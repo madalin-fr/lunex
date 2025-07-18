@@ -581,8 +581,6 @@ export const common = {
     },
     company: {
       name: 'Lunex Cleaning Services',
-      registration: 'Registrazione Società: BG/2024/CLN-0012',
-      vat: 'Partita IVA: IT12345678901',
       address: 'Romano di Lombardia, BG, Italia'
     }
   },

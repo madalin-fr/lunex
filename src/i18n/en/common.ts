@@ -217,9 +217,9 @@ export const common = {
     },
     
     luxury: {
-      title: 'Luxury Villa Cleaning',
-      name: 'Luxury Villa Cleaning',
-      subtitle: 'Premium cleaning services for luxury properties',
+      title: 'Villa Cleaning',
+      name: 'Villa Cleaning',
+      subtitle: 'Premium cleaning services for villa properties',
       description: 'White-glove cleaning services for luxury villas and high-end properties.',
       features: {
         premium: 'Premium Service',
@@ -391,7 +391,7 @@ export const common = {
         office: 'Office Cleaning',
         domestic: 'Domestic Cleaning',
         postRenovation: 'Post-Renovation Cleaning',
-        luxury: 'Luxury Villa Cleaning',
+        luxury: 'Villa Cleaning',
         deep: 'Deep Cleaning',
         maintenance: 'Maintenance Cleaning',
         quote: 'General Quote Request'
@@ -581,8 +581,6 @@ export const common = {
     },
     company: {
       name: 'Lunex Cleaning Services',
-      registration: 'Company Registration: BG/2024/CLN-0012',
-      vat: 'VAT Number: IT12345678901',
       address: 'Romano di Lombardia, BG, Italy'
     }
   },

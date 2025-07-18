@@ -198,8 +198,6 @@ export default function PrivacyPolicyPage() {
                 <p>Romano di Lombardia, Bergamo, Italy</p>
                 <p>Email: infocleaninglunex@gmail.com</p>
                 <p>Phone: +39 327 779 1867</p>
-                <p>VAT Number: IT12345678901</p>
-                <p>Company Registration: BG/2024/CLN-0012</p>
               </div>
             </div>
 

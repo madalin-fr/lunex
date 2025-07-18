@@ -29,9 +29,6 @@ export default function TermsOfServicePage() {
               <h2 className="text-2xl font-bold text-gray-900 mb-4">Company Information</h2>
               <div className="space-y-2 text-gray-600">
                 <p><strong>Lunex Cleaning Services</strong></p>
-                <p>Company Registration: BG/2024/CLN-0012</p>
-                <p>VAT Number: IT12345678901</p>
-                <p>Business License: BG-CLN-2024-001</p>
                 <p>Address: Romano di Lombardia, Bergamo, Italy</p>
               </div>
             </div>
