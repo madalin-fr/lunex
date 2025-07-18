@@ -2,13 +2,13 @@
 
 import Link from "next/link"
 import { useLocale } from "@/hooks/useLocale"
-import { useEffect, useRef } from 'react'
-import { 
-  Home, 
-  CheckCircle, 
-  Shield, 
-  Users, 
-  Clock, 
+import { useScrollAnimation } from "@/hooks/useScrollAnimation"
+import {
+  Home,
+  CheckCircle,
+  Shield,
+  Users,
+  Clock,
   Sparkles,
   Star,
   Phone,
@@ -18,34 +18,7 @@ import {
 
 export default function DomesticCleaningPage() {
   const { t } = useLocale()
-  const heroRef = useRef<HTMLDivElement>(null)
-  const featuresRef = useRef<HTMLDivElement>(null)
-  const processRef = useRef<HTMLDivElement>(null)
-
-  useEffect(() => {
-    const observerOptions = {
-      threshold: 0.1,
-      rootMargin: '0px 0px -50px 0px'
-    }
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('animate-fade-in-up')
-        }
-      })
-    }, observerOptions)
-
-    const sections = [heroRef.current, featuresRef.current, processRef.current]
-    sections.forEach(section => {
-      if (section) {
-        const elements = section.querySelectorAll('.animate-on-scroll')
-        elements.forEach(el => observer.observe(el))
-      }
-    })
-
-    return () => observer.disconnect()
-  }, [])
+  useScrollAnimation()
 
   const features = [
     {

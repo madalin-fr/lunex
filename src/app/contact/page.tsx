@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { useLocale } from '@/hooks/useLocale'
 import { Button } from '@/components/ui/button'
 import { Mail, Phone, MapPin, Clock, CheckCircle, XCircle } from 'lucide-react'
+import GoogleMap from '@/components/ui/GoogleMap'
 
 export default function ContactPage() {
   const { t } = useLocale()
@@ -307,18 +308,34 @@ export default function ContactPage() {
               {t('contactPage.map.subtitle')}
             </p>
           </div>
-          <div className="bg-gray-200 rounded-lg h-96 flex items-center justify-center relative">
-            <div className="text-center">
-              <MapPin className="w-16 h-16 text-gray-400 mx-auto mb-4" />
-              <p className="text-gray-600 mb-4">Interactive map will be integrated here</p>
-              <div className="flex gap-4 justify-center">
-                <Button className="bg-blue-600 hover:bg-blue-700">
-                  {t('contactPage.map.directions')}
-                </Button>
-                <Button variant="outline" className="border-blue-600 text-blue-600 hover:bg-blue-50">
-                  {t('contactPage.map.viewLarger')}
-                </Button>
-              </div>
+          <div className="relative">
+            <GoogleMap
+              center={{ lat: 41.8902, lng: 12.4922 }} // Rome coordinates
+              zoom={16}
+              height="450px"
+              className="rounded-lg shadow-xl"
+              markers={[
+                {
+                  position: { lat: 41.8902, lng: 12.4922 },
+                  title: 'Lunex Cleaning Services',
+                  description: 'Via Example 123, Rome - Professional cleaning services for offices and homes'
+                }
+              ]}
+            />
+            <div className="absolute bottom-4 left-4 right-4 flex gap-4 justify-center">
+              <Button
+                className="bg-blue-600 hover:bg-blue-700 text-white shadow-lg"
+                onClick={() => window.open(`https://www.google.com/maps/dir/?api=1&destination=41.8902,12.4922`, '_blank')}
+              >
+                {t('contactPage.map.directions')}
+              </Button>
+              <Button
+                variant="outline"
+                className="bg-white border-blue-600 text-blue-600 hover:bg-blue-50 shadow-lg"
+                onClick={() => window.open(`https://www.google.com/maps/search/?api=1&query=41.8902,12.4922`, '_blank')}
+              >
+                {t('contactPage.map.viewLarger')}
+              </Button>
             </div>
           </div>
         </div>
