@@ -50,57 +50,57 @@ export default function LuxuryCleaningPage() {
   const features = [
     {
       icon: <Crown className="h-6 w-6" />,
-      title: t('services.luxury.features.premium'),
-      description: t('services.luxury.features.premiumDesc')
+      title: t('services.premium.features.premium'),
+      description: t('services.premium.features.premiumDesc')
     },
     {
       icon: <Eye className="h-6 w-6" />,
-      title: t('services.luxury.features.attention'),
-      description: t('services.luxury.features.attentionDesc')
+      title: t('services.premium.features.attention'),
+      description: t('services.premium.features.attentionDesc')
     },
     {
       icon: <Shield className="h-6 w-6" />,
-      title: t('services.luxury.features.discreet'),
-      description: t('services.luxury.features.discreetDesc')
+      title: t('services.premium.features.discreet'),
+      description: t('services.premium.features.discreetDesc')
     },
     {
       icon: <Award className="h-6 w-6" />,
-      title: t('services.luxury.features.custom'),
-      description: t('services.luxury.features.customDesc')
+      title: t('services.premium.features.custom'),
+      description: t('services.premium.features.customDesc')
     }
   ]
 
   const process = [
     {
       step: "01",
-      title: t('services.luxury.process.step1'),
-      description: t('services.luxury.process.step1Desc')
+      title: t('services.premium.process.step1'),
+      description: t('services.premium.process.step1Desc')
     },
     {
       step: "02",
-      title: t('services.luxury.process.step2'),
-      description: t('services.luxury.process.step2Desc')
+      title: t('services.premium.process.step2'),
+      description: t('services.premium.process.step2Desc')
     },
     {
       step: "03",
-      title: t('services.luxury.process.step3'),
-      description: t('services.luxury.process.step3Desc')
+      title: t('services.premium.process.step3'),
+      description: t('services.premium.process.step3Desc')
     },
     {
       step: "04",
-      title: t('services.luxury.process.step4'),
-      description: t('services.luxury.process.step4Desc')
+      title: t('services.premium.process.step4'),
+      description: t('services.premium.process.step4Desc')
     }
   ]
 
   const includes = [
-    t('services.luxury.includes.furniture'),
-    t('services.luxury.includes.surfaces'),
-    t('services.luxury.includes.chandeliers'),
-    t('services.luxury.includes.marble'),
-    t('services.luxury.includes.carpet'),
-    t('services.luxury.includes.outdoor'),
-    t('services.luxury.includes.maintenance')
+    t('services.premium.includes.furniture'),
+    t('services.premium.includes.surfaces'),
+    t('services.premium.includes.chandeliers'),
+    t('services.premium.includes.marble'),
+    t('services.premium.includes.carpet'),
+    t('services.premium.includes.outdoor'),
+    t('services.premium.includes.maintenance')
   ]
 
   return (
@@ -120,16 +120,16 @@ export default function LuxuryCleaningPage() {
                 <div className="w-12 h-12 rounded-full flex items-center justify-center glass-morphism">
                   <Crown className="h-6 w-6 text-purple-600" />
                 </div>
-                <span className="text-purple-600 font-semibold tracking-wide">{t('services.luxury.name')}</span>
+                <span className="text-purple-600 font-semibold tracking-wide">{t('services.premium.name')}</span>
               </div>
               
               <h1 className="text-4xl lg:text-5xl font-bold text-gray-900 leading-tight">
-                {t('services.luxury.title')}
+                {t('services.premium.title')}
                 <span className="text-gradient bg-gradient-to-r from-purple-600 to-indigo-600 bg-clip-text text-transparent"> Premium</span>
               </h1>
               
               <p className="text-xl text-gray-600 leading-relaxed">
-                {t('services.luxury.description')}
+                {t('services.premium.description')}
               </p>
               
               <div className="flex flex-col sm:flex-row gap-4">
@@ -176,7 +176,7 @@ export default function LuxuryCleaningPage() {
               {t('services.whyChooseUs.title')}
             </h2>
             <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              {t('services.luxury.subtitle')}
+              {t('services.premium.subtitle')}
             </p>
           </div>
 
@@ -208,10 +208,10 @@ export default function LuxuryCleaningPage() {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="text-center mb-16 animate-on-scroll opacity-0">
             <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
-              Our Luxury Service Process
+              Our Premium Service Process
             </h2>
             <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              White-glove cleaning service with the highest attention to detail and luxury standards
+              White-glove cleaning service with the highest attention to detail and premium standards
             </p>
           </div>
 
@@ -248,10 +248,10 @@ export default function LuxuryCleaningPage() {
               <div className="glass-morphism rounded-3xl p-8 hover:shadow-2xl transition-all duration-300">
                 <div className="bg-gradient-to-br from-purple-50 to-indigo-50 rounded-2xl p-8">
                   <h3 className="text-2xl font-bold text-gray-900 mb-4">
-                    {t('services.luxury.includes.title')}
+                    {t('services.premium.includes.title')}
                   </h3>
                   <p className="text-gray-600 mb-6">
-                    Premium cleaning services for luxury villas and high-end properties
+                    Premium cleaning services for premium villas and high-end properties
                   </p>
                   <div className="space-y-4">
                     <div className="flex items-center space-x-3 glass-morphism rounded-xl p-3">
@@ -279,10 +279,10 @@ export default function LuxuryCleaningPage() {
             
             <div className="space-y-6 animate-on-scroll opacity-0 animation-delay-200">
               <h2 className="text-3xl lg:text-4xl font-bold text-gray-900">
-                {t('services.luxury.includes.title')}
+                {t('services.premium.includes.title')}
               </h2>
               <p className="text-lg text-gray-600">
-                Comprehensive luxury cleaning services with specialized care for high-end properties and furnishings
+                Comprehensive premium cleaning services with specialized care for high-end properties and furnishings
               </p>
               
               <div className="space-y-4">
@@ -302,7 +302,7 @@ export default function LuxuryCleaningPage() {
 
               <div className="mt-8 p-6 bg-gradient-to-r from-purple-50 to-indigo-50 rounded-2xl">
                 <p className="text-gray-700 font-medium">
-                  We understand that luxury properties require specialized care and attention to detail.
+                  We understand that premium properties require specialized care and attention to detail.
                   Our white-glove service ensures your property receives the premium treatment it deserves.
                 </p>
               </div>

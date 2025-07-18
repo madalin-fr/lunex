@@ -11,12 +11,12 @@ import {
   InteractiveCard 
 } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
-import { 
-  Building2, 
-  Home, 
-  Hammer, 
-  Crown, 
-  Sparkles, 
+import {
+  Building2,
+  Home,
+  Hammer,
+  Crown,
+  Sparkles,
   Calendar,
   Phone,
   ArrowRight,

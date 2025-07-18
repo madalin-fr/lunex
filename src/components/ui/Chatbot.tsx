@@ -186,8 +186,8 @@ export default function Chatbot({ isOpen, onToggle }: ChatbotProps) {
       {/* Header */}
       <div className="bg-green-600 text-white p-4 sm:rounded-t-lg flex items-center justify-between">
         <div className="flex items-center space-x-3">
-          <div className="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center">
-            <Bot className="w-5 h-5" />
+          <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-lg border-2 border-green-100">
+            <Bot className="w-7 h-7 text-green-600" />
           </div>
           <div>
             <h3 className="font-semibold">{t('chatbot.title')}</h3>
