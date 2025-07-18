@@ -14,26 +14,28 @@ const LocaleContext = createContext<LocaleContextType | undefined>(undefined)
 const LOCALE_STORAGE_KEY = 'lunex-locale'
 
 export function LocaleProvider({ children }: { children: ReactNode }) {
-  // Initialize locale from localStorage, fallback to browser preference or default
-  const [locale, setLocaleState] = useState<Locale>(() => {
+  // Initialize with default locale to avoid SSR/hydration issues
+  const [locale, setLocaleState] = useState<Locale>(defaultLocale)
+  const [isHydrated, setIsHydrated] = useState(false)
+
+  // Handle client-side initialization after hydration
+  useEffect(() => {
+    setIsHydrated(true)
+    
     // Check localStorage
-    if (typeof window !== 'undefined') {
-      const storedLocale = localStorage.getItem(LOCALE_STORAGE_KEY) as Locale
-      if (storedLocale === 'it' || storedLocale === 'en') {
-        return storedLocale
-      }
-      
-      // Check browser language preference
-      if (window.navigator) {
-        const browserLang = window.navigator.language.toLowerCase()
-        if (browserLang.startsWith('it')) {
-          return 'it'
-        }
-      }
+    const storedLocale = localStorage.getItem(LOCALE_STORAGE_KEY) as Locale
+    if (storedLocale === 'it' || storedLocale === 'en') {
+      setLocaleState(storedLocale)
+      return
     }
     
-    return defaultLocale
-  })
+    // Check browser language preference
+    const browserLang = window.navigator.language.toLowerCase()
+    if (browserLang.startsWith('it')) {
+      setLocaleState('it')
+      localStorage.setItem(LOCALE_STORAGE_KEY, 'it')
+    }
+  }, [])
 
   // Update localStorage when locale changes
   const setLocale = (newLocale: Locale) => {
@@ -45,12 +47,12 @@ export function LocaleProvider({ children }: { children: ReactNode }) {
     }
   }
 
-  // Ensure localStorage is synced on mount
+  // Sync localStorage when locale changes (only after hydration)
   useEffect(() => {
-    if (typeof window !== 'undefined') {
+    if (isHydrated) {
       localStorage.setItem(LOCALE_STORAGE_KEY, locale)
     }
-  }, [locale])
+  }, [locale, isHydrated])
 
   const t = (key: string, values?: Record<string, string | number>) => {
     return formatMessage(locale, key, values)

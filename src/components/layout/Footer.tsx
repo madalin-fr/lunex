@@ -161,9 +161,19 @@ export function Footer() {
         <div className="border-t border-gray-800 mt-12 pt-8">
           <div className="text-center text-sm text-gray-400">
             <p>© 2024 Lunex Cleaning Services. {t('all_rights_reserved')}</p>
-            <p className="mt-2 text-xs text-gray-500">
-              {t('footer.legal.privacy')} | {t('footer.legal.terms')} | {t('footer.legal.cookies')}
-            </p>
+            <div className="mt-2 text-xs">
+              <Link href="/privacy" className="text-gray-500 hover:text-green-400 transition-colors">
+                {t('footer.legal.privacy')}
+              </Link>
+              <span className="text-gray-600 mx-2">|</span>
+              <Link href="/terms" className="text-gray-500 hover:text-green-400 transition-colors">
+                {t('footer.legal.terms')}
+              </Link>
+              <span className="text-gray-600 mx-2">|</span>
+              <Link href="/cookies" className="text-gray-500 hover:text-green-400 transition-colors">
+                {t('footer.legal.cookies')}
+              </Link>
+            </div>
           </div>
         </div>
       </div>

@@ -170,7 +170,7 @@ export default function ContactPage() {
                       value={formData.name}
                       onChange={handleInputChange}
                       required
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent placeholder-gray-500"
                       placeholder={t('contactPage.form.namePlaceholder')}
                     />
                   </div>
@@ -186,7 +186,7 @@ export default function ContactPage() {
                       value={formData.email}
                       onChange={handleInputChange}
                       required
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent placeholder-gray-500"
                       placeholder={t('contactPage.form.emailPlaceholder')}
                     />
                   </div>
@@ -203,7 +203,7 @@ export default function ContactPage() {
                       name="phone"
                       value={formData.phone}
                       onChange={handleInputChange}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent placeholder-gray-500"
                       placeholder={t('contactPage.form.phonePlaceholder')}
                     />
                   </div>
@@ -218,9 +218,9 @@ export default function ContactPage() {
                       value={formData.subject}
                       onChange={handleInputChange}
                       required
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-700"
                     >
-                      <option value="">{t('contactPage.form.selectSubject')}</option>
+                      <option value="" className="text-gray-500">{t('contactPage.form.selectSubject')}</option>
                       <option value="office">{t('contactPage.form.subjectOptions.office')}</option>
                       <option value="domestic">{t('contactPage.form.subjectOptions.domestic')}</option>
                       <option value="postRenovation">{t('contactPage.form.subjectOptions.postRenovation')}</option>
@@ -243,7 +243,7 @@ export default function ContactPage() {
                     onChange={handleInputChange}
                     required
                     rows={6}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none placeholder-gray-500"
                     placeholder={t('contactPage.form.messagePlaceholder')}
                   ></textarea>
                 </div>

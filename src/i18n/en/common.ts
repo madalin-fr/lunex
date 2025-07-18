@@ -483,5 +483,319 @@ export const common = {
     quote: 'Get Quote',
     ready: 'Ready for Professional Cleaning?',
     description: 'Join hundreds of satisfied customers who trust Lunex for their cleaning needs'
+  },
+
+  // Privacy Policy
+  privacy: {
+    title: 'Privacy Policy',
+    subtitle: 'How we protect and manage your personal information',
+    intro: {
+      title: 'Introduction',
+      content: 'At Lunex Cleaning Services, we take your privacy seriously. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website or use our services.',
+      commitment: 'We are committed to protecting your personal data and respecting your privacy rights.'
+    },
+    sections: {
+      collection: {
+        title: 'Information We Collect',
+        content: 'We collect information that you provide directly to us and information that is automatically collected when you use our services.',
+        personal: {
+          title: 'Personal Information',
+          name: 'Name and contact details',
+          email: 'Email address',
+          phone: 'Phone number',
+          address: 'Service address',
+          payment: 'Payment information'
+        },
+        usage: {
+          title: 'Usage Information',
+          browser: 'Browser type and version',
+          ip: 'IP address',
+          pages: 'Pages visited',
+          time: 'Time and date of visits'
+        }
+      },
+      use: {
+        title: 'How We Use Your Information',
+        content: 'We use the information we collect to provide, maintain, and improve our services.',
+        purposes: {
+          service: 'To provide cleaning services',
+          communication: 'To communicate with you',
+          improvement: 'To improve our services',
+          legal: 'To comply with legal obligations',
+          marketing: 'To send promotional materials (with consent)'
+        }
+      },
+      protection: {
+        title: 'Data Protection',
+        content: 'We implement appropriate technical and organizational measures to protect your personal information.',
+        measures: {
+          encryption: 'Data encryption',
+          access: 'Limited access controls',
+          training: 'Staff training on data protection',
+          regular: 'Regular security assessments'
+        }
+      },
+      sharing: {
+        title: 'Information Sharing',
+        content: 'We do not sell, trade, or rent your personal information to third parties.',
+        exceptions: {
+          consent: 'With your consent',
+          service: 'To service providers who assist us',
+          legal: 'To comply with legal obligations',
+          protect: 'To protect our rights and safety'
+        }
+      },
+      cookies: {
+        title: 'Cookies and Tracking',
+        content: 'We use cookies and similar tracking technologies to improve your experience on our website.',
+        types: {
+          essential: 'Essential cookies for site functionality',
+          analytics: 'Analytics cookies to understand usage',
+          preferences: 'Preference cookies to remember your choices'
+        }
+      },
+      rights: {
+        title: 'Your Rights',
+        content: 'You have certain rights regarding your personal information under applicable data protection laws.',
+        list: {
+          access: 'Right to access your data',
+          correction: 'Right to correct inaccurate data',
+          deletion: 'Right to request deletion',
+          portability: 'Right to data portability',
+          objection: 'Right to object to processing',
+          withdrawal: 'Right to withdraw consent'
+        }
+      },
+      children: {
+        title: 'Children\'s Privacy',
+        content: 'Our services are not directed to children under 16 years of age. We do not knowingly collect personal information from children.'
+      },
+      changes: {
+        title: 'Changes to This Policy',
+        content: 'We may update this Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page.'
+      },
+      contact: {
+        title: 'Contact Us',
+        content: 'If you have any questions about this Privacy Policy, please contact us:'
+      }
+    },
+    company: {
+      name: 'Lunex Cleaning Services',
+      registration: 'Company Registration: BG/2024/CLN-0012',
+      vat: 'VAT Number: IT12345678901',
+      address: 'Romano di Lombardia, BG, Italy'
+    }
+  },
+
+  // Terms of Service
+  terms: {
+    title: 'Terms of Service',
+    subtitle: 'Please read these terms carefully before using our services',
+    lastUpdated: 'Last updated',
+    acceptance: {
+      title: 'Acceptance of Terms',
+      content: 'By accessing and using Lunex Cleaning Services, you accept and agree to be bound by these Terms of Service and our Privacy Policy. If you do not agree to these terms, please do not use our services.'
+    },
+    services: {
+      title: 'Our Services',
+      description: {
+        title: 'Service Description',
+        content: 'Lunex provides professional cleaning services for offices, homes, and commercial spaces in Romano di Lombardia and surrounding areas. Our services include but are not limited to:',
+        list: {
+          office: 'Office and commercial cleaning',
+          domestic: 'Residential cleaning',
+          deep: 'Deep cleaning services',
+          post: 'Post-renovation cleaning',
+          luxury: 'Luxury property cleaning',
+          maintenance: 'Regular maintenance cleaning'
+        }
+      },
+      quality: {
+        title: 'Service Quality',
+        content: 'We strive to provide high-quality cleaning services. However, results may vary based on the condition of the space and specific requirements.'
+      }
+    },
+    booking: {
+      title: 'Booking and Scheduling',
+      process: {
+        title: 'Booking Process',
+        content: 'Services can be booked through our website, phone, or email. All bookings are subject to availability.',
+        confirmation: 'You will receive a confirmation once your booking is accepted.'
+      },
+      cancellation: {
+        title: 'Cancellation Policy',
+        content: 'Cancellations must be made at least 24 hours before the scheduled service.',
+        fee: 'Late cancellations may incur a cancellation fee of up to 50% of the service cost.'
+      },
+      rescheduling: {
+        title: 'Rescheduling',
+        content: 'Services can be rescheduled with at least 24 hours notice, subject to availability.'
+      }
+    },
+    pricing: {
+      title: 'Pricing and Payment',
+      rates: {
+        title: 'Service Rates',
+        content: 'Prices are quoted based on the specific requirements of each service. All prices are in EUR and include applicable taxes.'
+      },
+      payment: {
+        title: 'Payment Terms',
+        content: 'Payment is due upon completion of service unless other arrangements have been made.',
+        methods: 'We accept cash, bank transfer, and major credit cards.'
+      },
+      additional: {
+        title: 'Additional Charges',
+        content: 'Additional charges may apply for:',
+        list: {
+          supplies: 'Special cleaning supplies requested',
+          extra: 'Services beyond the agreed scope',
+          parking: 'Parking fees where applicable',
+          travel: 'Travel beyond our standard service area'
+        }
+      }
+    },
+    responsibilities: {
+      title: 'Responsibilities',
+      client: {
+        title: 'Client Responsibilities',
+        access: 'Provide safe access to the premises',
+        pets: 'Secure pets during service',
+        valuables: 'Secure valuable items',
+        hazards: 'Inform us of any hazards or special requirements',
+        payment: 'Make timely payment for services'
+      },
+      our: {
+        title: 'Our Responsibilities',
+        professional: 'Provide professional cleaning services',
+        trained: 'Use trained and insured staff',
+        equipment: 'Bring necessary equipment and supplies',
+        respect: 'Respect your property and privacy',
+        schedule: 'Arrive at scheduled times'
+      }
+    },
+    liability: {
+      title: 'Liability and Insurance',
+      coverage: {
+        title: 'Insurance Coverage',
+        content: 'Lunex Cleaning Services is fully insured for general liability. Our insurance covers accidental damage during normal cleaning operations.'
+      },
+      limitations: {
+        title: 'Limitations',
+        content: 'We are not liable for:',
+        list: {
+          pre: 'Pre-existing damage',
+          valuable: 'Loss of cash or valuables',
+          indirect: 'Indirect or consequential damages',
+          normal: 'Normal wear and tear',
+          hidden: 'Damage to items not visible or accessible'
+        }
+      },
+      claims: {
+        title: 'Damage Claims',
+        content: 'Any damage claims must be reported within 24 hours of service completion.'
+      }
+    },
+    intellectual: {
+      title: 'Intellectual Property',
+      content: 'All content on our website, including text, graphics, logos, and images, is the property of Lunex Cleaning Services and protected by copyright laws.'
+    },
+    termination: {
+      title: 'Termination',
+      content: 'Either party may terminate the service agreement with appropriate notice. We reserve the right to refuse service to anyone for any reason.'
+    },
+    governing: {
+      title: 'Governing Law',
+      content: 'These Terms of Service are governed by the laws of Italy. Any disputes shall be resolved in the courts of Bergamo, Italy.'
+    },
+    contact: {
+      title: 'Contact Information',
+      content: 'For questions about these Terms of Service, please contact us at:'
+    }
+  },
+
+  // Cookies Policy
+  cookies: {
+    title: 'Cookie Policy',
+    subtitle: 'Understanding how we use cookies on our website',
+    lastUpdated: 'Last updated',
+    banner: {
+      title: 'We use cookies',
+      message: 'This website uses cookies to enhance your browsing experience. By continuing to use our site, you consent to our use of cookies.',
+      accept: 'Accept All',
+      decline: 'Decline',
+      customize: 'Customize Settings'
+    },
+    intro: {
+      title: 'Introduction',
+      content: 'This Cookie Policy explains what cookies are and how we use them on the Lunex Cleaning Services website. We encourage you to read this policy to understand what cookies we use and why.',
+      consent: 'By using our website, you consent to the use of cookies in accordance with this policy.'
+    },
+    types: {
+      title: 'Types of Cookies We Use',
+      essential: {
+        title: 'Essential Cookies',
+        description: 'These cookies are necessary for the website to function properly. They enable basic functions like page navigation and access to secure areas.',
+        examples: {
+          session: 'Session management cookies',
+          preferences: 'User preference cookies',
+          security: 'Security and authentication cookies'
+        }
+      },
+      analytics: {
+        title: 'Analytics Cookies',
+        description: 'These cookies help us understand how visitors interact with our website by collecting and reporting information anonymously.',
+        examples: {
+          google: 'Google Analytics tracking',
+          behavior: 'User behavior analysis',
+          performance: 'Website performance monitoring'
+        }
+      },
+      functional: {
+        title: 'Functional Cookies',
+        description: 'These cookies enable the website to provide enhanced functionality and personalization based on your preferences.',
+        examples: {
+          language: 'Language preference cookies',
+          location: 'Location-based service cookies',
+          display: 'Display preference cookies'
+        }
+      }
+    },
+    sections: {
+      what: {
+        title: 'What Are Cookies?',
+        content: 'Cookies are small text files that are placed on your device when you visit a website. They are widely used to make websites work more efficiently and provide information to website owners.'
+      },
+      why: {
+        title: 'Why We Use Cookies',
+        content: 'We use cookies for several reasons:',
+        list: {
+          remember: 'To remember your preferences and settings',
+          improve: 'To improve website functionality and performance',
+          secure: 'To ensure secure access to our services',
+          personalize: 'To personalize your experience on our site'
+        }
+      },
+      control: {
+        title: 'How to Control Cookies',
+        content: 'You can control and manage cookies in various ways:',
+        list: {
+          browser: 'Browser settings - Most browsers allow you to refuse or accept cookies',
+          disable: 'Disable cookies - You can disable cookies entirely in your browser',
+          delete: 'Delete cookies - You can delete cookies already stored on your device',
+          block: 'Block specific cookies - You can block cookies from specific websites'
+        }
+      }
+    },
+    thirdParty: {
+      title: 'Third-Party Cookies',
+      content: 'We may use third-party services that set their own cookies:',
+      analytics: 'Website analytics and performance monitoring',
+      maps: 'Interactive maps and location services'
+    },
+    contact: {
+      title: 'Questions About Cookies',
+      description: 'If you have any questions about our use of cookies, please contact us:',
+      button: 'Contact Us'
+    }
   }
 }

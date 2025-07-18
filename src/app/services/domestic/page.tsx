@@ -3,6 +3,7 @@
 import Link from "next/link"
 import { useLocale } from "@/hooks/useLocale"
 import { useScrollAnimation } from "@/hooks/useScrollAnimation"
+import { useRef } from 'react'
 import {
   Home,
   CheckCircle,
@@ -19,6 +20,10 @@ import {
 export default function DomesticCleaningPage() {
   const { t } = useLocale()
   useScrollAnimation()
+  
+  const heroRef = useRef<HTMLElement>(null)
+  const featuresRef = useRef<HTMLElement>(null)
+  const processRef = useRef<HTMLElement>(null)
 
   const features = [
     {
