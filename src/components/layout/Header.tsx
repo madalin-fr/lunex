@@ -21,12 +21,12 @@ export function Header() {
   }, [])
 
   const navigation: NavItem[] = [
-    { href: '/', label: t('common.home') },
-    { href: '/services', label: t('common.servicesNav') },
-    { href: '/about', label: t('common.about') },
-    { href: '/reviews', label: t('common.reviews') },
-    { href: '/blog', label: t('common.blog') },
-    { href: '/contact', label: t('common.contact') },
+    { href: '/', label: t('home') },
+    { href: '/services', label: t('servicesNav') },
+    { href: '/about', label: t('about') },
+    { href: '/reviews', label: t('reviews') },
+    { href: '/blog', label: t('blog') },
+    { href: '/contact', label: t('contact') },
   ]
 
   const toggleLanguage = () => {
@@ -80,7 +80,7 @@ export function Header() {
               <Button 
                 className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white shadow-md hover:shadow-lg transition-all duration-300 hover:scale-105 px-6 py-2 rounded-full font-semibold"
               >
-                {t('common.book_now')}
+                {t('book_now')}
               </Button>
             </Link>
           </div>
@@ -157,7 +157,7 @@ export function Header() {
                 <Button 
                   className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white shadow-md hover:shadow-lg transition-all duration-300 px-4 py-1.5 rounded-full font-semibold text-sm"
                 >
-                  {t('common.book_now')}
+                  {t('book_now')}
                 </Button>
               </Link>
             </div>
