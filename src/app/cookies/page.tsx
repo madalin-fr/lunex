@@ -55,7 +55,7 @@ export default function CookiePolicyPage() {
             {/* Introduction */}
             <div className="bg-white rounded-2xl shadow-lg p-8">
               <h2 className="text-2xl font-bold text-gray-900 mb-4">Introduction</h2>
-              <p className="text-gray-600 mb-4">Lunex Cleaning Services ("we", "our", or "us") uses cookies and similar tracking technologies on our website. This Cookie Policy explains what cookies are, how we use them, and your choices regarding cookies.</p>
+              <p className="text-gray-600 mb-4">Lunex Cleaning Services (&quot;we&quot;, &quot;our&quot;, or &quot;us&quot;) uses cookies and similar tracking technologies on our website. This Cookie Policy explains what cookies are, how we use them, and your choices regarding cookies.</p>
               <p className="text-gray-600">By using our website, you agree to the use of cookies as described in this policy.</p>
             </div>
 

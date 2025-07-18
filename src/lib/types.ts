@@ -59,6 +59,7 @@ export interface CustomerSubscription {
   usage: SubscriptionUsage
   paymentMethod: string
   discounts: SubscriptionDiscount[]
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   metadata: Record<string, any>
   createdAt: Date
   updatedAt: Date

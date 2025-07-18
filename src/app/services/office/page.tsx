@@ -4,17 +4,17 @@ import { useLocale } from '@/hooks/useLocale'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
-import { 
-  Building2, 
-  Shield, 
-  Clock, 
-  Sparkles, 
-  CheckCircle, 
-  Phone, 
+import {
+  Building2,
+  Shield,
+  Clock,
+  Sparkles,
+  CheckCircle,
+  Phone,
   Calendar,
   Users,
-  Sanitizer,
-  Broom
+  ShieldCheck,
+  Home
 } from 'lucide-react'
 import Link from 'next/link'
 
@@ -28,12 +28,12 @@ export default function OfficeCleaning() {
       description: t('services.office.features.flexibleDesc')
     },
     {
-      icon: <Sanitizer className="h-6 w-6" />,
+      icon: <ShieldCheck className="h-6 w-6" />,
       title: t('services.office.features.disinfection'),
       description: t('services.office.features.disinfectionDesc')
     },
     {
-      icon: <Broom className="h-6 w-6" />,
+      icon: <Home className="h-6 w-6" />,
       title: t('services.office.features.equipment'),
       description: t('services.office.features.equipmentDesc')
     },

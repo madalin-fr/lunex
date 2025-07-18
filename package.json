@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "export": "next build && touch out/.nojekyll",
+    "deploy": "next build && touch out/.nojekyll && echo 'Ready for deployment!'"
   },
   "dependencies": {
     "@googlemaps/js-api-loader": "^1.16.10",

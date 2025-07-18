@@ -3,15 +3,12 @@
 import Link from "next/link"
 import { useLocale } from "@/hooks/useLocale"
 import { useEffect, useRef } from 'react'
-import { 
-  Calendar, 
-  CheckCircle, 
-  Shield, 
-  Clock, 
+import {
+  Calendar,
+  Shield,
+  Clock,
   DollarSign,
   CheckSquare,
-  Star,
-  Phone,
   ArrowRight,
   Sparkles
 } from 'lucide-react'
@@ -330,7 +327,7 @@ export default function MaintenanceCleaningPage() {
                 {t('services.maintenance.schedules.custom')}
               </h3>
               <p className="text-gray-600 mb-6">
-                Need a custom schedule? We can create a maintenance plan tailored to your specific needs and preferences. Whether you need different frequencies for different areas or have special requirements, we'll work with you to find the perfect solution.
+                Need a custom schedule? We can create a maintenance plan tailored to your specific needs and preferences. Whether you need different frequencies for different areas or have special requirements, we&apos;ll work with you to find the perfect solution.
               </p>
               <Link
                 href="/contact"

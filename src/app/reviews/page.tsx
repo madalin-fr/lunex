@@ -16,7 +16,7 @@ interface Review {
 }
 
 export default function ReviewsPage() {
-  const { t } = useLocale()
+  const { } = useLocale()
   
   // Sample reviews data - in a real app, this would come from an API
   const reviews: Review[] = [
@@ -198,7 +198,7 @@ export default function ReviewsPage() {
                 <div className="relative">
                   <Quote className="absolute -top-2 -left-2 w-8 h-8 text-purple-200" />
                   <p className="text-gray-700 pl-6 italic">
-                    "{review.comment}"
+                    &quot;{review.comment}&quot;
                   </p>
                 </div>
               </div>
@@ -256,7 +256,7 @@ export default function ReviewsPage() {
             Share Your Experience
           </h2>
           <p className="text-gray-600 mb-8 max-w-2xl mx-auto">
-            Have you visited Lunex? We'd love to hear about your experience and help others discover our services.
+            Have you visited Lunex? We&apos;d love to hear about your experience and help others discover our services.
           </p>
           <Button className="bg-purple-600 hover:bg-purple-700 text-white px-8 py-3">
             Write a Review

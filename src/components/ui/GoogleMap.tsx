@@ -18,7 +18,20 @@ interface GoogleMapProps {
 // Declare global google types to avoid TypeScript errors
 declare global {
   interface Window {
-    google: any;
+    google: {
+      maps: {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        Map: new (element: HTMLElement, options: any) => any;
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        Marker: new (options?: any) => any;
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        InfoWindow: new (options?: any) => any;
+        Animation: {
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          DROP: any;
+        };
+      };
+    };
     initGoogleMap?: () => void;
   }
 }
@@ -32,6 +45,7 @@ export default function GoogleMap({
   className = '',
 }: GoogleMapProps) {
   const mapRef = useRef<HTMLDivElement>(null);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const mapInstanceRef = useRef<any>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -177,6 +191,7 @@ export default function GoogleMap({
         delete window.initGoogleMap;
       }
     };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []); // Only run once on mount
 
   // Update map center and zoom when props change

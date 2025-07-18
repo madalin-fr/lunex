@@ -3,7 +3,7 @@
 import { useLocale } from '@/hooks/useLocale'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { Building2, Users, Award, Leaf, Shield, Clock, Phone, Mail } from 'lucide-react'
+import { Building2, Users, Award, Leaf, Shield, Phone, Mail } from 'lucide-react'
 import Link from 'next/link'
 
 export default function AboutPage() {
@@ -72,7 +72,7 @@ export default function AboutPage() {
                 Founded in Romano di Lombardia, Lunex has grown from a small family business to one of the most trusted cleaning services in the Bergamo province. Our commitment to quality and customer satisfaction has been the cornerstone of our success.
               </p>
               <p className="text-gray-600 mb-4">
-                We believe that a clean environment is essential for health, productivity, and well-being. That's why we use only the best eco-friendly products and employ trained professionals who care about the details.
+                We believe that a clean environment is essential for health, productivity, and well-being. That&apos;s why we use only the best eco-friendly products and employ trained professionals who care about the details.
               </p>
               <p className="text-gray-600">
                 Today, we serve hundreds of homes, offices, and commercial spaces, building lasting relationships based on trust, reliability, and exceptional service.

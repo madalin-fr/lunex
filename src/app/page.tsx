@@ -11,7 +11,6 @@ import {
   Calendar,
   Phone,
   CheckCircle,
-  Clock,
   Shield,
   Users,
   Star
@@ -259,7 +258,7 @@ export default function HomePage() {
                 </div>
               </div>
               <p className="text-gray-600 mb-4">
-                "Servizio di pulizia uffici eccellente! Professionali, puntuali e molto accurati. Il nostro ufficio è sempre impeccabile."
+                &quot;Servizio di pulizia uffici eccellente! Professionali, puntuali e molto accurati. Il nostro ufficio è sempre impeccabile.&quot;
               </p>
               <div className="flex items-center">
                 <div className="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center">
@@ -281,7 +280,7 @@ export default function HomePage() {
                 </div>
               </div>
               <p className="text-gray-600 mb-4">
-                "Pulizie domestiche di altissima qualità. Personale affidabile e prodotti eco-compatibili. Consiglio vivamente!"
+                &quot;Pulizie domestiche di altissima qualità. Personale affidabile e prodotti eco-compatibili. Consiglio vivamente!&quot;
               </p>
               <div className="flex items-center">
                 <div className="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center">
@@ -303,7 +302,7 @@ export default function HomePage() {
                 </div>
               </div>
               <p className="text-gray-600 mb-4">
-                "Dopo la ristrutturazione hanno lasciato tutto perfetto. Servizio post-lavori impeccabile e molto professionale."
+                &quot;Dopo la ristrutturazione hanno lasciato tutto perfetto. Servizio post-lavori impeccabile e molto professionale.&quot;
               </p>
               <div className="flex items-center">
                 <div className="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center">
