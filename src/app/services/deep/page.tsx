@@ -2,21 +2,51 @@
 
 import Link from "next/link"
 import { useLocale } from "@/hooks/useLocale"
-import { 
-  Sparkles, 
-  CheckCircle, 
-  Shield, 
-  Users, 
-  Clock, 
+import { useEffect, useRef } from 'react'
+import {
+  Sparkles,
+  CheckCircle,
+  Shield,
   Zap,
-  Star,
-  Phone,
+  Clock,
+  Target,
   RefreshCw,
-  Target
+  Award,
+  Phone,
+  ArrowRight,
+  Home
 } from 'lucide-react'
 
 export default function DeepCleaningPage() {
   const { t } = useLocale()
+  const heroRef = useRef<HTMLDivElement>(null)
+  const featuresRef = useRef<HTMLDivElement>(null)
+  const processRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    }
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('animate-fade-in-up')
+        }
+      })
+    }, observerOptions)
+
+    const sections = [heroRef.current, featuresRef.current, processRef.current]
+    sections.forEach(section => {
+      if (section) {
+        const elements = section.querySelectorAll('.animate-on-scroll')
+        elements.forEach(el => observer.observe(el))
+      }
+    })
+
+    return () => observer.disconnect()
+  }, [])
 
   const features = [
     {
@@ -74,66 +104,78 @@ export default function DeepCleaningPage() {
     t('services.deep.includes.sanitization')
   ]
 
-  const benefits = [
+  const deepCleanBenefits = [
     {
-      icon: <Sparkles className="h-6 w-6" />,
-      title: "Improved Air Quality",
-      description: "Deep cleaning removes dust, allergens, and pollutants for healthier indoor air"
+      title: "Health Benefits",
+      description: "Eliminates allergens, bacteria, and deep-seated dirt"
     },
     {
-      icon: <Shield className="h-6 w-6" />,
-      title: "Complete Sanitization",
-      description: "Thorough disinfection eliminates bacteria, viruses, and harmful microorganisms"
+      title: "Extended Lifespan",
+      description: "Preserves your home's surfaces and appliances"
     },
     {
-      icon: <RefreshCw className="h-6 w-6" />,
-      title: "Surface Restoration",
-      description: "Restore surfaces to their original condition with professional techniques"
+      title: "Fresh Start",
+      description: "Perfect for seasonal cleaning or new beginnings"
     }
   ]
 
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="relative bg-gradient-to-r from-cyan-50 to-blue-50 py-20">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+      <section ref={heroRef} className="relative overflow-hidden py-20">
+        {/* Animated Background */}
+        <div className="absolute inset-0 bg-gradient-to-br from-cyan-50 via-blue-50 to-indigo-50">
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-cyan-100/50 via-transparent to-transparent"></div>
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,_var(--tw-gradient-stops))] from-blue-100/50 via-transparent to-transparent"></div>
+        </div>
+
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div className="space-y-6">
+            <div className="space-y-6 animate-on-scroll opacity-0">
               <div className="flex items-center space-x-3">
-                <div className="w-12 h-12 bg-cyan-100 rounded-full flex items-center justify-center">
+                <div className="w-12 h-12 rounded-full flex items-center justify-center glass-morphism">
                   <Sparkles className="h-6 w-6 text-cyan-600" />
                 </div>
-                <span className="text-cyan-600 font-semibold">{t('services.deep.name')}</span>
+                <span className="text-cyan-600 font-semibold tracking-wide">{t('services.deep.name')}</span>
               </div>
               
               <h1 className="text-4xl lg:text-5xl font-bold text-gray-900 leading-tight">
                 {t('services.deep.title')}
+                <span className="text-gradient bg-gradient-to-r from-cyan-600 to-blue-600 bg-clip-text text-transparent"> Intensive</span>
               </h1>
               
-              <p className="text-xl text-gray-600">
+              <p className="text-xl text-gray-600 leading-relaxed">
                 {t('services.deep.description')}
               </p>
               
               <div className="flex flex-col sm:flex-row gap-4">
                 <Link
                   href="/contact"
-                  className="bg-cyan-600 text-white px-8 py-4 rounded-full hover:bg-cyan-700 transition-colors font-semibold text-center"
+                  className="group btn-modern bg-gradient-to-r from-cyan-600 to-blue-600 text-white px-8 py-4 rounded-full font-semibold text-center transition-all duration-300 hover:shadow-2xl hover:scale-105"
                 >
-                  {t('getQuote')}
+                  <span className="flex items-center justify-center gap-2">
+                    {t('getQuote')}
+                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                  </span>
                 </Link>
                 <Link
                   href="tel:+393277791867"
-                  className="border-2 border-cyan-600 text-cyan-600 px-8 py-4 rounded-full hover:bg-cyan-600 hover:text-white transition-colors font-semibold text-center"
+                  className="btn-glass border-2 border-cyan-600 text-cyan-600 px-8 py-4 rounded-full font-semibold text-center transition-all duration-300 hover:bg-cyan-600 hover:text-white hover:scale-105"
                 >
                   {t('call_now')}
                 </Link>
               </div>
             </div>
             
-            <div className="relative">
-              <div className="bg-white rounded-2xl p-8 shadow-xl">
-                <div className="flex items-center justify-center h-64 bg-cyan-50 rounded-lg">
-                  <Sparkles className="h-24 w-24 text-cyan-600" />
+            <div className="relative animate-on-scroll opacity-0 animation-delay-200">
+              <div className="glass-morphism rounded-3xl p-8 hover-card">
+                <div className="relative bg-gradient-to-br from-cyan-400/20 to-blue-400/20 rounded-2xl p-12 overflow-hidden">
+                  <div className="absolute inset-0 bg-grid-pattern opacity-10"></div>
+                  <Sparkles className="h-32 w-32 text-cyan-600 mx-auto relative z-10 animate-float" />
+                  <Zap className="absolute top-4 right-4 h-8 w-8 text-cyan-400 animate-pulse" />
+                  <RefreshCw className="absolute bottom-4 left-4 h-6 w-6 text-blue-400 animate-spin-slow" />
+                  <div className="absolute -bottom-4 -right-4 w-32 h-32 bg-cyan-500/20 rounded-full blur-3xl"></div>
+                  <div className="absolute -top-4 -left-4 w-24 h-24 bg-blue-500/20 rounded-full blur-2xl"></div>
                 </div>
               </div>
             </div>
@@ -142,9 +184,10 @@ export default function DeepCleaningPage() {
       </section>
 
       {/* Features Section */}
-      <section className="py-20 bg-white">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
+      <section ref={featuresRef} className="py-20 bg-white relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-b from-gray-50/50 to-white pointer-events-none"></div>
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="text-center mb-16 animate-on-scroll opacity-0">
             <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
               {t('services.whyChooseUs.title')}
             </h2>
@@ -155,12 +198,20 @@ export default function DeepCleaningPage() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {features.map((feature, index) => (
-              <div key={index} className="text-center space-y-4">
-                <div className="w-16 h-16 bg-cyan-100 rounded-full flex items-center justify-center mx-auto text-cyan-600">
-                  {feature.icon}
+              <div 
+                key={index} 
+                className="animate-on-scroll opacity-0 hover-card group"
+                style={{ animationDelay: `${index * 100}ms` }}
+              >
+                <div className="glass-morphism rounded-2xl p-6 text-center space-y-4 h-full border border-cyan-100/50 transition-all duration-300 hover:border-cyan-300/50">
+                  <div className="w-16 h-16 rounded-2xl flex items-center justify-center mx-auto bg-gradient-to-br from-cyan-100 to-blue-100 group-hover:scale-110 transition-transform duration-300">
+                    <div className="text-cyan-600 group-hover:rotate-12 transition-transform duration-300">
+                      {feature.icon}
+                    </div>
+                  </div>
+                  <h3 className="text-xl font-semibold text-gray-900">{feature.title}</h3>
+                  <p className="text-gray-600">{feature.description}</p>
                 </div>
-                <h3 className="text-xl font-semibold text-gray-900">{feature.title}</h3>
-                <p className="text-gray-600">{feature.description}</p>
               </div>
             ))}
           </div>
@@ -168,11 +219,12 @@ export default function DeepCleaningPage() {
       </section>
 
       {/* Process Section */}
-      <section className="py-20 bg-gray-50">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
+      <section ref={processRef} className="py-20 relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-gray-50 via-cyan-50/30 to-blue-50/30"></div>
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="text-center mb-16 animate-on-scroll opacity-0">
             <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
-              Intensive Cleaning Process
+              Our Deep Cleaning Process
             </h2>
             <p className="text-xl text-gray-600 max-w-2xl mx-auto">
               Our systematic deep cleaning process ensures every corner is thoroughly cleaned and sanitized
@@ -181,18 +233,22 @@ export default function DeepCleaningPage() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {process.map((item, index) => (
-              <div key={index} className="relative">
-                <div className="bg-white rounded-2xl p-6 shadow-lg h-full">
+              <div 
+                key={index} 
+                className="relative animate-on-scroll opacity-0"
+                style={{ animationDelay: `${index * 150}ms` }}
+              >
+                <div className="glass-morphism rounded-3xl p-6 h-full hover:shadow-2xl transition-all duration-300 group hover:-translate-y-2">
                   <div className="text-center space-y-4">
-                    <div className="w-12 h-12 bg-cyan-600 rounded-full flex items-center justify-center mx-auto">
-                      <span className="text-white font-bold">{item.step}</span>
+                    <div className="w-14 h-14 bg-gradient-to-br from-cyan-500 to-blue-600 rounded-2xl flex items-center justify-center mx-auto shadow-lg group-hover:scale-110 transition-transform duration-300">
+                      <span className="text-white font-bold text-xl">{item.step}</span>
                     </div>
                     <h3 className="text-xl font-semibold text-gray-900">{item.title}</h3>
                     <p className="text-gray-600">{item.description}</p>
                   </div>
                 </div>
                 {index < process.length - 1 && (
-                  <div className="hidden lg:block absolute top-6 -right-4 w-8 h-0.5 bg-cyan-200"></div>
+                  <div className="hidden lg:block absolute top-7 -right-4 w-8 h-0.5 bg-gradient-to-r from-cyan-300 to-transparent"></div>
                 )}
               </div>
             ))}
@@ -201,10 +257,10 @@ export default function DeepCleaningPage() {
       </section>
 
       {/* What's Included Section */}
-      <section className="py-20 bg-white">
+      <section className="py-20 bg-white relative overflow-hidden">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div className="space-y-6">
+            <div className="space-y-6 animate-on-scroll opacity-0">
               <h2 className="text-3xl lg:text-4xl font-bold text-gray-900">
                 {t('services.deep.includes.title')}
               </h2>
@@ -212,43 +268,45 @@ export default function DeepCleaningPage() {
                 Comprehensive deep cleaning services that go beyond surface cleaning for maximum results
               </p>
               
-              <div className="space-y-3">
+              <div className="space-y-4">
                 {includes.map((item, index) => (
-                  <div key={index} className="flex items-center space-x-3">
-                    <CheckCircle className="h-5 w-5 text-cyan-600 flex-shrink-0" />
-                    <span className="text-gray-700">{item}</span>
+                  <div 
+                    key={index} 
+                    className="flex items-center space-x-3 group animate-on-scroll opacity-0"
+                    style={{ animationDelay: `${index * 50}ms` }}
+                  >
+                    <div className="flex-shrink-0">
+                      <CheckCircle className="h-6 w-6 text-cyan-600 group-hover:scale-110 transition-transform" />
+                    </div>
+                    <span className="text-gray-700 text-lg group-hover:text-cyan-700 transition-colors">{item}</span>
                   </div>
                 ))}
               </div>
             </div>
             
-            <div className="relative">
-              <div className="bg-cyan-50 rounded-2xl p-8">
-                <div className="bg-white rounded-lg p-6 shadow-lg">
-                  <h3 className="text-xl font-bold text-gray-900 mb-4">
-                    {t('getQuote')}
+            <div className="relative animate-on-scroll opacity-0 animation-delay-300">
+              <div className="glass-morphism rounded-3xl p-8 hover:shadow-2xl transition-all duration-300">
+                <div className="bg-gradient-to-br from-cyan-50 to-blue-50 rounded-2xl p-8">
+                  <h3 className="text-2xl font-bold text-gray-900 mb-4">
+                    Why Choose Deep Cleaning?
                   </h3>
                   <p className="text-gray-600 mb-6">
                     Professional deep cleaning with intensive sanitization and restoration
                   </p>
                   <div className="space-y-4">
-                    <div className="flex items-center space-x-2">
-                      <Clock className="h-5 w-5 text-cyan-600" />
-                      <span className="text-gray-700">{t('contactPage.info.hours.weekdays')}</span>
-                    </div>
-                    <div className="flex items-center space-x-2">
-                      <Phone className="h-5 w-5 text-cyan-600" />
-                      <span className="text-gray-700">{t('contactPage.info.phone.number')}</span>
-                    </div>
-                    <div className="flex items-center space-x-2">
-                      <Shield className="h-5 w-5 text-cyan-600" />
-                      <span className="text-gray-700">{t('services.whyChooseUs.insured.title')}</span>
-                    </div>
-                    <div className="flex items-center space-x-2">
-                      <Target className="h-5 w-5 text-cyan-600" />
-                      <span className="text-gray-700">Professional Equipment</span>
-                    </div>
+                    {deepCleanBenefits.map((benefit, index) => (
+                      <div key={index} className="glass-morphism rounded-xl p-4">
+                        <h4 className="font-semibold text-gray-900">{benefit.title}</h4>
+                        <p className="text-sm text-gray-600">{benefit.description}</p>
+                      </div>
+                    ))}
                   </div>
+                  <Link
+                    href="/booking"
+                    className="btn-modern bg-gradient-to-r from-cyan-600 to-blue-600 text-white px-6 py-3 rounded-full font-semibold text-center mt-6 w-full block hover:shadow-xl transition-all duration-300"
+                  >
+                    {t('bookNow')}
+                  </Link>
                 </div>
               </div>
             </div>
@@ -256,105 +314,65 @@ export default function DeepCleaningPage() {
         </div>
       </section>
 
-      {/* Benefits Section */}
-      <section className="py-20 bg-gray-50">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
+      {/* When to Deep Clean Section */}
+      <section className="py-20 relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-gray-50 via-cyan-50/20 to-blue-50/20"></div>
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="text-center mb-12 animate-on-scroll opacity-0">
             <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
-              Benefits of Deep Cleaning
+              When to Schedule Deep Cleaning
             </h2>
             <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              Experience the difference our intensive cleaning process makes for your space
+              Deep cleaning is recommended for these situations
             </p>
           </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {benefits.map((benefit, index) => (
-              <div key={index} className="bg-white rounded-2xl p-8 shadow-lg text-center">
-                <div className="w-16 h-16 bg-cyan-100 rounded-full flex items-center justify-center mx-auto mb-6 text-cyan-600">
-                  {benefit.icon}
-                </div>
-                <h3 className="text-xl font-semibold text-gray-900 mb-4">{benefit.title}</h3>
-                <p className="text-gray-600">{benefit.description}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* When to Choose Deep Cleaning */}
-      <section className="py-16 bg-cyan-50">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="bg-white rounded-2xl p-8 shadow-lg">
-            <div className="text-center mb-8">
-              <Sparkles className="h-12 w-12 text-cyan-600 mx-auto mb-4" />
-              <h3 className="text-2xl font-bold text-gray-900 mb-2">
-                When to Choose Deep Cleaning
-              </h3>
-              <p className="text-gray-600">
-                Deep cleaning is recommended in these situations for optimal results
-              </p>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="glass-morphism rounded-2xl p-6 animate-on-scroll opacity-0">
+              <Clock className="h-8 w-8 text-cyan-600 mb-4" />
+              <h4 className="font-semibold text-gray-900 mb-2">Seasonal Cleaning</h4>
+              <p className="text-sm text-gray-600">Spring or fall deep cleaning for complete refresh</p>
             </div>
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-              <div className="text-center space-y-3">
-                <div className="w-12 h-12 bg-cyan-100 rounded-full flex items-center justify-center mx-auto">
-                  <Clock className="h-6 w-6 text-cyan-600" />
-                </div>
-                <h4 className="font-semibold text-gray-900">Seasonal Cleaning</h4>
-                <p className="text-sm text-gray-600">Spring or fall deep cleaning for complete refresh</p>
-              </div>
-              
-              <div className="text-center space-y-3">
-                <div className="w-12 h-12 bg-cyan-100 rounded-full flex items-center justify-center mx-auto">
-                  <Users className="h-6 w-6 text-cyan-600" />
-                </div>
-                <h4 className="font-semibold text-gray-900">Special Events</h4>
-                <p className="text-sm text-gray-600">Before hosting important events or gatherings</p>
-              </div>
-              
-              <div className="text-center space-y-3">
-                <div className="w-12 h-12 bg-cyan-100 rounded-full flex items-center justify-center mx-auto">
-                  <Shield className="h-6 w-6 text-cyan-600" />
-                </div>
-                <h4 className="font-semibold text-gray-900">Health Concerns</h4>
-                <p className="text-sm text-gray-600">When dealing with allergies or health issues</p>
-              </div>
-              
-              <div className="text-center space-y-3">
-                <div className="w-12 h-12 bg-cyan-100 rounded-full flex items-center justify-center mx-auto">
-                  <RefreshCw className="h-6 w-6 text-cyan-600" />
-                </div>
-                <h4 className="font-semibold text-gray-900">Move In/Out</h4>
-                <p className="text-sm text-gray-600">Moving into a new space or preparing to leave</p>
-              </div>
+            <div className="glass-morphism rounded-2xl p-6 animate-on-scroll opacity-0 animation-delay-100">
+              <Home className="h-8 w-8 text-cyan-600 mb-4" />
+              <h4 className="font-semibold text-gray-900 mb-2">Moving In/Out</h4>
+              <p className="text-sm text-gray-600">Thorough cleaning for new beginnings</p>
+            </div>
+            <div className="glass-morphism rounded-2xl p-6 animate-on-scroll opacity-0 animation-delay-200">
+              <Award className="h-8 w-8 text-cyan-600 mb-4" />
+              <h4 className="font-semibold text-gray-900 mb-2">Special Events</h4>
+              <p className="text-sm text-gray-600">Pre-event deep cleaning for perfect presentation</p>
             </div>
           </div>
         </div>
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 bg-gradient-to-r from-cyan-600 to-blue-600">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl lg:text-4xl font-bold text-white mb-4">
-            {t('cta.ready')}
-          </h2>
-          <p className="text-xl text-cyan-100 mb-8 max-w-2xl mx-auto">
-            {t('cta.description')}
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link
-              href="/contact"
-              className="bg-white text-cyan-600 px-8 py-4 rounded-full hover:bg-gray-100 transition-colors font-semibold text-lg"
-            >
-              {t('getQuote')}
-            </Link>
-            <Link
-              href="tel:+393277791867"
-              className="border-2 border-white text-white px-8 py-4 rounded-full hover:bg-white hover:text-cyan-600 transition-colors font-semibold text-lg"
-            >
-              {t('call_now')}
-            </Link>
+      <section className="py-20 relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-r from-cyan-600 via-blue-600 to-indigo-600"></div>
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,rgba(255,255,255,0.1),transparent)]"></div>
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+          <div className="animate-on-scroll opacity-0">
+            <h2 className="text-3xl lg:text-4xl font-bold text-white mb-4">
+              {t('cta.ready')}
+            </h2>
+            <p className="text-xl text-cyan-100 mb-8 max-w-2xl mx-auto">
+              {t('cta.description')}
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Link
+                href="/contact"
+                className="btn-glass bg-white/10 backdrop-blur-md text-white px-8 py-4 rounded-full hover:bg-white hover:text-cyan-600 transition-all duration-300 font-semibold text-lg hover:scale-105"
+              >
+                {t('getQuote')}
+              </Link>
+              <Link
+                href="tel:+393277791867"
+                className="btn-glass border-2 border-white/50 text-white px-8 py-4 rounded-full hover:bg-white hover:text-cyan-600 transition-all duration-300 font-semibold text-lg hover:scale-105"
+              >
+                {t('call_now')}
+              </Link>
+            </div>
           </div>
         </div>
       </section>
