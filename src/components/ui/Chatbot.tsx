@@ -18,9 +18,11 @@ import {
 interface Message {
   id: string
   text: string
+  textKey?: string  // For bot messages, store the translation key
   sender: 'user' | 'bot'
   timestamp: Date
   suggestions?: string[]
+  suggestionKeys?: string[]  // Store suggestion keys for bot messages
 }
 
 interface ChatbotProps {
@@ -29,18 +31,20 @@ interface ChatbotProps {
 }
 
 export default function Chatbot({ isOpen, onToggle }: ChatbotProps) {
-  const { t } = useLocale()
+  const { t, locale } = useLocale()
   const [messages, setMessages] = useState<Message[]>([
     {
       id: '1',
-      text: t('chatbot.welcome'),
+      text: '',  // Will be filled by translation
+      textKey: 'chatbot.welcome',
       sender: 'bot',
       timestamp: new Date(),
-      suggestions: [
-        t('chatbot.suggestions.quote'),
-        t('chatbot.suggestions.hours'),
-        t('chatbot.suggestions.services'),
-        t('chatbot.suggestions.booking')
+      suggestions: [],  // Will be filled by translation
+      suggestionKeys: [
+        'chatbot.suggestions.quote',
+        'chatbot.suggestions.hours',
+        'chatbot.suggestions.services',
+        'chatbot.suggestions.booking'
       ]
     }
   ])
@@ -55,6 +59,22 @@ export default function Chatbot({ isOpen, onToggle }: ChatbotProps) {
   useEffect(() => {
     scrollToBottom()
   }, [messages])
+
+  // Update all messages when locale changes
+  useEffect(() => {
+    setMessages(prevMessages =>
+      prevMessages.map(msg => {
+        if (msg.sender === 'bot' && msg.textKey) {
+          return {
+            ...msg,
+            text: t(msg.textKey),
+            suggestions: msg.suggestionKeys?.map(key => t(key)) || []
+          }
+        }
+        return msg
+      })
+    )
+  }, [locale, t])
 
   const generateBotResponse = (userMessage: string): Message => {
     const lowerMessage = userMessage.toLowerCase()
@@ -88,17 +108,24 @@ export default function Chatbot({ isOpen, onToggle }: ChatbotProps) {
       responseKey = 'thanks'
     }
 
+    const suggestionKeys = [
+      `chatbot.responses.${responseKey}.suggestions.0`,
+      `chatbot.responses.${responseKey}.suggestions.1`,
+      `chatbot.responses.${responseKey}.suggestions.2`,
+      `chatbot.responses.${responseKey}.suggestions.3`
+    ]
+
     return {
       id: Date.now().toString(),
       text: t(`chatbot.responses.${responseKey}.text`),
+      textKey: `chatbot.responses.${responseKey}.text`,
       sender: 'bot',
       timestamp: new Date(),
-      suggestions: [
-        t(`chatbot.responses.${responseKey}.suggestions.0`),
-        t(`chatbot.responses.${responseKey}.suggestions.1`),
-        t(`chatbot.responses.${responseKey}.suggestions.2`),
-        t(`chatbot.responses.${responseKey}.suggestions.3`)
-      ].filter(s => s && !s.includes(`chatbot.responses.${responseKey}.suggestions`))
+      suggestions: suggestionKeys.map(key => t(key)).filter(s => s && !s.includes(`chatbot.responses.${responseKey}.suggestions`)),
+      suggestionKeys: suggestionKeys.filter(key => {
+        const translated = t(key)
+        return translated && !translated.includes(`chatbot.responses.${responseKey}.suggestions`)
+      })
     }
   }
 
@@ -141,7 +168,7 @@ export default function Chatbot({ isOpen, onToggle }: ChatbotProps) {
     return (
       <button
         onClick={onToggle}
-        className="fixed bottom-6 right-6 z-50 bg-green-600 text-white p-4 rounded-full shadow-lg hover:bg-green-700 transition-colors animate-pulse"
+        className="fixed bottom-20 right-4 sm:bottom-6 sm:right-6 z-50 bg-green-600 text-white p-4 rounded-full shadow-lg hover:bg-green-700 transition-colors animate-pulse"
       >
         <MessageCircle className="w-6 h-6" />
       </button>
@@ -149,9 +176,15 @@ export default function Chatbot({ isOpen, onToggle }: ChatbotProps) {
   }
 
   return (
-    <div className="fixed bottom-6 right-6 z-50 w-96 h-[600px] bg-white rounded-lg shadow-2xl border border-gray-200 flex flex-col">
+    <div className="fixed inset-0 sm:inset-auto sm:bottom-6 sm:right-6 z-50 w-full sm:w-96 h-full sm:h-[600px] max-h-[80vh] sm:max-h-[600px] bg-white sm:rounded-lg shadow-2xl border border-gray-200 flex flex-col">
+      {/* Mobile overlay background */}
+      <div
+        className="fixed inset-0 bg-black/50 sm:hidden -z-10"
+        onClick={onToggle}
+      />
+      
       {/* Header */}
-      <div className="bg-green-600 text-white p-4 rounded-t-lg flex items-center justify-between">
+      <div className="bg-green-600 text-white p-4 sm:rounded-t-lg flex items-center justify-between">
         <div className="flex items-center space-x-3">
           <div className="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center">
             <Bot className="w-5 h-5" />
@@ -191,18 +224,27 @@ export default function Chatbot({ isOpen, onToggle }: ChatbotProps) {
                   <User className="w-4 h-4 mt-1 text-white" />
                 )}
                 <div className="flex-1">
-                  <p className="text-sm whitespace-pre-line">{message.text}</p>
+                  <p className="text-sm whitespace-pre-line">
+                    {message.sender === 'bot' && message.textKey
+                      ? t(message.textKey)
+                      : message.text}
+                  </p>
                   {message.suggestions && (
                     <div className="mt-3 space-y-1">
-                      {message.suggestions.map((suggestion, index) => (
-                        <button
-                          key={index}
-                          onClick={() => handleSuggestionClick(suggestion)}
-                          className="block w-full text-left p-2 text-xs bg-white border border-gray-200 rounded hover:bg-gray-50 transition-colors"
-                        >
-                          {suggestion}
-                        </button>
-                      ))}
+                      {message.suggestions.map((suggestion, index) => {
+                        const displayText = message.suggestionKeys?.[index]
+                          ? t(message.suggestionKeys[index])
+                          : suggestion
+                        return (
+                          <button
+                            key={index}
+                            onClick={() => handleSuggestionClick(displayText)}
+                            className="block w-full text-left p-2 text-xs bg-white border border-gray-200 rounded hover:bg-gray-50 transition-colors"
+                          >
+                            {displayText}
+                          </button>
+                        )
+                      })}
                     </div>
                   )}
                 </div>
