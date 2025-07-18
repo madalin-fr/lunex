@@ -65,6 +65,36 @@ export const common = {
   all_rights_reserved: 'All rights reserved',
   follow_us: 'Follow Us',
   
+  footer: {
+    company: {
+      description: 'Professional cleaning services for offices, homes, and commercial spaces. Trusted by businesses and families throughout Romano di Lombardia.',
+      registration: 'Reg. No: BG/2024/CLN-0012',
+      vat: 'VAT: IT12345678901',
+      license: 'Operating License: BG-CLN-2024-001'
+    },
+    links: {
+      title: 'Quick Links'
+    },
+    contact: {
+      title: 'Contact Info'
+    },
+    certifications: {
+      title: 'Certifications',
+      insured: 'Fully Insured',
+      certified: 'ISO 9001 Certified'
+    },
+    badges: {
+      title: 'Memberships',
+      startup: 'Registered Startup',
+      member: 'Chamber of Commerce Member'
+    },
+    legal: {
+      privacy: 'Privacy Policy',
+      terms: 'Terms of Service',
+      cookies: 'Cookie Policy'
+    }
+  },
+  
   // Contact Info
   opening_hours: 'Opening Hours',
   closed: 'Closed',
