@@ -33,14 +33,14 @@ export default function Chatbot({ isOpen, onToggle }: ChatbotProps) {
   const [messages, setMessages] = useState<Message[]>([
     {
       id: '1',
-      text: 'Ciao! Sono l\'assistente virtuale di Lunex. Come posso aiutarti oggi con i nostri servizi di pulizia?',
+      text: t('chatbot.welcome'),
       sender: 'bot',
       timestamp: new Date(),
       suggestions: [
-        'Voglio un preventivo',
-        'Orari di servizio',
-        'Tipi di pulizia',
-        'Prenota un appuntamento'
+        t('chatbot.suggestions.quote'),
+        t('chatbot.suggestions.hours'),
+        t('chatbot.suggestions.services'),
+        t('chatbot.suggestions.booking')
       ]
     }
   ])
@@ -59,44 +59,46 @@ export default function Chatbot({ isOpen, onToggle }: ChatbotProps) {
   const generateBotResponse = (userMessage: string): Message => {
     const lowerMessage = userMessage.toLowerCase()
     
-    let response = ''
-    let suggestions: string[] = []
-
-    if (lowerMessage.includes('preventivo') || lowerMessage.includes('prezzo') || lowerMessage.includes('costo')) {
-      response = 'Perfetto! I nostri prezzi dipendono dal tipo di servizio:\n\n• Pulizia domestica: €15-25/ora\n• Pulizia uffici: €20-30/ora\n• Pulizia post-ristrutturazione: €30-50/ora\n• Pulizia ville di lusso: €25-40/ora\n\nVuoi un preventivo personalizzato?'
-      suggestions = ['Sì, voglio un preventivo', 'Servizi disponibili', 'Come prenotare']
-    } else if (lowerMessage.includes('orari') || lowerMessage.includes('quando')) {
-      response = 'I nostri orari di servizio sono:\n\n• Lunedì-Venerdì: 8:00-18:00\n• Sabato: 9:00-17:00\n• Domenica: Solo emergenze\n\nSiamo disponibili anche per servizi fuori orario su richiesta!'
-      suggestions = ['Prenota ora', 'Servizio emergenza', 'Contatti']
-    } else if (lowerMessage.includes('pulizia') || lowerMessage.includes('servizi') || lowerMessage.includes('tipo')) {
-      response = 'Offriamo diversi tipi di pulizia professionale:\n\n• 🏢 Pulizia uffici\n• 🏠 Pulizia domestica\n• 🔨 Pulizia post-ristrutturazione\n• ✨ Pulizia ville di lusso\n• 🧽 Pulizia profonda\n• 🔄 Pulizia di mantenimento\n\nQuale ti interessa di più?'
-      suggestions = ['Pulizia uffici', 'Pulizia domestica', 'Pulizia post-ristrutturazione', 'Preventivo']
-    } else if (lowerMessage.includes('prenota') || lowerMessage.includes('appuntamento')) {
-      response = 'Ottimo! Per prenotare un appuntamento hai diverse opzioni:\n\n1. 📱 Compila il form di prenotazione online\n2. 📞 Chiama il +39 327 779 1867\n3. 📧 Email: info@lunex-cleaning.com\n\nPreferisci prenotare online?'
-      suggestions = ['Prenota online', 'Chiama ora', 'Invia email']
-    } else if (lowerMessage.includes('dove') || lowerMessage.includes('zona') || lowerMessage.includes('romano')) {
-      response = 'Operiamo principalmente in:\n\n• Romano di Lombardia\n• Bergamo e provincia\n• Zone limitrofe\n\nPer zone più distanti, contattaci per verificare la disponibilità!'
-      suggestions = ['Verifica disponibilità', 'Contatti', 'Preventivo']
-    } else if (lowerMessage.includes('emergenza') || lowerMessage.includes('urgente')) {
-      response = 'Per emergenze di pulizia siamo disponibili 24/7!\n\n📞 Numero emergenze: +39 327 779 1867\n\nTariffe emergenza: +50% sul prezzo base\nTempo di intervento: 2-4 ore'
-      suggestions = ['Chiama emergenza', 'Preventivo normale', 'Orari standard']
-    } else if (lowerMessage.includes('ciao') || lowerMessage.includes('salve') || lowerMessage.includes('buongiorno')) {
-      response = 'Ciao! Benvenuto in Lunex Professional Cleaning! 👋\n\nSono qui per aiutarti con informazioni sui nostri servizi di pulizia professionale. Cosa posso fare per te?'
-      suggestions = ['Voglio un preventivo', 'Servizi disponibili', 'Come prenotare', 'Contatti']
-    } else if (lowerMessage.includes('grazie') || lowerMessage.includes('perfetto') || lowerMessage.includes('bene')) {
-      response = 'Prego! Sono qui per aiutarti! 😊\n\nSe hai altre domande o vuoi procedere con la prenotazione, fammi sapere!'
-      suggestions = ['Prenota ora', 'Altre domande', 'Contatti']
-    } else {
-      response = 'Capisco la tua richiesta! Per informazioni più specifiche, ti suggerisco di:\n\n• Contattare il nostro team al +39 327 779 1867\n• Visitare la sezione servizi del sito\n• Compilare il form di contatto\n\nCosa preferisci fare?'
-      suggestions = ['Chiama ora', 'Vedi servizi', 'Contatta via email', 'Preventivo']
+    let responseKey = 'default'
+    
+    // Detect keywords for both English and Italian
+    if (lowerMessage.includes('preventivo') || lowerMessage.includes('prezzo') || lowerMessage.includes('costo') ||
+        lowerMessage.includes('quote') || lowerMessage.includes('price') || lowerMessage.includes('cost')) {
+      responseKey = 'quote'
+    } else if (lowerMessage.includes('orari') || lowerMessage.includes('quando') ||
+               lowerMessage.includes('hours') || lowerMessage.includes('when')) {
+      responseKey = 'hours'
+    } else if (lowerMessage.includes('pulizia') || lowerMessage.includes('servizi') || lowerMessage.includes('tipo') ||
+               lowerMessage.includes('clean') || lowerMessage.includes('service') || lowerMessage.includes('type')) {
+      responseKey = 'services'
+    } else if (lowerMessage.includes('prenota') || lowerMessage.includes('appuntamento') ||
+               lowerMessage.includes('book') || lowerMessage.includes('appointment')) {
+      responseKey = 'booking'
+    } else if (lowerMessage.includes('dove') || lowerMessage.includes('zona') || lowerMessage.includes('romano') ||
+               lowerMessage.includes('where') || lowerMessage.includes('area') || lowerMessage.includes('location')) {
+      responseKey = 'location'
+    } else if (lowerMessage.includes('emergenza') || lowerMessage.includes('urgente') ||
+               lowerMessage.includes('emergency') || lowerMessage.includes('urgent')) {
+      responseKey = 'emergency'
+    } else if (lowerMessage.includes('ciao') || lowerMessage.includes('salve') || lowerMessage.includes('buongiorno') ||
+               lowerMessage.includes('hello') || lowerMessage.includes('hi') || lowerMessage.includes('good morning')) {
+      responseKey = 'greeting'
+    } else if (lowerMessage.includes('grazie') || lowerMessage.includes('perfetto') || lowerMessage.includes('bene') ||
+               lowerMessage.includes('thank') || lowerMessage.includes('perfect') || lowerMessage.includes('good')) {
+      responseKey = 'thanks'
     }
 
     return {
       id: Date.now().toString(),
-      text: response,
+      text: t(`chatbot.responses.${responseKey}.text`),
       sender: 'bot',
       timestamp: new Date(),
-      suggestions
+      suggestions: [
+        t(`chatbot.responses.${responseKey}.suggestions.0`),
+        t(`chatbot.responses.${responseKey}.suggestions.1`),
+        t(`chatbot.responses.${responseKey}.suggestions.2`),
+        t(`chatbot.responses.${responseKey}.suggestions.3`)
+      ].filter(s => s && !s.includes(`chatbot.responses.${responseKey}.suggestions`))
     }
   }
 
@@ -139,7 +141,7 @@ export default function Chatbot({ isOpen, onToggle }: ChatbotProps) {
     return (
       <button
         onClick={onToggle}
-        className="fixed bottom-6 right-6 z-50 bg-blue-600 text-white p-4 rounded-full shadow-lg hover:bg-blue-700 transition-colors animate-pulse"
+        className="fixed bottom-6 right-6 z-50 bg-green-600 text-white p-4 rounded-full shadow-lg hover:bg-green-700 transition-colors animate-pulse"
       >
         <MessageCircle className="w-6 h-6" />
       </button>
@@ -149,19 +151,19 @@ export default function Chatbot({ isOpen, onToggle }: ChatbotProps) {
   return (
     <div className="fixed bottom-6 right-6 z-50 w-96 h-[600px] bg-white rounded-lg shadow-2xl border border-gray-200 flex flex-col">
       {/* Header */}
-      <div className="bg-blue-600 text-white p-4 rounded-t-lg flex items-center justify-between">
+      <div className="bg-green-600 text-white p-4 rounded-t-lg flex items-center justify-between">
         <div className="flex items-center space-x-3">
           <div className="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center">
             <Bot className="w-5 h-5" />
           </div>
           <div>
-            <h3 className="font-semibold">Assistente Lunex</h3>
-            <p className="text-sm text-blue-100">Online ora</p>
+            <h3 className="font-semibold">{t('chatbot.title')}</h3>
+            <p className="text-sm text-green-100">{t('chatbot.status')}</p>
           </div>
         </div>
         <button
           onClick={onToggle}
-          className="text-white hover:text-blue-100 transition-colors"
+          className="text-white hover:text-green-100 transition-colors"
         >
           <X className="w-5 h-5" />
         </button>
@@ -177,13 +179,13 @@ export default function Chatbot({ isOpen, onToggle }: ChatbotProps) {
             <div
               className={`max-w-[80%] p-3 rounded-lg ${
                 message.sender === 'user'
-                  ? 'bg-blue-600 text-white ml-auto'
+                  ? 'bg-green-600 text-white ml-auto'
                   : 'bg-gray-100 text-gray-800'
               }`}
             >
               <div className="flex items-start space-x-2">
                 {message.sender === 'bot' && (
-                  <Bot className="w-4 h-4 mt-1 text-blue-600" />
+                  <Bot className="w-4 h-4 mt-1 text-green-600" />
                 )}
                 {message.sender === 'user' && (
                   <User className="w-4 h-4 mt-1 text-white" />
@@ -216,7 +218,7 @@ export default function Chatbot({ isOpen, onToggle }: ChatbotProps) {
           <div className="flex justify-start">
             <div className="bg-gray-100 p-3 rounded-lg">
               <div className="flex items-center space-x-2">
-                <Bot className="w-4 h-4 text-blue-600" />
+                <Bot className="w-4 h-4 text-green-600" />
                 <div className="flex space-x-1">
                   <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"></div>
                   <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></div>
@@ -238,13 +240,13 @@ export default function Chatbot({ isOpen, onToggle }: ChatbotProps) {
             value={inputMessage}
             onChange={(e) => setInputMessage(e.target.value)}
             onKeyPress={handleKeyPress}
-            placeholder="Scrivi un messaggio..."
-            className="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            placeholder={t('chatbot.placeholder')}
+            className="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
           />
           <button
             onClick={() => handleSendMessage()}
             disabled={!inputMessage.trim()}
-            className="bg-blue-600 text-white p-2 rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+            className="bg-green-600 text-white p-2 rounded-lg hover:bg-green-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
           >
             <Send className="w-5 h-5" />
           </button>
@@ -253,22 +255,22 @@ export default function Chatbot({ isOpen, onToggle }: ChatbotProps) {
         {/* Quick actions */}
         <div className="mt-3 flex flex-wrap gap-2">
           <button
-            onClick={() => handleSuggestionClick('Voglio un preventivo')}
-            className="text-xs bg-blue-50 text-blue-600 px-3 py-1 rounded-full hover:bg-blue-100 transition-colors"
-          >
-            💰 Preventivo
-          </button>
-          <button
-            onClick={() => handleSuggestionClick('Prenota un appuntamento')}
+            onClick={() => handleSuggestionClick(t('chatbot.suggestions.quote'))}
             className="text-xs bg-green-50 text-green-600 px-3 py-1 rounded-full hover:bg-green-100 transition-colors"
           >
-            📅 Prenota
+            {t('chatbot.quickActions.quote')}
           </button>
           <button
-            onClick={() => handleSuggestionClick('Servizi disponibili')}
-            className="text-xs bg-purple-50 text-purple-600 px-3 py-1 rounded-full hover:bg-purple-100 transition-colors"
+            onClick={() => handleSuggestionClick(t('chatbot.suggestions.booking'))}
+            className="text-xs bg-emerald-50 text-emerald-600 px-3 py-1 rounded-full hover:bg-emerald-100 transition-colors"
           >
-            🧽 Servizi
+            {t('chatbot.quickActions.book')}
+          </button>
+          <button
+            onClick={() => handleSuggestionClick(t('chatbot.suggestions.services'))}
+            className="text-xs bg-teal-50 text-teal-600 px-3 py-1 rounded-full hover:bg-teal-100 transition-colors"
+          >
+            {t('chatbot.quickActions.services')}
           </button>
         </div>
       </div>

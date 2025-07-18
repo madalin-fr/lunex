@@ -797,5 +797,62 @@ export const common = {
       description: 'Se hai domande sul nostro utilizzo dei cookie, contattaci:',
       button: 'Contattaci'
     }
+  },
+
+  // Chatbot
+  chatbot: {
+    title: 'Assistente Lunex',
+    status: 'Online ora',
+    placeholder: 'Scrivi un messaggio...',
+    welcome: 'Ciao! Sono l\'assistente virtuale di Lunex. Come posso aiutarti oggi con i nostri servizi di pulizia?',
+    suggestions: {
+      quote: 'Voglio un preventivo',
+      hours: 'Orari di servizio',
+      services: 'Tipi di pulizia',
+      booking: 'Prenota un appuntamento'
+    },
+    responses: {
+      quote: {
+        text: 'Perfetto! I nostri prezzi dipendono dal tipo di servizio:\n\n• Pulizia domestica: €15-25/ora\n• Pulizia uffici: €20-30/ora\n• Pulizia post-ristrutturazione: €30-50/ora\n• Pulizia ville di lusso: €25-40/ora\n\nVuoi un preventivo personalizzato?',
+        suggestions: ['Sì, voglio un preventivo', 'Servizi disponibili', 'Come prenotare']
+      },
+      hours: {
+        text: 'I nostri orari di servizio sono:\n\n• Lunedì-Venerdì: 8:00-18:00\n• Sabato: 9:00-17:00\n• Domenica: Solo emergenze\n\nSiamo disponibili anche per servizi fuori orario su richiesta!',
+        suggestions: ['Prenota ora', 'Servizio emergenza', 'Contatti']
+      },
+      services: {
+        text: 'Offriamo diversi tipi di pulizia professionale:\n\n• 🏢 Pulizia uffici\n• 🏠 Pulizia domestica\n• 🔨 Pulizia post-ristrutturazione\n• ✨ Pulizia ville di lusso\n• 🧽 Pulizia profonda\n• 🔄 Pulizia di mantenimento\n\nQuale ti interessa di più?',
+        suggestions: ['Pulizia uffici', 'Pulizia domestica', 'Pulizia post-ristrutturazione', 'Preventivo']
+      },
+      booking: {
+        text: 'Ottimo! Per prenotare un appuntamento hai diverse opzioni:\n\n1. 📱 Compila il form di prenotazione online\n2. 📞 Chiama il +39 327 779 1867\n3. 📧 Email: info@lunex-cleaning.com\n\nPreferisci prenotare online?',
+        suggestions: ['Prenota online', 'Chiama ora', 'Invia email']
+      },
+      location: {
+        text: 'Operiamo principalmente in:\n\n• Romano di Lombardia\n• Bergamo e provincia\n• Zone limitrofe\n\nPer zone più distanti, contattaci per verificare la disponibilità!',
+        suggestions: ['Verifica disponibilità', 'Contatti', 'Preventivo']
+      },
+      emergency: {
+        text: 'Per emergenze di pulizia siamo disponibili 24/7!\n\n📞 Numero emergenze: +39 327 779 1867\n\nTariffe emergenza: +50% sul prezzo base\nTempo di intervento: 2-4 ore',
+        suggestions: ['Chiama emergenza', 'Preventivo normale', 'Orari standard']
+      },
+      greeting: {
+        text: 'Ciao! Benvenuto in Lunex Professional Cleaning! 👋\n\nSono qui per aiutarti con informazioni sui nostri servizi di pulizia professionale. Cosa posso fare per te?',
+        suggestions: ['Voglio un preventivo', 'Servizi disponibili', 'Come prenotare', 'Contatti']
+      },
+      thanks: {
+        text: 'Prego! Sono qui per aiutarti! 😊\n\nSe hai altre domande o vuoi procedere con la prenotazione, fammi sapere!',
+        suggestions: ['Prenota ora', 'Altre domande', 'Contatti']
+      },
+      default: {
+        text: 'Capisco la tua richiesta! Per informazioni più specifiche, ti suggerisco di:\n\n• Contattare il nostro team al +39 327 779 1867\n• Visitare la sezione servizi del sito\n• Compilare il form di contatto\n\nCosa preferisci fare?',
+        suggestions: ['Chiama ora', 'Vedi servizi', 'Contatta via email', 'Preventivo']
+      }
+    },
+    quickActions: {
+      quote: '💰 Preventivo',
+      book: '📅 Prenota',
+      services: '🧽 Servizi'
+    }
   }
 }

@@ -123,11 +123,12 @@
     line-height: 1.6;
     min-height: 100dvh;
     
-    /* Modern gradient background */
-    background-image: 
-      radial-gradient(at 40% 20%, color-mix(in srgb, var(--color-primary) 10%, transparent) 0px, transparent 50%),
-      radial-gradient(at 80% 0%, color-mix(in srgb, var(--color-secondary) 10%, transparent) 0px, transparent 50%),
-      radial-gradient(at 0% 50%, color-mix(in srgb, var(--color-accent) 10%, transparent) 0px, transparent 50%);
+    /* Subtle gradient background for white theme */
+    background-image:
+      radial-gradient(at 40% 20%, color-mix(in srgb, var(--color-primary) 5%, transparent) 0px, transparent 50%),
+      radial-gradient(at 80% 0%, color-mix(in srgb, var(--color-secondary) 5%, transparent) 0px, transparent 50%),
+      radial-gradient(at 0% 50%, color-mix(in srgb, var(--color-accent) 5%, transparent) 0px, transparent 50%);
+    background-color: #fafafa;
   }
   
   /* Focus visible styles with :has() */
@@ -156,16 +157,31 @@
 }
 
 @layer recipes {
-  /* Modern Glass Morphism Effect */
+  /* Modern Glass Morphism Effect - White Theme */
   .glass {
-    background: oklch(100% 0 0 / 0.05);
-    backdrop-filter: blur(10px) saturate(180%);
-    -webkit-backdrop-filter: blur(10px) saturate(180%);
-    border: 1px solid oklch(100% 0 0 / 0.1);
+    background: oklch(100% 0 0 / 0.6);
+    backdrop-filter: blur(12px) saturate(150%);
+    -webkit-backdrop-filter: blur(12px) saturate(150%);
+    border: 1px solid oklch(0% 0 0 / 0.08);
     
-    @supports (backdrop-filter: blur(10px)) {
-      background: oklch(100% 0 0 / 0.03);
+    @supports (backdrop-filter: blur(12px)) {
+      background: oklch(100% 0 0 / 0.5);
     }
+  }
+  
+  .glass-white {
+    background: oklch(100% 0 0 / 0.7);
+    backdrop-filter: blur(16px) saturate(160%);
+    -webkit-backdrop-filter: blur(16px) saturate(160%);
+    border: 1px solid oklch(0% 0 0 / 0.06);
+    box-shadow: 0 2px 8px oklch(0% 0 0 / 0.04);
+  }
+  
+  .glass-subtle {
+    background: oklch(100% 0 0 / 0.3);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid oklch(0% 0 0 / 0.04);
   }
   
   /* Gradient Text with Animation */
@@ -270,6 +286,75 @@
     ::view-transition-new(page) {
       animation: fade-in 0.3s var(--ease-smooth);
     }
+  }
+  
+  /* Enhanced navbar transparency effects - White Glass Theme */
+  .navbar-glass {
+    background: linear-gradient(
+      to bottom,
+      oklch(100% 0 0 / 0.4),
+      oklch(100% 0 0 / 0.3)
+    );
+    backdrop-filter: blur(12px) saturate(150%);
+    -webkit-backdrop-filter: blur(12px) saturate(150%);
+    border-bottom: 1px solid oklch(0% 0 0 / 0.06);
+    box-shadow: 0 1px 3px oklch(0% 0 0 / 0.05);
+  }
+  
+  .navbar-glass-scrolled {
+    background: linear-gradient(
+      to bottom,
+      oklch(100% 0 0 / 0.8),
+      oklch(100% 0 0 / 0.75)
+    );
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    box-shadow:
+      0 4px 20px oklch(0% 0 0 / 0.08),
+      0 1px 3px oklch(0% 0 0 / 0.05);
+    border-bottom: 1px solid oklch(0% 0 0 / 0.08);
+  }
+  
+  /* Navbar link hover glow */
+  .nav-link-glow {
+    position: relative;
+    
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg,
+        var(--color-primary),
+        var(--color-accent)
+      );
+      opacity: 0;
+      transition: opacity 0.3s var(--ease-smooth);
+      filter: blur(1px);
+      box-shadow: 0 0 8px var(--color-primary);
+    }
+    
+    &:hover::after {
+      opacity: 0.8;
+    }
+  }
+  
+  /* Animate fade in for mobile menu items */
+  @keyframes nav-fade-in {
+    from {
+      opacity: 0;
+      transform: translateX(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+  
+  .animate-fade-in {
+    animation: nav-fade-in 0.3s var(--ease-smooth) both;
   }
 }
 

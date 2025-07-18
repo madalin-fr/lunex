@@ -80,14 +80,14 @@ export default function HomePage() {
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="relative bg-gradient-to-r from-blue-50 to-indigo-100 py-20 lg:py-32">
+      <section className="relative bg-gradient-to-r from-green-50 to-emerald-50 py-20 lg:py-32">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div className="space-y-8">
               <div className="space-y-4">
                 <h1 className="text-4xl lg:text-6xl font-bold text-gray-900 leading-tight">
                   {t('hero.title')}
-                  <span className="text-blue-600"> {t('hero.subtitle')}</span>
+                  <span className="text-green-600"> {t('hero.subtitle')}</span>
                 </h1>
                 <p className="text-xl text-gray-600 max-w-xl">
                   {t('hero.description')}
@@ -97,13 +97,13 @@ export default function HomePage() {
               <div className="flex flex-col sm:flex-row gap-4">
                 <Link
                   href="/contact"
-                  className="bg-blue-600 text-white px-8 py-4 rounded-full hover:bg-blue-700 transition-colors font-semibold text-lg text-center"
+                  className="bg-gradient-to-r from-green-600 to-emerald-600 text-white px-8 py-4 rounded-full hover:from-green-700 hover:to-emerald-700 transition-all font-semibold text-lg text-center shadow-lg hover:shadow-xl"
                 >
                   {t('hero.cta')}
                 </Link>
                 <Link
                   href="/services"
-                  className="border-2 border-blue-600 text-blue-600 px-8 py-4 rounded-full hover:bg-blue-600 hover:text-white transition-colors font-semibold text-lg text-center"
+                  className="border-2 border-green-600 text-green-600 px-8 py-4 rounded-full hover:bg-green-600 hover:text-white transition-all font-semibold text-lg text-center"
                 >
                   {t('servicesNav')}
                 </Link>
@@ -111,24 +111,24 @@ export default function HomePage() {
 
               <div className="flex items-center space-x-8 text-sm text-gray-600">
                 <div className="flex items-center space-x-2">
-                  <CheckCircle className="w-5 h-5 text-blue-600" />
+                  <CheckCircle className="w-5 h-5 text-green-600" />
                   <span>{t('services.whyChooseUs.experience.title')}</span>
                 </div>
                 <div className="flex items-center space-x-2">
-                  <Shield className="w-5 h-5 text-blue-600" />
+                  <Shield className="w-5 h-5 text-green-600" />
                   <span>{t('services.whyChooseUs.insured.title')}</span>
                 </div>
               </div>
             </div>
 
             <div className="relative">
-              <div className="bg-blue-100 rounded-3xl p-8 shadow-2xl">
+              <div className="bg-gradient-to-br from-green-100 to-emerald-100 rounded-3xl p-8 shadow-2xl">
                 <div className="bg-white rounded-2xl p-6 shadow-lg">
                   <h3 className="text-2xl font-bold text-gray-900 mb-4">{t('getQuote')}</h3>
                   <p className="text-gray-600 mb-6">{t('contactPage.info.hours.weekdays')}</p>
                   <Link
                     href="/contact"
-                    className="w-full bg-blue-600 text-white py-3 rounded-full hover:bg-blue-700 transition-colors font-semibold block text-center"
+                    className="w-full bg-gradient-to-r from-green-600 to-emerald-600 text-white py-3 rounded-full hover:from-green-700 hover:to-emerald-700 transition-all font-semibold block text-center shadow-md hover:shadow-lg"
                   >
                     {t('contactUs')}
                   </Link>
@@ -154,12 +154,12 @@ export default function HomePage() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {services.map((service, index) => (
               <div key={index} className="bg-gray-50 rounded-2xl p-8 text-center hover:shadow-lg transition-shadow group">
-                <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-6 text-blue-600 group-hover:bg-blue-600 group-hover:text-white transition-colors">
+                <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6 text-green-600 group-hover:bg-gradient-to-r group-hover:from-green-600 group-hover:to-emerald-600 group-hover:text-white transition-all">
                   {service.icon}
                 </div>
                 <h3 className="text-xl font-semibold text-gray-900 mb-3">{service.title}</h3>
                 <p className="text-gray-600 mb-4">{service.description}</p>
-                <Link href={service.href} className="text-blue-600 hover:text-blue-700 font-medium">
+                <Link href={service.href} className="text-green-600 hover:text-green-700 font-medium">
                   {t('read_more')} →
                 </Link>
               </div>
@@ -183,7 +183,7 @@ export default function HomePage() {
               <div className="space-y-4">
                 {whyChooseUs.map((item, index) => (
                   <div key={index} className="flex items-start space-x-3">
-                    <div className="w-6 h-6 bg-blue-600 rounded-full flex items-center justify-center flex-shrink-0 mt-1 text-white">
+                    <div className="w-6 h-6 bg-gradient-to-r from-green-600 to-emerald-600 rounded-full flex items-center justify-center flex-shrink-0 mt-1 text-white">
                       <CheckCircle className="w-3 h-3" />
                     </div>
                     <div>
@@ -196,7 +196,7 @@ export default function HomePage() {
               
               <Link
                 href="/contact"
-                className="inline-flex items-center text-blue-600 hover:text-blue-700 font-medium"
+                className="inline-flex items-center text-green-600 hover:text-green-700 font-medium"
               >
                 {t('contactUs')}
                 <Phone className="w-4 h-4 ml-2" />
@@ -204,7 +204,7 @@ export default function HomePage() {
             </div>
             
             <div className="relative">
-              <div className="bg-blue-600 rounded-3xl p-8 shadow-2xl">
+              <div className="bg-gradient-to-br from-green-600 to-emerald-600 rounded-3xl p-8 shadow-2xl">
                 <div className="bg-white rounded-2xl p-6 text-center">
                   <h3 className="text-2xl font-bold text-gray-900 mb-4">{t('contactPage.info.hours.title')}</h3>
                   <div className="space-y-2 text-gray-600">
@@ -225,7 +225,7 @@ export default function HomePage() {
                     <p className="text-sm text-gray-500 mb-4">{t('contactPage.info.phone.whatsapp')}</p>
                     <Link
                       href="tel:+393277791867"
-                      className="w-full bg-blue-600 text-white py-3 rounded-full hover:bg-blue-700 transition-colors font-semibold block text-center"
+                      className="w-full bg-gradient-to-r from-green-600 to-emerald-600 text-white py-3 rounded-full hover:from-green-700 hover:to-emerald-700 transition-all font-semibold block text-center shadow-md hover:shadow-lg"
                     >
                       {t('call_now')}
                     </Link>
@@ -262,8 +262,8 @@ export default function HomePage() {
                 "Servizio di pulizia uffici eccellente! Professionali, puntuali e molto accurati. Il nostro ufficio è sempre impeccabile."
               </p>
               <div className="flex items-center">
-                <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center">
-                  <span className="text-blue-600 font-semibold">M</span>
+                <div className="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center">
+                  <span className="text-green-600 font-semibold">M</span>
                 </div>
                 <div className="ml-3">
                   <h4 className="font-semibold text-gray-900">Marco Verdi</h4>
@@ -284,8 +284,8 @@ export default function HomePage() {
                 "Pulizie domestiche di altissima qualità. Personale affidabile e prodotti eco-compatibili. Consiglio vivamente!"
               </p>
               <div className="flex items-center">
-                <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center">
-                  <span className="text-blue-600 font-semibold">A</span>
+                <div className="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center">
+                  <span className="text-green-600 font-semibold">A</span>
                 </div>
                 <div className="ml-3">
                   <h4 className="font-semibold text-gray-900">Anna Bianchi</h4>
@@ -306,8 +306,8 @@ export default function HomePage() {
                 "Dopo la ristrutturazione hanno lasciato tutto perfetto. Servizio post-lavori impeccabile e molto professionale."
               </p>
               <div className="flex items-center">
-                <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center">
-                  <span className="text-blue-600 font-semibold">L</span>
+                <div className="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center">
+                  <span className="text-green-600 font-semibold">L</span>
                 </div>
                 <div className="ml-3">
                   <h4 className="font-semibold text-gray-900">Luigi Rossi</h4>
@@ -320,7 +320,7 @@ export default function HomePage() {
           <div className="text-center mt-12">
             <Link
               href="/reviews"
-              className="inline-flex items-center text-blue-600 hover:text-blue-700 font-medium"
+              className="inline-flex items-center text-green-600 hover:text-green-700 font-medium"
             >
               {t('view_all')} {t('reviews')}
               <Phone className="w-4 h-4 ml-2" />
@@ -330,24 +330,24 @@ export default function HomePage() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 bg-gradient-to-r from-blue-600 to-indigo-600">
+      <section className="py-20 bg-gradient-to-r from-green-600 to-emerald-600">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl lg:text-4xl font-bold text-white mb-4">
             {t('cta.ready')}
           </h2>
-          <p className="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
+          <p className="text-xl text-green-50 mb-8 max-w-2xl mx-auto">
             {t('cta.description')}
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
               href="/contact"
-              className="bg-white text-blue-600 px-8 py-4 rounded-full hover:bg-gray-100 transition-colors font-semibold text-lg"
+              className="bg-white text-green-600 px-8 py-4 rounded-full hover:bg-gray-50 transition-all font-semibold text-lg shadow-lg hover:shadow-xl"
             >
               {t('getQuote')}
             </Link>
             <Link
               href="tel:+393277791867"
-              className="border-2 border-white text-white px-8 py-4 rounded-full hover:bg-white hover:text-blue-600 transition-colors font-semibold text-lg"
+              className="border-2 border-white text-white px-8 py-4 rounded-full hover:bg-white hover:text-green-600 transition-all font-semibold text-lg"
             >
               {t('call_now')}
             </Link>

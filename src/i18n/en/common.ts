@@ -797,5 +797,62 @@ export const common = {
       description: 'If you have any questions about our use of cookies, please contact us:',
       button: 'Contact Us'
     }
+  },
+
+  // Chatbot
+  chatbot: {
+    title: 'Lunex Assistant',
+    status: 'Online now',
+    placeholder: 'Type a message...',
+    welcome: 'Hi! I\'m the Lunex virtual assistant. How can I help you today with our cleaning services?',
+    suggestions: {
+      quote: 'I want a quote',
+      hours: 'Service hours',
+      services: 'Types of cleaning',
+      booking: 'Book an appointment'
+    },
+    responses: {
+      quote: {
+        text: 'Perfect! Our prices depend on the type of service:\n\n• Home cleaning: €15-25/hour\n• Office cleaning: €20-30/hour\n• Post-renovation cleaning: €30-50/hour\n• Luxury villa cleaning: €25-40/hour\n\nWould you like a personalized quote?',
+        suggestions: ['Yes, I want a quote', 'Available services', 'How to book']
+      },
+      hours: {
+        text: 'Our service hours are:\n\n• Monday-Friday: 8:00 AM - 6:00 PM\n• Saturday: 9:00 AM - 5:00 PM\n• Sunday: Emergency services only\n\nWe\'re also available for out-of-hours service upon request!',
+        suggestions: ['Book now', 'Emergency service', 'Contact']
+      },
+      services: {
+        text: 'We offer different types of professional cleaning:\n\n• 🏢 Office cleaning\n• 🏠 Home cleaning\n• 🔨 Post-renovation cleaning\n• ✨ Luxury villa cleaning\n• 🧽 Deep cleaning\n• 🔄 Maintenance cleaning\n\nWhich interests you most?',
+        suggestions: ['Office cleaning', 'Home cleaning', 'Post-renovation cleaning', 'Get quote']
+      },
+      booking: {
+        text: 'Great! To book an appointment you have several options:\n\n1. 📱 Fill out the online booking form\n2. 📞 Call +39 327 779 1867\n3. 📧 Email: info@lunex-cleaning.com\n\nWould you prefer to book online?',
+        suggestions: ['Book online', 'Call now', 'Send email']
+      },
+      location: {
+        text: 'We mainly operate in:\n\n• Romano di Lombardia\n• Bergamo and province\n• Surrounding areas\n\nFor more distant areas, contact us to check availability!',
+        suggestions: ['Check availability', 'Contact', 'Get quote']
+      },
+      emergency: {
+        text: 'For cleaning emergencies we\'re available 24/7!\n\n📞 Emergency number: +39 327 779 1867\n\nEmergency rates: +50% on base price\nResponse time: 2-4 hours',
+        suggestions: ['Call emergency', 'Normal quote', 'Standard hours']
+      },
+      greeting: {
+        text: 'Hello! Welcome to Lunex Professional Cleaning! 👋\n\nI\'m here to help you with information about our professional cleaning services. What can I do for you?',
+        suggestions: ['I want a quote', 'Available services', 'How to book', 'Contact']
+      },
+      thanks: {
+        text: 'You\'re welcome! I\'m here to help! 😊\n\nIf you have other questions or want to proceed with booking, let me know!',
+        suggestions: ['Book now', 'Other questions', 'Contact']
+      },
+      default: {
+        text: 'I understand your request! For more specific information, I suggest you:\n\n• Contact our team at +39 327 779 1867\n• Visit the services section of the site\n• Fill out the contact form\n\nWhat would you prefer to do?',
+        suggestions: ['Call now', 'View services', 'Contact via email', 'Get quote']
+      }
+    },
+    quickActions: {
+      quote: '💰 Quote',
+      book: '📅 Book',
+      services: '🧽 Services'
+    }
   }
 }

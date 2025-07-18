@@ -38,8 +38,8 @@ export function Header() {
       className={cn(
         "sticky top-0 z-50 transition-all duration-300",
         isScrolled
-          ? "glass-morphism shadow-lg backdrop-blur-xl bg-white/80 border-b border-white/20"
-          : "bg-white/60 backdrop-blur-md"
+          ? "backdrop-blur-xl bg-white/70 shadow-lg border-b border-gray-200/40"
+          : "backdrop-blur-md bg-white/20 border-b border-white/10"
       )}
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -60,10 +60,10 @@ export function Header() {
               <Link
                 key={item.href}
                 href={item.href}
-                className="relative text-gray-700 hover:text-gray-900 font-medium transition-all duration-300 hover:scale-105 group"
+                className="relative text-gray-700 hover:text-green-600 font-medium transition-all duration-300 hover:scale-105 group"
               >
                 {item.label}
-                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-green-600 to-emerald-600 transition-all duration-300 group-hover:w-full" />
+                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-green-600 to-emerald-600 transition-all duration-300 group-hover:w-full shadow-glow" />
               </Link>
             ))}
           </nav>
@@ -72,13 +72,13 @@ export function Header() {
           <div className="hidden lg:flex items-center space-x-4">
             <button
               onClick={toggleLanguage}
-              className="relative text-sm font-medium px-3 py-1 rounded-full glass-morphism hover:shadow-md transition-all duration-300 hover:scale-105 bg-white/50 backdrop-blur-sm"
+              className="relative text-sm font-medium px-3 py-1 rounded-full backdrop-blur-sm bg-white/50 hover:bg-white/70 border border-gray-200/40 hover:border-gray-300/40 hover:shadow-md transition-all duration-300 hover:scale-105"
             >
-              <span className="relative z-10">{locale === 'it' ? 'EN' : 'IT'}</span>
+              <span className="relative z-10 text-gray-700">{locale === 'it' ? 'EN' : 'IT'}</span>
             </button>
             <Link href="/booking">
               <Button
-                className="bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white shadow-md hover:shadow-lg transition-all duration-300 hover:scale-105 px-6 py-2 rounded-full font-semibold"
+                className="bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 px-6 py-2 rounded-full font-semibold backdrop-blur-sm border border-white/20"
               >
                 {t('book_now')}
               </Button>
@@ -87,12 +87,12 @@ export function Header() {
 
           {/* Mobile Menu Button */}
           <button
-            className="lg:hidden p-2 rounded-lg glass-morphism hover:shadow-md transition-all duration-300 bg-white/50 backdrop-blur-sm"
+            className="lg:hidden p-2 rounded-lg backdrop-blur-sm bg-white/50 hover:bg-white/70 border border-gray-200/40 hover:border-gray-300/40 hover:shadow-md transition-all duration-300"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             aria-label="Toggle menu"
           >
             <svg
-              className="w-6 h-6 text-gray-800"
+              className="w-6 h-6 text-gray-700"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -121,7 +121,7 @@ export function Header() {
         {/* Mobile Navigation with Glass Effect */}
         <div
           className={cn(
-            'lg:hidden border-t border-white/20 transition-all duration-300',
+            'lg:hidden border-t border-gray-200/20 transition-all duration-300 backdrop-blur-xl bg-white/50',
             isMenuOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0 overflow-hidden'
           )}
         >
@@ -131,7 +131,7 @@ export function Header() {
                 key={item.href}
                 href={item.href}
                 className={cn(
-                  "block py-2 px-4 rounded-lg font-medium transition-all duration-300 text-gray-800",
+                  "block py-2 px-4 rounded-lg font-medium transition-all duration-300 text-gray-700",
                   "hover:bg-white/30 hover:translate-x-2",
                   "animate-fade-in"
                 )}
@@ -143,10 +143,10 @@ export function Header() {
                 {item.label}
               </Link>
             ))}
-            <div className="flex items-center justify-between pt-4 border-t border-white/20">
+            <div className="flex items-center justify-between pt-4 border-t border-gray-200/30">
               <button
                 onClick={toggleLanguage}
-                className="text-sm font-medium px-3 py-1 rounded-full glass-morphism hover:shadow-md transition-all duration-300 bg-white/50 backdrop-blur-sm"
+                className="text-sm font-medium px-3 py-1 rounded-full backdrop-blur-sm bg-white/50 hover:bg-white/70 border border-gray-200/40 hover:border-gray-300/40 hover:shadow-md transition-all duration-300 text-gray-700"
               >
                 {locale === 'it' ? 'EN' : 'IT'}
               </button>
