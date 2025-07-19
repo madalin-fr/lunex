@@ -20,6 +20,7 @@ export default function ContactPage() {
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target
+    console.log(`🔍 [Contact Form] Input changed - ${name}:`, value)
     setFormData(prev => ({
       ...prev,
       [name]: value
@@ -28,17 +29,34 @@ export default function ContactPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+    console.log('🔍 [Contact Form] Submit initiated')
+    console.log('🔍 [Contact Form] Form data:', formData)
+    
     setIsSubmitting(true)
     setSubmitStatus('idle')
 
     try {
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1000))
+      console.log('📤 [Contact Form] Sending to API...')
       
-      // Here you would typically send the form data to your backend
-      console.log('Form submitted:', formData)
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      })
+
+      const result = await response.json()
+      console.log('📥 [Contact Form] API response:', result)
+
+      if (!response.ok) {
+        throw new Error(result.error || 'Failed to send message')
+      }
       
+      console.log('✅ [Contact Form] Email sent successfully!')
       setSubmitStatus('success')
+      
+      // Clear form after successful submission
       setFormData({
         name: '',
         email: '',
@@ -46,10 +64,12 @@ export default function ContactPage() {
         subject: '',
         message: ''
       })
-    } catch {
+    } catch (error) {
+      console.error('❌ [Contact Form] Submit error:', error)
       setSubmitStatus('error')
     } finally {
       setIsSubmitting(false)
+      console.log('🔍 [Contact Form] Submit process completed')
     }
   }
 
@@ -169,7 +189,7 @@ export default function ContactPage() {
                       value={formData.name}
                       onChange={handleInputChange}
                       required
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent placeholder-gray-500"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 placeholder-gray-400"
                       placeholder={t('contactPage.form.namePlaceholder')}
                     />
                   </div>
@@ -185,7 +205,7 @@ export default function ContactPage() {
                       value={formData.email}
                       onChange={handleInputChange}
                       required
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent placeholder-gray-500"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 placeholder-gray-400"
                       placeholder={t('contactPage.form.emailPlaceholder')}
                     />
                   </div>
@@ -202,7 +222,7 @@ export default function ContactPage() {
                       name="phone"
                       value={formData.phone}
                       onChange={handleInputChange}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent placeholder-gray-500"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 placeholder-gray-400"
                       placeholder={t('contactPage.form.phonePlaceholder')}
                     />
                   </div>
@@ -217,7 +237,7 @@ export default function ContactPage() {
                       value={formData.subject}
                       onChange={handleInputChange}
                       required
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-700"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900"
                     >
                       <option value="" className="text-gray-500">{t('contactPage.form.selectSubject')}</option>
                       <option value="office">{t('contactPage.form.subjectOptions.office')}</option>
@@ -242,7 +262,7 @@ export default function ContactPage() {
                     onChange={handleInputChange}
                     required
                     rows={6}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none placeholder-gray-500"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none text-gray-900 placeholder-gray-400 whitespace-normal"
                     placeholder={t('contactPage.form.messagePlaceholder')}
                   ></textarea>
                 </div>
