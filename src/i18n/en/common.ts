@@ -6,7 +6,7 @@ export const common = {
   contact: 'Contact',
   booking: 'Booking',
   reviews: 'Reviews',
-  blog: 'Blog',
+  blogNav: 'Blog',
   
   // Common Actions
   bookNow: 'Book Now',
@@ -448,8 +448,7 @@ export const common = {
       hours: {
         title: 'Service Hours',
         weekdays: 'Mon - Fri: 8:00 AM - 6:00 PM',
-        saturday_hours: 'Saturday: 8:00 AM - 4:00 PM',
-        sunday_hours: 'Sunday: Emergency Services Only'
+        saturday_hours: 'Saturday: 8:00 AM - 12:00 PM'
       },
       social: {
         title: 'Follow Us',
@@ -815,7 +814,7 @@ export const common = {
         suggestions: ['Yes, I want a quote', 'Available services', 'How to book']
       },
       hours: {
-        text: 'Our service hours are:\n\n• Monday-Friday: 8:00 AM - 6:00 PM\n• Saturday: 9:00 AM - 5:00 PM\n• Sunday: Emergency services only\n\nWe\'re also available for out-of-hours service upon request!',
+        text: 'Our service hours are:\n\n• Monday-Friday: 8:00 AM - 6:00 PM\n• Saturday: 8:00 AM - 12:00 PM\n\nWe\'re also available for out-of-hours service upon request!',
         suggestions: ['Book now', 'Emergency service', 'Contact']
       },
       services: {
@@ -852,5 +851,36 @@ export const common = {
       book: '📅 Book',
       services: '🧽 Services'
     }
+  },
+
+  // Blog
+  blog: {
+    hero: {
+      subtitle: 'Professional cleaning insights, tips and industry expertise'
+    },
+    setup: {
+      title: 'Sanity CMS Setup Required',
+      description: 'To start publishing your cleaning experience and insights, you need to set up Sanity CMS:',
+      step1: 'Create a Sanity account at',
+      step2: 'Create a new project and note your Project ID',
+      step3: 'Create a file',
+      step3_cont: 'in your project root',
+      step4: 'Add your Sanity configuration:',
+      step5: 'Restart the development server',
+      instructions: 'For detailed instructions, see'
+    },
+    articleCount: 'Articles Available',
+    latestArticles: 'Latest Articles',
+    by: 'by',
+    comingSoon: {
+      title: 'Coming Soon!',
+      description: 'We\'re preparing great cleaning tips and insights for you. Check back soon!'
+    },
+    needProfessionalCleaning: 'Need professional cleaning services?',
+    ctaDescription: 'Let Lunex handle your cleaning needs with our professional, reliable, and eco-friendly services.',
+    getFreeQuote: 'Get Free Quote',
+    viewServices: 'View Services',
+    backToBlog: '← Back to Blog',
+    about: 'About'
   }
 }

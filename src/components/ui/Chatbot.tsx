@@ -249,9 +249,6 @@ export default function Chatbot({ isOpen, onToggle }: ChatbotProps) {
                   )}
                 </div>
               </div>
-              <p className="text-xs opacity-70 mt-1">
-                {message.timestamp.toLocaleTimeString('it-IT', { hour: '2-digit', minute: '2-digit' })}
-              </p>
             </div>
           </div>
         ))}

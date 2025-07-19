@@ -141,7 +141,6 @@ export default function ContactPage() {
                     <div className="text-gray-600 space-y-1">
                       <p>{t('contactPage.info.hours.weekdays')}</p>
                       <p>{t('contactPage.info.hours.saturday_hours')}</p>
-                      <p>{t('contactPage.info.hours.sunday_hours')}</p>
                     </div>
                   </div>
                 </div>

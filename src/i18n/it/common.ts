@@ -6,6 +6,7 @@ export const common = {
   contact: 'Contatti',
   booking: 'Prenota',
   reviews: 'Recensioni',
+  blogNav: 'Blog',
   
   // Common Actions
   bookNow: 'Prenota Ora',
@@ -447,8 +448,7 @@ export const common = {
       hours: {
         title: 'Orari di Servizio',
         weekdays: 'Lun - Ven: 8:00 - 18:00',
-        saturday_hours: 'Sabato: 8:00 - 16:00',
-        sunday_hours: 'Domenica: Solo Servizi di Emergenza'
+        saturday_hours: 'Sabato: 8:00 - 12:00'
       },
       social: {
         title: 'Seguici',
@@ -814,7 +814,7 @@ export const common = {
         suggestions: ['Sì, voglio un preventivo', 'Servizi disponibili', 'Come prenotare']
       },
       hours: {
-        text: 'I nostri orari di servizio sono:\n\n• Lunedì-Venerdì: 8:00-18:00\n• Sabato: 9:00-17:00\n• Domenica: Solo emergenze\n\nSiamo disponibili anche per servizi fuori orario su richiesta!',
+        text: 'I nostri orari di servizio sono:\n\n• Lunedì-Venerdì: 8:00-18:00\n• Sabato: 8:00-12:00\n\nSiamo disponibili anche per servizi fuori orario su richiesta!',
         suggestions: ['Prenota ora', 'Servizio emergenza', 'Contatti']
       },
       services: {

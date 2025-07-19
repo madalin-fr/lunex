@@ -213,11 +213,7 @@ export default function HomePage() {
                     </div>
                     <div className="flex justify-between">
                       <span>{t('contactPage.info.hours.saturday_hours').split(':')[0]}</span>
-                      <span>8:00 - 16:00</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span>{t('contactPage.info.hours.sunday_hours').split(':')[0]}</span>
-                      <span>{t('contactPage.info.hours.sunday_hours').split(':')[1]}</span>
+                      <span>8:00 - 12:00</span>
                     </div>
                   </div>
                   <div className="mt-6 pt-6 border-t border-gray-200">
