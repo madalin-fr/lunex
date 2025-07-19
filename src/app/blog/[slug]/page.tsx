@@ -6,6 +6,7 @@ import { notFound } from 'next/navigation'
 import { Post } from '@/lib/sanity/types'
 import { getLocalizedPost } from '@/lib/sanity/utils'
 import { headers, cookies } from 'next/headers'
+import { LocaleSwitchHandler } from '@/components/blog/LocaleSwitchHandler'
 
 export const revalidate = 60
 
@@ -112,18 +113,18 @@ const components = {
     },
   },
   block: {
-    h1: ({ children }: { children?: React.ReactNode }) => <h1 className="text-4xl font-bold mt-8 mb-4">{children}</h1>,
-    h2: ({ children }: { children?: React.ReactNode }) => <h2 className="text-3xl font-bold mt-8 mb-4">{children}</h2>,
-    h3: ({ children }: { children?: React.ReactNode }) => <h3 className="text-2xl font-bold mt-6 mb-3">{children}</h3>,
-    h4: ({ children }: { children?: React.ReactNode }) => <h4 className="text-xl font-bold mt-6 mb-3">{children}</h4>,
+    h1: ({ children }: { children?: React.ReactNode }) => <h1 className="text-4xl font-bold mt-8 mb-4 text-gray-900">{children}</h1>,
+    h2: ({ children }: { children?: React.ReactNode }) => <h2 className="text-3xl font-bold mt-8 mb-4 text-gray-900">{children}</h2>,
+    h3: ({ children }: { children?: React.ReactNode }) => <h3 className="text-2xl font-bold mt-6 mb-3 text-gray-900">{children}</h3>,
+    h4: ({ children }: { children?: React.ReactNode }) => <h4 className="text-xl font-bold mt-6 mb-3 text-gray-900">{children}</h4>,
     blockquote: ({ children }: { children?: React.ReactNode }) => (
-      <blockquote className="border-l-4 border-gray-300 pl-4 my-6 italic">{children}</blockquote>
+      <blockquote className="border-l-4 border-gray-400 pl-4 my-6 italic text-gray-700">{children}</blockquote>
     ),
-    normal: ({ children }: { children?: React.ReactNode }) => <p className="mb-4 leading-relaxed">{children}</p>,
+    normal: ({ children }: { children?: React.ReactNode }) => <p className="mb-4 leading-relaxed text-gray-900">{children}</p>,
   },
   list: {
-    bullet: ({ children }: { children?: React.ReactNode }) => <ul className="list-disc list-inside mb-4">{children}</ul>,
-    number: ({ children }: { children?: React.ReactNode }) => <ol className="list-decimal list-inside mb-4">{children}</ol>,
+    bullet: ({ children }: { children?: React.ReactNode }) => <ul className="list-disc list-inside mb-4 text-gray-900">{children}</ul>,
+    number: ({ children }: { children?: React.ReactNode }) => <ol className="list-decimal list-inside mb-4 text-gray-900">{children}</ol>,
   },
 }
 
@@ -147,6 +148,12 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
     slug: slug
   })
 
+  // Get slug mapping for locale switching
+  const slugMap = {
+    en: rawPost.slug?.en?.current || slug,
+    it: rawPost.slug?.it?.current || slug
+  }
+
   // Process the localized post data
   const post = getLocalizedPost(rawPost, locale)
   
@@ -157,6 +164,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
         'blog.backToBlog': '← Back to Blog',
         'blog.by': 'By',
         'blog.about': 'About',
+        'blog.writtenBy': 'Written by',
         'blog.needProfessionalCleaning': 'Need Professional Cleaning Services?',
         'blog.ctaDescription': 'Let Lunex handle your cleaning needs with our professional, reliable, and eco-friendly services.',
         'blog.getFreeQuote': 'Get Free Quote',
@@ -166,6 +174,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
         'blog.backToBlog': '← Torna al Blog',
         'blog.by': 'di',
         'blog.about': 'Chi è',
+        'blog.writtenBy': 'Scritto da',
         'blog.needProfessionalCleaning': 'Hai bisogno di servizi di pulizia professionali?',
         'blog.ctaDescription': 'Lascia che Lunex gestisca le tue esigenze di pulizia con i nostri servizi professionali, affidabili ed ecologici.',
         'blog.getFreeQuote': 'Richiedi Preventivo Gratuito',
@@ -178,6 +187,9 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
 
   return (
     <article className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50">
+      {/* Handle locale switching */}
+      <LocaleSwitchHandler currentSlug={slug} slugMap={slugMap} />
+      
       {/* Hero section with featured image */}
       {post.mainImage && (
         <div className="relative w-full h-[500px] md:h-[600px]">
@@ -258,7 +270,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
               </div>
             )}
             <h1 className="text-4xl md:text-6xl font-bold mb-6 text-gray-900 leading-tight">{post.title}</h1>
-            <div className="flex items-center justify-center gap-6 text-lg text-gray-600">
+            <div className="flex items-center justify-center gap-6 text-lg text-gray-800">
               {post.author?.name && (
                 <div className="flex items-center gap-2">
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -286,46 +298,36 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
           </div>
         )}
         
-        {/* Author bio */}
-        {post.author && (
-          <div className="mb-12">
-            <div className="bg-white rounded-2xl shadow-lg overflow-hidden">
-              <div className="bg-gradient-to-r from-blue-500 to-purple-500 h-2"></div>
-              <div className="p-8">
-                <div className="flex items-start gap-6">
-                  {post.author.image && (
-                    <div className="relative w-20 h-20 rounded-full overflow-hidden flex-shrink-0 ring-4 ring-blue-100">
-                      <Image
-                        src={urlFor({ ...post.author.image, _type: 'image' }).width(80).height(80).url()}
-                        alt={post.author.name}
-                        fill
-                        className="object-cover"
-                      />
-                    </div>
-                  )}
-                  <div className="flex-1">
-                    <h3 className="text-2xl font-bold text-gray-900 mb-2">{t('blog.about')} {post.author.name}</h3>
-                    {post.author.bio && (
-                      <div className="text-gray-600 prose prose-sm max-w-none">
-                        <PortableText value={post.author.bio} />
-                      </div>
-                    )}
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        )}
-        
         {/* Main content */}
         <div className="bg-white rounded-2xl shadow-lg overflow-hidden">
           <div className="bg-gradient-to-r from-blue-500 to-purple-500 h-1"></div>
           <div className="p-8 md:p-12">
-            <div className="prose prose-lg prose-blue max-w-none">
+            <div className="prose prose-lg max-w-none">
               {post.body && <PortableText value={post.body} components={components} />}
             </div>
           </div>
         </div>
+        
+        {/* Author attribution */}
+        {post.author && (
+          <div className="mt-8 text-center">
+            <div className="inline-flex items-center gap-3 text-gray-700">
+              {post.author.image && (
+                <div className="relative w-10 h-10 rounded-full overflow-hidden">
+                  <Image
+                    src={urlFor({ ...post.author.image, _type: 'image' }).width(40).height(40).url()}
+                    alt={post.author.name}
+                    fill
+                    className="object-cover"
+                  />
+                </div>
+              )}
+              <p className="text-lg">
+                {t('blog.writtenBy')} <span className="font-semibold">{post.author.name}</span>
+              </p>
+            </div>
+          </div>
+        )}
         
         {/* Call to action */}
         <div className="mt-16 text-center">

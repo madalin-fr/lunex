@@ -101,7 +101,7 @@ NEXT_PUBLIC_SANITY_DATASET=production`}
       <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 flex items-center justify-center">
         <div className="text-center">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
-          <p className="text-gray-600">{t('loading')}</p>
+          <p className="text-gray-800">{t('loading')}</p>
         </div>
       </div>
     )
@@ -181,19 +181,19 @@ NEXT_PUBLIC_SANITY_DATASET=production`}
                   </h2>
                   
                   {post.excerpt && (
-                    <p className="text-gray-600 mb-6 line-clamp-3 leading-relaxed">{post.excerpt}</p>
+                    <p className="text-gray-700 mb-6 line-clamp-3 leading-relaxed">{post.excerpt}</p>
                   )}
                   
                   <div className="flex items-center justify-between pt-4 border-t border-gray-100">
                     <div className="flex items-center space-x-2">
                       {post.author && (
-                        <span className="text-sm text-gray-500 font-medium">
+                        <span className="text-sm text-gray-700 font-medium">
                           {t('blog.by')} {post.author.name}
                         </span>
                       )}
                     </div>
                     {post.publishedAt && (
-                      <time dateTime={post.publishedAt} className="text-sm text-gray-400">
+                      <time dateTime={post.publishedAt} className="text-sm text-gray-600">
                         {new Date(post.publishedAt).toLocaleDateString(locale === 'it' ? 'it-IT' : 'en-US', {
                           month: 'short',
                           day: 'numeric',
@@ -217,7 +217,7 @@ NEXT_PUBLIC_SANITY_DATASET=production`}
                 </svg>
               </div>
               <h3 className="text-2xl font-bold text-gray-900 mb-2">{t('blog.comingSoon.title')}</h3>
-              <p className="text-gray-500 text-lg">{t('blog.comingSoon.description')}</p>
+              <p className="text-gray-700 text-lg">{t('blog.comingSoon.description')}</p>
             </div>
           </div>
         )}
