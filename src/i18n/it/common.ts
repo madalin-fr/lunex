@@ -68,25 +68,13 @@ export const common = {
   footer: {
     company: {
       description: 'Servizi di pulizia professionali per uffici, abitazioni e spazi commerciali. Scelti da aziende e famiglie in tutta Romano di Lombardia.',
-      registration: 'Reg. Imp.: BG/2024/CLN-0012',
-      vat: 'P.IVA: IT12345678901',
-      license: 'Licenza Operativa: BG-CLN-2024-001'
+      vat: 'P.IVA: 04840720165'
     },
     links: {
       title: 'Collegamenti Rapidi'
     },
     contact: {
       title: 'Informazioni di Contatto'
-    },
-    certifications: {
-      title: 'Certificazioni',
-      insured: 'Completamente Assicurati',
-      certified: 'Certificati ISO 9001'
-    },
-    badges: {
-      title: 'Associazioni',
-      startup: 'Startup Registrata',
-      member: 'Membro Camera di Commercio'
     },
     legal: {
       privacy: 'Privacy Policy',

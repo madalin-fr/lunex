@@ -1,6 +1,12 @@
+'use client';
+
 import React from 'react';
+import { useLocale } from '@/hooks/useLocale';
+import Link from 'next/link';
 
 export default function TermsOfServicePage() {
+  const { t } = useLocale();
+
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Hero Section */}
@@ -8,13 +14,13 @@ export default function TermsOfServicePage() {
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
             <h1 className="text-4xl lg:text-5xl font-bold text-white mb-6">
-              Terms of Service
+              {t('terms.title')}
             </h1>
             <p className="text-xl text-green-100 mb-8">
-              Please read these terms carefully before using our services
+              {t('terms.subtitle')}
             </p>
             <div className="bg-white/20 backdrop-blur-sm inline-block px-6 py-3 rounded-full text-white">
-              <p className="text-sm">Effective Date: 18 July 2024</p>
+              <p className="text-sm">{t('terms.lastUpdated')}: 19 July 2025</p>
             </div>
           </div>
         </div>
@@ -26,188 +32,171 @@ export default function TermsOfServicePage() {
           <div className="max-w-4xl mx-auto space-y-8">
             {/* Company Info */}
             <div className="bg-white rounded-2xl shadow-lg p-8">
-              <h2 className="text-2xl font-bold text-gray-900 mb-4">Company Information</h2>
+              <h2 className="text-2xl font-bold text-gray-900 mb-4">{t('contactPage.info.title')}</h2>
               <div className="space-y-2 text-gray-600">
-                <p><strong>Lunex Cleaning Services</strong></p>
-                <p>Address: Romano di Lombardia, Bergamo, Italy</p>
+                <p><strong>{t('privacy.company.name')}</strong></p>
+                <p>{t('address')}: {t('privacy.company.address')}</p>
               </div>
             </div>
 
             {/* Acceptance of Terms */}
             <div className="bg-white rounded-2xl shadow-lg p-8">
-              <h2 className="text-2xl font-bold text-gray-900 mb-4">1. Acceptance of Terms</h2>
-              <p className="text-gray-600">By accessing and using the services provided by Lunex Cleaning Services, you accept and agree to be bound by the terms and provision of this agreement.</p>
+              <h2 className="text-2xl font-bold text-gray-900 mb-4">1. {t('terms.acceptance.title')}</h2>
+              <p className="text-gray-600">{t('terms.acceptance.content')}</p>
             </div>
 
             {/* Services */}
             <div className="bg-white rounded-2xl shadow-lg p-8">
-              <h2 className="text-2xl font-bold text-gray-900 mb-4">2. Our Services</h2>
-              <p className="text-gray-600 mb-4">Lunex Cleaning Services provides professional cleaning solutions including:</p>
+              <h2 className="text-2xl font-bold text-gray-900 mb-4">2. {t('terms.services.title')}</h2>
+              <p className="text-gray-600 mb-4">{t('terms.services.description.content')}</p>
               <ul className="space-y-2">
                 <li className="flex items-start space-x-2">
                   <span className="text-green-600 mt-1">•</span>
-                  <span className="text-gray-600">Office & Commercial Cleaning</span>
+                  <span className="text-gray-600">{t('terms.services.description.list.domestic')}</span>
                 </li>
                 <li className="flex items-start space-x-2">
                   <span className="text-green-600 mt-1">•</span>
-                  <span className="text-gray-600">Domestic & Residential Cleaning</span>
+                  <span className="text-gray-600">{t('terms.services.description.list.office')}</span>
                 </li>
                 <li className="flex items-start space-x-2">
                   <span className="text-green-600 mt-1">•</span>
-                  <span className="text-gray-600">Post-Renovation Cleaning</span>
+                  <span className="text-gray-600">{t('terms.services.description.list.deep')}</span>
                 </li>
                 <li className="flex items-start space-x-2">
                   <span className="text-green-600 mt-1">•</span>
-                  <span className="text-gray-600">Luxury Property Care</span>
+                  <span className="text-gray-600">{t('terms.services.description.list.post')}</span>
                 </li>
                 <li className="flex items-start space-x-2">
                   <span className="text-green-600 mt-1">•</span>
-                  <span className="text-gray-600">Deep Cleaning Services</span>
-                </li>
-                <li className="flex items-start space-x-2">
-                  <span className="text-green-600 mt-1">•</span>
-                  <span className="text-gray-600">Maintenance Cleaning Programs</span>
+                  <span className="text-gray-600">{t('terms.services.description.list.luxury')}</span>
                 </li>
               </ul>
             </div>
 
             {/* Obligations */}
             <div className="bg-white rounded-2xl shadow-lg p-8">
-              <h2 className="text-2xl font-bold text-gray-900 mb-4">3. Obligations</h2>
+              <h2 className="text-2xl font-bold text-gray-900 mb-4">3. {t('terms.responsibilities.title')}</h2>
               
-              <h3 className="text-lg font-semibold text-gray-800 mb-3">Our Obligations</h3>
+              <h3 className="text-lg font-semibold text-gray-800 mb-3">{t('terms.responsibilities.our.title')}</h3>
               <ul className="space-y-2 mb-6">
                 <li className="flex items-start space-x-2">
                   <span className="text-green-600 mt-1">•</span>
-                  <span className="text-gray-600">Provide professional quality cleaning services</span>
+                  <span className="text-gray-600">{t('terms.responsibilities.our.professional')}</span>
                 </li>
                 <li className="flex items-start space-x-2">
                   <span className="text-green-600 mt-1">•</span>
-                  <span className="text-gray-600">Arrive at scheduled times</span>
+                  <span className="text-gray-600">{t('terms.responsibilities.our.schedule')}</span>
                 </li>
                 <li className="flex items-start space-x-2">
                   <span className="text-green-600 mt-1">•</span>
-                  <span className="text-gray-600">Maintain proper insurance coverage</span>
+                  <span className="text-gray-600">{t('terms.responsibilities.our.trained')}</span>
                 </li>
                 <li className="flex items-start space-x-2">
                   <span className="text-green-600 mt-1">•</span>
-                  <span className="text-gray-600">Use safe, eco-friendly cleaning products</span>
+                  <span className="text-gray-600">{t('terms.responsibilities.our.equipment')}</span>
                 </li>
               </ul>
               
-              <h3 className="text-lg font-semibold text-gray-800 mb-3">Client Obligations</h3>
+              <h3 className="text-lg font-semibold text-gray-800 mb-3">{t('terms.responsibilities.client.title')}</h3>
               <ul className="space-y-2">
                 <li className="flex items-start space-x-2">
                   <span className="text-green-600 mt-1">•</span>
-                  <span className="text-gray-600">Provide safe access to cleaning areas</span>
+                  <span className="text-gray-600">{t('terms.responsibilities.client.access')}</span>
                 </li>
                 <li className="flex items-start space-x-2">
                   <span className="text-green-600 mt-1">•</span>
-                  <span className="text-gray-600">Inform us of any special requirements</span>
+                  <span className="text-gray-600">{t('terms.responsibilities.client.hazards')}</span>
                 </li>
                 <li className="flex items-start space-x-2">
                   <span className="text-green-600 mt-1">•</span>
-                  <span className="text-gray-600">Make timely payments as agreed</span>
+                  <span className="text-gray-600">{t('terms.responsibilities.client.payment')}</span>
                 </li>
                 <li className="flex items-start space-x-2">
                   <span className="text-green-600 mt-1">•</span>
-                  <span className="text-gray-600">Secure valuables and fragile items</span>
+                  <span className="text-gray-600">{t('terms.responsibilities.client.pets')}</span>
                 </li>
               </ul>
             </div>
 
             {/* Pricing and Payment */}
             <div className="bg-white rounded-2xl shadow-lg p-8">
-              <h2 className="text-2xl font-bold text-gray-900 mb-4">4. Pricing and Payment</h2>
-              <p className="text-gray-600 mb-4">Our pricing is transparent and agreed upon before service delivery.</p>
+              <h2 className="text-2xl font-bold text-gray-900 mb-4">4. {t('terms.pricing.title')}</h2>
+              <p className="text-gray-600 mb-4">{t('terms.pricing.rates.content')}</p>
               <ul className="space-y-2">
                 <li className="flex items-start space-x-2">
                   <span className="text-green-600 mt-1">•</span>
-                  <span className="text-gray-600">Quotes are valid for 30 days</span>
+                  <span className="text-gray-600">{t('terms.pricing.additional.list.extra')}</span>
                 </li>
                 <li className="flex items-start space-x-2">
                   <span className="text-green-600 mt-1">•</span>
-                  <span className="text-gray-600">Additional services will be charged separately</span>
+                  <span className="text-gray-600">{t('terms.pricing.payment.content')}</span>
                 </li>
                 <li className="flex items-start space-x-2">
                   <span className="text-green-600 mt-1">•</span>
-                  <span className="text-gray-600">Payment is due upon completion unless otherwise agreed</span>
-                </li>
-                <li className="flex items-start space-x-2">
-                  <span className="text-green-600 mt-1">•</span>
-                  <span className="text-gray-600">Late payments may incur additional charges</span>
+                  <span className="text-gray-600">{t('terms.pricing.additional.title')}</span>
                 </li>
               </ul>
             </div>
 
             {/* Cancellation Policy */}
             <div className="bg-white rounded-2xl shadow-lg p-8">
-              <h2 className="text-2xl font-bold text-gray-900 mb-4">5. Cancellation Policy</h2>
-              <p className="text-gray-600 mb-4">We understand that plans can change. Our cancellation policy is designed to be fair to both parties.</p>
+              <h2 className="text-2xl font-bold text-gray-900 mb-4">5. {t('terms.booking.cancellation.title')}</h2>
+              <p className="text-gray-600 mb-4">{t('terms.booking.cancellation.content')}</p>
               <ul className="space-y-2">
                 <li className="flex items-start space-x-2">
                   <span className="text-green-600 mt-1">•</span>
-                  <span className="text-gray-600">24-hour notice required for cancellations</span>
+                  <span className="text-gray-600">{t('terms.booking.cancellation.fee')}</span>
                 </li>
                 <li className="flex items-start space-x-2">
                   <span className="text-green-600 mt-1">•</span>
-                  <span className="text-gray-600">Late cancellations may incur a fee</span>
-                </li>
-                <li className="flex items-start space-x-2">
-                  <span className="text-green-600 mt-1">•</span>
-                  <span className="text-gray-600">Emergency cancellations will be handled on a case-by-case basis</span>
+                  <span className="text-gray-600">{t('terms.booking.rescheduling.content')}</span>
                 </li>
               </ul>
             </div>
 
             {/* Liability and Insurance */}
             <div className="bg-white rounded-2xl shadow-lg p-8">
-              <h2 className="text-2xl font-bold text-gray-900 mb-4">6. Liability and Insurance</h2>
-              <p className="text-gray-600 mb-4">We take responsibility for our work and maintain comprehensive insurance coverage.</p>
+              <h2 className="text-2xl font-bold text-gray-900 mb-4">6. {t('terms.liability.title')}</h2>
+              <p className="text-gray-600 mb-4">{t('terms.liability.coverage.content')}</p>
               <ul className="space-y-2">
                 <li className="flex items-start space-x-2">
                   <span className="text-green-600 mt-1">•</span>
-                  <span className="text-gray-600">Fully insured for property damage and liability</span>
+                  <span className="text-gray-600">{t('terms.liability.limitations.content')}</span>
                 </li>
                 <li className="flex items-start space-x-2">
                   <span className="text-green-600 mt-1">•</span>
-                  <span className="text-gray-600">Liability limited to the cost of service provided</span>
+                  <span className="text-gray-600">{t('terms.liability.claims.content')}</span>
                 </li>
                 <li className="flex items-start space-x-2">
                   <span className="text-green-600 mt-1">•</span>
-                  <span className="text-gray-600">Not responsible for pre-existing damage</span>
-                </li>
-                <li className="flex items-start space-x-2">
-                  <span className="text-green-600 mt-1">•</span>
-                  <span className="text-gray-600">Claims must be reported within 24 hours</span>
+                  <span className="text-gray-600">{t('terms.liability.limitations.list.pre')}</span>
                 </li>
               </ul>
             </div>
 
             {/* Termination */}
             <div className="bg-white rounded-2xl shadow-lg p-8">
-              <h2 className="text-2xl font-bold text-gray-900 mb-4">7. Termination</h2>
-              <p className="text-gray-600">Either party may terminate the service agreement with written notice. Outstanding balances must be settled before termination is complete.</p>
+              <h2 className="text-2xl font-bold text-gray-900 mb-4">7. {t('terms.termination.title')}</h2>
+              <p className="text-gray-600">{t('terms.termination.content')}</p>
             </div>
 
             {/* Legal Jurisdiction */}
             <div className="bg-gradient-to-br from-gray-100 to-gray-50 rounded-2xl p-8">
-              <h2 className="text-2xl font-bold text-gray-900 mb-4">Legal Jurisdiction</h2>
-              <p className="text-gray-600 mb-4">These terms are governed by the laws of Italy and the European Union.</p>
-              <p className="text-gray-600">Any disputes will be resolved in the courts of Bergamo, Italy.</p>
+              <h2 className="text-2xl font-bold text-gray-900 mb-4">{t('terms.governing.title')}</h2>
+              <p className="text-gray-600 mb-4">{t('terms.governing.content')}</p>
             </div>
 
             {/* Contact Section */}
             <div className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-2xl p-8">
-              <h2 className="text-2xl font-bold text-gray-900 mb-4">Questions About Terms?</h2>
-              <p className="text-gray-600 mb-6">If you have any questions about these Terms of Service, please contact us:</p>
+              <h2 className="text-2xl font-bold text-gray-900 mb-4">{t('terms.contact.title')}</h2>
+              <p className="text-gray-600 mb-6">{t('terms.contact.content')}</p>
               <div className="flex flex-col sm:flex-row gap-4">
-                <a 
+                <Link 
                   href="/contact"
                   className="bg-gradient-to-r from-green-600 to-emerald-600 text-white px-6 py-3 rounded-full text-center hover:shadow-lg transition-all duration-300 inline-block"
                 >
-                  Contact Us
-                </a>
+                  {t('contactUs')}
+                </Link>
                 <a 
                   href="mailto:infocleaninglunex@gmail.com"
                   className="border-2 border-green-600 text-green-600 px-6 py-3 rounded-full text-center hover:bg-green-600 hover:text-white transition-all duration-300 inline-block"
@@ -220,5 +209,5 @@ export default function TermsOfServicePage() {
         </div>
       </section>
     </div>
-  )
+  );
 }
