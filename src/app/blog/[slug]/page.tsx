@@ -5,7 +5,7 @@ import { PortableText } from '@portabletext/react'
 import { notFound } from 'next/navigation'
 import { Post } from '@/lib/sanity/types'
 import { getLocalizedPost } from '@/lib/sanity/utils'
-import { headers } from 'next/headers'
+import { headers, cookies } from 'next/headers'
 
 export const revalidate = 60
 
@@ -135,12 +135,46 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
     notFound()
   }
 
-  // Get locale from headers
-  const headersList = await headers()
-  const locale = headersList.get('x-locale') || 'en'
+  // Get locale from cookies instead of headers
+  const cookieStore = await cookies()
+  const localeCookie = cookieStore.get('locale')
+  const locale = localeCookie?.value || 'en'
+  
+  // Add logging to debug locale detection
+  console.log('[BlogPost] Locale detection:', {
+    cookieValue: localeCookie?.value,
+    finalLocale: locale,
+    slug: slug
+  })
 
   // Process the localized post data
   const post = getLocalizedPost(rawPost, locale)
+  
+  // Simple translation function for server components
+  const t = (key: string) => {
+    const translations: { [key: string]: { [key: string]: string } } = {
+      en: {
+        'blog.backToBlog': '← Back to Blog',
+        'blog.by': 'By',
+        'blog.about': 'About',
+        'blog.needProfessionalCleaning': 'Need Professional Cleaning Services?',
+        'blog.ctaDescription': 'Let Lunex handle your cleaning needs with our professional, reliable, and eco-friendly services.',
+        'blog.getFreeQuote': 'Get Free Quote',
+        'blog.viewServices': 'View Services'
+      },
+      it: {
+        'blog.backToBlog': '← Torna al Blog',
+        'blog.by': 'di',
+        'blog.about': 'Chi è',
+        'blog.needProfessionalCleaning': 'Hai bisogno di servizi di pulizia professionali?',
+        'blog.ctaDescription': 'Lascia che Lunex gestisca le tue esigenze di pulizia con i nostri servizi professionali, affidabili ed ecologici.',
+        'blog.getFreeQuote': 'Richiedi Preventivo Gratuito',
+        'blog.viewServices': 'Vedi Servizi'
+      }
+    }
+    
+    return translations[locale]?.[key] || translations['en'][key] || key
+  }
 
   return (
     <article className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50">
@@ -161,7 +195,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
           <div className="absolute top-8 left-8 right-8">
             <div className="max-w-4xl mx-auto">
               <nav className="text-white/80 text-sm">
-                <a href="/blog" className="hover:text-white transition-colors">← Back to Blog</a>
+                <a href="/blog" className="hover:text-white transition-colors">{t('blog.backToBlog')}</a>
               </nav>
             </div>
           </div>
@@ -184,7 +218,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                     </svg>
-                    <span>By {post.author.name}</span>
+                    <span>{t('blog.by')} {post.author.name}</span>
                   </div>
                 )}
                 {post.publishedAt && (
@@ -193,7 +227,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                     </svg>
                     <time dateTime={post.publishedAt}>
-                      {new Date(post.publishedAt).toLocaleDateString('en-US', {
+                      {new Date(post.publishedAt).toLocaleDateString(locale === 'it' ? 'it-IT' : 'en-US', {
                         year: 'numeric',
                         month: 'long',
                         day: 'numeric'
@@ -212,7 +246,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
         {!post.mainImage && (
           <div className="text-center mb-16">
             <nav className="text-blue-600 text-sm mb-8">
-              <a href="/blog" className="hover:text-blue-800 transition-colors">← Back to Blog</a>
+              <a href="/blog" className="hover:text-blue-800 transition-colors">{t('blog.backToBlog')}</a>
             </nav>
             {post.categories && post.categories.length > 0 && (
               <div className="flex gap-2 justify-center mb-6">
@@ -230,7 +264,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                   </svg>
-                  <span>By {post.author.name}</span>
+                  <span>{t('blog.by')} {post.author.name}</span>
                 </div>
               )}
               {post.publishedAt && (
@@ -239,7 +273,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                   </svg>
                   <time dateTime={post.publishedAt}>
-                    {new Date(post.publishedAt).toLocaleDateString('en-US', {
+                    {new Date(post.publishedAt).toLocaleDateString(locale === 'it' ? 'it-IT' : 'en-US', {
                       year: 'numeric',
                       month: 'long',
                       day: 'numeric'
@@ -270,7 +304,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                     </div>
                   )}
                   <div className="flex-1">
-                    <h3 className="text-2xl font-bold text-gray-900 mb-2">About {post.author.name}</h3>
+                    <h3 className="text-2xl font-bold text-gray-900 mb-2">{t('blog.about')} {post.author.name}</h3>
                     {post.author.bio && (
                       <div className="text-gray-600 prose prose-sm max-w-none">
                         <PortableText value={post.author.bio} />
@@ -296,16 +330,16 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
         {/* Call to action */}
         <div className="mt-16 text-center">
           <div className="bg-gradient-to-r from-blue-900 to-purple-900 rounded-2xl p-8 text-white">
-            <h3 className="text-2xl font-bold mb-4">Need Professional Cleaning Services?</h3>
+            <h3 className="text-2xl font-bold mb-4">{t('blog.needProfessionalCleaning')}</h3>
             <p className="text-blue-100 mb-6 max-w-2xl mx-auto">
-              Let Lunex handle your cleaning needs with our professional, reliable, and eco-friendly services.
+              {t('blog.ctaDescription')}
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a href="/contact" className="bg-white text-blue-900 px-6 py-3 rounded-full font-semibold hover:bg-blue-50 transition-colors">
-                Get Free Quote
+                {t('blog.getFreeQuote')}
               </a>
               <a href="/services" className="border border-white text-white px-6 py-3 rounded-full font-semibold hover:bg-white/10 transition-colors">
-                View Services
+                {t('blog.viewServices')}
               </a>
             </div>
           </div>

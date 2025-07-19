@@ -1,32 +1,38 @@
-import { client, hasValidConfig } from '@/lib/sanity/client'
 import { NextResponse } from 'next/server'
+import { client, hasValidConfig } from '@/lib/sanity/client'
 
 export async function GET() {
   if (!hasValidConfig) {
-    return NextResponse.json({ error: 'Sanity not configured', posts: [] }, { status: 200 })
+    return NextResponse.json([])
   }
   
   const query = `*[_type == "post"] | order(publishedAt desc) {
     _id,
-    title,
-    slug,
-    mainImage,
-    excerpt,
+    "title": title,
+    "slug": slug,
+    mainImage {
+      ...,
+      "alt": alt
+    },
+    "excerpt": excerpt,
     publishedAt,
     author-> {
-      name
+      _id,
+      "name": name,
+      "bio": bio
     },
     categories[]-> {
-      title
+      _id,
+      "title": title
     },
-    body
+    "body": body
   }`
   
   try {
     const posts = await client.fetch(query)
-    return NextResponse.json({ posts })
+    return NextResponse.json(posts || [])
   } catch (error) {
     console.error('Error fetching posts:', error)
-    return NextResponse.json({ error: 'Failed to fetch posts', posts: [] }, { status: 500 })
+    return NextResponse.json([])
   }
 }

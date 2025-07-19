@@ -6,7 +6,6 @@ export const common = {
   contact: 'Contatti',
   booking: 'Prenota',
   reviews: 'Recensioni',
-  blog: 'Blog',
   
   // Common Actions
   bookNow: 'Prenota Ora',
@@ -852,5 +851,36 @@ export const common = {
       book: '📅 Prenota',
       services: '🧽 Servizi'
     }
+  },
+
+  // Blog
+  blog: {
+    hero: {
+      subtitle: 'Approfondimenti professionali di pulizia, consigli e competenze del settore'
+    },
+    setup: {
+      title: 'Configurazione Sanity CMS Richiesta',
+      description: 'Per iniziare a pubblicare la tua esperienza e i tuoi approfondimenti di pulizia, devi configurare Sanity CMS:',
+      step1: 'Crea un account Sanity su',
+      step2: 'Crea un nuovo progetto e annota il tuo Project ID',
+      step3: 'Crea un file',
+      step3_cont: 'nella root del tuo progetto',
+      step4: 'Aggiungi la tua configurazione Sanity:',
+      step5: 'Riavvia il server di sviluppo',
+      instructions: 'Per istruzioni dettagliate, vedi'
+    },
+    articleCount: 'Articoli Disponibili',
+    latestArticles: 'Ultimi Articoli',
+    by: 'di',
+    comingSoon: {
+      title: 'Prossimamente!',
+      description: 'Stiamo preparando fantastici consigli e approfondimenti di pulizia per te. Torna presto!'
+    },
+    needProfessionalCleaning: 'Hai bisogno di servizi di pulizia professionali?',
+    ctaDescription: 'Lascia che Lunex gestisca le tue esigenze di pulizia con i nostri servizi professionali, affidabili ed ecologici.',
+    getFreeQuote: 'Richiedi Preventivo Gratuito',
+    viewServices: 'Vedi Servizi',
+    backToBlog: '← Torna al Blog',
+    about: 'Chi è'
   }
 }
