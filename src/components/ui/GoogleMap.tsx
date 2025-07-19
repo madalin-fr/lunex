@@ -217,7 +217,7 @@ export default function GoogleMap({
             <p className="text-gray-600 mb-2">{error}</p>
             {error.includes('API key') && (
               <p className="text-sm text-gray-500">
-                Please add your Google Maps API key to .env.local
+                Please add your Google Maps API key to env
               </p>
             )}
           </div>

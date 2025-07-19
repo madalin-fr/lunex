@@ -182,7 +182,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
         'blog.writtenBy': 'Written by',
         'blog.needProfessionalCleaning': 'Need Professional Cleaning Services?',
         'blog.ctaDescription': 'Let Lunex handle your cleaning needs with our professional, reliable, and eco-friendly services.',
-        'blog.getFreeQuote': 'Get Free Quote',
+        'blog.getFreeQuote': 'Free Estimate',
         'blog.viewServices': 'View Services'
       },
       it: {

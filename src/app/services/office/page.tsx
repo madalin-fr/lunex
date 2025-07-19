@@ -12,7 +12,6 @@ import {
   Phone,
   Calendar,
   Users,
-  ShieldCheck,
   Home
 } from 'lucide-react'
 import Link from 'next/link'
@@ -68,6 +67,7 @@ export default function OfficeCleaning() {
     t('services.office.includes.kitchen'),
     t('services.office.includes.windows'),
     t('services.office.includes.trash'),
+    t('services.office.includes.customPlans')
   ]
 
   return (
@@ -195,17 +195,23 @@ export default function OfficeCleaning() {
           <p className="text-xl text-blue-100 mb-8">
             {t('services.cta.subtitle')}
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <div className="flex flex-wrap gap-4 justify-center">
             <Link href="/contact">
               <Button size="lg" className="bg-white text-blue-600 hover:bg-gray-100">
                 <Sparkles className="h-5 w-5 mr-2" />
-                {t('getQuote')}
+                <div className="flex items-center">
+                  <Sparkles className="h-5 w-5 mr-2" />
+                  {t('cta.quote')}
+                </div>
               </Button>
             </Link>
             <Link href="tel:+393277791867">
               <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-blue-600">
                 <Phone className="h-5 w-5 mr-2" />
-                {t('call_now')}
+                <div className="flex items-center">
+                  <Phone className="h-5 w-5 mr-2" />
+                  {t('call_now')}
+                </div>
               </Button>
             </Link>
           </div>

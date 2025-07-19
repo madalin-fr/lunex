@@ -11,11 +11,21 @@ import { useEffect, useState } from 'react'
 // Force dynamic rendering since we use headers
 export const dynamic = 'force-dynamic'
 
-async function getPosts() {
+async function getPosts(): Promise<Post[]> {
   try {
     const response = await fetch('/api/blog/posts')
-    const posts = await response.json()
-    return posts || []
+    if (!response.ok) {
+      console.error('Failed to fetch posts:', response.status, response.statusText)
+      return []
+    }
+    const data = await response.json()
+    // The API returns { posts: [], total: number, hasMore: boolean }
+    // Extract the posts array from the response
+    if (data && Array.isArray(data.posts)) {
+      return data.posts
+    }
+    // Fallback: if data is directly an array
+    return Array.isArray(data) ? data : []
   } catch (error) {
     console.error('Error fetching posts:', error)
     return []
@@ -30,7 +40,8 @@ export default function BlogPage() {
   useEffect(() => {
     const fetchPosts = async () => {
       const fetchedPosts = await getPosts()
-      setPosts(fetchedPosts)
+      // Ensure posts is always an array
+      setPosts(Array.isArray(fetchedPosts) ? fetchedPosts : [])
       setLoading(false)
     }
     fetchPosts()

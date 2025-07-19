@@ -25,7 +25,7 @@ export const common = {
   edit: 'Modifica',
   delete: 'Elimina',
   close: 'Chiudi',
-  getQuote: 'Richiedi Preventivo',
+  getQuote: 'Preventivo Gratuito',
   
   // Common Labels
   name: 'Nome',
@@ -124,6 +124,7 @@ export const common = {
         kitchen: 'Pulizia cucina e zone break',
         windows: 'Pulizia finestre (interno)',
         trash: 'Rimozione rifiuti e sostituzione',
+        customPlans: 'Piani personalizzati per aziende'
       }
     },
     
@@ -455,7 +456,7 @@ export const common = {
     cta: {
       title: 'Pronti per la Pulizia Professionale?',
       subtitle: 'Contattateci oggi per un preventivo gratuito!',
-      button: 'Richiedi Preventivo',
+      button: 'Preventivo Gratuito',
       or: 'oppure',
       call: 'Chiama Ora'
     }
@@ -464,7 +465,7 @@ export const common = {
   // General CTA
   cta: {
     book: 'Prenota Ora',
-    quote: 'Richiedi Preventivo',
+    quote: 'Preventivo Gratuito',
     ready: 'Pronti per la Pulizia Professionale?',
     description: 'Unisciti a centinaia di clienti soddisfatti che si affidano a Lunex per le loro esigenze di pulizia'
   },

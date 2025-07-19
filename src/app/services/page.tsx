@@ -3,7 +3,6 @@
 import { useLocale } from '@/hooks/useLocale'
 import { Button } from '@/components/ui/button'
 import {
-  CardContent,
   CardDescription,
   CardHeader,
   CardTitle
@@ -12,14 +11,17 @@ import { Badge } from '@/components/ui/badge'
 import {
   Building2,
   Home,
-  Hammer,
-  Crown,
-  Sparkles,
-  Calendar,
+  HardHat,
+  Gem,
+  Droplets,
+  RotateCcw,
   Phone,
-  ArrowRight,
   CheckCircle,
-  Users
+  Users,
+  Calendar,
+  Shield,
+  Zap,
+  Sparkles
 } from 'lucide-react'
 import Link from 'next/link'
 
@@ -48,7 +50,7 @@ export default function ServicesPage() {
       badge: null
     },
     {
-      icon: <Hammer className="h-8 w-8" />,
+      icon: <HardHat className="h-8 w-8" />,
       title: t('services.postRenovation.title'),
       description: t('services.postRenovation.subtitle'),
       href: '/services/post-renovation',
@@ -58,7 +60,7 @@ export default function ServicesPage() {
       badge: null
     },
     {
-      icon: <Crown className="h-8 w-8" />,
+      icon: <Gem className="h-8 w-8" />,
       title: t('services.luxury.title'),
       description: t('services.luxury.subtitle'),
       href: '/services/luxury',
@@ -68,7 +70,7 @@ export default function ServicesPage() {
       badge: 'Premium'
     },
     {
-      icon: <Sparkles className="h-8 w-8" />,
+      icon: <Droplets className="h-8 w-8" />,
       title: t('services.deep.title'),
       description: t('services.deep.subtitle'),
       href: '/services/deep',
@@ -78,7 +80,7 @@ export default function ServicesPage() {
       badge: null
     },
     {
-      icon: <Calendar className="h-8 w-8" />,
+      icon: <RotateCcw className="h-8 w-8" />,
       title: t('services.maintenance.title'),
       description: t('services.maintenance.subtitle'),
       href: '/services/maintenance',
@@ -111,12 +113,12 @@ export default function ServicesPage() {
       description: t('services.whyChooseUs.eco.description')
     },
     {
-      icon: <Building2 className="h-6 w-6" />,
+      icon: <Shield className="h-6 w-6" />,
       title: t('services.whyChooseUs.insured.title'),
       description: t('services.whyChooseUs.insured.description')
     },
     {
-      icon: <Home className="h-6 w-6" />,
+      icon: <Zap className="h-6 w-6" />,
       title: t('services.whyChooseUs.local.title'),
       description: t('services.whyChooseUs.local.description')
     }
@@ -180,16 +182,6 @@ export default function ServicesPage() {
                     {service.description}
                   </CardDescription>
                 </CardHeader>
-                <CardContent className="text-center">
-                  <Link href={service.href}>
-                    <Button 
-                      className={`w-full bg-gradient-to-r ${service.gradientFrom} ${service.gradientTo} text-white hover:shadow-lg transition-all duration-300 group`}
-                    >
-                      {t('viewDetails')}
-                      <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
-                    </Button>
-                  </Link>
-                </CardContent>
               </div>
             ))}
           </div>
@@ -249,24 +241,28 @@ export default function ServicesPage() {
           <p className="text-xl text-white/90 mb-8">
             {t('services.cta.subtitle')}
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <div className="flex flex-wrap gap-4 justify-center">
             <Link href="/contact">
-              <Button 
-                size="lg" 
+              <Button
+                size="lg"
                 className="bg-white text-purple-600 hover:bg-gray-100 hover:shadow-xl transition-all duration-300"
               >
-                <Calendar className="h-5 w-5 mr-2" />
-                {t('getQuote')}
+                <div className="flex items-center">
+                  <Calendar className="h-5 w-5 mr-2" />
+                  {t('cta.quote')}
+                </div>
               </Button>
             </Link>
             <Link href="tel:+393277791867">
-              <Button 
-                size="lg" 
+              <Button
+                size="lg"
                 variant="outline"
                 className="border-white text-white hover:bg-white/20 hover:shadow-xl transition-all duration-300"
               >
-                <Phone className="h-5 w-5 mr-2" />
-                {t('call_now')}
+                <div className="flex items-center">
+                  <Phone className="h-5 w-5 mr-2" />
+                  {t('call_now')}
+                </div>
               </Button>
             </Link>
           </div>

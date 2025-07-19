@@ -25,7 +25,7 @@ export const common = {
   edit: 'Edit',
   delete: 'Delete',
   close: 'Close',
-  getQuote: 'Get Quote',
+  getQuote: 'Free Estimate',
   
   // Common Labels
   name: 'Name',
@@ -124,6 +124,7 @@ export const common = {
         kitchen: 'Kitchen and break room cleaning',
         windows: 'Window cleaning (interior)',
         trash: 'Trash removal and replacement',
+        customPlans: 'Customized business plans'
       }
     },
     
@@ -341,7 +342,7 @@ export const common = {
     
     cta: {
       title: 'Ready for a Spotless Space?',
-      subtitle: 'Contact us today for a free quote and discover the Lunex difference'
+      subtitle: 'Contact us today for a free estimate and discover the Lunex difference'
     }
   },
   
@@ -350,19 +351,19 @@ export const common = {
     title: 'Professional Cleaning Services',
     subtitle: 'Romano di Lombardia',
     description: 'Quality cleaning solutions for offices, homes, and commercial spaces. Trusted by businesses and families throughout Bergamo province.',
-    cta: 'Get Free Quote'
+    cta: 'Free Estimate'
   },
   
   // Contact Page
   contactPage: {
     title: 'Contact Us',
     subtitle: 'Get in touch for professional cleaning services',
-    description: 'Ready to experience professional cleaning? Contact us for a free quote and consultation.',
+    description: 'Ready to experience professional cleaning? Contact us for a free estimate and consultation.',
     
     // Contact Form
     form: {
-      title: 'Request a Quote',
-      subtitle: 'Fill out the form below and we\'ll get back to you with a customized quote',
+      title: 'Request an Estimate',
+      subtitle: 'Fill out the form below and we\'ll get back to you with a customized estimate',
       name: 'Full Name',
       namePlaceholder: 'Enter your full name',
       email: 'Email Address',
@@ -454,8 +455,8 @@ export const common = {
     // CTA Section
     cta: {
       title: 'Ready for Professional Cleaning?',
-      subtitle: 'Contact us today for a free quote!',
-      button: 'Get Quote Now',
+      subtitle: 'Contact us today for a free estimate!',
+      button: 'Free Estimate Now',
       or: 'or',
       call: 'Call Now'
     }
@@ -464,7 +465,7 @@ export const common = {
   // General CTA
   cta: {
     book: 'Book Now',
-    quote: 'Get Quote',
+    quote: 'Free Estimate',
     ready: 'Ready for Professional Cleaning?',
     description: 'Join hundreds of satisfied customers who trust Lunex for their cleaning needs'
   },
@@ -804,7 +805,7 @@ export const common = {
       },
       services: {
         text: 'We offer different types of professional cleaning:\n\n• 🏢 Office cleaning\n• 🏠 Home cleaning\n• 🔨 Post-renovation cleaning\n• ✨ Luxury villa cleaning\n• 🧽 Deep cleaning\n• 🔄 Maintenance cleaning\n\nWhich interests you most?',
-        suggestions: ['Office cleaning', 'Home cleaning', 'Post-renovation cleaning', 'Get quote']
+        suggestions: ['Office cleaning', 'Home cleaning', 'Post-renovation cleaning', 'Free estimate']
       },
       booking: {
         text: 'Great! To book an appointment you have several options:\n\n1. 📱 Fill out the online booking form\n2. 📞 Call +39 327 779 1867\n3. 📧 Email: info@lunex-cleaning.com\n\nWould you prefer to book online?',
@@ -812,7 +813,7 @@ export const common = {
       },
       location: {
         text: 'We mainly operate in:\n\n• Romano di Lombardia\n• Bergamo and province\n• Surrounding areas\n\nFor more distant areas, contact us to check availability!',
-        suggestions: ['Check availability', 'Contact', 'Get quote']
+        suggestions: ['Check availability', 'Contact', 'Free estimate']
       },
       emergency: {
         text: 'For cleaning emergencies we\'re available 24/7!\n\n📞 Emergency number: +39 327 779 1867\n\nEmergency rates: +50% on base price\nResponse time: 2-4 hours',
@@ -828,7 +829,7 @@ export const common = {
       },
       default: {
         text: 'I understand your request! For more specific information, I suggest you:\n\n• Contact our team at +39 327 779 1867\n• Visit the services section of the site\n• Fill out the contact form\n\nWhat would you prefer to do?',
-        suggestions: ['Call now', 'View services', 'Contact via email', 'Get quote']
+        suggestions: ['Call now', 'View services', 'Contact via email', 'Free estimate']
       }
     },
     quickActions: {
@@ -863,7 +864,7 @@ export const common = {
     },
     needProfessionalCleaning: 'Need professional cleaning services?',
     ctaDescription: 'Let Lunex handle your cleaning needs with our professional, reliable, and eco-friendly services.',
-    getFreeQuote: 'Get Free Quote',
+    getFreeQuote: 'Free Estimate',
     viewServices: 'View Services',
     backToBlog: '← Back to Blog',
     about: 'About'
