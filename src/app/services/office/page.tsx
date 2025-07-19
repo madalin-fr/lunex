@@ -93,7 +93,7 @@ export default function OfficeCleaning() {
                   {t('bookNow')}
                 </Button>
               </Link>
-              <Link href="tel:+393277791867">
+              <Link href="https://wa.me/393277791867">
                 <Button size="lg" variant="outline">
                   <Phone className="h-5 w-5 mr-2" />
                   {t('call_now')}
@@ -205,7 +205,7 @@ export default function OfficeCleaning() {
                 </div>
               </Button>
             </Link>
-            <Link href="tel:+393277791867">
+            <Link href="https://wa.me/393277791867">
               <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-blue-600">
                 <Phone className="h-5 w-5 mr-2" />
                 <div className="flex items-center">

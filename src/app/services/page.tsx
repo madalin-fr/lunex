@@ -17,7 +17,6 @@ import {
   RotateCcw,
   Phone,
   CheckCircle,
-  Users,
   Calendar,
   Shield,
   Zap,
@@ -92,11 +91,6 @@ export default function ServicesPage() {
   ]
 
   const whyChooseUs = [
-    {
-      icon: <Users className="h-6 w-6" />,
-      title: t('services.whyChooseUs.experience.title'),
-      description: t('services.whyChooseUs.experience.description')
-    },
     {
       icon: <CheckCircle className="h-6 w-6" />,
       title: t('services.whyChooseUs.quality.title'),
@@ -253,7 +247,7 @@ export default function ServicesPage() {
                 </div>
               </Button>
             </Link>
-            <Link href="tel:+393277791867">
+            <Link href="https://wa.me/393277791867">
               <Button
                 size="lg"
                 variant="outline"

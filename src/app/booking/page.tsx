@@ -106,7 +106,7 @@ export default function BookingPage() {
               <Button
                 size="lg"
                 className="bg-amber-600 hover:bg-amber-700 text-white font-semibold py-3 px-8"
-                onClick={() => window.location.href = 'tel:+393277791867'}
+                onClick={() => window.location.href = 'https://wa.me/393277791867'}
               >
                 {t('bookingPage.bookAppointment')}
               </Button>
@@ -143,7 +143,7 @@ export default function BookingPage() {
                 ) : (
                   <Button
                     className="w-full"
-                    onClick={() => window.location.href = 'tel:+393277791867'}
+                    onClick={() => window.location.href = 'https://wa.me/393277791867'}
                     variant="outline"
                   >
                     {t('bookingPage.bookService')}
@@ -193,7 +193,7 @@ export default function BookingPage() {
                     <p className="text-gray-600 mb-4">
                       {t('bookingPage.preferCall.description')}
                     </p>
-                    <Button variant="default" size="lg" onClick={() => window.location.href = 'tel:+393277791867'}>
+                    <Button variant="default" size="lg" onClick={() => window.location.href = 'https://wa.me/393277791867'}>
                       📞 +39 327 779 1867
                     </Button>
                   </div>
@@ -218,7 +218,7 @@ export default function BookingPage() {
               <Button
                 size="lg"
                 className="bg-amber-600 hover:bg-amber-700 text-white font-semibold py-3 px-8"
-                onClick={() => window.location.href = 'tel:+393277791867'}
+                onClick={() => window.location.href = 'https://wa.me/393277791867'}
               >
                 {t('bookingPage.bookAppointment')}
               </Button>
@@ -264,7 +264,7 @@ export default function BookingPage() {
             <p className="text-gray-600 mb-4">
               {t('bookingPage.preferCall.description')}
             </p>
-            <Button variant="outline" size="lg" onClick={() => window.location.href = 'tel:+393277791867'}>
+            <Button variant="outline" size="lg" onClick={() => window.location.href = 'https://wa.me/393277791867'}>
               📞 +39 327 779 1867
             </Button>
           </CardContent>

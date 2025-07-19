@@ -60,11 +60,6 @@ export default function HomePage() {
 
   const whyChooseUs = [
     {
-      icon: <Users className="h-6 w-6" />,
-      title: t('services.whyChooseUs.experience.title'),
-      description: t('services.whyChooseUs.experience.description')
-    },
-    {
       icon: <CheckCircle className="h-6 w-6" />,
       title: t('services.whyChooseUs.quality.title'),
       description: t('services.whyChooseUs.quality.description')
@@ -111,7 +106,7 @@ export default function HomePage() {
               <div className="flex items-center space-x-8 text-sm text-gray-600">
                 <div className="flex items-center space-x-2">
                   <CheckCircle className="w-5 h-5 text-green-600" />
-                  <span>{t('services.whyChooseUs.experience.title')}</span>
+                  <span>{t('services.whyChooseUs.quality.title')}</span>
                 </div>
                 <div className="flex items-center space-x-2">
                   <Shield className="w-5 h-5 text-green-600" />
@@ -219,7 +214,7 @@ export default function HomePage() {
                   <div className="mt-6 pt-6 border-t border-gray-200">
                     <p className="text-sm text-gray-500 mb-4">{t('contactPage.info.phone.whatsapp')}</p>
                     <Link
-                      href="tel:+393277791867"
+                      href="https://wa.me/393277791867"
                       className="w-full bg-gradient-to-r from-green-600 to-emerald-600 text-white py-3 rounded-full hover:from-green-700 hover:to-emerald-700 transition-all font-semibold block text-center shadow-md hover:shadow-lg"
                     >
                       {t('call_now')}
@@ -341,7 +336,7 @@ export default function HomePage() {
               {t('getQuote')}
             </Link>
             <Link
-              href="tel:+393277791867"
+              href="https://wa.me/393277791867"
               className="border-2 border-white text-white px-8 py-4 rounded-full hover:bg-white hover:text-green-600 transition-all font-semibold text-lg"
             >
               {t('call_now')}

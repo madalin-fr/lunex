@@ -196,7 +196,7 @@ export default function AboutPage() {
                 Get in Touch
               </Button>
             </Link>
-            <Link href="tel:+393277791867">
+            <Link href="https://wa.me/393277791867">
               <Button 
                 size="lg" 
                 variant="outline"

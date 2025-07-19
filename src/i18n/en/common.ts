@@ -314,10 +314,6 @@ export const common = {
     whyChooseUs: {
       title: 'Why Choose Lunex',
       subtitle: 'Experience the difference with our professional cleaning services',
-      experience: {
-        title: 'Professional Experience',
-        description: 'Years of experience in professional cleaning services across Romano di Lombardia'
-      },
       quality: {
         title: 'Quality Guarantee',
         description: 'We guarantee the highest quality cleaning standards for every service'
@@ -416,15 +412,15 @@ export const common = {
       title: 'Get in Touch',
       subtitle: 'Contact us for professional cleaning services',
       address: {
-        title: 'Service Area',
-        line1: 'Romano di Lombardia',
-        line2: 'Provincia di Bergamo',
-        city: 'Lombardy, Italy'
+        title: 'Address',
+        line1: 'Via Monsignor Giacomo Maggioni 26',
+        line2: '24058 Romano di Lombardia',
+        city: 'Provincia di Bergamo, Italy'
       },
       phone: {
-        title: 'Phone',
+        title: 'WhatsApp',
         number: '+39 327 779 1867',
-        whatsapp: 'WhatsApp Available'
+        whatsapp: 'Available on WhatsApp'
       },
       email: {
         title: 'Email',
@@ -566,7 +562,7 @@ export const common = {
     },
     company: {
       name: 'Lunex Cleaning Services',
-      address: 'Romano di Lombardia, BG, Italy'
+      address: 'Via Monsignor Giacomo Maggioni 26, 24058 Romano di Lombardia, BG, Italy'
     }
   },
 

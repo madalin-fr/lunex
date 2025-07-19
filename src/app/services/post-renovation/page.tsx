@@ -142,7 +142,7 @@ export default function PostRenovationPage() {
                   </span>
                 </Link>
                 <Link
-                  href="tel:+393277791867"
+                  href="https://wa.me/393277791867"
                   className="btn-glass border-2 border-orange-600 text-orange-600 px-8 py-4 rounded-full font-semibold text-center transition-all duration-300 hover:bg-orange-600 hover:text-white hover:scale-105"
                 >
                   {t('call_now')}
@@ -321,7 +321,7 @@ export default function PostRenovationPage() {
                 {t('getQuote')}
               </Link>
               <Link
-                href="tel:+393277791867"
+                href="https://wa.me/393277791867"
                 className="btn-glass border-2 border-white/50 text-white px-8 py-4 rounded-full hover:bg-white hover:text-orange-600 transition-all duration-300 font-semibold text-lg hover:scale-105"
               >
                 {t('call_now')}

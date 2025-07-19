@@ -374,7 +374,7 @@ export default function ContactPage() {
               {t('contactPage.cta.button')}
             </Button>
             <span className="text-blue-100">{t('contactPage.cta.or')}</span>
-            <a href="tel:+393277791867">
+            <a href="https://wa.me/393277791867">
               <Button variant="outline" className="border-white text-white hover:bg-white hover:text-blue-600 px-8 py-3">
                 {t('contactPage.cta.call')}
               </Button>
