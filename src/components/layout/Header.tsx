@@ -121,18 +121,19 @@ export function Header() {
         {/* Mobile Navigation with Glass Effect */}
         <div
           className={cn(
-            'lg:hidden border-t border-gray-200/20 transition-all duration-300 backdrop-blur-xl bg-white/50',
-            isMenuOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0 overflow-hidden'
+            'lg:hidden transition-all duration-300 backdrop-blur-xl bg-white/95 shadow-lg',
+            isMenuOpen ? 'max-h-screen opacity-100 border-t border-gray-200/40' : 'max-h-0 opacity-0 overflow-hidden'
           )}
         >
-          <nav className="py-4 space-y-2">
+          <nav className="py-6 space-y-1">
             {navigation.map((item, index) => (
               <Link
                 key={item.href}
                 href={item.href}
                 className={cn(
-                  "block py-2 px-4 rounded-lg font-medium transition-all duration-300 text-gray-700",
-                  "hover:bg-white/30 hover:translate-x-2",
+                  "block py-3 px-4 text-lg font-medium transition-all duration-300 text-gray-700",
+                  "hover:bg-green-50 hover:text-green-600 hover:translate-x-1",
+                  "border-l-4 border-transparent hover:border-green-500",
                   "animate-fade-in"
                 )}
                 style={{
@@ -143,19 +144,20 @@ export function Header() {
                 {item.label}
               </Link>
             ))}
-            <div className="flex items-center justify-between pt-4 border-t border-gray-200/30">
+            <div className="flex flex-col space-y-4 pt-6 border-t border-gray-200/40 mx-4">
               <button
                 onClick={toggleLanguage}
-                className="text-sm font-medium px-3 py-1 rounded-full backdrop-blur-sm bg-white/50 hover:bg-white/70 border border-gray-200/40 hover:border-gray-300/40 hover:shadow-md transition-all duration-300 text-gray-700"
+                className="self-start text-sm font-medium px-4 py-2 rounded-full backdrop-blur-sm bg-white/70 hover:bg-white border border-gray-200/40 hover:border-gray-300/40 hover:shadow-md transition-all duration-300 text-gray-700"
               >
                 {locale === 'it' ? 'EN' : 'IT'}
               </button>
               <Link
                 href="/booking"
                 onClick={() => setIsMenuOpen(false)}
+                className="self-start"
               >
                 <Button
-                  className="bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white shadow-md hover:shadow-lg transition-all duration-300 px-4 py-1.5 rounded-full font-semibold text-sm"
+                  className="bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white shadow-lg hover:shadow-xl transition-all duration-300 px-6 py-3 rounded-full font-semibold"
                 >
                   {t('book_now')}
                 </Button>
