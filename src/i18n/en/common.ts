@@ -101,8 +101,6 @@ export const common = {
       features: {
         daily: 'Daily Cleaning',
         dailyDesc: 'Regular daily cleaning services to maintain office hygiene',
-        disinfection: 'Deep Disinfection',
-        disinfectionDesc: 'Thorough disinfection of all surfaces and high-touch areas',
         flexible: 'Flexible Scheduling',
         flexibleDesc: 'Cleaning services scheduled around your business hours',
         equipment: 'Professional Equipment',
@@ -126,7 +124,6 @@ export const common = {
         kitchen: 'Kitchen and break room cleaning',
         windows: 'Window cleaning (interior)',
         trash: 'Trash removal and replacement',
-        disinfection: 'Disinfection of high-touch surfaces'
       }
     },
     

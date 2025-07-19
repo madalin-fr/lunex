@@ -6,6 +6,7 @@ import { LocaleProvider } from "@/hooks/useLocale";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { ChatbotWrapper } from "@/components/ui/ChatbotWrapper";
+import { Analytics } from "@vercel/analytics/next";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -67,6 +68,7 @@ export default function RootLayout({
             <Footer />
           </ChatbotWrapper>
         </LocaleProvider>
+        <Analytics />
       </body>
     </html>
   );

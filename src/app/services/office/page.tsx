@@ -27,11 +27,6 @@ export default function OfficeCleaning() {
       description: t('services.office.features.flexibleDesc')
     },
     {
-      icon: <ShieldCheck className="h-6 w-6" />,
-      title: t('services.office.features.disinfection'),
-      description: t('services.office.features.disinfectionDesc')
-    },
-    {
       icon: <Home className="h-6 w-6" />,
       title: t('services.office.features.equipment'),
       description: t('services.office.features.equipmentDesc')
@@ -73,7 +68,6 @@ export default function OfficeCleaning() {
     t('services.office.includes.kitchen'),
     t('services.office.includes.windows'),
     t('services.office.includes.trash'),
-    t('services.office.includes.disinfection')
   ]
 
   return (

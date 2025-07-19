@@ -101,8 +101,6 @@ export const common = {
       features: {
         daily: 'Pulizie Quotidiane',
         dailyDesc: 'Servizi di pulizia quotidiana per mantenere l\'igiene dell\'ufficio',
-        disinfection: 'Disinfezione Profonda',
-        disinfectionDesc: 'Disinfezione accurata di tutte le superfici e aree ad alto contatto',
         flexible: 'Orari Flessibili',
         flexibleDesc: 'Servizi di pulizia programmati secondo i vostri orari di lavoro',
         equipment: 'Attrezzature Professionali',
@@ -126,7 +124,6 @@ export const common = {
         kitchen: 'Pulizia cucina e zone break',
         windows: 'Pulizia finestre (interno)',
         trash: 'Rimozione rifiuti e sostituzione',
-        disinfection: 'Disinfezione superfici ad alto contatto'
       }
     },
     
