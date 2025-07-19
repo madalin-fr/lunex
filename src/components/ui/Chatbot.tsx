@@ -2,17 +2,12 @@
 
 import { useState, useRef, useEffect } from 'react'
 import { useLocale } from '@/hooks/useLocale'
-import { 
-  MessageCircle, 
-  X, 
-  Send, 
-  Bot, 
-  User, 
-  Calendar,
-  DollarSign,
-  MapPin,
-  Clock,
-  Sparkles
+import {
+  MessageCircle,
+  X,
+  Send,
+  Bot,
+  User
 } from 'lucide-react'
 
 interface Message {

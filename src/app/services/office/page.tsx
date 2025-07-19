@@ -6,7 +6,6 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Badge } from '@/components/ui/badge'
 import {
   Building2,
-  Shield,
   Clock,
   Sparkles,
   CheckCircle,
@@ -19,7 +18,7 @@ import {
 import Link from 'next/link'
 
 export default function OfficeCleaning() {
-  const { t, locale } = useLocale()
+  const { t } = useLocale()
 
   const features = [
     {

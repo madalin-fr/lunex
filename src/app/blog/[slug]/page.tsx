@@ -28,13 +28,13 @@ async function getPost(slug: string) {
     publishedAt,
     author-> {
       _id,
-      "name": name,
+      name,
       image,
-      "bio": bio
+      bio
     },
     categories[]-> {
       _id,
-      "title": title
+      title
     }
   }`
   
@@ -141,11 +141,16 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
   const localeCookie = cookieStore.get('locale')
   const locale = localeCookie?.value || 'en'
   
-  // Add logging to debug locale detection
+  // Add logging to debug locale detection and post data
   console.log('[BlogPost] Locale detection:', {
     cookieValue: localeCookie?.value,
     finalLocale: locale,
     slug: slug
+  })
+  console.log('[BlogPost] Raw post data:', {
+    author: rawPost?.author,
+    title: rawPost?.title,
+    categories: rawPost?.categories
   })
 
   // Get slug mapping for locale switching
@@ -156,6 +161,16 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
 
   // Process the localized post data
   const post = getLocalizedPost(rawPost, locale)
+  
+  console.log('[BlogPost] Processed post data:', {
+    author: post?.author,
+    title: post?.title,
+    categories: post?.categories
+  })
+  
+  if (!post) {
+    notFound()
+  }
   
   // Simple translation function for server components
   const t = (key: string) => {
@@ -216,23 +231,38 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
             <div className="max-w-4xl mx-auto">
               {post.categories && post.categories.length > 0 && (
                 <div className="flex gap-2 mb-6">
-                  {post.categories.map((category: string) => (
-                    <span key={category} className="inline-block bg-gradient-to-r from-blue-500 to-purple-500 text-white text-sm font-semibold uppercase px-4 py-2 rounded-full backdrop-blur-sm">
-                      {category}
-                    </span>
-                  ))}
+                  {post.categories.map((category, index) => {
+                    let categoryText = ''
+                    if (typeof category === 'string') {
+                      categoryText = category
+                    } else if (category && typeof category === 'object' && 'title' in category) {
+                      categoryText = typeof category.title === 'string' ? category.title : ''
+                    }
+                    return (
+                      <span key={index} className="inline-block bg-gradient-to-r from-blue-500 to-purple-500 text-white text-sm font-semibold uppercase px-4 py-2 rounded-full backdrop-blur-sm">
+                        {categoryText}
+                      </span>
+                    )
+                  })}
                 </div>
               )}
               <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">{post.title}</h1>
               <div className="flex items-center gap-6 text-lg text-white/90">
-                {post.author?.name && (
-                  <div className="flex items-center gap-2">
-                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                    </svg>
-                    <span>{t('blog.by')} {post.author.name}</span>
-                  </div>
-                )}
+                <div className="flex items-center gap-2">
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                  </svg>
+                  <span>{t('blog.by')} {(() => {
+                    if (post.author) {
+                      if (typeof post.author === 'string') {
+                        return post.author
+                      } else if ('name' in post.author && post.author.name) {
+                        return typeof post.author.name === 'string' ? post.author.name : 'Lunex Team'
+                      }
+                    }
+                    return 'Lunex Team'
+                  })()}</span>
+                </div>
                 {post.publishedAt && (
                   <div className="flex items-center gap-2">
                     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -262,23 +292,38 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
             </nav>
             {post.categories && post.categories.length > 0 && (
               <div className="flex gap-2 justify-center mb-6">
-                {post.categories.map((category: string) => (
-                  <span key={category} className="inline-block bg-gradient-to-r from-blue-500 to-purple-500 text-white text-sm font-semibold uppercase px-4 py-2 rounded-full">
-                    {category}
-                  </span>
-                ))}
+                {post.categories.map((category, index) => {
+                  let categoryText = ''
+                  if (typeof category === 'string') {
+                    categoryText = category
+                  } else if (category && typeof category === 'object' && 'title' in category) {
+                    categoryText = typeof category.title === 'string' ? category.title : ''
+                  }
+                  return (
+                    <span key={index} className="inline-block bg-gradient-to-r from-blue-500 to-purple-500 text-white text-sm font-semibold uppercase px-4 py-2 rounded-full">
+                      {categoryText}
+                    </span>
+                  )
+                })}
               </div>
             )}
             <h1 className="text-4xl md:text-6xl font-bold mb-6 text-gray-900 leading-tight">{post.title}</h1>
             <div className="flex items-center justify-center gap-6 text-lg text-gray-800">
-              {post.author?.name && (
-                <div className="flex items-center gap-2">
-                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                  </svg>
-                  <span>{t('blog.by')} {post.author.name}</span>
-                </div>
-              )}
+              <div className="flex items-center gap-2">
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                </svg>
+                <span>{t('blog.by')} {(() => {
+                  if (post.author) {
+                    if (typeof post.author === 'string') {
+                      return post.author
+                    } else if ('name' in post.author && post.author.name) {
+                      return typeof post.author.name === 'string' ? post.author.name : 'Lunex Team'
+                    }
+                  }
+                  return 'Lunex Team'
+                })()}</span>
+              </div>
               {post.publishedAt && (
                 <div className="flex items-center gap-2">
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -309,21 +354,35 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
         </div>
         
         {/* Author attribution */}
-        {post.author && (
+        {post.author && typeof post.author !== 'string' && 'name' in post.author && (
           <div className="mt-8 text-center">
             <div className="inline-flex items-center gap-3 text-gray-700">
-              {post.author.image && (
-                <div className="relative w-10 h-10 rounded-full overflow-hidden">
-                  <Image
-                    src={urlFor({ ...post.author.image, _type: 'image' }).width(40).height(40).url()}
-                    alt={post.author.name}
-                    fill
-                    className="object-cover"
-                  />
-                </div>
-              )}
+              {(() => {
+                if ('image' in post.author && post.author.image &&
+                    typeof post.author.image === 'object' &&
+                    'asset' in post.author.image) {
+                  return (
+                    <div className="relative w-10 h-10 rounded-full overflow-hidden">
+                      <Image
+                        src={urlFor({ ...post.author.image, _type: 'image' } as { _type: string; asset: { _ref: string; _type: string }; alt?: string }).width(40).height(40).url()}
+                        alt={typeof post.author.name === 'string' ? post.author.name : 'Author'}
+                        fill
+                        className="object-cover"
+                      />
+                    </div>
+                  )
+                }
+                return null
+              })()}
               <p className="text-lg">
-                {t('blog.writtenBy')} <span className="font-semibold">{post.author.name}</span>
+                {t('blog.writtenBy')} <span className="font-semibold">{(() => {
+                  if (typeof post.author === 'string') {
+                    return post.author
+                  } else if ('name' in post.author && post.author.name) {
+                    return typeof post.author.name === 'string' ? post.author.name : 'Lunex Team'
+                  }
+                  return 'Lunex Team'
+                })()}</span>
               </p>
             </div>
           </div>

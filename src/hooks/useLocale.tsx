@@ -1,7 +1,7 @@
 'use client'
 
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react'
-import { Locale, defaultLocale, getTranslation, formatMessage } from '@/i18n'
+import { Locale, defaultLocale, formatMessage } from '@/i18n'
 
 interface LocaleContextType {
   locale: Locale

@@ -43,15 +43,15 @@ export function CalendarScheduler({
     
     for (let day = 1; day <= 6; day++) { // Monday = 1, Saturday = 6
       const currentDay = startOfWeek.clone().add(day, 'days')
-      let startHour = 8
-      let endHour = day === 6 ? 12 : 18 // Saturday ends at 12:00
+      const startHour = 8
+      const endHour = day === 6 ? 12 : 18 // Saturday ends at 12:00
       
       for (let hour = startHour; hour < endHour; hour++) {
         for (let minute = 0; minute < 60; minute += 30) { // 30-minute slots
           const start = currentDay.clone().hour(hour).minute(minute).toDate()
           const end = currentDay.clone().hour(hour).minute(minute + 30).toDate()
           
-          const isBooked = bookedSlots.some(slot => 
+          const isBooked = bookedSlots.some(slot =>
             moment(slot.start).isSame(start) && moment(slot.end).isSame(end)
           )
           
@@ -68,7 +68,7 @@ export function CalendarScheduler({
     }
     
     return hours
-  }, [bookedSlots, currentDate])
+  }, [bookedSlots])
 
   const handleSelectSlot = useCallback(({ start, end }: { start: Date; end: Date }) => {
     const isBusinessHour = moment(start).day() !== 0 && // Not Sunday
@@ -89,7 +89,7 @@ export function CalendarScheduler({
     }
   }, [bookedSlots, onDateTimeSelect])
 
-  const eventStyleGetter = (event: any) => {
+  const eventStyleGetter = (event: TimeSlot & { resource?: { available: boolean } }) => {
     const isSelected = selectedDate && selectedTime && 
       moment(event.start).isSame(selectedDate, 'day') &&
       moment(event.start).format('HH:mm') === selectedTime
@@ -215,7 +215,7 @@ export function CalendarScheduler({
         date={currentDate}
         onNavigate={setCurrentDate}
         onSelectSlot={handleSelectSlot}
-        onSelectEvent={(event: any) => {
+        onSelectEvent={(event: TimeSlot & { resource?: { available: boolean } }) => {
           if (!event.isBooked && moment(event.start).isAfter(moment())) {
             handleSelectSlot({ start: event.start, end: event.end })
           }

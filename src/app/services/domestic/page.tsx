@@ -11,9 +11,7 @@ import {
   Users,
   Clock,
   Sparkles,
-  Star,
   Phone,
-  Calendar,
   ArrowRight
 } from 'lucide-react'
 

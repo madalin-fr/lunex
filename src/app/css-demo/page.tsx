@@ -2,13 +2,12 @@
 
 import React, { useState } from 'react';
 import { Button, ButtonGroup, IconButton } from '@/components/ui/button';
-import { 
-  Card, 
-  CardHeader, 
-  CardTitle, 
-  CardDescription, 
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardDescription,
   CardContent,
-  CardFooter,
   InteractiveCard,
   BentoCard,
   SkeletonCard
@@ -23,7 +22,6 @@ import {
 
 export default function CSSDemo() {
   const [count, setCount] = useState(5);
-  const [loading, setLoading] = useState(false);
 
   return (
     <div className="min-h-screen">

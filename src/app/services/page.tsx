@@ -2,13 +2,11 @@
 
 import { useLocale } from '@/hooks/useLocale'
 import { Button } from '@/components/ui/button'
-import { 
-  Card, 
-  CardContent, 
-  CardDescription, 
-  CardHeader, 
-  CardTitle,
-  InteractiveCard 
+import {
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle
 } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import {
@@ -26,7 +24,7 @@ import {
 import Link from 'next/link'
 
 export default function ServicesPage() {
-  const { t, locale } = useLocale()
+  const { t } = useLocale()
 
   const services = [
     {

@@ -127,6 +127,16 @@ const InteractiveCard = React.forwardRef<
   }
 >(({ className, glowColor = 'var(--color-primary)', parallax = false, children, ...props }, ref) => {
   const cardRef = React.useRef<HTMLDivElement>(null);
+  const mergedRef = React.useMemo(() => {
+    if (!ref) return cardRef;
+    if (typeof ref === 'function') {
+      return (node: HTMLDivElement | null) => {
+        ref(node);
+        (cardRef as React.MutableRefObject<HTMLDivElement | null>).current = node;
+      };
+    }
+    return cardRef;
+  }, [ref]);
   const [mousePosition, setMousePosition] = React.useState({ x: 0, y: 0 });
 
   React.useEffect(() => {
@@ -163,7 +173,7 @@ const InteractiveCard = React.forwardRef<
 
   return (
     <div
-      ref={cardRef}
+      ref={mergedRef}
       className={cn(
         "group relative overflow-hidden rounded-xl",
         "bg-gradient-to-br from-background to-background/80",

@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
-import { Card } from '@/components/ui/card';
 import { useLocale } from '@/hooks/useLocale';
 
 interface BookingIntegrationProps {
@@ -196,6 +195,11 @@ declare global {
         primaryColor?: string;
       }) => void;
     };
-    Cal?: any;
+    Cal?: {
+      (action: string, ...args: unknown[]): void;
+      ns?: Record<string, unknown>;
+      q?: unknown[];
+      loaded?: boolean;
+    };
   }
 }

@@ -3,16 +3,15 @@
 import Link from "next/link"
 import { useLocale } from "@/hooks/useLocale"
 import { useEffect, useRef } from 'react'
-import { 
-  Hammer, 
-  CheckCircle, 
-  Shield, 
-  Sparkles, 
-  Clock, 
+import {
+  Hammer,
+  CheckCircle,
+  Shield,
+  Sparkles,
+  Clock,
   Zap,
   Target,
   Award,
-  Phone,
   ArrowRight
 } from 'lucide-react'
 

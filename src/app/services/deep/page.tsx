@@ -13,7 +13,6 @@ import {
   Target,
   RefreshCw,
   Award,
-  Phone,
   ArrowRight,
   Home
 } from 'lucide-react'

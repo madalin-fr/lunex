@@ -144,6 +144,7 @@ NEXT_PUBLIC_SANITY_DATASET=production`}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {posts.map((rawPost: Post) => {
             const post = getLocalizedPost(rawPost, locale)
+            if (!post) return null
             const slugValue = post.slug?.current || ''
             
             return (
@@ -165,11 +166,19 @@ NEXT_PUBLIC_SANITY_DATASET=production`}
                 <div className="p-6">
                   {post.categories && post.categories.length > 0 && (
                     <div className="flex gap-2 mb-3">
-                      {post.categories.map((category: { title: string } | string, index: number) => (
-                        <span key={index} className="inline-block bg-gradient-to-r from-blue-500 to-purple-500 text-white text-xs font-semibold uppercase px-3 py-1 rounded-full">
-                          {typeof category === 'string' ? category : category.title}
-                        </span>
-                      ))}
+                      {post.categories.map((category, index) => {
+                        let categoryText = ''
+                        if (typeof category === 'string') {
+                          categoryText = category
+                        } else if (category && typeof category === 'object' && 'title' in category) {
+                          categoryText = typeof category.title === 'string' ? category.title : String(category.title)
+                        }
+                        return categoryText ? (
+                          <span key={index} className="inline-block bg-gradient-to-r from-blue-500 to-purple-500 text-white text-xs font-semibold uppercase px-3 py-1 rounded-full">
+                            {categoryText}
+                          </span>
+                        ) : null
+                      })}
                     </div>
                   )}
                   
@@ -187,7 +196,11 @@ NEXT_PUBLIC_SANITY_DATASET=production`}
                     <div className="flex items-center space-x-2">
                       {post.author && (
                         <span className="text-sm text-gray-700 font-medium">
-                          {t('blog.by')} {post.author.name}
+                          {t('blog.by')} {typeof post.author === 'string'
+                            ? post.author
+                            : 'name' in post.author && typeof post.author.name === 'string'
+                              ? post.author.name
+                              : ''}
                         </span>
                       )}
                     </div>

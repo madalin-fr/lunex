@@ -46,6 +46,9 @@ export interface SubscriptionService {
   additionalCost?: number
 }
 
+// Type for subscription metadata
+export type SubscriptionMetadataValue = string | number | boolean | Date | null | undefined
+
 export interface CustomerSubscription {
   id: string
   customerId: string
@@ -59,8 +62,7 @@ export interface CustomerSubscription {
   usage: SubscriptionUsage
   paymentMethod: string
   discounts: SubscriptionDiscount[]
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  metadata: Record<string, any>
+  metadata: Record<string, SubscriptionMetadataValue>
   createdAt: Date
   updatedAt: Date
 }

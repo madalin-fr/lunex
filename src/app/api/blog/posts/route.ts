@@ -8,24 +8,24 @@ export async function GET() {
   
   const query = `*[_type == "post"] | order(publishedAt desc) {
     _id,
-    "title": title,
-    "slug": slug,
+    title,
+    slug,
     mainImage {
       ...,
-      "alt": alt
+      alt
     },
-    "excerpt": excerpt,
+    excerpt,
     publishedAt,
     author-> {
       _id,
-      "name": name,
-      "bio": bio
+      name,
+      bio
     },
     categories[]-> {
       _id,
-      "title": title
+      title
     },
-    "body": body
+    body
   }`
   
   try {
