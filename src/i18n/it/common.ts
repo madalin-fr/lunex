@@ -882,5 +882,38 @@ export const common = {
     viewServices: 'Vedi Servizi',
     backToBlog: '← Torna al Blog',
     about: 'Chi è'
+  },
+
+  // Booking Page
+  bookingPage: {
+    title: 'Prenota il Tuo Servizio di Pulizia',
+    subtitle: 'Seleziona un servizio e prenota il tuo appuntamento online',
+    bookService: 'Prenota Questo Servizio',
+    selectTimeSlot: 'Seleziona Fascia Oraria',
+    selectedService: 'Servizio Selezionato',
+    maintenance: {
+      duration: 'Mensile/Settimanale'
+    },
+    benefits: {
+      instantConfirmation: {
+        title: 'Conferma Istantanea',
+        description: 'Prenota il tuo appuntamento e ricevi conferma immediata'
+      },
+      flexibleScheduling: {
+        title: 'Programmazione Flessibile',
+        description: 'Scegli tra le fasce orarie disponibili che si adattano ai tuoi impegni'
+      },
+      easyRescheduling: {
+        title: 'Riprogrammazione Facile',
+        description: 'Devi cambiare il tuo appuntamento? Riprogramma in qualsiasi momento'
+      }
+    },
+    preferCall: {
+      title: 'Preferisci Chiamare?',
+      description: 'Il nostro team è disponibile per aiutarti a prenotare il tuo appuntamento'
+    },
+    scheduleAppointment: 'Prenota Appuntamento',
+    bookAppointment: 'Prenota Appuntamento',
+    loadingSystem: 'Caricamento sistema di prenotazione...'
   }
 }

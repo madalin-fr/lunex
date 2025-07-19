@@ -1,11 +1,10 @@
 'use client'
 
-import { client, hasValidConfig, urlFor } from '@/lib/sanity/client'
+import { hasValidConfig, urlFor } from '@/lib/sanity/client'
 import Link from 'next/link'
 import Image from 'next/image'
 import { Post } from '@/lib/sanity/types'
 import { getLocalizedPost } from '@/lib/sanity/utils'
-import { headers } from 'next/headers'
 import { useLocale } from '@/hooks/useLocale'
 import { useEffect, useState } from 'react'
 
@@ -166,7 +165,7 @@ NEXT_PUBLIC_SANITY_DATASET=production`}
                 <div className="p-6">
                   {post.categories && post.categories.length > 0 && (
                     <div className="flex gap-2 mb-3">
-                      {post.categories.map((category: any, index: number) => (
+                      {post.categories.map((category: { title: string } | string, index: number) => (
                         <span key={index} className="inline-block bg-gradient-to-r from-blue-500 to-purple-500 text-white text-xs font-semibold uppercase px-3 py-1 rounded-full">
                           {typeof category === 'string' ? category : category.title}
                         </span>

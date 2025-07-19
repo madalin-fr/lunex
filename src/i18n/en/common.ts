@@ -882,5 +882,38 @@ export const common = {
     viewServices: 'View Services',
     backToBlog: '← Back to Blog',
     about: 'About'
+  },
+
+  // Booking Page
+  bookingPage: {
+    title: 'Book Your Cleaning Service',
+    subtitle: 'Select a service and book your appointment online',
+    bookService: 'Book This Service',
+    selectTimeSlot: 'Select Time Slot',
+    selectedService: 'Selected Service',
+    maintenance: {
+      duration: 'Monthly/Weekly'
+    },
+    benefits: {
+      instantConfirmation: {
+        title: 'Instant Confirmation',
+        description: 'Book your appointment and receive immediate confirmation'
+      },
+      flexibleScheduling: {
+        title: 'Flexible Scheduling',
+        description: 'Choose from available time slots that fit your schedule'
+      },
+      easyRescheduling: {
+        title: 'Easy Rescheduling',
+        description: 'Need to change your appointment? Reschedule anytime'
+      }
+    },
+    preferCall: {
+      title: 'Prefer to Call?',
+      description: 'Our team is available to help you book your appointment'
+    },
+    scheduleAppointment: 'Schedule Appointment',
+    bookAppointment: 'Book Appointment',
+    loadingSystem: 'Loading booking system...'
   }
 }

@@ -45,3 +45,5 @@ recycled/
 
 # dist folder
 /dist/
+
+/src/generated/prisma

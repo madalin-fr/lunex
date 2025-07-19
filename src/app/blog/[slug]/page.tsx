@@ -1,11 +1,11 @@
 import { client, hasValidConfig } from '@/lib/sanity/client'
 import { urlFor } from '@/lib/sanity/client'
 import Image from 'next/image'
+import Link from 'next/link'
 import { PortableText } from '@portabletext/react'
 import { notFound } from 'next/navigation'
-import { Post } from '@/lib/sanity/types'
 import { getLocalizedPost } from '@/lib/sanity/utils'
-import { headers, cookies } from 'next/headers'
+import { cookies } from 'next/headers'
 import { LocaleSwitchHandler } from '@/components/blog/LocaleSwitchHandler'
 
 export const revalidate = 60
@@ -65,7 +65,7 @@ export async function generateStaticParams() {
     
     const slugs: { slug: string }[] = []
     
-    posts.forEach((post: any) => {
+    posts.forEach((post: { slug?: { en?: { current?: string }; it?: { current?: string } } }) => {
       if (post.slug) {
         // Add English slug
         if (post.slug.en && post.slug.en.current) {
@@ -207,7 +207,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
           <div className="absolute top-8 left-8 right-8">
             <div className="max-w-4xl mx-auto">
               <nav className="text-white/80 text-sm">
-                <a href="/blog" className="hover:text-white transition-colors">{t('blog.backToBlog')}</a>
+                <Link href="/blog" className="hover:text-white transition-colors">{t('blog.backToBlog')}</Link>
               </nav>
             </div>
           </div>
@@ -258,7 +258,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
         {!post.mainImage && (
           <div className="text-center mb-16">
             <nav className="text-blue-600 text-sm mb-8">
-              <a href="/blog" className="hover:text-blue-800 transition-colors">{t('blog.backToBlog')}</a>
+              <Link href="/blog" className="hover:text-blue-800 transition-colors">{t('blog.backToBlog')}</Link>
             </nav>
             {post.categories && post.categories.length > 0 && (
               <div className="flex gap-2 justify-center mb-6">
