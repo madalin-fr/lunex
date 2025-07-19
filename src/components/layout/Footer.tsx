@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { useLocale } from '@/hooks/useLocale'
-import { Shield, Award, CheckCircle } from 'lucide-react'
+// Icons removed as they were not being used
 
 export function Footer() {
   const { t } = useLocale()

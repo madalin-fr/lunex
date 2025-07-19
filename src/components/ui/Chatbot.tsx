@@ -161,40 +161,115 @@ export default function Chatbot({ isOpen, onToggle }: ChatbotProps) {
 
   if (!isOpen) {
     return (
-      <button
-        onClick={onToggle}
-        className="fixed bottom-20 right-4 sm:bottom-6 sm:right-6 z-50 bg-green-600 text-white p-4 rounded-full shadow-lg hover:bg-green-700 transition-colors animate-pulse"
-      >
-        <MessageCircle className="w-6 h-6" />
-      </button>
+      <div className="fixed bottom-20 right-4 sm:bottom-6 sm:right-6 z-50">
+        {/* Attractive floating button with emotions */}
+        <button
+          onClick={onToggle}
+          className="relative group"
+        >
+          {/* Glow effect */}
+          <div className="absolute inset-0 bg-gradient-to-r from-green-400 to-emerald-400 rounded-full blur-md opacity-75 group-hover:opacity-100 animate-pulse transition-opacity"></div>
+          
+          {/* Main button */}
+          <div className="relative bg-gradient-to-br from-green-500 to-emerald-600 text-white p-5 rounded-full shadow-2xl transform transition-all duration-300 hover:scale-110 hover:rotate-3">
+            <MessageCircle className="w-8 h-8" />
+            
+            {/* Animated hearts floating up */}
+            <div className="absolute -top-2 -right-1 text-red-500 animate-bounce">
+              <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clipRule="evenodd" />
+              </svg>
+            </div>
+            
+            {/* Sparkle effect */}
+            <div className="absolute -bottom-1 -left-1 text-yellow-300 animate-spin">
+              <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M10 2l2.5 5.5L18 8l-4 4.5L15 18l-5-3-5 3 1-5.5L2 8l5.5-.5L10 2z" />
+              </svg>
+            </div>
+          </div>
+          
+          {/* Notification dot */}
+          <div className="absolute top-0 right-0 w-4 h-4 bg-red-500 rounded-full border-2 border-white animate-pulse"></div>
+        </button>
+        
+        {/* Floating text bubble */}
+        <div className="absolute bottom-full right-0 mb-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+          <div className="bg-gray-800 text-white text-sm px-3 py-2 rounded-lg whitespace-nowrap">
+            {t('chatbot.needHelp')}
+            <div className="absolute bottom-0 right-6 transform translate-y-1/2 rotate-45 w-2 h-2 bg-gray-800"></div>
+          </div>
+        </div>
+      </div>
     )
   }
 
   return (
-    <div className="fixed inset-0 sm:inset-auto sm:bottom-6 sm:right-6 z-50 w-full sm:w-96 h-full sm:h-[600px] max-h-[80vh] sm:max-h-[600px] bg-white sm:rounded-lg shadow-2xl border border-gray-200 flex flex-col">
-      {/* Mobile overlay background */}
+    <>
+      {/* Mobile overlay background - darken the website but preserve navbar */}
       <div
-        className="fixed inset-0 bg-black/50 sm:hidden -z-10"
+        className="fixed top-16 left-0 right-0 bottom-0 bg-black/60 sm:hidden z-40"
         onClick={onToggle}
       />
       
+      {/* Chatbot container with higher z-index to stay on top */}
+      <div className="fixed top-20 left-[7.5%] right-[7.5%] bottom-[10%] sm:inset-auto sm:bottom-6 sm:right-6 z-50 w-auto sm:w-96 h-auto sm:h-[600px] sm:max-h-[600px] bg-white rounded-lg shadow-2xl border border-gray-200 flex flex-col">
+      
       {/* Header */}
-      <div className="bg-green-600 text-white p-4 sm:rounded-t-lg flex items-center justify-between">
-        <div className="flex items-center space-x-3">
-          <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-lg border-2 border-green-100">
-            <Bot className="w-7 h-7 text-green-600" />
+      <div className="bg-gradient-to-r from-green-600 to-emerald-600 text-white p-3 sm:rounded-t-lg">
+        <div className="flex items-center justify-between">
+          {/* Avatar and info in horizontal layout */}
+          <div className="flex items-center gap-3">
+            {/* Compact Animated Avatar */}
+            <div className="relative w-12 h-12">
+              {/* Outer glow effect */}
+              <div className="absolute inset-0 bg-gradient-to-r from-green-400 to-emerald-400 rounded-full blur-lg opacity-60 animate-pulse"></div>
+              
+              {/* Middle ring */}
+              <div className="absolute inset-0 bg-gradient-to-br from-white/90 to-green-50 rounded-full shadow-2xl border-2 border-white/30 animate-[spin_20s_linear_infinite]">
+                <div className="absolute inset-1 bg-gradient-to-tr from-green-100 to-white rounded-full"></div>
+              </div>
+              
+              {/* Inner avatar container */}
+              <div className="absolute inset-1.5 bg-white rounded-full shadow-inner flex items-center justify-center transform hover:scale-105 transition-transform duration-300">
+                {/* Animated bot icon with emotion */}
+                <div className="relative">
+                  <Bot className="w-6 h-6 text-green-600 animate-[bounce_2s_ease-in-out_infinite]" />
+                  {/* Heart decoration for emotional touch */}
+                  <div className="absolute -top-1 -right-1 text-red-500 animate-pulse">
+                    <svg className="w-2.5 h-2.5" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clipRule="evenodd" />
+                    </svg>
+                  </div>
+                  {/* Sparkles for attractiveness */}
+                  <div className="absolute -bottom-1 -left-1 text-yellow-400 animate-[spin_3s_linear_infinite]">
+                    <svg className="w-2.5 h-2.5" fill="currentColor" viewBox="0 0 20 20">
+                      <path d="M10 2l2.5 5.5L18 8l-4 4.5L15 18l-5-3-5 3 1-5.5L2 8l5.5-.5L10 2z" />
+                    </svg>
+                  </div>
+                </div>
+              </div>
+              
+            </div>
+            
+            {/* Title and status */}
+            <div className="text-left">
+              <h3 className="font-bold text-lg leading-tight">{t('chatbot.title')}</h3>
+              <p className="text-xs text-green-100 flex items-center gap-1">
+                <span className="inline-block w-2 h-2 bg-green-300 rounded-full animate-pulse"></span>
+                {t('chatbot.status')}
+              </p>
+            </div>
           </div>
-          <div>
-            <h3 className="font-semibold">{t('chatbot.title')}</h3>
-            <p className="text-sm text-green-100">{t('chatbot.status')}</p>
-          </div>
+          
+          {/* Close button */}
+          <button
+            onClick={onToggle}
+            className="text-white/80 hover:text-white transition-all transform hover:scale-110"
+          >
+            <X className="w-6 h-6" />
+          </button>
         </div>
-        <button
-          onClick={onToggle}
-          className="text-white hover:text-green-100 transition-colors"
-        >
-          <X className="w-5 h-5" />
-        </button>
       </div>
 
       {/* Messages */}
@@ -205,58 +280,85 @@ export default function Chatbot({ isOpen, onToggle }: ChatbotProps) {
             className={`flex ${message.sender === 'user' ? 'justify-end' : 'justify-start'}`}
           >
             <div
-              className={`max-w-[80%] p-3 rounded-lg ${
+              className={`max-w-[80%] ${
                 message.sender === 'user'
-                  ? 'bg-green-600 text-white ml-auto'
-                  : 'bg-gray-100 text-gray-800'
+                  ? 'ml-auto'
+                  : ''
               }`}
             >
-              <div className="flex items-start space-x-2">
-                {message.sender === 'bot' && (
-                  <Bot className="w-4 h-4 mt-1 text-green-600" />
-                )}
-                {message.sender === 'user' && (
-                  <User className="w-4 h-4 mt-1 text-white" />
-                )}
-                <div className="flex-1">
-                  <p className="text-sm whitespace-pre-line">
-                    {message.sender === 'bot' && message.textKey
-                      ? t(message.textKey)
-                      : message.text}
-                  </p>
-                  {message.suggestions && (
-                    <div className="mt-3 space-y-1">
-                      {message.suggestions.map((suggestion, index) => {
-                        const displayText = message.suggestionKeys?.[index]
-                          ? t(message.suggestionKeys[index])
-                          : suggestion
-                        return (
-                          <button
-                            key={index}
-                            onClick={() => handleSuggestionClick(displayText)}
-                            className="block w-full text-left p-2 text-xs bg-white border border-gray-200 rounded hover:bg-gray-50 transition-colors"
-                          >
-                            {displayText}
-                          </button>
-                        )
-                      })}
+              <div className={`p-3 rounded-lg ${
+                message.sender === 'user'
+                  ? 'bg-green-600 text-white'
+                  : 'bg-gray-100 text-gray-800'
+              }`}>
+                <div className="flex items-start space-x-3">
+                  {message.sender === 'bot' && (
+                    <div className="relative flex-shrink-0">
+                      <div className="w-10 h-10 bg-gradient-to-br from-green-100 to-emerald-100 rounded-full flex items-center justify-center shadow-md transform hover:scale-110 transition-transform">
+                        <Bot className="w-6 h-6 text-green-600" />
+                      </div>
                     </div>
                   )}
+                  {message.sender === 'user' && (
+                    <div className="w-10 h-10 bg-gradient-to-br from-green-500 to-emerald-600 rounded-full flex items-center justify-center shadow-md">
+                      <User className="w-6 h-6 text-white" />
+                    </div>
+                  )}
+                  <div className="flex-1">
+                    <p className="text-sm whitespace-pre-line">
+                      {message.sender === 'bot' && message.textKey
+                        ? t(message.textKey)
+                        : message.text}
+                    </p>
+                  </div>
                 </div>
               </div>
+              {message.suggestions && (
+                <div className="mt-2 space-y-2">
+                  {message.suggestions.map((suggestion, index) => {
+                    const displayText = message.suggestionKeys?.[index]
+                      ? t(message.suggestionKeys[index])
+                      : suggestion
+                    const colors = [
+                      'bg-gradient-to-r from-green-50 to-emerald-50 border-green-200 text-green-700 hover:from-green-100 hover:to-emerald-100 hover:border-green-300',
+                      'bg-gradient-to-r from-blue-50 to-sky-50 border-blue-200 text-blue-700 hover:from-blue-100 hover:to-sky-100 hover:border-blue-300',
+                      'bg-gradient-to-r from-purple-50 to-violet-50 border-purple-200 text-purple-700 hover:from-purple-100 hover:to-violet-100 hover:border-purple-300',
+                      'bg-gradient-to-r from-amber-50 to-yellow-50 border-amber-200 text-amber-700 hover:from-amber-100 hover:to-yellow-100 hover:border-amber-300'
+                    ]
+                    return (
+                      <button
+                        key={index}
+                        onClick={() => handleSuggestionClick(displayText)}
+                        className={`block w-full text-left p-3 text-sm rounded-lg border-2 transition-all duration-200 transform hover:scale-[1.02] hover:shadow-md ${colors[index % colors.length]}`}
+                      >
+                        {displayText}
+                      </button>
+                    )
+                  })}
+                </div>
+              )}
             </div>
           </div>
         ))}
         
         {isTyping && (
           <div className="flex justify-start">
-            <div className="bg-gray-100 p-3 rounded-lg">
-              <div className="flex items-center space-x-2">
-                <Bot className="w-4 h-4 text-green-600" />
+            <div className="bg-gray-100 p-3 rounded-lg max-w-[80%]">
+              <div className="flex items-center space-x-3">
+                <div className="relative">
+                  <div className="w-10 h-10 bg-gradient-to-br from-green-100 to-emerald-100 rounded-full flex items-center justify-center shadow-md animate-pulse">
+                    <Bot className="w-6 h-6 text-green-600" />
+                  </div>
+                  <div className="absolute -bottom-1 -right-1 text-yellow-400 animate-spin">
+                    <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
+                      <path d="M10 2l2.5 5.5L18 8l-4 4.5L15 18l-5-3-5 3 1-5.5L2 8l5.5-.5L10 2z" />
+                    </svg>
+                  </div>
+                </div>
                 <div className="flex space-x-1">
-                  <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"></div>
-                  <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></div>
-                  <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
+                  <div className="w-3 h-3 bg-gradient-to-r from-green-400 to-emerald-400 rounded-full animate-bounce"></div>
+                  <div className="w-3 h-3 bg-gradient-to-r from-green-400 to-emerald-400 rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></div>
+                  <div className="w-3 h-3 bg-gradient-to-r from-green-400 to-emerald-400 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
                 </div>
               </div>
             </div>
@@ -275,7 +377,7 @@ export default function Chatbot({ isOpen, onToggle }: ChatbotProps) {
             onChange={(e) => setInputMessage(e.target.value)}
             onKeyPress={handleKeyPress}
             placeholder={t('chatbot.placeholder')}
-            className="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
+            className="flex-1 px-3 py-2 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500 placeholder:text-gray-600 text-black bg-white"
           />
           <button
             onClick={() => handleSendMessage()}
@@ -309,5 +411,6 @@ export default function Chatbot({ isOpen, onToggle }: ChatbotProps) {
         </div>
       </div>
     </div>
+    </>
   )
 }

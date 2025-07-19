@@ -26,7 +26,7 @@ let calScriptLoaded = false;
 let calScriptLoading = false;
 const calLoadPromise = new Promise<void>((resolve) => {
   if (typeof window !== 'undefined') {
-    (window as any).__calLoadResolve = resolve;
+    (window as Window & { __calLoadResolve?: () => void }).__calLoadResolve = resolve;
   }
 });
 
