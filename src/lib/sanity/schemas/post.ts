@@ -8,17 +8,33 @@ export const post = defineType({
     defineField({
       name: 'title',
       title: 'Title',
-      type: 'string',
+      type: 'localizedString',
       validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: 'slug',
       title: 'Slug',
-      type: 'slug',
-      options: {
-        source: 'title',
-        maxLength: 96,
-      },
+      type: 'object',
+      fields: [
+        {
+          name: 'it',
+          title: 'Italian Slug',
+          type: 'slug',
+          options: {
+            source: 'title.it',
+            maxLength: 96,
+          },
+        },
+        {
+          name: 'en',
+          title: 'English Slug',
+          type: 'slug',
+          options: {
+            source: 'title.en',
+            maxLength: 96,
+          },
+        },
+      ],
       validation: (Rule) => Rule.required(),
     }),
     defineField({
@@ -37,7 +53,7 @@ export const post = defineType({
       fields: [
         {
           name: 'alt',
-          type: 'string',
+          type: 'localizedString',
           title: 'Alternative Text',
         }
       ]
@@ -56,25 +72,28 @@ export const post = defineType({
     defineField({
       name: 'excerpt',
       title: 'Excerpt',
-      type: 'text',
-      rows: 4,
+      type: 'localizedText',
     }),
     defineField({
       name: 'body',
       title: 'Body',
-      type: 'blockContent',
+      type: 'localizedBlockContent',
     }),
   ],
 
   preview: {
     select: {
-      title: 'title',
+      title: 'title.it',
+      titleEn: 'title.en',
       author: 'author.name',
       media: 'mainImage',
     },
     prepare(selection) {
-      const { author } = selection
-      return { ...selection, subtitle: author && `by ${author}` }
+      const { title, titleEn, author } = selection
+      return {
+        title: title || titleEn,
+        subtitle: author && `by ${author.it || author.en || author}`
+      }
     },
   },
 })

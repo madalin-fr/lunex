@@ -8,17 +8,33 @@ export const author = defineType({
     defineField({
       name: 'name',
       title: 'Name',
-      type: 'string',
+      type: 'localizedString',
       validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: 'slug',
       title: 'Slug',
-      type: 'slug',
-      options: {
-        source: 'name',
-        maxLength: 96,
-      },
+      type: 'object',
+      fields: [
+        {
+          name: 'it',
+          title: 'Italian Slug',
+          type: 'slug',
+          options: {
+            source: 'name.it',
+            maxLength: 96,
+          },
+        },
+        {
+          name: 'en',
+          title: 'English Slug',
+          type: 'slug',
+          options: {
+            source: 'name.en',
+            maxLength: 96,
+          },
+        },
+      ],
       validation: (Rule) => Rule.required(),
     }),
     defineField({
@@ -31,7 +47,7 @@ export const author = defineType({
       fields: [
         {
           name: 'alt',
-          type: 'string',
+          type: 'localizedString',
           title: 'Alternative Text',
         }
       ]
@@ -39,21 +55,21 @@ export const author = defineType({
     defineField({
       name: 'bio',
       title: 'Bio',
-      type: 'array',
-      of: [
-        {
-          title: 'Block',
-          type: 'block',
-          styles: [{ title: 'Normal', value: 'normal' }],
-          lists: [],
-        },
-      ],
+      type: 'localizedBlockContent',
     }),
   ],
   preview: {
     select: {
-      title: 'name',
+      title: 'name.it',
+      titleEn: 'name.en',
       media: 'image',
+    },
+    prepare(selection) {
+      const { title, titleEn } = selection
+      return {
+        title: title || titleEn,
+        media: selection.media
+      }
     },
   },
 })
