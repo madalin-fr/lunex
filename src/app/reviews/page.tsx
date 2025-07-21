@@ -9,7 +9,10 @@ import { hasValidConfig } from '@/lib/sanity/client'
 
 interface Review {
   _id: string
-  customerName: string
+  customerName: {
+    it?: string
+    en?: string
+  }
   service: {
     it?: string
     en?: string
@@ -24,6 +27,7 @@ interface Review {
     asset?: {
       _ref: string
       _type: string
+      url?: string
     }
     alt?: string
   }
@@ -245,16 +249,26 @@ NEXT_PUBLIC_SANITY_DATASET=production`}
             {currentReviews.map((review) => (
               <div key={review._id} className="bg-white rounded-lg shadow-md p-6 border border-gray-200 hover:shadow-lg transition-shadow duration-300">
                 <div className="flex items-center mb-4">
-                  <div className="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mr-4">
-                    <span className="text-purple-600 font-semibold text-lg">
-                      {review.customerName && typeof review.customerName === 'string'
-                        ? review.customerName.split(' ').map((n: string) => n[0]).join('')
-                        : '?'}
-                    </span>
+                  <div className="w-12 h-12 rounded-full flex items-center justify-center mr-4 overflow-hidden">
+                    {review.customerAvatar?.asset?.url ? (
+                      <img
+                        src={review.customerAvatar.asset.url}
+                        alt={review.customerAvatar.alt || `${review.customerName || 'Customer'} avatar`}
+                        className="w-full h-full object-cover"
+                      />
+                    ) : (
+                      <div className="w-full h-full bg-purple-100 rounded-full flex items-center justify-center">
+                        <span className="text-purple-600 font-semibold text-lg">
+                          {getLocalizedValue(review.customerName, locale)
+                            ? getLocalizedValue(review.customerName, locale)!.split(' ').map((n: string) => n[0]).join('')
+                            : '?'}
+                        </span>
+                      </div>
+                    )}
                   </div>
                   <div>
                     <h3 className="font-semibold text-gray-800">
-                      {review.customerName && typeof review.customerName === 'string' ? review.customerName : 'Anonymous'}
+                      {getLocalizedValue(review.customerName, locale) || 'Anonymous'}
                     </h3>
                     <p className="text-sm text-gray-600">{getLocalizedValue(review.service, locale)}</p>
                   </div>

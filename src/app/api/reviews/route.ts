@@ -24,11 +24,38 @@ export async function GET(request: NextRequest) {
   
   let query = `*[${filter}] | order(publishedAt desc) {
     _id,
-    "customerName": clientName.en,
-    service,
+    "customerName": clientName,
+    "service": {
+      "it": select(
+        service == "office" => "Pulizie Uffici",
+        service == "domestic" => "Pulizie Domestiche",
+        service == "post-renovation" => "Pulizie Post-Ristrutturazione",
+        service == "villa" => "Pulizie Ville",
+        service == "deep" => "Pulizie Approfondite",
+        service == "maintenance" => "Pulizie di Mantenimento",
+        service
+      ),
+      "en": select(
+        service == "office" => "Office Cleaning",
+        service == "domestic" => "Domestic Cleaning",
+        service == "post-renovation" => "Post-Renovation Cleaning",
+        service == "villa" => "Villa Cleaning",
+        service == "deep" => "Deep Cleaning",
+        service == "maintenance" => "Maintenance Cleaning",
+        service
+      )
+    },
     rating,
-    "comment": testimonial.en,
+    "comment": testimonial,
     "reviewDate": publishedAt,
+    "customerAvatar": clientPhoto {
+      asset-> {
+        _ref,
+        _type,
+        url
+      },
+      "alt": alt
+    },
     featured,
     verified
   }`
