@@ -10,16 +10,16 @@ import { hasValidConfig } from '@/lib/sanity/client'
 
 interface Review {
   _id: string
-  customerName: {
+  customerName: string | {
     it?: string
     en?: string
   }
-  service: {
+  service: string | {
     it?: string
     en?: string
   }
   rating: number
-  comment: {
+  comment: string | {
     it?: string
     en?: string
   }
@@ -30,7 +30,10 @@ interface Review {
       _type: string
       url?: string
     }
-    alt?: string
+    alt?: string | {
+      it?: string
+      en?: string
+    }
   }
   featured?: boolean
 }
@@ -254,7 +257,18 @@ NEXT_PUBLIC_SANITY_DATASET=production`}
                     {review.customerAvatar?.asset?.url ? (
                       <Image
                         src={review.customerAvatar.asset.url}
-                        alt={review.customerAvatar.alt || `${getLocalizedValue(review.customerName, locale) || 'Customer'} avatar`}
+                        alt={(() => {
+                          if (review.customerAvatar?.alt) {
+                            if (typeof review.customerAvatar.alt === 'string') {
+                              return review.customerAvatar.alt;
+                            }
+                            return getLocalizedValue(review.customerAvatar.alt, locale) || '';
+                          }
+                          const customerName = typeof review.customerName === 'string'
+                            ? review.customerName
+                            : getLocalizedValue(review.customerName, locale);
+                          return `${customerName || 'Customer'} avatar`;
+                        })()}
                         width={48}
                         height={48}
                         className="w-full h-full object-cover rounded-full"
@@ -263,10 +277,19 @@ NEXT_PUBLIC_SANITY_DATASET=production`}
                       <div className="w-full h-full bg-purple-100 rounded-full flex items-center justify-center">
                         <span className="text-purple-600 font-semibold text-lg">
                           {(() => {
-                            const name = getLocalizedValue(review.customerName, locale);
-                            return name && typeof name === 'string'
-                              ? name.split(' ').map((n: string) => n[0]).join('')
-                              : '?';
+                            // Handle both string and localized object formats
+                            let name: string | undefined;
+                            
+                            if (typeof review.customerName === 'string') {
+                              name = review.customerName;
+                            } else if (review.customerName && typeof review.customerName === 'object') {
+                              name = getLocalizedValue(review.customerName, locale);
+                            }
+                            
+                            if (name && typeof name === 'string') {
+                              return name.split(' ').map((n: string) => n[0]).join('').toUpperCase();
+                            }
+                            return '?';
                           })()}
                         </span>
                       </div>
@@ -274,9 +297,15 @@ NEXT_PUBLIC_SANITY_DATASET=production`}
                   </div>
                   <div>
                     <h3 className="font-semibold text-gray-800">
-                      {getLocalizedValue(review.customerName, locale) || 'Anonymous'}
+                      {typeof review.customerName === 'string'
+                        ? review.customerName
+                        : getLocalizedValue(review.customerName, locale) || 'Anonymous'}
                     </h3>
-                    <p className="text-sm text-gray-600">{getLocalizedValue(review.service, locale)}</p>
+                    <p className="text-sm text-gray-600">
+                      {typeof review.service === 'string'
+                        ? review.service
+                        : getLocalizedValue(review.service, locale)}
+                    </p>
                   </div>
                 </div>
                 
@@ -290,7 +319,9 @@ NEXT_PUBLIC_SANITY_DATASET=production`}
                 <div className="relative">
                   <Quote className="absolute -top-2 -left-2 w-8 h-8 text-purple-200" />
                   <p className="text-gray-700 pl-6 italic">
-                    &quot;{getLocalizedValue(review.comment, locale)}&quot;
+                    &quot;{typeof review.comment === 'string'
+                      ? review.comment
+                      : getLocalizedValue(review.comment, locale)}&quot;
                   </p>
                 </div>
               </div>
