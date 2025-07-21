@@ -27,7 +27,7 @@ export async function GET(request: NextRequest) {
     "customerName": clientName.en,
     service,
     rating,
-    "comment": reviewText,
+    "comment": testimonial.en,
     "reviewDate": publishedAt,
     featured,
     verified

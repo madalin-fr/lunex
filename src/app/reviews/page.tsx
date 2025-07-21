@@ -21,7 +21,10 @@ interface Review {
   }
   reviewDate: string
   customerAvatar?: {
-    asset?: any
+    asset?: {
+      _ref: string
+      _type: string
+    }
     alt?: string
   }
   featured?: boolean

@@ -14,7 +14,6 @@ import {
   Phone,
   CheckCircle,
   Shield,
-  Users,
   Star
 } from 'lucide-react'
 
@@ -32,7 +31,10 @@ interface Review {
   }
   reviewDate: string
   customerAvatar?: {
-    asset?: any
+    asset?: {
+      _ref: string
+      _type: string
+    }
     alt?: string
   }
   featured?: boolean
