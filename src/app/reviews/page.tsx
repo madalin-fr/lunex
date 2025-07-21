@@ -262,9 +262,12 @@ NEXT_PUBLIC_SANITY_DATASET=production`}
                     ) : (
                       <div className="w-full h-full bg-purple-100 rounded-full flex items-center justify-center">
                         <span className="text-purple-600 font-semibold text-lg">
-                          {getLocalizedValue(review.customerName, locale)
-                            ? getLocalizedValue(review.customerName, locale)!.split(' ').map((n: string) => n[0]).join('')
-                            : '?'}
+                          {(() => {
+                            const name = getLocalizedValue(review.customerName, locale);
+                            return name && typeof name === 'string'
+                              ? name.split(' ').map((n: string) => n[0]).join('')
+                              : '?';
+                          })()}
                         </span>
                       </div>
                     )}
