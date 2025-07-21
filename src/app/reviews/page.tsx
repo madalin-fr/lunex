@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import Image from 'next/image'
 import { useLocale } from '@/hooks/useLocale'
 import { Button } from '@/components/ui/button'
 import { Star, Quote, ChevronLeft, ChevronRight } from 'lucide-react'
@@ -251,10 +252,12 @@ NEXT_PUBLIC_SANITY_DATASET=production`}
                 <div className="flex items-center mb-4">
                   <div className="w-12 h-12 rounded-full flex items-center justify-center mr-4 overflow-hidden">
                     {review.customerAvatar?.asset?.url ? (
-                      <img
+                      <Image
                         src={review.customerAvatar.asset.url}
-                        alt={review.customerAvatar.alt || `${review.customerName || 'Customer'} avatar`}
-                        className="w-full h-full object-cover"
+                        alt={review.customerAvatar.alt || `${getLocalizedValue(review.customerName, locale) || 'Customer'} avatar`}
+                        width={48}
+                        height={48}
+                        className="w-full h-full object-cover rounded-full"
                       />
                     ) : (
                       <div className="w-full h-full bg-purple-100 rounded-full flex items-center justify-center">
