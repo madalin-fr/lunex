@@ -5,7 +5,7 @@ export const common = {
   about: 'About Us',
   contact: 'Contact',
   booking: 'Booking',
-  reviews: 'Reviews',
+  reviewsNav: 'Reviews',
   blogNav: 'Blog',
   
   // Common Actions
@@ -373,7 +373,7 @@ export const common = {
         office: 'Office Cleaning',
         domestic: 'Domestic Cleaning',
         postRenovation: 'Post-Renovation Cleaning',
-        luxury: 'Villa Cleaning',
+        villa: 'Villa Cleaning',
         deep: 'Deep Cleaning',
         maintenance: 'Maintenance Cleaning',
         quote: 'General Quote Request'
@@ -800,8 +800,8 @@ export const common = {
         suggestions: ['Book now', 'Emergency service', 'Contact']
       },
       services: {
-        text: 'We offer different types of professional cleaning:\n\n• 🏢 Office cleaning\n• 🏠 Home cleaning\n• 🔨 Post-renovation cleaning\n• ✨ Luxury villa cleaning\n• 🧽 Deep cleaning\n• 🔄 Maintenance cleaning\n\nWhich interests you most?',
-        suggestions: ['Office cleaning', 'Home cleaning', 'Post-renovation cleaning', 'Free estimate']
+        text: 'We offer different types of professional cleaning:\n\n• 🏢 Office cleaning\n• 🏠 Domestic cleaning\n• 🔨 Post-renovation cleaning\n• ✨ Villa cleaning\n• 🧽 Deep cleaning\n• 🔄 Maintenance cleaning\n\nWhich interests you most?',
+        suggestions: ['Office cleaning', 'Domestic cleaning', 'Post-renovation cleaning', 'Free estimate']
       },
       booking: {
         text: 'Great! To book an appointment you have several options:\n\n1. 📱 Fill out the online booking form\n2. 📞 Call +39 327 779 1867\n3. 📧 Email: info@lunex-cleaning.com\n\nWould you prefer to book online?',
@@ -897,5 +897,47 @@ export const common = {
     scheduleAppointment: 'Schedule Appointment',
     bookAppointment: 'Book Appointment',
     loadingSystem: 'Loading booking system...'
+  },
+
+  // Reviews
+  reviews: {
+    hero: {
+      title: 'Customer Reviews',
+      subtitle: 'Discover what our clients say about our professional cleaning services'
+    },
+    setup: {
+      title: 'Sanity CMS Setup Required',
+      description: 'To start managing your customer reviews, you need to set up Sanity CMS:',
+      step1: 'Create a Sanity account at',
+      step2: 'Create a new project and note your Project ID',
+      step3: 'Create a file',
+      step3_cont: 'in your project root',
+      step4: 'Add your Sanity configuration:',
+      step5: 'Restart the development server',
+      instructions: 'For detailed instructions, see'
+    },
+    basedOn: 'Based on {count} reviews',
+    testimonials: 'Customer Testimonials',
+    noReviews: {
+      title: 'No Reviews Yet',
+      description: 'We\'re gathering reviews from our satisfied customers. Check back soon!'
+    },
+    cta: {
+      title: 'Share Your Experience',
+      description: 'Have you used our services? We\'d love to hear from you!',
+      button: 'Write a Review'
+    },
+    finalCta: {
+      title: 'Ready to Try Our Services?',
+      description: 'Join our satisfied customers and experience the Lunex professional cleaning difference.',
+      bookButton: 'Book Now',
+      servicesButton: 'View Services'
+    }
+  },
+
+  // Pagination
+  pagination: {
+    previous: 'Previous',
+    next: 'Next'
   }
 }

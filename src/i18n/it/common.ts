@@ -5,7 +5,7 @@ export const common = {
   about: 'Chi Siamo',
   contact: 'Contatti',
   booking: 'Prenota',
-  reviews: 'Recensioni',
+  reviewsNav: 'Recensioni',
   blogNav: 'Blog',
   
   // Common Actions
@@ -203,10 +203,10 @@ export const common = {
     },
     
     luxury: {
-      title: 'Pulizie Ville di Lusso',
-      name: 'Pulizie Ville di Lusso',
-      subtitle: 'Servizi di pulizia premium per proprietà di lusso',
-      description: 'Servizi di pulizia di alta classe per ville di lusso e proprietà di pregio.',
+      title: 'Pulizie Ville',
+      name: 'Pulizie Ville',
+      subtitle: 'Servizi di pulizia premium per ville e proprietà',
+      description: 'Servizi di pulizia di alta classe per ville e proprietà di pregio.',
       features: {
         premium: 'Servizio Premium',
         premiumDesc: 'Standard di pulizia di massima qualità per proprietà di lusso',
@@ -373,7 +373,7 @@ export const common = {
         office: 'Pulizie Uffici',
         domestic: 'Pulizie Domestiche',
         postRenovation: 'Pulizie Post-Ristrutturazione',
-        luxury: 'Pulizie Ville di Lusso',
+        villa: 'Pulizie Ville',
         deep: 'Pulizie Approfondite',
         maintenance: 'Pulizie di Mantenimento',
         quote: 'Richiesta Preventivo Generale'
@@ -585,7 +585,7 @@ export const common = {
           domestic: 'Pulizie residenziali',
           deep: 'Servizi di pulizia approfondita',
           post: 'Pulizie post-ristrutturazione',
-          luxury: 'Pulizie proprietà di lusso',
+          luxury: 'Pulizie ville',
           maintenance: 'Pulizie di mantenimento regolari'
         }
       },
@@ -792,7 +792,7 @@ export const common = {
     },
     responses: {
       quote: {
-        text: 'Perfetto! I nostri prezzi dipendono dal tipo di servizio:\n\n• Pulizia domestica: €15-25/ora\n• Pulizia uffici: €20-30/ora\n• Pulizia post-ristrutturazione: €30-50/ora\n• Pulizia ville di lusso: €25-40/ora\n\nVuoi un preventivo personalizzato?',
+        text: 'Perfetto! I nostri prezzi dipendono dal tipo di servizio:\n\n• Pulizia domestica: €15-25/ora\n• Pulizia uffici: €20-30/ora\n• Pulizia post-ristrutturazione: €30-50/ora\n• Pulizia ville: €25-40/ora\n\nVuoi un preventivo personalizzato?',
         suggestions: ['Sì, voglio un preventivo', 'Servizi disponibili', 'Come prenotare']
       },
       hours: {
@@ -800,8 +800,8 @@ export const common = {
         suggestions: ['Prenota ora', 'Servizio emergenza', 'Contatti']
       },
       services: {
-        text: 'Offriamo diversi tipi di pulizia professionale:\n\n• 🏢 Pulizia uffici\n• 🏠 Pulizia domestica\n• 🔨 Pulizia post-ristrutturazione\n• ✨ Pulizia ville di lusso\n• 🧽 Pulizia profonda\n• 🔄 Pulizia di mantenimento\n\nQuale ti interessa di più?',
-        suggestions: ['Pulizia uffici', 'Pulizia domestica', 'Pulizia post-ristrutturazione', 'Preventivo']
+        text: 'Offriamo diversi tipi di pulizia professionale:\n\n• 🏢 Pulizie uffici\n• 🏠 Pulizie domestiche\n• 🔨 Pulizie post-ristrutturazione\n• ✨ Pulizie ville\n• 🧽 Pulizie approfondite\n• 🔄 Pulizie di mantenimento\n\nQuale ti interessa di più?',
+        suggestions: ['Pulizie uffici', 'Pulizie domestiche', 'Pulizie post-ristrutturazione', 'Preventivo']
       },
       booking: {
         text: 'Ottimo! Per prenotare un appuntamento hai diverse opzioni:\n\n1. 📱 Compila il form di prenotazione online\n2. 📞 Chiama il +39 327 779 1867\n3. 📧 Email: info@lunex-cleaning.com\n\nPreferisci prenotare online?',
@@ -897,5 +897,47 @@ export const common = {
     scheduleAppointment: 'Prenota Appuntamento',
     bookAppointment: 'Prenota Appuntamento',
     loadingSystem: 'Caricamento sistema di prenotazione...'
+  },
+
+  // Reviews
+  reviews: {
+    hero: {
+      title: 'Recensioni Clienti',
+      subtitle: 'Scopri cosa dicono i nostri clienti sui nostri servizi di pulizia professionale'
+    },
+    setup: {
+      title: 'Configurazione Sanity CMS Richiesta',
+      description: 'Per iniziare a gestire le recensioni dei tuoi clienti, devi configurare Sanity CMS:',
+      step1: 'Crea un account Sanity su',
+      step2: 'Crea un nuovo progetto e annota il tuo Project ID',
+      step3: 'Crea un file',
+      step3_cont: 'nella root del tuo progetto',
+      step4: 'Aggiungi la tua configurazione Sanity:',
+      step5: 'Riavvia il server di sviluppo',
+      instructions: 'Per istruzioni dettagliate, vedi'
+    },
+    basedOn: 'Basato su {count} recensioni',
+    testimonials: 'Testimonianze dei Clienti',
+    noReviews: {
+      title: 'Nessuna Recensione Ancora',
+      description: 'Stiamo raccogliendo recensioni dai nostri clienti soddisfatti. Torna presto!'
+    },
+    cta: {
+      title: 'Condividi la Tua Esperienza',
+      description: 'Hai utilizzato i nostri servizi? Ci piacerebbe sentire la tua opinione!',
+      button: 'Scrivi una Recensione'
+    },
+    finalCta: {
+      title: 'Pronto per Provare i Nostri Servizi?',
+      description: 'Unisciti ai nostri clienti soddisfatti e scopri la differenza della pulizia professionale Lunex.',
+      bookButton: 'Prenota Ora',
+      servicesButton: 'Vedi Servizi'
+    }
+  },
+
+  // Pagination
+  pagination: {
+    previous: 'Precedente',
+    next: 'Successivo'
   }
 }

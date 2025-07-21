@@ -24,7 +24,7 @@ export function Header() {
     { href: '/', label: t('home') },
     { href: '/services', label: t('servicesNav') },
     { href: '/about', label: t('about') },
-    { href: '/reviews', label: t('reviews') },
+    { href: '/reviews', label: t('reviewsNav') },
     { href: '/blog', label: t('blogNav') },
     { href: '/contact', label: t('contact') },
   ]

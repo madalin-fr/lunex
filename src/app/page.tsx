@@ -2,12 +2,14 @@
 
 import Link from "next/link"
 import { useLocale } from "@/hooks/useLocale"
-import { 
-  Building2, 
-  Home, 
-  Hammer, 
-  Crown, 
-  Sparkles, 
+import { useState, useEffect } from 'react'
+import { getLocalizedValue } from '@/lib/sanity/utils'
+import {
+  Building2,
+  Home,
+  Hammer,
+  Crown,
+  Sparkles,
   Calendar,
   Phone,
   CheckCircle,
@@ -16,8 +18,54 @@ import {
   Star
 } from 'lucide-react'
 
+interface Review {
+  _id: string
+  customerName: string
+  service: {
+    it?: string
+    en?: string
+  }
+  rating: number
+  comment: {
+    it?: string
+    en?: string
+  }
+  reviewDate: string
+  customerAvatar?: {
+    asset?: any
+    alt?: string
+  }
+  featured?: boolean
+}
+
+async function getFeaturedReviews(): Promise<Review[]> {
+  try {
+    const response = await fetch('/api/reviews?featured=true&limit=3')
+    if (!response.ok) {
+      console.error('Failed to fetch reviews:', response.status, response.statusText)
+      return []
+    }
+    const data = await response.json()
+    return Array.isArray(data) ? data.slice(0, 3) : []
+  } catch (error) {
+    console.error('Error fetching reviews:', error)
+    return []
+  }
+}
+
 export default function HomePage() {
-  const { t } = useLocale()
+  const { t, locale } = useLocale()
+  const [featuredReviews, setFeaturedReviews] = useState<Review[]>([])
+  const [reviewsLoading, setReviewsLoading] = useState(true)
+
+  useEffect(() => {
+    const fetchFeaturedReviews = async () => {
+      const reviews = await getFeaturedReviews()
+      setFeaturedReviews(reviews)
+      setReviewsLoading(false)
+    }
+    fetchFeaturedReviews()
+  }, [])
 
   const services = [
     {
@@ -239,73 +287,71 @@ export default function HomePage() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="bg-gray-50 rounded-2xl p-6">
-              <div className="flex items-center mb-4">
-                <div className="flex text-yellow-400">
-                  {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="w-5 h-5 fill-current" />
-                  ))}
+          {reviewsLoading ? (
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              {[...Array(3)].map((_, i) => (
+                <div key={i} className="bg-gray-50 rounded-2xl p-6 animate-pulse">
+                  <div className="flex items-center mb-4">
+                    <div className="flex space-x-1">
+                      {[...Array(5)].map((_, j) => (
+                        <div key={j} className="w-5 h-5 bg-gray-300 rounded" />
+                      ))}
+                    </div>
+                  </div>
+                  <div className="space-y-2 mb-4">
+                    <div className="h-4 bg-gray-300 rounded w-full" />
+                    <div className="h-4 bg-gray-300 rounded w-3/4" />
+                  </div>
+                  <div className="flex items-center">
+                    <div className="w-10 h-10 bg-gray-300 rounded-full" />
+                    <div className="ml-3 space-y-2">
+                      <div className="h-4 bg-gray-300 rounded w-20" />
+                      <div className="h-3 bg-gray-300 rounded w-16" />
+                    </div>
+                  </div>
                 </div>
-              </div>
-              <p className="text-gray-600 mb-4">
-                &quot;Servizio di pulizia uffici eccellente! Professionali, puntuali e molto accurati. Il nostro ufficio è sempre impeccabile.&quot;
-              </p>
-              <div className="flex items-center">
-                <div className="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center">
-                  <span className="text-green-600 font-semibold">M</span>
-                </div>
-                <div className="ml-3">
-                  <h4 className="font-semibold text-gray-900">Marco Verdi</h4>
-                  <p className="text-sm text-gray-600">Direttore Ufficio</p>
-                </div>
-              </div>
+              ))}
             </div>
-
-            <div className="bg-gray-50 rounded-2xl p-6">
-              <div className="flex items-center mb-4">
-                <div className="flex text-yellow-400">
-                  {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="w-5 h-5 fill-current" />
-                  ))}
+          ) : featuredReviews.length > 0 ? (
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              {featuredReviews.map((review) => (
+                <div key={review._id} className="bg-gray-50 rounded-2xl p-6">
+                  <div className="flex items-center mb-4">
+                    <div className="flex text-yellow-400">
+                      {[...Array(5)].map((_, i) => (
+                        <Star
+                          key={i}
+                          className={`w-5 h-5 ${i < review.rating ? 'fill-current' : 'text-gray-300'}`}
+                        />
+                      ))}
+                    </div>
+                  </div>
+                  <p className="text-gray-600 mb-4">
+                    &quot;{getLocalizedValue(review.comment, locale)}&quot;
+                  </p>
+                  <div className="flex items-center">
+                    <div className="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center">
+                      <span className="text-green-600 font-semibold">
+                        {review.customerName.split(' ').map((n: string) => n[0]).join('')}
+                      </span>
+                    </div>
+                    <div className="ml-3">
+                      <h4 className="font-semibold text-gray-900">{review.customerName}</h4>
+                      <p className="text-sm text-gray-600">{getLocalizedValue(review.service, locale)}</p>
+                    </div>
+                  </div>
                 </div>
-              </div>
-              <p className="text-gray-600 mb-4">
-                &quot;Pulizie domestiche di altissima qualità. Personale affidabile e prodotti eco-compatibili. Consiglio vivamente!&quot;
-              </p>
-              <div className="flex items-center">
-                <div className="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center">
-                  <span className="text-green-600 font-semibold">A</span>
-                </div>
-                <div className="ml-3">
-                  <h4 className="font-semibold text-gray-900">Anna Bianchi</h4>
-                  <p className="text-sm text-gray-600">Proprietaria Casa</p>
-                </div>
-              </div>
+              ))}
             </div>
-
-            <div className="bg-gray-50 rounded-2xl p-6">
-              <div className="flex items-center mb-4">
-                <div className="flex text-yellow-400">
-                  {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="w-5 h-5 fill-current" />
-                  ))}
-                </div>
+          ) : (
+            <div className="text-center py-12">
+              <div className="w-16 h-16 bg-gradient-to-br from-green-500 to-emerald-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Star className="w-8 h-8 text-white" />
               </div>
-              <p className="text-gray-600 mb-4">
-                &quot;Dopo la ristrutturazione hanno lasciato tutto perfetto. Servizio post-lavori impeccabile e molto professionale.&quot;
-              </p>
-              <div className="flex items-center">
-                <div className="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center">
-                  <span className="text-green-600 font-semibold">L</span>
-                </div>
-                <div className="ml-3">
-                  <h4 className="font-semibold text-gray-900">Luigi Rossi</h4>
-                  <p className="text-sm text-gray-600">Proprietario</p>
-                </div>
-              </div>
+              <h3 className="text-xl font-semibold text-gray-900 mb-2">{t('reviews.noReviews.title')}</h3>
+              <p className="text-gray-600">{t('reviews.noReviews.description')}</p>
             </div>
-          </div>
+          )}
 
           <div className="text-center mt-12">
             <Link
