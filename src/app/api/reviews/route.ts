@@ -24,7 +24,7 @@ export async function GET(request: NextRequest) {
   
   let query = `*[${filter}] | order(publishedAt desc) {
     _id,
-    "customerName": clientName,
+    clientName,
     "service": {
       "it": select(
         service == "office" => "Pulizie Uffici",
@@ -46,15 +46,15 @@ export async function GET(request: NextRequest) {
       )
     },
     rating,
-    "comment": testimonial,
-    "reviewDate": publishedAt,
-    "customerAvatar": clientPhoto {
+    testimonial,
+    "reviewDate": publishedAt, // Keep this as reviewDate is more semantic for the frontend
+    "customerAvatar": clientPhoto { // Keep this as customerAvatar is more semantic
       asset-> {
         _ref,
         _type,
         url
       },
-      "alt": alt
+      alt
     },
     featured,
     verified

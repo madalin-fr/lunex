@@ -10,7 +10,7 @@ import { hasValidConfig } from '@/lib/sanity/client'
 
 interface Review {
   _id: string
-  customerName: string | {
+  clientName: string | {
     it?: string
     en?: string
   }
@@ -19,12 +19,12 @@ interface Review {
     en?: string
   }
   rating: number
-  comment: string | {
+  testimonial: string | {
     it?: string
     en?: string
   }
   reviewDate: string
-  customerAvatar?: {
+  clientPhoto?: {
     asset?: {
       _ref: string
       _type: string
@@ -118,6 +118,24 @@ export default function ReviewsPage() {
       day: 'numeric'
     })
   }
+
+  const getSafeCustomerName = (review: Review) => {
+    if (typeof review.clientName === 'string') {
+      return review.clientName;
+    }
+    if (review.clientName && typeof review.clientName === 'object') {
+      return getLocalizedValue(review.clientName, locale);
+    }
+    return 'Anonymous';
+  };
+
+  const getSafeCustomerInitials = (review: Review) => {
+    const name = getSafeCustomerName(review);
+    if (name && name !== 'Anonymous') {
+      return name.split(' ').map((n) => n[0]).join('').toUpperCase();
+    }
+    return '?';
+  };
 
   if (!hasValidConfig) {
     return (
@@ -254,21 +272,10 @@ NEXT_PUBLIC_SANITY_DATASET=production`}
               <div key={review._id} className="bg-white rounded-lg shadow-md p-6 border border-gray-200 hover:shadow-lg transition-shadow duration-300">
                 <div className="flex items-center mb-4">
                   <div className="w-12 h-12 rounded-full flex items-center justify-center mr-4 overflow-hidden">
-                    {review.customerAvatar?.asset?.url ? (
+                    {review.clientPhoto?.asset?.url ? (
                       <Image
-                        src={review.customerAvatar.asset.url}
-                        alt={(() => {
-                          if (review.customerAvatar?.alt) {
-                            if (typeof review.customerAvatar.alt === 'string') {
-                              return review.customerAvatar.alt;
-                            }
-                            return getLocalizedValue(review.customerAvatar.alt, locale) || '';
-                          }
-                          const customerName = typeof review.customerName === 'string'
-                            ? review.customerName
-                            : getLocalizedValue(review.customerName, locale);
-                          return `${customerName || 'Customer'} avatar`;
-                        })()}
+                        src={review.clientPhoto.asset.url}
+                        alt={getSafeCustomerName(review) + ' avatar'}
                         width={48}
                         height={48}
                         className="w-full h-full object-cover rounded-full"
@@ -276,30 +283,14 @@ NEXT_PUBLIC_SANITY_DATASET=production`}
                     ) : (
                       <div className="w-full h-full bg-purple-100 rounded-full flex items-center justify-center">
                         <span className="text-purple-600 font-semibold text-lg">
-                          {(() => {
-                            // Handle both string and localized object formats
-                            let name: string | undefined;
-                            
-                            if (typeof review.customerName === 'string') {
-                              name = review.customerName;
-                            } else if (review.customerName && typeof review.customerName === 'object') {
-                              name = getLocalizedValue(review.customerName, locale);
-                            }
-                            
-                            if (name && typeof name === 'string') {
-                              return name.split(' ').map((n: string) => n[0]).join('').toUpperCase();
-                            }
-                            return '?';
-                          })()}
+                          {getSafeCustomerInitials(review)}
                         </span>
                       </div>
                     )}
                   </div>
                   <div>
                     <h3 className="font-semibold text-gray-800">
-                      {typeof review.customerName === 'string'
-                        ? review.customerName
-                        : getLocalizedValue(review.customerName, locale) || 'Anonymous'}
+                      {getSafeCustomerName(review)}
                     </h3>
                     <p className="text-sm text-gray-600">
                       {typeof review.service === 'string'
@@ -319,9 +310,9 @@ NEXT_PUBLIC_SANITY_DATASET=production`}
                 <div className="relative">
                   <Quote className="absolute -top-2 -left-2 w-8 h-8 text-purple-200" />
                   <p className="text-gray-700 pl-6 italic">
-                    &quot;{typeof review.comment === 'string'
-                      ? review.comment
-                      : getLocalizedValue(review.comment, locale)}&quot;
+                    &quot;{typeof review.testimonial === 'string'
+                      ? review.testimonial
+                      : getLocalizedValue(review.testimonial, locale)}&quot;
                   </p>
                 </div>
               </div>

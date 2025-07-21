@@ -19,18 +19,18 @@ import {
 
 interface Review {
   _id: string
-  customerName: string
+  clientName: string | { it?: string; en?: string }
   service: {
     it?: string
     en?: string
   }
   rating: number
-  comment: {
+  testimonial: {
     it?: string
     en?: string
   }
   reviewDate: string
-  customerAvatar?: {
+  clientPhoto?: {
     asset?: {
       _ref: string
       _type: string
@@ -329,16 +329,16 @@ export default function HomePage() {
                     </div>
                   </div>
                   <p className="text-gray-600 mb-4">
-                    &quot;{getLocalizedValue(review.comment, locale)}&quot;
+                    &quot;{getLocalizedValue(review.testimonial, locale)}&quot;
                   </p>
                   <div className="flex items-center">
                     <div className="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center">
                       <span className="text-green-600 font-semibold">
-                        {review.customerName.split(' ').map((n: string) => n[0]).join('')}
+                        {getLocalizedValue(review.clientName, locale).split(' ').map((n: string) => n[0]).join('')}
                       </span>
                     </div>
                     <div className="ml-3">
-                      <h4 className="font-semibold text-gray-900">{review.customerName}</h4>
+                      <h4 className="font-semibold text-gray-900">{getLocalizedValue(review.clientName, locale)}</h4>
                       <p className="text-sm text-gray-600">{getLocalizedValue(review.service, locale)}</p>
                     </div>
                   </div>
