@@ -240,7 +240,7 @@ export default function DeepCleaningPage() {
               </h2>
               <p className="text-lg text-gray-600">
                 Comprehensive deep cleaning services that go beyond surface cleaning for maximum results
-                Comprehensive deep cleaning services that go beyond surface cleaning for maximum results
+                Servizi completi di pulizia profonda che vanno oltre la pulizia superficiale per risultati ottimali
               </p>
               
               <div className="space-y-4">

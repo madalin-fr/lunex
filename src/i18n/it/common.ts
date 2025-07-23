@@ -261,8 +261,7 @@ export const common = {
         step2Desc: 'Preparazione dello spazio e attrezzature per pulizia intensiva',
         step3: 'Pulizia Approfondita',
         step3Desc: 'Pulizia sistematica approfondita utilizzando tecniche professionali',
-        step4: 'Sanificazione',
-        step4Desc: 'Sanificazione completa e ispezione qualità finale'
+        
       },
       includes: {
         title: 'Pulizia Approfondita Include',
