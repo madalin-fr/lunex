@@ -225,6 +225,7 @@ export default function DomesticCleaningPage() {
                   </h3>
                   <p className="text-gray-600 mb-6">
                     Professional home cleaning services tailored to your needs
+                    Servizi professionali di pulizia domestica su misura per le tue esigenze
                   </p>
                   <div className="space-y-4">
                     <div className="flex items-center space-x-3 glass-morphism rounded-xl p-3">
