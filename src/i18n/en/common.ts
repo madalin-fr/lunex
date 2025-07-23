@@ -67,7 +67,7 @@ export const common = {
   
   footer: {
     company: {
-      description: 'Professional cleaning services for offices, homes, and commercial spaces. Trusted by businesses and families throughout Romano di Lombardia.',
+      description: 'Professional cleaning services for offices, homes, and commercial spaces.',
       vat: 'P.IVA: 04840720165'
     },
     links: {
@@ -346,7 +346,7 @@ export const common = {
   hero: {
     title: 'Professional Cleaning Services',
     subtitle: 'Romano di Lombardia',
-    description: 'Quality cleaning solutions for offices, homes, and commercial spaces. Trusted by businesses and families throughout Bergamo province.',
+    description: 'Quality cleaning solutions for offices, homes, and commercial spaces.',
     cta: 'Free Estimate'
   },
   
@@ -442,7 +442,7 @@ export const common = {
     
     // Map Section
     map: {
-      title: 'Our Service Area',
+      title: 'Our ',
       subtitle: 'Serving Romano di Lombardia and surrounding areas',
       directions: 'Get Directions',
       viewLarger: 'View Larger Map'

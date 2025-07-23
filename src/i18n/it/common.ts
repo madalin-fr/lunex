@@ -67,7 +67,7 @@ export const common = {
   
   footer: {
     company: {
-      description: 'Servizi di pulizia professionali per uffici, abitazioni e spazi commerciali. Scelti da aziende e famiglie in tutta Romano di Lombardia.',
+      description: 'Servizi di pulizia professionali per uffici, abitazioni e spazi commerciali.',
       vat: 'P.IVA: 04840720165'
     },
     links: {
@@ -346,7 +346,7 @@ export const common = {
   hero: {
     title: 'Servizi di Pulizia Professionali',
     subtitle: 'Romano di Lombardia',
-    description: 'Soluzioni di pulizia di qualità per uffici, abitazioni e spazi commerciali. Scelti da aziende e famiglie in tutta la provincia di Bergamo.',
+    description: 'Soluzioni di pulizia di qualità per uffici, abitazioni e spazi commerciali.',
     cta: 'Preventivo Gratuito'
   },
   
@@ -442,8 +442,8 @@ export const common = {
     
     // Map Section
     map: {
-      title: 'La Nostra Area di Servizio',
-      subtitle: 'Serviamo Romano di Lombardia e zone limitrofe',
+      title: ' ',
+      subtitle: '',
       directions: 'Ottieni Indicazioni',
       viewLarger: 'Visualizza Mappa Più Grande'
     },
