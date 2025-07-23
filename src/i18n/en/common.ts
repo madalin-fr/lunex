@@ -151,7 +151,7 @@ export const common = {
         step3: 'Professional Cleaning',
         step3Desc: 'Systematic cleaning of all areas using professional techniques',
         step4: 'Final Inspection',
-        step4Desc: 'Quality check and walkthrough to ensure satisfaction'
+        step4Desc: 'Quality check to ensure satisfaction of clients'
       },
       includes: {
         title: 'Service Includes',

@@ -69,15 +69,7 @@ export default function DomesticCleaningPage() {
     }
   ]
 
-  const includes = [
-    t('services.domestic.includes.bedrooms'),
-    t('services.domestic.includes.bathrooms'),
-    t('services.domestic.includes.kitchen'),
-    t('services.domestic.includes.living'),
-    t('services.domestic.includes.floors'),
-    t('services.domestic.includes.appliances'),
-    t('services.domestic.includes.windows')
-  ]
+  
 
   return (
     <div className="min-h-screen">
@@ -219,27 +211,10 @@ export default function DomesticCleaningPage() {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div className="space-y-6 animate-on-scroll opacity-0">
-              <h2 className="text-3xl lg:text-4xl font-bold text-gray-900">
-                {t('services.domestic.includes.title')}
-              </h2>
-              <p className="text-lg text-gray-600">
-                Our comprehensive domestic cleaning service covers all essential areas of your home
-              </p>
+            
+             
               
-              <div className="space-y-4">
-                {includes.map((item, index) => (
-                  <div 
-                    key={index} 
-                    className="flex items-center space-x-3 group animate-on-scroll opacity-0"
-                    style={{ animationDelay: `${index * 50}ms` }}
-                  >
-                    <div className="flex-shrink-0">
-                      <CheckCircle className="h-6 w-6 text-green-600 group-hover:scale-110 transition-transform" />
-                    </div>
-                    <span className="text-gray-700 text-lg group-hover:text-green-700 transition-colors">{item}</span>
-                  </div>
-                ))}
-              </div>
+              
             </div>
             
             <div className="relative animate-on-scroll opacity-0 animation-delay-300">
