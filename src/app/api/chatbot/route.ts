@@ -31,6 +31,8 @@ YOUR ROLE:
 - Always respond in the same language the user writes in (Italian or English)
 - Keep responses concise but informative (max 150 words)
 - When appropriate, suggest next steps like getting a quote or booking
+- NEVER use markdown formatting (no *, **, #, -, etc.) - use plain text only
+- Use line breaks and spacing for structure instead of markdown symbols
 
 IMPORTANT GUIDELINES:
 - Always mention that final quotes depend on specific requirements and space size
@@ -73,8 +75,8 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    // Get the generative model
-    const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' })
+    // Get the generative model - using 1.5-flash for optimal balance of performance and cost
+    const model = genAI.getGenerativeModel({ model: 'gemini-2.0-flash' })
 
     // Build conversation context with system prompt
     const systemMessage = SYSTEM_PROMPT + (locale === 'it' ? '\nRispondi sempre in italiano.' : '\nAlways respond in English.')
@@ -115,7 +117,7 @@ export async function POST(request: NextRequest) {
       response: aiResponse,
       suggestions,
       conversationId: Date.now().toString(),
-      model: 'gemini-1.5-flash'
+      model: 'gemini-2.0-flash'
     })
 
   } catch (error) {
@@ -186,7 +188,7 @@ export async function GET() {
   return NextResponse.json({
     status: 'ok',
     service: 'Lunex Intelligent Chatbot API (Google Gemini)',
-    model: 'gemini-1.5-flash',
+    model: 'gemini-2.0-flash',
     timestamp: new Date().toISOString(),
     geminiConfigured: !!process.env.GEMINI_API_KEY && process.env.GEMINI_API_KEY !== 'YOUR_GEMINI_API_KEY_HERE',
     benefits: [
