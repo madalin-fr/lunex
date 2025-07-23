@@ -65,11 +65,7 @@ export default function DeepCleaningPage() {
       title: t('services.deep.process.step3'),
       description: t('services.deep.process.step3Desc')
     },
-    {
-      step: "04",
-      title: t('services.deep.process.step4'),
-      description: t('services.deep.process.step4Desc')
-    }
+ 
   ]
 
   const includes = [
@@ -244,6 +240,7 @@ export default function DeepCleaningPage() {
               </h2>
               <p className="text-lg text-gray-600">
                 Comprehensive deep cleaning services that go beyond surface cleaning for maximum results
+                Comprehensive deep cleaning services that go beyond surface cleaning for maximum results
               </p>
               
               <div className="space-y-4">
@@ -262,32 +259,7 @@ export default function DeepCleaningPage() {
               </div>
             </div>
             
-            <div className="relative animate-on-scroll opacity-0 animation-delay-300">
-              <div className="glass-morphism rounded-3xl p-8 hover:shadow-2xl transition-all duration-300">
-                <div className="bg-gradient-to-br from-cyan-50 to-blue-50 rounded-2xl p-8">
-                  <h3 className="text-2xl font-bold text-gray-900 mb-4">
-                    Why Choose Deep Cleaning?
-                  </h3>
-                  <p className="text-gray-600 mb-6">
-                    Professional deep cleaning with intensive sanitization and restoration
-                  </p>
-                  <div className="space-y-4">
-                    {deepCleanBenefits.map((benefit, index) => (
-                      <div key={index} className="glass-morphism rounded-xl p-4">
-                        <h4 className="font-semibold text-gray-900">{benefit.title}</h4>
-                        <p className="text-sm text-gray-600">{benefit.description}</p>
-                      </div>
-                    ))}
-                  </div>
-                  <Link
-                    href="/booking"
-                    className="btn-modern bg-gradient-to-r from-cyan-600 to-blue-600 text-white px-6 py-3 rounded-full font-semibold text-center mt-6 w-full block hover:shadow-xl transition-all duration-300"
-                  >
-                    {t('bookNow')}
-                  </Link>
-                </div>
-              </div>
-            </div>
+            
           </div>
         </div>
       </section>
