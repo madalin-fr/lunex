@@ -243,7 +243,7 @@ export const common = {
       title: 'Pulizie Approfondite',
       name: 'Pulizie Approfondite',
       subtitle: 'Pulizie intensive con attrezzature professionali',
-      description: 'Servizi completi di pulizia approfondita per sanificazione e ripristino accurati.',
+      description: 'Servizi completi di pulizia approfondita',
       features: {
         intensive: 'Processo Intensivo',
         intensiveDesc: 'Processo di pulizia approfondita multi-step per risultati massimi',

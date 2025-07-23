@@ -203,9 +203,11 @@ export default function HomePage() {
                 </div>
                 <h3 className="text-xl font-semibold text-gray-900 mb-3">{service.title}</h3>
                 <p className="text-gray-600 mb-4">{service.description}</p>
-                <Link href={service.href} className="text-green-600 hover:text-green-700 font-medium">
-                  {t('read_more')} →
-                </Link>
+                {service.href !== '/services/post-renovation' && service.href !== '/services/luxury' && (
+                  <Link href={service.href} className="text-green-600 hover:text-green-700 font-medium">
+                    {t('read_more')} →
+                  </Link>
+                )}
               </div>
             ))}
           </div>
