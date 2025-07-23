@@ -270,9 +270,9 @@ export const common = {
         grout: 'Pulizia profonda fughe e piastrelle',
         baseboards: 'Pulizia battiscopa e finiture',
         light: 'Pulizia corpi illuminanti',
-        cabinet: 'Pulizia interno armadi',
-        upholstery: 'Pulizia approfondita tappezzeria',
-        sanitization: 'Trattamento di sanificazione completo'
+        cabinet: 'sters',
+        upholstery: 'sters',
+        sanitization: 'sters'
       }
     },
     
