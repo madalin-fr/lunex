@@ -13,11 +13,20 @@ import {
 interface Message {
   id: string
   text: string
-  textKey?: string  // For bot messages, store the translation key
   sender: 'user' | 'bot'
   timestamp: Date
   suggestions?: string[]
-  suggestionKeys?: string[]  // Store suggestion keys for bot messages
+  isAI?: boolean  // Track if message is from AI
+  error?: boolean  // Track if message has error
+}
+
+interface ChatResponse {
+  success: boolean
+  response?: string
+  suggestions?: string[]
+  conversationId?: string
+  error?: string
+  fallbackResponse?: string
 }
 
 interface ChatbotProps {
@@ -27,25 +36,12 @@ interface ChatbotProps {
 
 export default function Chatbot({ isOpen, onToggle }: ChatbotProps) {
   const { t, locale } = useLocale()
-  const [messages, setMessages] = useState<Message[]>([
-    {
-      id: '1',
-      text: '',  // Will be filled by translation
-      textKey: 'chatbot.welcome',
-      sender: 'bot',
-      timestamp: new Date(),
-      suggestions: [],  // Will be filled by translation
-      suggestionKeys: [
-        'chatbot.suggestions.quote',
-        'chatbot.suggestions.hours',
-        'chatbot.suggestions.services',
-        'chatbot.suggestions.booking'
-      ]
-    }
-  ])
+  const [messages, setMessages] = useState<Message[]>([])
   const [inputMessage, setInputMessage] = useState('')
   const [isTyping, setIsTyping] = useState(false)
+  const [conversationHistory, setConversationHistory] = useState<Array<{role: 'user' | 'model', parts: [{text: string}]}>>([])
   const messagesEndRef = useRef<HTMLDivElement>(null)
+  const [initialized, setInitialized] = useState(false)
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
@@ -55,72 +51,117 @@ export default function Chatbot({ isOpen, onToggle }: ChatbotProps) {
     scrollToBottom()
   }, [messages])
 
-  // Update all messages when locale changes
+  // Initialize welcome message when component mounts
   useEffect(() => {
-    setMessages(prevMessages =>
-      prevMessages.map(msg => {
-        if (msg.sender === 'bot' && msg.textKey) {
+    if (!initialized) {
+      const welcomeMessage: Message = {
+        id: '1',
+        text: t('chatbot.welcome'),
+        sender: 'bot',
+        timestamp: new Date(),
+        suggestions: [
+          t('chatbot.suggestions.quote'),
+          t('chatbot.suggestions.hours'),
+          t('chatbot.suggestions.services'),
+          t('chatbot.suggestions.booking')
+        ],
+        isAI: false
+      }
+      setMessages([welcomeMessage])
+      setInitialized(true)
+    }
+  }, [initialized, t])
+
+  // Update welcome message when locale changes
+  useEffect(() => {
+    if (initialized) {
+      setMessages(prev => prev.map(msg => {
+        if (msg.id === '1' && msg.sender === 'bot') {
           return {
             ...msg,
-            text: t(msg.textKey),
-            suggestions: msg.suggestionKeys?.map(key => t(key)) || []
+            text: t('chatbot.welcome'),
+            suggestions: [
+              t('chatbot.suggestions.quote'),
+              t('chatbot.suggestions.hours'),
+              t('chatbot.suggestions.services'),
+              t('chatbot.suggestions.booking')
+            ]
           }
         }
         return msg
-      })
-    )
-  }, [locale, t])
-
-  const generateBotResponse = (userMessage: string): Message => {
-    const lowerMessage = userMessage.toLowerCase()
-    
-    let responseKey = 'default'
-    
-    // Detect keywords for both English and Italian
-    if (lowerMessage.includes('preventivo') || lowerMessage.includes('prezzo') || lowerMessage.includes('costo') ||
-        lowerMessage.includes('quote') || lowerMessage.includes('price') || lowerMessage.includes('cost')) {
-      responseKey = 'quote'
-    } else if (lowerMessage.includes('orari') || lowerMessage.includes('quando') ||
-               lowerMessage.includes('hours') || lowerMessage.includes('when')) {
-      responseKey = 'hours'
-    } else if (lowerMessage.includes('pulizia') || lowerMessage.includes('servizi') || lowerMessage.includes('tipo') ||
-               lowerMessage.includes('clean') || lowerMessage.includes('service') || lowerMessage.includes('type')) {
-      responseKey = 'services'
-    } else if (lowerMessage.includes('prenota') || lowerMessage.includes('appuntamento') ||
-               lowerMessage.includes('book') || lowerMessage.includes('appointment')) {
-      responseKey = 'booking'
-    } else if (lowerMessage.includes('dove') || lowerMessage.includes('zona') || lowerMessage.includes('romano') ||
-               lowerMessage.includes('where') || lowerMessage.includes('area') || lowerMessage.includes('location')) {
-      responseKey = 'location'
-    } else if (lowerMessage.includes('emergenza') || lowerMessage.includes('urgente') ||
-               lowerMessage.includes('emergency') || lowerMessage.includes('urgent')) {
-      responseKey = 'emergency'
-    } else if (lowerMessage.includes('ciao') || lowerMessage.includes('salve') || lowerMessage.includes('buongiorno') ||
-               lowerMessage.includes('hello') || lowerMessage.includes('hi') || lowerMessage.includes('good morning')) {
-      responseKey = 'greeting'
-    } else if (lowerMessage.includes('grazie') || lowerMessage.includes('perfetto') || lowerMessage.includes('bene') ||
-               lowerMessage.includes('thank') || lowerMessage.includes('perfect') || lowerMessage.includes('good')) {
-      responseKey = 'thanks'
+      }))
     }
+  }, [locale, t, initialized])
 
-    const suggestionKeys = [
-      `chatbot.responses.${responseKey}.suggestions.0`,
-      `chatbot.responses.${responseKey}.suggestions.1`,
-      `chatbot.responses.${responseKey}.suggestions.2`,
-      `chatbot.responses.${responseKey}.suggestions.3`
-    ]
-
-    return {
-      id: Date.now().toString(),
-      text: t(`chatbot.responses.${responseKey}.text`),
-      textKey: `chatbot.responses.${responseKey}.text`,
-      sender: 'bot',
-      timestamp: new Date(),
-      suggestions: suggestionKeys.map(key => t(key)).filter(s => s && !s.includes(`chatbot.responses.${responseKey}.suggestions`)),
-      suggestionKeys: suggestionKeys.filter(key => {
-        const translated = t(key)
-        return translated && !translated.includes(`chatbot.responses.${responseKey}.suggestions`)
+  const getAIResponse = async (userMessage: string): Promise<Message> => {
+    try {
+      const response = await fetch('/api/chatbot', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          message: userMessage,
+          conversationHistory: conversationHistory,
+          locale: locale
+        }),
       })
+
+      const data: ChatResponse = await response.json()
+
+      if (data.success && data.response) {
+        // Update conversation history
+        setConversationHistory(prev => [
+          ...prev,
+          { role: 'user', parts: [{ text: userMessage }] },
+          { role: 'model', parts: [{ text: data.response! }] }
+        ])
+
+        return {
+          id: Date.now().toString(),
+          text: data.response,
+          sender: 'bot',
+          timestamp: new Date(),
+          suggestions: data.suggestions || [],
+          isAI: true
+        }
+      } else {
+        // Handle API error with fallback
+        return {
+          id: Date.now().toString(),
+          text: data.fallbackResponse || t('chatbot.responses.default.text'),
+          sender: 'bot',
+          timestamp: new Date(),
+          suggestions: [
+            t('chatbot.suggestions.quote'),
+            t('chatbot.suggestions.services'),
+            t('chatbot.suggestions.booking')
+          ],
+          isAI: false,
+          error: true
+        }
+      }
+    } catch (error) {
+      console.error('Error getting AI response:', error)
+      
+      // Fallback response
+      const fallbackText = locale === 'it'
+        ? 'Mi dispiace, al momento non riesco a elaborare la tua richiesta. Ti prego di contattarci direttamente al +39 327 779 1867.'
+        : 'I apologize, but I\'m currently unable to process your request. Please contact us directly at +39 327 779 1867.'
+
+      return {
+        id: Date.now().toString(),
+        text: fallbackText,
+        sender: 'bot',
+        timestamp: new Date(),
+        suggestions: [
+          t('chatbot.suggestions.quote'),
+          t('chatbot.suggestions.services'),
+          t('chatbot.suggestions.booking')
+        ],
+        isAI: false,
+        error: true
+      }
     }
   }
 
@@ -140,12 +181,28 @@ export default function Chatbot({ isOpen, onToggle }: ChatbotProps) {
     setInputMessage('')
     setIsTyping(true)
 
-    // Simulate typing delay
-    setTimeout(() => {
-      const botResponse = generateBotResponse(text)
+    // Get AI response
+    try {
+      const botResponse = await getAIResponse(text)
       setMessages(prev => [...prev, botResponse])
+    } catch (error) {
+      console.error('Error in handleSendMessage:', error)
+      // Add fallback message
+      const fallbackMessage: Message = {
+        id: Date.now().toString(),
+        text: locale === 'it'
+          ? 'Mi dispiace, si è verificato un errore. Riprova o contattaci direttamente.'
+          : 'Sorry, an error occurred. Please try again or contact us directly.',
+        sender: 'bot',
+        timestamp: new Date(),
+        suggestions: [],
+        error: true,
+        isAI: false
+      }
+      setMessages(prev => [...prev, fallbackMessage])
+    } finally {
       setIsTyping(false)
-    }, 1000 + Math.random() * 1000)
+    }
   }
 
   const handleKeyPress = (e: React.KeyboardEvent) => {
@@ -306,19 +363,20 @@ export default function Chatbot({ isOpen, onToggle }: ChatbotProps) {
                   )}
                   <div className="flex-1">
                     <p className="text-sm whitespace-pre-line">
-                      {message.sender === 'bot' && message.textKey
-                        ? t(message.textKey)
-                        : message.text}
+                      {message.text}
                     </p>
+                    {message.error && (
+                      <p className="text-xs text-red-500 mt-1">
+                        {locale === 'it' ? 'Errore nella risposta' : 'Response error'}
+                      </p>
+                    )}
                   </div>
                 </div>
               </div>
-              {message.suggestions && (
+              {message.suggestions && message.suggestions.length > 0 && (
                 <div className="mt-2 space-y-2">
                   {message.suggestions.map((suggestion, index) => {
-                    const displayText = message.suggestionKeys?.[index]
-                      ? t(message.suggestionKeys[index])
-                      : suggestion
+                    const displayText = suggestion
                     const colors = [
                       'bg-gradient-to-r from-green-50 to-emerald-50 border-green-200 text-green-700 hover:from-green-100 hover:to-emerald-100 hover:border-green-300',
                       'bg-gradient-to-r from-blue-50 to-sky-50 border-blue-200 text-blue-700 hover:from-blue-100 hover:to-sky-100 hover:border-blue-300',

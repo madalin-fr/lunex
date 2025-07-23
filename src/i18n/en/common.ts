@@ -780,10 +780,11 @@ export const common = {
 
   // Chatbot
   chatbot: {
-    title: 'Lunex Assistant',
+    title: 'Luna - AI Assistant',
     status: 'Online now',
     placeholder: 'Type a message...',
-    welcome: 'Hi! I\'m the Lunex virtual assistant. How can I help you today with our cleaning services?',
+    welcome: 'Hi! I\'m Luna, your intelligent Lunex assistant. I can help you with questions about our professional cleaning services, pricing, and booking. How can I assist you today?',
+    needHelp: 'Need help? Chat with Luna!',
     suggestions: {
       quote: 'I want a quote',
       hours: 'Service hours',
