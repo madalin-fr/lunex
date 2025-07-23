@@ -151,7 +151,7 @@ export const common = {
         step3: 'Pulizia Professionale',
         step3Desc: 'Pulizia sistematica di tutte le aree utilizzando tecniche professionali',
         step4: 'Ispezione Finale',
-        step4Desc: 'Controllo qualità per garantire dei clienti'
+        step4Desc: 'Controllo qualità per garantire la soddisfazione dei clienti'
       },
       includes: {
         title: 'Il Servizio Include',
