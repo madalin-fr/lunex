@@ -812,6 +812,54 @@ export const common = {
       title: 'Questions About Cookies',
       description: 'If you have any questions about our use of cookies, please contact us:',
       button: 'Contact Us'
+    },
+    
+    // Cookie Consent Banner
+    banner: {
+      title: 'We use cookies',
+      message: 'This website uses cookies to enhance your browsing experience and provide personalized services. By continuing to use our site, you consent to essential cookies.',
+      accept: 'Accept All',
+      decline: 'Reject Non-Essential',
+      customize: 'Customize Settings',
+      learnMore: 'Learn more',
+      legalNotice: 'By clicking "Accept All", you consent to all cookie categories. You can change your preferences at any time using the cookie settings.'
+    },
+    
+    // Cookie Customization
+    customization: {
+      title: 'Cookie Preferences',
+      subtitle: 'Manage your cookie preferences for our website',
+      required: 'Required',
+      cookiesUsed: 'Cookies Used',
+      footerNote: 'Changes will take effect immediately after saving.',
+      cancel: 'Cancel',
+      save: 'Save Preferences'
+    },
+    
+    // Cookie Settings Button
+    settings: {
+      title: 'Cookie Settings',
+      tooltip: 'Manage cookie preferences'
+    },
+    
+    // Cookie Categories
+    categories: {
+      essential: {
+        title: 'Essential Cookies',
+        description: 'These cookies are necessary for the website to function properly. They enable basic functions like page navigation, access to secure areas, and language preferences.'
+      },
+      functional: {
+        title: 'Functional Cookies',
+        description: 'These cookies enhance the functionality of the website by storing your preferences, such as chatbot conversation history and user interface settings.'
+      },
+      analytics: {
+        title: 'Analytics Cookies',
+        description: 'These cookies help us understand how visitors interact with our website by collecting and reporting information anonymously, allowing us to improve our services.'
+      },
+      external: {
+        title: 'External Services',
+        description: 'These cookies enable external services like Google Maps for location services and AI-powered chatbot features for enhanced customer support.'
+      }
     }
   },
 

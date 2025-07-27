@@ -2,6 +2,7 @@
 
 import { useState, useRef, useEffect } from 'react'
 import { useLocale } from '@/hooks/useLocale'
+import { useFunctionalFeatures } from '@/contexts/CookieConsentContext'
 import {
   MessageCircle,
   X,
@@ -36,6 +37,7 @@ interface ChatbotProps {
 
 export default function Chatbot({ isOpen, onToggle }: ChatbotProps) {
   const { t, locale } = useLocale()
+  const { canStoreChatHistory } = useFunctionalFeatures()
   const [messages, setMessages] = useState<Message[]>([])
   const [inputMessage, setInputMessage] = useState('')
   const [isTyping, setIsTyping] = useState(false)
@@ -110,12 +112,14 @@ export default function Chatbot({ isOpen, onToggle }: ChatbotProps) {
       const data: ChatResponse = await response.json()
 
       if (data.success && data.response) {
-        // Update conversation history
-        setConversationHistory(prev => [
-          ...prev,
-          { role: 'user', parts: [{ text: userMessage }] },
-          { role: 'model', parts: [{ text: data.response! }] }
-        ])
+        // Update conversation history only if functional cookies allowed
+        if (canStoreChatHistory) {
+          setConversationHistory(prev => [
+            ...prev,
+            { role: 'user', parts: [{ text: userMessage }] },
+            { role: 'model', parts: [{ text: data.response! }] }
+          ])
+        }
 
         return {
           id: Date.now().toString(),

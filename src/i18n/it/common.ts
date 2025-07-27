@@ -811,6 +811,54 @@ export const common = {
       title: 'Domande sui Cookie',
       description: 'Se hai domande sul nostro utilizzo dei cookie, contattaci:',
       button: 'Contattaci'
+    },
+    
+    // Cookie Consent Banner
+    banner: {
+      title: 'Utilizziamo i cookie',
+      message: 'Questo sito web utilizza i cookie per migliorare la tua esperienza di navigazione e fornire servizi personalizzati. Continuando a utilizzare il nostro sito, acconsenti ai cookie essenziali.',
+      accept: 'Accetta Tutti',
+      decline: 'Rifiuta Non-Essenziali',
+      customize: 'Personalizza Impostazioni',
+      learnMore: 'Scopri di più',
+      legalNotice: 'Cliccando "Accetta Tutti", acconsenti a tutte le categorie di cookie. Puoi modificare le tue preferenze in qualsiasi momento utilizzando le impostazioni dei cookie.'
+    },
+    
+    // Cookie Customization
+    customization: {
+      title: 'Preferenze Cookie',
+      subtitle: 'Gestisci le tue preferenze sui cookie per il nostro sito web',
+      required: 'Richiesto',
+      cookiesUsed: 'Cookie Utilizzati',
+      footerNote: 'Le modifiche avranno effetto immediatamente dopo il salvataggio.',
+      cancel: 'Annulla',
+      save: 'Salva Preferenze'
+    },
+    
+    // Cookie Settings Button
+    settings: {
+      title: 'Impostazioni Cookie',
+      tooltip: 'Gestisci preferenze cookie'
+    },
+    
+    // Cookie Categories
+    categories: {
+      essential: {
+        title: 'Cookie Essenziali',
+        description: 'Questi cookie sono necessari per il corretto funzionamento del sito web. Abilitano funzioni di base come la navigazione delle pagine, l\'accesso alle aree sicure e le preferenze linguistiche.'
+      },
+      functional: {
+        title: 'Cookie Funzionali',
+        description: 'Questi cookie migliorano la funzionalità del sito web memorizzando le tue preferenze, come la cronologia delle conversazioni del chatbot e le impostazioni dell\'interfaccia utente.'
+      },
+      analytics: {
+        title: 'Cookie Analitici',
+        description: 'Questi cookie ci aiutano a capire come i visitatori interagiscono con il nostro sito web raccogliendo e riportando informazioni in modo anonimo, permettendoci di migliorare i nostri servizi.'
+      },
+      external: {
+        title: 'Servizi Esterni',
+        description: 'Questi cookie abilitano servizi esterni come Google Maps per i servizi di localizzazione e funzionalità chatbot alimentate da AI per un supporto clienti migliorato.'
+      }
     }
   },
 

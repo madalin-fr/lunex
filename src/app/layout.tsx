@@ -6,7 +6,9 @@ import { LocaleProvider } from "@/hooks/useLocale";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { ChatbotWrapper } from "@/components/ui/ChatbotWrapper";
-import { Analytics } from "@vercel/analytics/next";
+import { CookieConsentProvider } from "@/contexts/CookieConsentContext";
+import { CookieBanner, CookieSettingsButton } from "@/components/cookies/CookieBanner";
+import { ConditionalAnalytics } from "@/components/cookies/ConditionalAnalytics";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -41,34 +43,46 @@ export default function RootLayout({
   return (
     <html lang="it" suppressHydrationWarning>
       <head>
-        {/* Google Analytics */}
-        <Script
-          async
-          src="https://www.googletagmanager.com/gtag/js?id=G-RC1VTMXZWV"
-          strategy="afterInteractive"
-        />
-        <Script id="google-analytics" strategy="afterInteractive">
+        {/* Google Analytics Consent Initialization - Always loads first */}
+        <Script id="gtag-consent-init" strategy="beforeInteractive">
           {`
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'G-RC1VTMXZWV');
+            
+            // Initialize with denied consent by default (Italian law compliance)
+            gtag('consent', 'default', {
+              analytics_storage: 'denied',
+              ad_storage: 'denied',
+              functionality_storage: 'denied',
+              personalization_storage: 'denied',
+              security_storage: 'granted'
+            });
           `}
         </Script>
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen flex flex-col`}
       >
-        <LocaleProvider>
-          <ChatbotWrapper>
-            <Header />
-            <main className="flex-1">
-              {children}
-            </main>
-            <Footer />
-          </ChatbotWrapper>
-        </LocaleProvider>
-        <Analytics />
+        <CookieConsentProvider>
+          <LocaleProvider>
+            <ChatbotWrapper>
+              <Header />
+              <main className="flex-1">
+                {children}
+              </main>
+              <Footer />
+            </ChatbotWrapper>
+            
+            {/* Cookie Banner - Shows only when consent needed */}
+            <CookieBanner />
+            
+            {/* Cookie Settings Button - Always available after consent */}
+            <CookieSettingsButton />
+            
+            {/* Conditional Analytics - Only loads with consent */}
+            <ConditionalAnalytics />
+          </LocaleProvider>
+        </CookieConsentProvider>
       </body>
     </html>
   );

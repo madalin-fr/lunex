@@ -1,6 +1,8 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
+import { useExternalServices } from '@/contexts/CookieConsentContext';
+import { useLocale } from '@/hooks/useLocale';
 
 interface GoogleMapProps {
   center?: { lat: number; lng: number };
@@ -44,11 +46,45 @@ export default function GoogleMap({
   width = '100%',
   className = '',
 }: GoogleMapProps) {
+  const { canUseGoogleMaps } = useExternalServices();
+  const { t } = useLocale();
   const mapRef = useRef<HTMLDivElement>(null);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const mapInstanceRef = useRef<any>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+
+  // If external services consent not given, show fallback
+  if (!canUseGoogleMaps) {
+    return (
+      <div
+        className={`relative rounded-xl overflow-hidden shadow-lg bg-gradient-to-br from-gray-100 to-gray-200 ${className}`}
+        style={{ height, width }}
+      >
+        <div className="absolute inset-0 flex items-center justify-center p-6">
+          <div className="text-center">
+            <div className="w-16 h-16 bg-gradient-to-br from-green-100 to-emerald-100 rounded-full flex items-center justify-center mx-auto mb-4">
+              <svg className="w-8 h-8 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+              </svg>
+            </div>
+            <h3 className="text-lg font-semibold text-gray-900 mb-2">
+              {t('contactPage.info.address.title')}
+            </h3>
+            <div className="text-gray-600 space-y-1">
+              <p className="font-medium">{t('contactPage.info.address.line1')}</p>
+              <p>{t('contactPage.info.address.line2')}</p>
+              <p>{t('contactPage.info.address.city')}</p>
+            </div>
+            <p className="text-sm text-gray-500 mt-4">
+              {t('cookies.categories.external.description')}
+            </p>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   useEffect(() => {
     let isMounted = true;

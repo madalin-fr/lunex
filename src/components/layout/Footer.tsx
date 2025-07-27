@@ -2,6 +2,7 @@
 
 import Link from 'next/link'
 import { useLocale } from '@/hooks/useLocale'
+import { CookieSettingsLink } from '@/components/cookies/CookieBanner'
 // Icons removed as they were not being used
 
 export function Footer() {
@@ -154,6 +155,8 @@ export function Footer() {
               <Link href="/cookies" className="text-gray-500 hover:text-green-400 transition-colors">
                 {t('footer.legal.cookies')}
               </Link>
+              <span className="text-gray-600 mx-2">|</span>
+              <CookieSettingsLink />
             </div>
           </div>
         </div>

@@ -172,22 +172,70 @@ export default function CookiePolicyPage() {
               </ul>
             </div>
 
-            {/* Third Party Services */}
+            {/* Detailed Cookie Information */}
             <div className="bg-gradient-to-br from-gray-100 to-gray-50 rounded-2xl p-8">
-              <h2 className="text-2xl font-bold text-gray-900 mb-4">{t('cookies.thirdParty.title')}</h2>
-              <p className="text-gray-600 mb-4">{t('cookies.thirdParty.content')}</p>
-              <div className="space-y-3">
-                <div className="flex items-center space-x-3">
-                  <svg className="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+              <h2 className="text-2xl font-bold text-gray-900 mb-6">{t('cookies.thirdParty.title')}</h2>
+              <p className="text-gray-600 mb-6">{t('cookies.thirdParty.content')}</p>
+              
+              {/* Google Analytics */}
+              <div className="bg-white rounded-lg p-4 mb-4 border border-purple-200">
+                <div className="flex items-center space-x-3 mb-2">
+                  <svg className="w-5 h-5 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
                   </svg>
-                  <span className="text-gray-700">{t('cookies.thirdParty.analytics')}</span>
+                  <h3 className="font-semibold text-gray-900">Google Analytics (G-RC1VTMXZWV)</h3>
                 </div>
-                <div className="flex items-center space-x-3">
-                  <svg className="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                <p className="text-sm text-gray-600 mb-2">Tracks website usage and visitor behavior</p>
+                <div className="text-xs text-gray-500">
+                  <span className="font-medium">Cookies:</span> _ga, _ga_*, _gid |
+                  <span className="font-medium ml-2">Duration:</span> 2 years |
+                  <span className="font-medium ml-2">Category:</span> Analytics
+                </div>
+              </div>
+
+              {/* Vercel Analytics */}
+              <div className="bg-white rounded-lg p-4 mb-4 border border-purple-200">
+                <div className="flex items-center space-x-3 mb-2">
+                  <svg className="w-5 h-5 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
                   </svg>
-                  <span className="text-gray-700">{t('cookies.thirdParty.maps')}</span>
+                  <h3 className="font-semibold text-gray-900">Vercel Analytics</h3>
+                </div>
+                <p className="text-sm text-gray-600 mb-2">Website performance monitoring</p>
+                <div className="text-xs text-gray-500">
+                  <span className="font-medium">Duration:</span> 1 year |
+                  <span className="font-medium ml-2">Category:</span> Analytics
+                </div>
+              </div>
+
+              {/* Google Maps */}
+              <div className="bg-white rounded-lg p-4 mb-4 border border-orange-200">
+                <div className="flex items-center space-x-3 mb-2">
+                  <svg className="w-5 h-5 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                  </svg>
+                  <h3 className="font-semibold text-gray-900">Google Maps</h3>
+                </div>
+                <p className="text-sm text-gray-600 mb-2">Interactive maps and location services</p>
+                <div className="text-xs text-gray-500">
+                  <span className="font-medium">Duration:</span> Session |
+                  <span className="font-medium ml-2">Category:</span> External Services
+                </div>
+              </div>
+
+              {/* Google AI */}
+              <div className="bg-white rounded-lg p-4 border border-orange-200">
+                <div className="flex items-center space-x-3 mb-2">
+                  <svg className="w-5 h-5 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+                  </svg>
+                  <h3 className="font-semibold text-gray-900">Google AI Chatbot</h3>
+                </div>
+                <p className="text-sm text-gray-600 mb-2">Enhanced chatbot responses with AI</p>
+                <div className="text-xs text-gray-500">
+                  <span className="font-medium">Duration:</span> Session |
+                  <span className="font-medium ml-2">Category:</span> External Services
                 </div>
               </div>
             </div>
