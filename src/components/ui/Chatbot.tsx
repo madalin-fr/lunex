@@ -2,7 +2,7 @@
 
 import { useState, useRef, useEffect } from 'react'
 import { useLocale } from '@/hooks/useLocale'
-import { useFunctionalFeatures } from '@/contexts/CookieConsentContext'
+import { useFunctionalFeatures, useExternalServices } from '@/contexts/CookieConsentContext'
 import {
   MessageCircle,
   X,
@@ -38,6 +38,7 @@ interface ChatbotProps {
 export default function Chatbot({ isOpen, onToggle }: ChatbotProps) {
   const { t, locale } = useLocale()
   const { canStoreChatHistory } = useFunctionalFeatures()
+  const { canUseAI } = useExternalServices()
   const [messages, setMessages] = useState<Message[]>([])
   const [inputMessage, setInputMessage] = useState('')
   const [isTyping, setIsTyping] = useState(false)
@@ -96,6 +97,60 @@ export default function Chatbot({ isOpen, onToggle }: ChatbotProps) {
   }, [locale, t, initialized])
 
   const getAIResponse = async (userMessage: string): Promise<Message> => {
+    // Check if external services (including AI) are allowed
+    if (!canUseAI) {
+      const consentMessage = locale === 'it'
+        ? 'Per utilizzare l\'assistente AI intelligente, è necessario accettare i servizi esterni nelle impostazioni dei cookie. Nel frattempo, ecco alcune informazioni di base sui nostri servizi:'
+        : 'To use our intelligent AI assistant, you need to accept external services in your cookie settings. Meanwhile, here\'s some basic information about our services:'
+      
+      const basicInfo = locale === 'it'
+        ? `
+Lunex Professional Cleaning Services offre:
+
+• Pulizia uffici
+• Pulizia domestica
+• Pulizia post-ristrutturazione
+• Pulizia ville
+• Pulizia profonda
+• Pulizia di mantenimento
+
+Orari: Lun-Ven 8:00-18:00, Sab 8:00-12:00
+Telefono: +39 327 779 1867
+Email: infocleaninglunex@gmail.com
+Zona: Romano di Lombardia, BG e dintorni
+
+Per un preventivo personalizzato, contattaci direttamente!`
+        : `
+Lunex Professional Cleaning Services offers:
+
+• Office cleaning
+• Domestic cleaning
+• Post-renovation cleaning
+• Villa cleaning
+• Deep cleaning
+• Maintenance cleaning
+
+Hours: Mon-Fri 8:00 AM-6:00 PM, Sat 8:00 AM-12:00 PM
+Phone: +39 327 779 1867
+Email: infocleaninglunex@gmail.com
+Area: Romano di Lombardia, BG and surroundings
+
+Contact us directly for a personalized quote!`
+
+      return {
+        id: Date.now().toString(),
+        text: consentMessage + '\n' + basicInfo,
+        sender: 'bot',
+        timestamp: new Date(),
+        suggestions: [
+          t('chatbot.suggestions.quote'),
+          t('chatbot.suggestions.services'),
+          t('chatbot.suggestions.booking')
+        ],
+        isAI: false
+      }
+    }
+
     try {
       const response = await fetch('/api/chatbot', {
         method: 'POST',

@@ -5,7 +5,7 @@ import { GoogleGenerativeAI } from '@google/generative-ai'
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || '')
 
 // System prompt to define the chatbot's role and behavior
-const SYSTEM_PROMPT = `You are Luna, an intelligent virtual assistant for Lunex Professional Cleaning Services, a premium cleaning company based in Romano di Lombardia, Italy. 
+const SYSTEM_PROMPT = `You are Luna, an intelligent virtual assistant for Lunex Professional Cleaning Services, a premium cleaning company based in Romano di Lombardia, Italy.
 
 COMPANY CONTEXT:
 - Lunex provides professional cleaning services for offices, homes, and commercial spaces
@@ -15,18 +15,10 @@ COMPANY CONTEXT:
 - Address: Via Monsignor Giacomo Maggioni 26, 24058 Romano di Lombardia, BG, Italy
 - Service area: Romano di Lombardia, Bergamo province, and surrounding areas
 
-PRICING RANGES:
-- Home cleaning: €15-25/hour
-- Office cleaning: €20-30/hour  
-- Post-renovation cleaning: €30-50/hour
-- Luxury villa cleaning: €25-40/hour
-- Deep cleaning: €25-35/hour
-- Maintenance cleaning: €18-28/hour
-
 YOUR ROLE:
 - Be helpful, professional, and friendly
-- Provide accurate information about Lunex services
-- Help customers understand pricing and booking options
+- Provide ONLY verified information about Lunex services that you have been explicitly provided
+- Help customers understand services and direct them to get personalized quotes
 - Guide users toward contacting the company or booking services
 - Always respond in the same language the user writes in (Italian or English)
 - Keep responses concise but informative (max 150 words)
@@ -34,10 +26,14 @@ YOUR ROLE:
 - NEVER use markdown formatting (no *, **, #, -, etc.) - use plain text only
 - Use line breaks and spacing for structure instead of markdown symbols
 
-IMPORTANT GUIDELINES:
-- Always mention that final quotes depend on specific requirements and space size
+STRICT GUIDELINES:
+- NEVER provide specific pricing, rates, or cost estimates
+- NEVER mention euro amounts or hourly rates
+- Always say "Contact us for a personalized quote" when asked about pricing
+- Only discuss services and information explicitly provided in this prompt
+- If asked about anything not in your knowledge base, direct users to contact human support
+- Do not invent or assume information about services, availability, or company policies
 - For booking, direct users to call +39 327 779 1867 or visit the booking page
-- If asked about services outside your knowledge, politely redirect to human support
 - Be empathetic and solution-oriented
 - Use emojis sparingly and professionally`
 
@@ -50,6 +46,82 @@ interface ChatRequest {
   message: string
   conversationHistory?: ChatMessage[]
   locale?: string
+}
+
+// Validated company information that the AI can reference
+const VALIDATED_COMPANY_INFO = {
+  services: [
+    'Office cleaning',
+    'Domestic cleaning',
+    'Post-renovation cleaning',
+    'Villa cleaning',
+    'Deep cleaning',
+    'Maintenance cleaning'
+  ],
+  contact: {
+    phone: '+39 327 779 1867',
+    email: 'infocleaninglunex@gmail.com',
+    address: 'Via Monsignor Giacomo Maggioni 26, 24058 Romano di Lombardia, BG, Italy'
+  },
+  hours: 'Mon-Fri 8:00 AM - 6:00 PM, Saturday 8:00 AM - 12:00 PM',
+  serviceArea: 'Romano di Lombardia, Bergamo province, and surrounding areas'
+}
+
+// Function to remove price tags and validate response content
+function sanitizeResponse(response: string): string {
+  // Remove any price mentions (euro symbols, numbers with €, price ranges, hourly rates)
+  let sanitized = response
+    .replace(/€\s*\d+(\.\d{2})?[-–—]\s*€?\s*\d+(\.\d{2})?/gi, '[Contact us for pricing]')
+    .replace(/€\s*\d+(\.\d{2})?/gi, '[Contact us for pricing]')
+    .replace(/\d+[-–—]\d+\s*euro?s?/gi, '[Contact us for pricing]')
+    .replace(/\d+[-–—]\d+\s*€/gi, '[Contact us for pricing]')
+    .replace(/prezzo\s*:?\s*€?\s*\d+/gi, 'Prezzo: Contattaci per un preventivo')
+    .replace(/price\s*:?\s*€?\s*\d+/gi, 'Price: Contact us for a quote')
+    .replace(/\d+\s*euro?s?\s*(per|each|all|total)/gi, '[Contact us for pricing]')
+    .replace(/da\s*€?\s*\d+/gi, 'Contattaci per informazioni sui prezzi')
+    .replace(/from\s*€?\s*\d+/gi, 'Contact us for pricing information')
+    .replace(/starting\s*(at|from)\s*€?\s*\d+/gi, 'Contact us for a personalized quote')
+    .replace(/a\s*partire\s*da\s*€?\s*\d+/gi, 'Contattaci per un preventivo personalizzato')
+    
+  // Remove specific hourly rate patterns
+  sanitized = sanitized
+    .replace(/\d+[-–—]\d+\/hour/gi, '[Contact for rates]')
+    .replace(/\d+[-–—]\d+\s*all'ora/gi, '[Contatta per tariffe]')
+    .replace(/\d+\s*€?\s*(per|all)\s*hour/gi, '[Contact for rates]')
+    .replace(/\d+\s*€?\s*all'ora/gi, '[Contatta per tariffe]')
+
+  return sanitized.trim()
+}
+
+// Function to validate response doesn't contain unverified information
+function validateResponseContent(response: string): { isValid: boolean; sanitizedResponse: string } {
+  const sanctizedResponse = sanitizeResponse(response)
+  
+  // Check for common signs of hallucinated information
+  const suspiciousPatterns = [
+    /we have \d+ years of experience/i,
+    /established in \d{4}/i,
+    /over \d+ satisfied customers/i,
+    /certified by .+ association/i,
+    /licensed and insured for/i,
+    /winner of .+ award/i,
+    /partner with .+ companies/i,
+    /using .+ equipment/i,
+    /eco-friendly products certified by/i,
+    /ISO \d+ certified/i
+  ]
+  
+  const containsSuspiciousInfo = suspiciousPatterns.some(pattern => pattern.test(response))
+  
+  if (containsSuspiciousInfo) {
+    const fallbackMessage = response.includes('italian') || response.includes('italiano')
+      ? 'Per informazioni dettagliate sui nostri servizi, ti invito a contattarci direttamente al +39 327 779 1867 o via email a infocleaninglunex@gmail.com.'
+      : 'For detailed information about our services, please contact us directly at +39 327 779 1867 or email infocleaninglunex@gmail.com.'
+    
+    return { isValid: false, sanitizedResponse: fallbackMessage }
+  }
+  
+  return { isValid: true, sanitizedResponse: sanctizedResponse }
 }
 
 export async function POST(request: NextRequest) {
@@ -103,21 +175,29 @@ export async function POST(request: NextRequest) {
 
     // Send message and get response
     const result = await chat.sendMessage(message.trim())
-    const aiResponse = result.response.text()
+    const rawResponse = result.response.text()
 
-    if (!aiResponse) {
+    if (!rawResponse) {
       throw new Error('No response from Gemini')
     }
 
+    // Validate and sanitize the AI response
+    const { isValid, sanitizedResponse } = validateResponseContent(rawResponse)
+    
+    if (!isValid) {
+      console.warn('AI response contained unverified information, using fallback')
+    }
+
     // Generate contextual suggestions based on the conversation
-    const suggestions = generateSuggestions(aiResponse, locale)
+    const suggestions = generateSuggestions(sanitizedResponse, locale)
 
     return NextResponse.json({
       success: true,
-      response: aiResponse,
+      response: sanitizedResponse,
       suggestions,
       conversationId: Date.now().toString(),
-      model: 'gemini-2.0-flash'
+      model: 'gemini-2.0-flash',
+      filtered: !isValid // Indicate if response was filtered
     })
 
   } catch (error) {
