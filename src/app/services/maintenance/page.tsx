@@ -1,8 +1,7 @@
 'use client'
 
-import Link from "next/link"
-import { useLocale } from "@/hooks/useLocale"
-import { useEffect, useRef } from 'react'
+import { useScrollAnimation } from '@/hooks/useScrollAnimation'
+import { useLocale } from '@/hooks/useLocale'
 import {
   Calendar,
   Shield,
@@ -12,37 +11,11 @@ import {
   ArrowRight,
   Sparkles
 } from 'lucide-react'
+import Link from 'next/link'
 
 export default function MaintenanceCleaningPage() {
-  const { t } = useLocale()
-  const heroRef = useRef<HTMLDivElement>(null)
-  const featuresRef = useRef<HTMLDivElement>(null)
-  const processRef = useRef<HTMLDivElement>(null)
-
-  useEffect(() => {
-    const observerOptions = {
-      threshold: 0.1,
-      rootMargin: '0px 0px -50px 0px'
-    }
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('animate-fade-in-up')
-        }
-      })
-    }, observerOptions)
-
-    const sections = [heroRef.current, featuresRef.current, processRef.current]
-    sections.forEach(section => {
-      if (section) {
-        const elements = section.querySelectorAll('.animate-on-scroll')
-        elements.forEach(el => observer.observe(el))
-      }
-    })
-
-    return () => observer.disconnect()
-  }, [])
+  const { t, locale } = useLocale()
+  useScrollAnimation()
 
   const features = [
     {
@@ -56,7 +29,7 @@ export default function MaintenanceCleaningPage() {
       description: t('services.maintenance.features.flexibleDesc')
     },
     {
-      icon: <CheckSquare className="h-6 w-6" />,
+      icon: <Shield className="h-6 w-6" />,
       title: t('services.maintenance.features.consistent'),
       description: t('services.maintenance.features.consistentDesc')
     },
@@ -93,25 +66,25 @@ export default function MaintenanceCleaningPage() {
   const schedules = [
     {
       title: t('services.maintenance.schedules.daily'),
-      description: "Perfect for high-traffic offices and commercial spaces",
+      description: t('services.maintenance.schedules.dailyDesc'),
       frequency: "Daily",
       popular: false
     },
     {
       title: t('services.maintenance.schedules.weekly'),
-      description: "Ideal for most homes and small offices",
+      description: t('services.maintenance.schedules.weeklyDesc'),
       frequency: "Weekly",
       popular: true
     },
     {
       title: t('services.maintenance.schedules.biweekly'),
-      description: "Great for busy families and medium-sized offices",
+      description: t('services.maintenance.schedules.biweeklyDesc'),
       frequency: "Bi-weekly",
       popular: false
     },
     {
       title: t('services.maintenance.schedules.monthly'),
-      description: "Comprehensive maintenance for seasonal care",
+      description: t('services.maintenance.schedules.monthlyDesc'),
       frequency: "Monthly",
       popular: false
     }
@@ -120,25 +93,25 @@ export default function MaintenanceCleaningPage() {
   const benefits = [
     {
       icon: <Clock className="h-5 w-5" />,
-      title: "Time Savings",
-      description: "Regular maintenance saves time and prevents deep cleaning needs"
+      title: t('services.maintenance.schedules.timeSavings'),
+      description: t('services.maintenance.schedules.timeSavingsDesc')
     },
     {
       icon: <DollarSign className="h-5 w-5" />,
-      title: "Cost Effective",
-      description: "Ongoing maintenance is more cost-effective than irregular deep cleaning"
+      title: t('services.maintenance.schedules.costEffective'),
+      description: t('services.maintenance.schedules.costEffectiveDesc')
     },
     {
       icon: <Shield className="h-5 w-5" />,
-      title: "Healthier Environment",
-      description: "Consistent cleaning maintains a healthier living and working space"
+      title: t('services.maintenance.schedules.healthierEnv'),
+      description: t('services.maintenance.schedules.healthierEnvDesc')
     }
   ]
 
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section ref={heroRef} className="relative overflow-hidden py-20">
+      <section className="relative overflow-hidden py-20">
         {/* Animated Background */}
         <div className="absolute inset-0 bg-gradient-to-br from-teal-50 via-emerald-50 to-green-50">
           <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-teal-100/50 via-transparent to-transparent"></div>
@@ -147,17 +120,29 @@ export default function MaintenanceCleaningPage() {
 
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div className="space-y-6 animate-on-scroll opacity-0">
+            <div className="space-y-6 animate-on-scroll">
               <div className="flex items-center space-x-3">
                 <div className="w-12 h-12 rounded-full flex items-center justify-center glass-morphism">
                   <Calendar className="h-6 w-6 text-teal-600" />
                 </div>
-                <span className="text-teal-600 font-semibold tracking-wide">{t('services.maintenance.name')}</span>
               </div>
               
               <h1 className="text-4xl lg:text-5xl font-bold text-gray-900 leading-tight">
-                {t('services.maintenance.title')}
-                <span className="text-gradient bg-gradient-to-r from-teal-600 to-emerald-600 bg-clip-text text-transparent"> Scheduled</span>
+                {(() => {
+                  const title = t('services.maintenance.title')
+                  const styledWord =
+                    locale === 'it' ? 'Mantenimento' : 'Maintenance'
+                  const parts = title.split(styledWord)
+                  return (
+                    <>
+                      {parts[0]}
+                      <span className="bg-gradient-to-r from-teal-600 to-emerald-600 bg-clip-text text-transparent">
+                        {styledWord}
+                      </span>
+                      {parts[1]}
+                    </>
+                  )
+                })()}
               </h1>
               
               <p className="text-xl text-gray-600 leading-relaxed">
@@ -183,7 +168,7 @@ export default function MaintenanceCleaningPage() {
               </div>
             </div>
             
-            <div className="relative animate-on-scroll opacity-0 animation-delay-200">
+            <div className="relative animate-on-scroll animation-delay-200">
               <div className="glass-morphism rounded-3xl p-8 hover-card">
                 <div className="relative bg-gradient-to-br from-teal-400/20 to-emerald-400/20 rounded-2xl p-12 overflow-hidden">
                   <div className="absolute inset-0 bg-grid-pattern opacity-10"></div>
@@ -200,10 +185,10 @@ export default function MaintenanceCleaningPage() {
       </section>
 
       {/* Features Section */}
-      <section ref={featuresRef} className="py-20 bg-white relative overflow-hidden">
+      <section className="py-20 bg-white relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-gray-50/50 to-white pointer-events-none"></div>
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="text-center mb-16 animate-on-scroll opacity-0">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 max-w-7xl">
+          <div className="text-center mb-16 animate-on-scroll">
             <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
               {t('services.whyChooseUs.title')}
             </h2>
@@ -212,11 +197,11 @@ export default function MaintenanceCleaningPage() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-6 lg:gap-8">
             {features.map((feature, index) => (
-              <div 
-                key={index} 
-                className="animate-on-scroll opacity-0 hover-card group"
+              <div
+                key={index}
+                className="animate-on-scroll hover-card group"
                 style={{ animationDelay: `${index * 100}ms` }}
               >
                 <div className="glass-morphism rounded-2xl p-6 text-center space-y-4 h-full border border-teal-100/50 transition-all duration-300 hover:border-teal-300/50">
@@ -235,23 +220,23 @@ export default function MaintenanceCleaningPage() {
       </section>
 
       {/* Process Section */}
-      <section ref={processRef} className="py-20 relative overflow-hidden">
+      <section className="py-20 relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-gray-50 via-teal-50/30 to-emerald-50/30"></div>
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="text-center mb-16 animate-on-scroll opacity-0">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 max-w-7xl">
+          <div className="text-center mb-16 animate-on-scroll">
             <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
-              How It Works
+              {t('services.maintenance.schedules.howItWorks')}
             </h2>
             <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              Setting up your maintenance cleaning schedule is simple and straightforward
+              {t('services.maintenance.schedules.howItWorksDesc')}
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-6 lg:gap-8">
             {process.map((item, index) => (
-              <div 
-                key={index} 
-                className="relative animate-on-scroll opacity-0"
+              <div
+                key={index}
+                className="relative animate-on-scroll"
                 style={{ animationDelay: `${index * 150}ms` }}
               >
                 <div className="glass-morphism rounded-3xl p-6 h-full hover:shadow-2xl transition-all duration-300 group hover:-translate-y-2">
@@ -274,28 +259,28 @@ export default function MaintenanceCleaningPage() {
 
       {/* Schedules Section */}
       <section className="py-20 bg-white relative overflow-hidden">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16 animate-on-scroll opacity-0">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
+          <div className="text-center mb-16 animate-on-scroll">
             <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
               {t('services.maintenance.schedules.title')}
             </h2>
             <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              Choose the maintenance schedule that works best for your needs and lifestyle
+              {t('services.maintenance.schedules.scheduleDesc')}
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
             {schedules.map((schedule, index) => (
-              <div 
-                key={index} 
-                className="animate-on-scroll opacity-0 hover-card group"
+              <div
+                key={index}
+                className="animate-on-scroll hover-card group"
                 style={{ animationDelay: `${index * 100}ms` }}
               >
                 <div className={`glass-morphism rounded-3xl p-6 h-full relative transition-all duration-300 hover:shadow-2xl ${schedule.popular ? 'border-2 border-teal-500' : 'border border-gray-200'}`}>
                   {schedule.popular && (
                     <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
                       <span className="bg-gradient-to-r from-teal-600 to-emerald-600 text-white px-4 py-1 rounded-full text-sm font-semibold">
-                        Most Popular
+                        {t('services.maintenance.schedules.mostPopular')}
                       </span>
                     </div>
                   )}
@@ -309,31 +294,25 @@ export default function MaintenanceCleaningPage() {
                     <p className="text-gray-600">
                       {schedule.description}
                     </p>
-                    <Link
-                      href="/contact"
-                      className={`btn-modern ${schedule.popular ? 'bg-gradient-to-r from-teal-600 to-emerald-600 text-white' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'} px-6 py-3 rounded-full font-semibold text-center w-full block transition-all duration-300`}
-                    >
-                      Choose Plan
-                    </Link>
                   </div>
                 </div>
               </div>
             ))}
           </div>
 
-          <div className="mt-12 text-center animate-on-scroll opacity-0">
+          <div className="mt-12 text-center animate-on-scroll">
             <div className="glass-morphism rounded-3xl p-8 max-w-2xl mx-auto">
               <h3 className="text-2xl font-bold text-gray-900 mb-4">
                 {t('services.maintenance.schedules.custom')}
               </h3>
               <p className="text-gray-600 mb-6">
-                Need a custom schedule? We can create a maintenance plan tailored to your specific needs and preferences. Whether you need different frequencies for different areas or have special requirements, we&apos;ll work with you to find the perfect solution.
+                {t('services.maintenance.schedules.customDesc')}
               </p>
               <Link
                 href="/contact"
                 className="btn-modern bg-gradient-to-r from-teal-600 to-emerald-600 text-white px-8 py-4 rounded-full font-semibold inline-block hover:shadow-xl transition-all duration-300"
               >
-                Discuss Custom Plan
+                {t('services.maintenance.schedules.discussCustom')}
               </Link>
             </div>
           </div>
@@ -343,19 +322,19 @@ export default function MaintenanceCleaningPage() {
       {/* Benefits Section */}
       <section className="py-20 relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-gray-50 via-teal-50/20 to-emerald-50/20"></div>
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="text-center mb-12 animate-on-scroll opacity-0">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 max-w-6xl">
+          <div className="text-center mb-12 animate-on-scroll">
             <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
-              Benefits of Regular Maintenance
+              {t('services.maintenance.schedules.benefitsTitle')}
             </h2>
             <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              Discover why regular cleaning maintenance is the smart choice
+              {t('services.maintenance.schedules.benefitsDesc')}
             </p>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
             {benefits.map((benefit, index) => (
-              <div key={index} className="glass-morphism rounded-2xl p-6 animate-on-scroll opacity-0" style={{ animationDelay: `${index * 100}ms` }}>
+              <div key={index} className="glass-morphism rounded-2xl p-6 animate-on-scroll" style={{ animationDelay: `${index * 100}ms` }}>
                 <div className="flex items-start space-x-4">
                   <div className="text-teal-600">{benefit.icon}</div>
                   <div>
@@ -374,12 +353,12 @@ export default function MaintenanceCleaningPage() {
         <div className="absolute inset-0 bg-gradient-to-r from-teal-600 via-emerald-600 to-green-600"></div>
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,rgba(255,255,255,0.1),transparent)]"></div>
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
-          <div className="animate-on-scroll opacity-0">
+          <div className="animate-on-scroll">
             <h2 className="text-3xl lg:text-4xl font-bold text-white mb-4">
               {t('cta.ready')}
             </h2>
             <p className="text-xl text-teal-100 mb-8 max-w-2xl mx-auto">
-              Contact us today to discuss your maintenance cleaning needs and create a schedule that works for you
+              {t('services.maintenance.schedules.ctaDesc')}
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link

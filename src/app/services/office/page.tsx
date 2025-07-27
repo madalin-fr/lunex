@@ -3,7 +3,7 @@
 import { useLocale } from '@/hooks/useLocale'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { Badge } from '@/components/ui/badge'
+import { IconBadge } from '@/components/ui/badge'
 import {
   Building2,
   Clock,
@@ -76,29 +76,31 @@ export default function OfficeCleaning() {
       <section className="relative py-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
           <div className="text-center">
-            <Badge className="mb-4 bg-blue-100 text-blue-800 border-blue-200">
-              <Building2 className="h-4 w-4 mr-2" />
+            <IconBadge
+              icon={<Building2 className="h-4 w-4" />}
+              className="mb-4 bg-blue-100 text-blue-800 border-blue-200"
+            >
               {t('services.office.name')}
-            </Badge>
+            </IconBadge>
             <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-6">
               {t('services.office.title')}
             </h1>
             <p className="text-xl text-gray-600 mb-8 max-w-3xl mx-auto">
               {t('services.office.subtitle')}
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link href="/contact">
-                <Button size="lg" className="bg-blue-600 hover:bg-blue-700">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+              <Button size="lg" className="bg-blue-600 hover:bg-blue-700 w-full sm:w-auto" asChild>
+                <Link href="/contact" className="flex items-center justify-center">
                   <Calendar className="h-5 w-5 mr-2" />
                   {t('bookNow')}
-                </Button>
-              </Link>
-              <Link href="https://wa.me/393277791867">
-                <Button size="lg" variant="outline">
+                </Link>
+              </Button>
+              <Button size="lg" variant="outline" className="w-full sm:w-auto border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white" asChild>
+                <Link href="https://wa.me/393277791867" className="flex items-center justify-center">
                   <Phone className="h-5 w-5 mr-2" />
                   {t('call_now')}
-                </Button>
-              </Link>
+                </Link>
+              </Button>
             </div>
           </div>
         </div>
@@ -113,7 +115,7 @@ export default function OfficeCleaning() {
             </h2>
           </div>
           
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {features.map((feature, index) => (
               <Card key={index} className="text-center hover:shadow-lg transition-shadow">
                 <CardHeader>
@@ -138,7 +140,7 @@ export default function OfficeCleaning() {
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-              {t('services.office.process.step1').split(' ')[0]} {/* Our Process */}
+              Our Process
             </h2>
           </div>
           
@@ -195,25 +197,19 @@ export default function OfficeCleaning() {
           <p className="text-xl text-blue-100 mb-8">
             {t('services.cta.subtitle')}
           </p>
-          <div className="flex flex-wrap gap-4 justify-center">
-            <Link href="/contact">
-              <Button size="lg" className="bg-white text-blue-600 hover:bg-gray-100">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+            <Button size="lg" className="bg-white text-blue-600 hover:bg-gray-100 w-full sm:w-auto" asChild>
+              <Link href="/contact" className="flex items-center justify-center">
                 <Sparkles className="h-5 w-5 mr-2" />
-                <div className="flex items-center">
-                  <Sparkles className="h-5 w-5 mr-2" />
-                  {t('cta.quote')}
-                </div>
-              </Button>
-            </Link>
-            <Link href="https://wa.me/393277791867">
-              <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-blue-600">
+                {t('cta.quote')}
+              </Link>
+            </Button>
+            <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-blue-600 w-full sm:w-auto" asChild>
+              <Link href="https://wa.me/393277791867" className="flex items-center justify-center">
                 <Phone className="h-5 w-5 mr-2" />
-                <div className="flex items-center">
-                  <Phone className="h-5 w-5 mr-2" />
-                  {t('call_now')}
-                </div>
-              </Button>
-            </Link>
+                {t('call_now')}
+              </Link>
+            </Button>
           </div>
         </div>
       </section>

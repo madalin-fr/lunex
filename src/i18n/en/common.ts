@@ -273,7 +273,24 @@ export const common = {
         cabinet: 'Cabinet interior cleaning',
         upholstery: 'Upholstery deep cleaning',
         sanitization: 'Complete sanitization treatment'
-      }
+      },
+      scheduling: {
+        title: 'When to Schedule Deep Cleaning',
+        subtitle: 'Deep cleaning is recommended for these situations',
+        seasonal: {
+          title: 'Seasonal Cleaning',
+          description: 'Spring or fall deep cleaning for complete refresh'
+        },
+        moving: {
+          title: 'Moving In/Out',
+          description: 'Thorough cleaning for new beginnings'
+        },
+        events: {
+          title: 'Special Events',
+          description: 'Pre-event deep cleaning for perfect presentation'
+        }
+      },
+      processTitle: 'Our Deep Cleaning Process'
     },
     
     maintenance: {
@@ -307,7 +324,27 @@ export const common = {
         weekly: 'Weekly maintenance cleaning',
         biweekly: 'Bi-weekly cleaning service',
         monthly: 'Monthly deep maintenance',
-        custom: 'Custom schedule available'
+        custom: 'Custom schedule available',
+        dailyDesc: 'Perfect for high-traffic offices and commercial spaces',
+        weeklyDesc: 'Ideal for most homes and small offices',
+        biweeklyDesc: 'Great for busy families and medium-sized offices',
+        monthlyDesc: 'Comprehensive maintenance for seasonal care',
+        mostPopular: 'Most Popular',
+        choosePlan: 'Choose Plan',
+        howItWorks: 'How It Works',
+        howItWorksDesc: 'Setting up your maintenance cleaning schedule is simple and straightforward',
+        scheduleDesc: 'Choose the maintenance schedule that works best for your needs and lifestyle',
+        customDesc: 'Need a custom schedule? We can create a maintenance plan tailored to your specific needs and preferences. Whether you need different frequencies for different areas or have special requirements, we\'ll work with you to find the perfect solution.',
+        discussCustom: 'Discuss Custom Plan',
+        benefitsTitle: 'Benefits of Regular Maintenance',
+        benefitsDesc: 'Discover why regular cleaning maintenance is the smart choice',
+        timeSavings: 'Time Savings',
+        timeSavingsDesc: 'Regular maintenance saves time and prevents deep cleaning needs',
+        costEffective: 'Cost Effective',
+        costEffectiveDesc: 'Ongoing maintenance is more cost-effective than irregular deep cleaning',
+        healthierEnv: 'Healthier Environment',
+        healthierEnvDesc: 'Consistent cleaning maintains a healthier living and working space',
+        ctaDesc: 'Contact us today to discuss your maintenance cleaning needs and create a schedule that works for you'
       }
     },
     
@@ -933,6 +970,53 @@ export const common = {
       description: 'Join our satisfied customers and experience the Lunex professional cleaning difference.',
       bookButton: 'Book Now',
       servicesButton: 'View Services'
+    }
+  },
+
+  // Review Form
+  reviewForm: {
+    title: 'Write a Review',
+    subtitle: 'Share your experience with our services',
+    name: 'Full Name',
+    namePlaceholder: 'Enter your full name',
+    service: 'Service Received',
+    servicePlaceholder: 'Select service',
+    rating: 'Rating',
+    ratingLabel: 'How many stars would you give our service?',
+    testimonial: 'Your Review',
+    testimonialPlaceholder: 'Describe your experience with our services...',
+    submit: 'Submit Review',
+    submitting: 'Submitting...',
+    
+    // Service Options
+    serviceOptions: {
+      office: 'Office Cleaning',
+      domestic: 'Domestic Cleaning',
+      'post-renovation': 'Post-Renovation Cleaning',
+      villa: 'Villa Cleaning',
+      deep: 'Deep Cleaning',
+      maintenance: 'Maintenance Cleaning'
+    },
+    
+    // Validation
+    validation: {
+      nameRequired: 'Name is required',
+      serviceRequired: 'Service is required',
+      ratingRequired: 'Rating is required',
+      testimonialRequired: 'Review is required',
+      testimonialMinLength: 'Review must be at least 10 characters long'
+    },
+    
+    // Messages
+    success: {
+      title: 'Review Submitted Successfully!',
+      description: 'Thank you for your review. It will be published after verification.',
+      button: 'Close'
+    },
+    error: {
+      title: 'Failed to Submit Review',
+      description: 'An error occurred. Please try again later.',
+      button: 'Try Again'
     }
   },
 

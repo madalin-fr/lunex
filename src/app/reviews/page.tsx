@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 import Image from 'next/image'
 import { useLocale } from '@/hooks/useLocale'
 import { Button } from '@/components/ui/button'
+import { ReviewForm } from '@/components/ui/ReviewForm'
 import { Star, Quote, ChevronLeft, ChevronRight } from 'lucide-react'
 import { getLocalizedValue } from '@/lib/sanity/utils'
 import { hasValidConfig } from '@/lib/sanity/client'
@@ -61,16 +62,24 @@ export default function ReviewsPage() {
   const [reviews, setReviews] = useState<Review[]>([])
   const [loading, setLoading] = useState(true)
   const [currentPage, setCurrentPage] = useState(1)
+  const [showReviewForm, setShowReviewForm] = useState(false)
+
+  const fetchReviews = async () => {
+    const fetchedReviews = await getReviews()
+    // Ensure reviews is always an array
+    setReviews(Array.isArray(fetchedReviews) ? fetchedReviews : [])
+    setLoading(false)
+  }
 
   useEffect(() => {
-    const fetchReviews = async () => {
-      const fetchedReviews = await getReviews()
-      // Ensure reviews is always an array
-      setReviews(Array.isArray(fetchedReviews) ? fetchedReviews : [])
-      setLoading(false)
-    }
     fetchReviews()
   }, [])
+
+  const handleReviewFormClose = () => {
+    setShowReviewForm(false)
+    // Refresh reviews list in case a new review was submitted
+    fetchReviews()
+  }
 
   // Calculate values that depend on reviews
   const reviewsPerPage = 6
@@ -269,51 +278,96 @@ NEXT_PUBLIC_SANITY_DATASET=production`}
           
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {currentReviews.map((review) => (
-              <div key={review._id} className="bg-white rounded-lg shadow-md p-6 border border-gray-200 hover:shadow-lg transition-shadow duration-300">
-                <div className="flex items-center mb-4">
-                  <div className="w-12 h-12 rounded-full flex items-center justify-center mr-4 overflow-hidden">
-                    {review.clientPhoto?.asset?.url ? (
-                      <Image
-                        src={review.clientPhoto.asset.url}
-                        alt={getSafeCustomerName(review) + ' avatar'}
-                        width={48}
-                        height={48}
-                        className="w-full h-full object-cover rounded-full"
-                      />
-                    ) : (
-                      <div className="w-full h-full bg-purple-100 rounded-full flex items-center justify-center">
-                        <span className="text-purple-600 font-semibold text-lg">
-                          {getSafeCustomerInitials(review)}
-                        </span>
+              <div
+                key={review._id}
+                className="group relative bg-gradient-to-br from-white to-gray-50 rounded-2xl shadow-lg hover:shadow-2xl border border-gray-100 hover:border-purple-200 transition-all duration-500 transform hover:-translate-y-2 overflow-hidden"
+              >
+                {/* Gradient overlay for premium look */}
+                <div className="absolute inset-0 bg-gradient-to-br from-purple-600/5 to-pink-600/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                
+                {/* Content */}
+                <div className="relative p-8">
+                  {/* Header with profile */}
+                  <div className="flex items-start mb-6">
+                    <div className="relative">
+                      <div className="w-16 h-16 rounded-full overflow-hidden ring-4 ring-white shadow-xl">
+                        {review.clientPhoto?.asset?.url ? (
+                          <Image
+                            src={review.clientPhoto.asset.url}
+                            alt={getSafeCustomerName(review) + ' avatar'}
+                            width={64}
+                            height={64}
+                            className="w-full h-full object-cover"
+                          />
+                        ) : (
+                          <div className="w-full h-full bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center">
+                            <span className="text-white font-bold text-xl">
+                              {getSafeCustomerInitials(review)}
+                            </span>
+                          </div>
+                        )}
                       </div>
-                    )}
+                      {/* Verified badge */}
+                      <div className="absolute -bottom-1 -right-1 w-6 h-6 bg-green-500 rounded-full flex items-center justify-center ring-2 ring-white">
+                        <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
+                          <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                        </svg>
+                      </div>
+                    </div>
+                    
+                    <div className="ml-4 flex-1">
+                      <h3 className="font-bold text-gray-900 text-lg mb-1">
+                        {getSafeCustomerName(review)}
+                      </h3>
+                      <div className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-gradient-to-r from-purple-100 to-pink-100 text-purple-700 border border-purple-200">
+                        {typeof review.service === 'string'
+                          ? review.service
+                          : getLocalizedValue(review.service, locale)}
+                      </div>
+                    </div>
                   </div>
-                  <div>
-                    <h3 className="font-semibold text-gray-800">
-                      {getSafeCustomerName(review)}
-                    </h3>
-                    <p className="text-sm text-gray-600">
-                      {typeof review.service === 'string'
-                        ? review.service
-                        : getLocalizedValue(review.service, locale)}
-                    </p>
+                  
+                  {/* Rating and date */}
+                  <div className="flex items-center justify-between mb-6">
+                    <div className="flex items-center space-x-1">
+                      {renderStars(review.rating)}
+                      <span className="ml-2 text-sm font-semibold text-gray-700">
+                        {review.rating}.0
+                      </span>
+                    </div>
+                    <span className="text-sm text-gray-500 font-medium">
+                      {formatDate(review.reviewDate)}
+                    </span>
+                  </div>
+                  
+                  {/* Testimonial with better styling */}
+                  <div className="relative">
+                    <div className="absolute -top-2 -left-2 w-8 h-8 text-purple-300">
+                      <Quote className="w-full h-full" />
+                    </div>
+                    <blockquote className="pl-8 pr-4">
+                      <p className="text-gray-700 leading-relaxed font-medium italic">
+                        {typeof review.testimonial === 'string'
+                          ? review.testimonial
+                          : getLocalizedValue(review.testimonial, locale)}
+                      </p>
+                    </blockquote>
+                    
+                    {/* Decorative bottom border */}
+                    <div className="mt-6 h-1 w-12 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full mx-auto" />
                   </div>
                 </div>
                 
-                <div className="flex items-center mb-4">
-                  {renderStars(review.rating)}
-                  <span className="ml-2 text-sm text-gray-600">
-                    {formatDate(review.reviewDate)}
-                  </span>
-                </div>
-                
-                <div className="relative">
-                  <Quote className="absolute -top-2 -left-2 w-8 h-8 text-purple-200" />
-                  <p className="text-gray-700 pl-6 italic">
-                    &quot;{typeof review.testimonial === 'string'
-                      ? review.testimonial
-                      : getLocalizedValue(review.testimonial, locale)}&quot;
-                  </p>
+                {/* Subtle pattern overlay */}
+                <div className="absolute bottom-0 right-0 w-32 h-32 opacity-5">
+                  <svg viewBox="0 0 100 100" className="w-full h-full">
+                    <defs>
+                      <pattern id="circles" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
+                        <circle cx="10" cy="10" r="2" fill="currentColor" />
+                      </pattern>
+                    </defs>
+                    <rect width="100" height="100" fill="url(#circles)" />
+                  </svg>
                 </div>
               </div>
             ))}
@@ -384,7 +438,10 @@ NEXT_PUBLIC_SANITY_DATASET=production`}
           <p className="text-gray-600 mb-8 max-w-2xl mx-auto">
             {t('reviews.cta.description')}
           </p>
-          <Button className="bg-purple-600 hover:bg-purple-700 text-white px-8 py-3">
+          <Button
+            onClick={() => setShowReviewForm(true)}
+            className="bg-purple-600 hover:bg-purple-700 text-white px-8 py-3"
+          >
             {t('reviews.cta.button')}
           </Button>
         </div>
@@ -410,6 +467,12 @@ NEXT_PUBLIC_SANITY_DATASET=production`}
           </div>
         </div>
       </section>
+
+      {/* Review Form Modal */}
+      <ReviewForm
+        isOpen={showReviewForm}
+        onClose={handleReviewFormClose}
+      />
     </div>
   )
 }

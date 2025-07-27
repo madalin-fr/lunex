@@ -269,10 +269,27 @@ export const common = {
         grout: 'Pulizia profonda fughe e piastrelle',
         baseboards: 'Pulizia battiscopa e finiture',
         light: 'Pulizia corpi illuminanti',
-        cabinet: 'sters',
-        upholstery: 'sters',
-        sanitization: 'sters'
-      }
+        cabinet: 'Pulizia interno armadietti e cassetti',
+        upholstery: 'Pulizia tappezzeria e tessuti',
+        sanitization: 'Sanificazione completa'
+      },
+      scheduling: {
+        title: 'Quando Programmare una Pulizia Approfondita',
+        subtitle: 'La pulizia approfondita è consigliata per queste situazioni',
+        seasonal: {
+          title: 'Pulizia Stagionale',
+          description: 'Pulizia approfondita primaverile o autunnale per un rinnovamento completo'
+        },
+        moving: {
+          title: 'Traslochi',
+          description: 'Pulizia accurata per nuovi inizi'
+        },
+        events: {
+          title: 'Eventi Speciali',
+          description: 'Pulizia approfondita pre-evento per una presentazione perfetta'
+        }
+      },
+      processTitle: 'Il Nostro Processo di Pulizia Approfondita'
     },
     
     maintenance: {
@@ -306,7 +323,27 @@ export const common = {
         weekly: 'Pulizia di mantenimento settimanale',
         biweekly: 'Servizio di pulizia bisettimanale',
         monthly: 'Mantenimento profondo mensile',
-        custom: 'Programma personalizzato disponibile'
+        custom: 'Programma personalizzato disponibile',
+        dailyDesc: 'Perfetto per uffici ad alto traffico e spazi commerciali',
+        weeklyDesc: 'Ideale per la maggior parte delle case e piccoli uffici',
+        biweeklyDesc: 'Ottimo per famiglie impegnate e uffici di medie dimensioni',
+        monthlyDesc: 'Manutenzione completa per cura stagionale',
+        mostPopular: 'Più Popolare',
+        choosePlan: 'Scegli Piano',
+        howItWorks: 'Come Funziona',
+        howItWorksDesc: 'Impostare il tuo programma di pulizia di mantenimento è semplice e diretto',
+        scheduleDesc: 'Scegli il programma di manutenzione che funziona meglio per le tue esigenze e stile di vita',
+        customDesc: 'Hai bisogno di un programma personalizzato? Possiamo creare un piano di manutenzione su misura per le tue esigenze e preferenze specifiche. Che tu abbia bisogno di frequenze diverse per aree diverse o requisiti speciali, lavoreremo con te per trovare la soluzione perfetta.',
+        discussCustom: 'Discuti Piano Personalizzato',
+        benefitsTitle: 'Vantaggi della Manutenzione Regolare',
+        benefitsDesc: 'Scopri perché la manutenzione di pulizia regolare è la scelta intelligente',
+        timeSavings: 'Risparmio di Tempo',
+        timeSavingsDesc: 'La manutenzione regolare fa risparmiare tempo e previene la necessità di pulizie approfondite',
+        costEffective: 'Conveniente',
+        costEffectiveDesc: 'La manutenzione continua è più conveniente rispetto alle pulizie approfondite irregolari',
+        healthierEnv: 'Ambiente Più Salubre',
+        healthierEnvDesc: 'La pulizia costante mantiene uno spazio abitativo e lavorativo più salubre',
+        ctaDesc: 'Contattaci oggi per discutere le tue esigenze di pulizia di mantenimento e creare un programma che funzioni per te'
       }
     },
     
@@ -330,8 +367,8 @@ export const common = {
         description: 'Copertura assicurativa completa per la vostra tranquillità'
       },
       local: {
-        title: 'Azienda Locale',
-        description: 'Serviamo con orgoglio Romano di Lombardia e zone limitrofe'
+        title: 'sterge',
+        description: 'sterge'
       }
     },
     
@@ -932,6 +969,53 @@ export const common = {
       description: 'Unisciti ai nostri clienti soddisfatti e scopri la differenza della pulizia professionale Lunex.',
       bookButton: 'Prenota Ora',
       servicesButton: 'Vedi Servizi'
+    }
+  },
+
+  // Review Form
+  reviewForm: {
+    title: 'Scrivi una Recensione',
+    subtitle: 'Condividi la tua esperienza con i nostri servizi',
+    name: 'Nome Completo',
+    namePlaceholder: 'Inserisci il tuo nome completo',
+    service: 'Servizio Ricevuto',
+    servicePlaceholder: 'Seleziona il servizio',
+    rating: 'Valutazione',
+    ratingLabel: 'Quante stelle daresti al nostro servizio?',
+    testimonial: 'La Tua Recensione',
+    testimonialPlaceholder: 'Descrivi la tua esperienza con i nostri servizi...',
+    submit: 'Invia Recensione',
+    submitting: 'Invio in corso...',
+    
+    // Service Options
+    serviceOptions: {
+      office: 'Pulizie Uffici',
+      domestic: 'Pulizie Domestiche',
+      'post-renovation': 'Pulizie Post-Ristrutturazione',
+      villa: 'Pulizie Ville',
+      deep: 'Pulizie Approfondite',
+      maintenance: 'Pulizie di Mantenimento'
+    },
+    
+    // Validation
+    validation: {
+      nameRequired: 'Il nome è richiesto',
+      serviceRequired: 'Il servizio è richiesto',
+      ratingRequired: 'La valutazione è richiesta',
+      testimonialRequired: 'La recensione è richiesta',
+      testimonialMinLength: 'La recensione deve contenere almeno 10 caratteri'
+    },
+    
+    // Messages
+    success: {
+      title: 'Recensione Inviata con Successo!',
+      description: 'Grazie per la tua recensione. Sarà pubblicata dopo la verifica.',
+      button: 'Chiudi'
+    },
+    error: {
+      title: 'Invio Recensione Fallito',
+      description: 'Si è verificato un errore. Riprova più tardi.',
+      button: 'Riprova'
     }
   },
 

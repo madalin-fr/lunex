@@ -34,8 +34,12 @@ interface Review {
     asset?: {
       _ref: string
       _type: string
+      url?: string
     }
-    alt?: string
+    alt?: string | {
+      it?: string
+      en?: string
+    }
   }
   featured?: boolean
 }
@@ -284,11 +288,12 @@ export default function HomePage() {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
-              {t('reviews')}
+              {t('reviewsNav')}
             </h2>
             <p className="text-xl text-gray-600 max-w-2xl mx-auto">
               {t('cta.description')}
             </p>
+            <div className="w-24 h-1 bg-gradient-to-r from-green-500 to-emerald-500 rounded-full mx-auto mt-6"></div>
           </div>
 
           {reviewsLoading ? (
@@ -319,30 +324,95 @@ export default function HomePage() {
           ) : featuredReviews.length > 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               {featuredReviews.map((review) => (
-                <div key={review._id} className="bg-gray-50 rounded-2xl p-6">
-                  <div className="flex items-center mb-4">
-                    <div className="flex text-yellow-400">
-                      {[...Array(5)].map((_, i) => (
-                        <Star
-                          key={i}
-                          className={`w-5 h-5 ${i < review.rating ? 'fill-current' : 'text-gray-300'}`}
-                        />
-                      ))}
+                <div
+                  key={review._id}
+                  className="group relative bg-gradient-to-br from-white to-gray-50 rounded-2xl shadow-lg hover:shadow-2xl border border-gray-100 hover:border-green-200 transition-all duration-500 transform hover:-translate-y-2 overflow-hidden"
+                >
+                  {/* Gradient overlay for premium look */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-green-600/5 to-emerald-600/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                  
+                  {/* Content */}
+                  <div className="relative p-8">
+                    {/* Rating with better spacing */}
+                    <div className="flex items-center justify-between mb-6">
+                      <div className="flex items-center space-x-1">
+                        {[...Array(5)].map((_, i) => (
+                          <Star
+                            key={i}
+                            className={`w-5 h-5 transition-colors ${
+                              i < review.rating
+                                ? 'text-yellow-400 fill-current drop-shadow-sm'
+                                : 'text-gray-300'
+                            }`}
+                          />
+                        ))}
+                        <span className="ml-2 text-sm font-semibold text-gray-700">
+                          {review.rating}.0
+                        </span>
+                      </div>
+                      {/* Verified badge */}
+                      <div className="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center ring-2 ring-white">
+                        <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
+                          <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                        </svg>
+                      </div>
                     </div>
+                    
+                    {/* Testimonial with quote styling */}
+                    <div className="relative mb-6">
+                      <div className="absolute -top-2 -left-2 w-8 h-8 text-green-300 opacity-50">
+                        <svg viewBox="0 0 24 24" fill="currentColor" className="w-full h-full">
+                          <path d="M14,17h3l2-4V7h-6v6h3M6,17h3l2-4V7H5v6h3L6,17z"/>
+                        </svg>
+                      </div>
+                      <blockquote className="pl-8 pr-4">
+                        <p className="text-gray-700 leading-relaxed font-medium italic">
+                          {getLocalizedValue(review.testimonial, locale)}
+                        </p>
+                      </blockquote>
+                    </div>
+                    
+                    {/* Profile section */}
+                    <div className="flex items-center">
+                      <div className="relative">
+                        <div className="w-12 h-12 rounded-full overflow-hidden ring-3 ring-white shadow-lg">
+                          {review.clientPhoto?.asset?.url ? (
+                            <img
+                              src={review.clientPhoto.asset.url}
+                              alt={getLocalizedValue(review.clientName, locale)}
+                              className="w-full h-full object-cover"
+                            />
+                          ) : (
+                            <div className="w-full h-full bg-gradient-to-br from-green-500 to-emerald-500 flex items-center justify-center">
+                              <span className="text-white font-bold text-sm">
+                                {getLocalizedValue(review.clientName, locale).split(' ').map((n: string) => n[0]).join('')}
+                              </span>
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                      <div className="ml-4 flex-1">
+                        <h4 className="font-bold text-gray-900 text-lg">{getLocalizedValue(review.clientName, locale)}</h4>
+                        <div className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-gradient-to-r from-green-100 to-emerald-100 text-green-700 border border-green-200 mt-1">
+                          {getLocalizedValue(review.service, locale)}
+                        </div>
+                      </div>
+                    </div>
+                    
+                    {/* Decorative bottom border */}
+                    <div className="mt-6 h-1 w-12 bg-gradient-to-r from-green-500 to-emerald-500 rounded-full mx-auto" />
                   </div>
-                  <p className="text-gray-600 mb-4">
-                    &quot;{getLocalizedValue(review.testimonial, locale)}&quot;
-                  </p>
-                  <div className="flex items-center">
-                    <div className="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center">
-                      <span className="text-green-600 font-semibold">
-                        {getLocalizedValue(review.clientName, locale).split(' ').map((n: string) => n[0]).join('')}
-                      </span>
-                    </div>
-                    <div className="ml-3">
-                      <h4 className="font-semibold text-gray-900">{getLocalizedValue(review.clientName, locale)}</h4>
-                      <p className="text-sm text-gray-600">{getLocalizedValue(review.service, locale)}</p>
-                    </div>
+                  
+                  {/* Subtle pattern overlay */}
+                  <div className="absolute bottom-0 right-0 w-24 h-24 opacity-5">
+                    <svg viewBox="0 0 100 100" className="w-full h-full">
+                      <defs>
+                        <pattern id="circles-main" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
+                          <circle cx="10" cy="10" r="2" fill="currentColor" />
+                        </pattern>
+                      </defs>
+                      <rect width="100" height="100" fill="url(#circles-main)" />
+                    </svg>
                   </div>
                 </div>
               ))}
@@ -360,10 +430,12 @@ export default function HomePage() {
           <div className="text-center mt-12">
             <Link
               href="/reviews"
-              className="inline-flex items-center text-green-600 hover:text-green-700 font-medium"
+              className="inline-flex items-center bg-gradient-to-r from-green-600 to-emerald-600 text-white px-8 py-4 rounded-full hover:from-green-700 hover:to-emerald-700 transition-all font-semibold text-lg shadow-lg hover:shadow-xl transform hover:scale-105"
             >
-              {t('view_all')} {t('reviews')}
-              <Phone className="w-4 h-4 ml-2" />
+              {t('view_all')} {t('reviewsNav')}
+              <svg className="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+              </svg>
             </Link>
           </div>
         </div>

@@ -19,13 +19,12 @@ import {
   CheckCircle,
   Calendar,
   Shield,
-  Zap,
   Sparkles
 } from 'lucide-react'
 import Link from 'next/link'
 
 export default function ServicesPage() {
-  const { t } = useLocale()
+  const { t, locale } = useLocale()
 
   const services = [
     {
@@ -110,11 +109,6 @@ export default function ServicesPage() {
       icon: <Shield className="h-6 w-6" />,
       title: t('services.whyChooseUs.insured.title'),
       description: t('services.whyChooseUs.insured.description')
-    },
-    {
-      icon: <Zap className="h-6 w-6" />,
-      title: t('services.whyChooseUs.local.title'),
-      description: t('services.whyChooseUs.local.description')
     }
   ]
 
@@ -171,7 +165,25 @@ export default function ServicesPage() {
                   >
                     {service.icon}
                   </div>
-                  <CardTitle className="text-xl mb-2 text-gray-800">{service.title}</CardTitle>
+                  <CardTitle className="text-xl mb-2 text-gray-800">
+                    {service.href === '/services/maintenance'
+                      ? (() => {
+                          const title = service.title
+                          const styledWord =
+                            locale === 'it' ? 'Mantenimento' : 'Maintenance'
+                          const parts = title.split(styledWord)
+                          return (
+                            <>
+                              {parts[0]}
+                              <span className="bg-gradient-to-r from-teal-600 to-emerald-600 bg-clip-text text-transparent">
+                                {styledWord}
+                              </span>
+                              {parts[1]}
+                            </>
+                          )
+                        })()
+                      : service.title}
+                  </CardTitle>
                   <CardDescription className="text-gray-600">
                     {service.description}
                   </CardDescription>
