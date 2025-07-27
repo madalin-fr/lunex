@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import { useCookieConsent } from '@/contexts/CookieConsentContext';
 import { useLocale } from '@/hooks/useLocale';
-import { Cookie, Settings, X } from 'lucide-react';
+import { Cookie, Settings } from 'lucide-react';
 import { CookieCustomizationModal } from './CookieCustomizationModal';
 
 export function CookieBanner() {

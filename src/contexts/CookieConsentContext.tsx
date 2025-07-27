@@ -4,6 +4,14 @@ import React, { createContext, useContext, useEffect, useState, ReactNode } from
 import { CookieConsent } from '@/types/cookies';
 import { cookieConsentService } from '@/lib/cookies/consent-service';
 
+// Extend Window interface for gtag
+declare global {
+  interface Window {
+    gtag: (...args: unknown[]) => void;
+    dataLayer: unknown[];
+  }
+}
+
 interface CookieConsentContextType {
   consent: CookieConsent | null;
   hasConsent: boolean;
@@ -127,8 +135,8 @@ export function useAnalytics() {
   
   return {
     canTrack: isAllowed('analytics'),
-    gtag: (typeof window !== 'undefined' && isAllowed('analytics')) 
-      ? (window as any).gtag 
+    gtag: (typeof window !== 'undefined' && isAllowed('analytics') && window.gtag)
+      ? window.gtag
       : () => {}, // No-op function
   };
 }

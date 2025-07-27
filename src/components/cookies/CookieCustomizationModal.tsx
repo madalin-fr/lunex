@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { useCookieConsent } from '@/contexts/CookieConsentContext';
 import { useLocale } from '@/hooks/useLocale';
-import { COOKIE_CATEGORIES, CookieConsent } from '@/types/cookies';
+import { COOKIE_CATEGORIES } from '@/types/cookies';
 import { X, Save, Shield, BarChart3, Cog, Globe } from 'lucide-react';
 
 interface CookieCustomizationModalProps {

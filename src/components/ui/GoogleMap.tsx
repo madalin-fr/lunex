@@ -54,40 +54,14 @@ export default function GoogleMap({
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  // If external services consent not given, show fallback
-  if (!canUseGoogleMaps) {
-    return (
-      <div
-        className={`relative rounded-xl overflow-hidden shadow-lg bg-gradient-to-br from-gray-100 to-gray-200 ${className}`}
-        style={{ height, width }}
-      >
-        <div className="absolute inset-0 flex items-center justify-center p-6">
-          <div className="text-center">
-            <div className="w-16 h-16 bg-gradient-to-br from-green-100 to-emerald-100 rounded-full flex items-center justify-center mx-auto mb-4">
-              <svg className="w-8 h-8 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-              </svg>
-            </div>
-            <h3 className="text-lg font-semibold text-gray-900 mb-2">
-              {t('contactPage.info.address.title')}
-            </h3>
-            <div className="text-gray-600 space-y-1">
-              <p className="font-medium">{t('contactPage.info.address.line1')}</p>
-              <p>{t('contactPage.info.address.line2')}</p>
-              <p>{t('contactPage.info.address.city')}</p>
-            </div>
-            <p className="text-sm text-gray-500 mt-4">
-              {t('cookies.categories.external.description')}
-            </p>
-          </div>
-        </div>
-      </div>
-    );
-  }
-
   useEffect(() => {
     let isMounted = true;
+
+    // Don't load map if external services consent not given
+    if (!canUseGoogleMaps) {
+      setIsLoading(false);
+      return;
+    }
 
     const initMap = () => {
       if (!isMounted || !mapRef.current) return;
@@ -228,15 +202,47 @@ export default function GoogleMap({
       }
     };
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []); // Only run once on mount
+  }, [canUseGoogleMaps]); // Re-run when consent changes
 
   // Update map center and zoom when props change
   useEffect(() => {
-    if (mapInstanceRef.current && window.google) {
+    if (mapInstanceRef.current && window.google && canUseGoogleMaps) {
       mapInstanceRef.current.setCenter(center);
       mapInstanceRef.current.setZoom(zoom);
     }
-  }, [center, zoom]);
+  }, [center, zoom, canUseGoogleMaps]);
+
+  // If external services consent not given, show fallback
+  if (!canUseGoogleMaps) {
+    return (
+      <div
+        className={`relative rounded-xl overflow-hidden shadow-lg bg-gradient-to-br from-gray-100 to-gray-200 ${className}`}
+        style={{ height, width }}
+      >
+        <div className="absolute inset-0 flex items-center justify-center p-6">
+          <div className="text-center">
+            <div className="w-16 h-16 bg-gradient-to-br from-green-100 to-emerald-100 rounded-full flex items-center justify-center mx-auto mb-4">
+              <svg className="w-8 h-8 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+              </svg>
+            </div>
+            <h3 className="text-lg font-semibold text-gray-900 mb-2">
+              {t('contactPage.info.address.title')}
+            </h3>
+            <div className="text-gray-600 space-y-1">
+              <p className="font-medium">{t('contactPage.info.address.line1')}</p>
+              <p>{t('contactPage.info.address.line2')}</p>
+              <p>{t('contactPage.info.address.city')}</p>
+            </div>
+            <p className="text-sm text-gray-500 mt-4">
+              {t('cookies.categories.external.description')}
+            </p>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   if (error) {
     return (

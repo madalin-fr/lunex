@@ -733,13 +733,6 @@ export const common = {
     title: 'Politica sui Cookie',
     subtitle: 'Comprendere come utilizziamo i cookie sul nostro sito web',
     lastUpdated: 'Ultimo aggiornamento',
-    banner: {
-      title: 'Utilizziamo i cookie',
-      message: 'Questo sito web utilizza i cookie per migliorare la tua esperienza di navigazione. Continuando a utilizzare il nostro sito, acconsenti al nostro utilizzo dei cookie.',
-      accept: 'Accetta Tutti',
-      decline: 'Rifiuta',
-      customize: 'Personalizza Impostazioni'
-    },
     intro: {
       title: 'Introduzione',
       content: 'Questa Politica sui Cookie spiega cosa sono i cookie e come li utilizziamo sul sito web di Lunex Cleaning Services. Ti incoraggiamo a leggere questa politica per capire quali cookie utilizziamo e perché.',

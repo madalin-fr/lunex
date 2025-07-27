@@ -734,13 +734,6 @@ export const common = {
     title: 'Cookie Policy',
     subtitle: 'Understanding how we use cookies on our website',
     lastUpdated: 'Last updated',
-    banner: {
-      title: 'We use cookies',
-      message: 'This website uses cookies to enhance your browsing experience. By continuing to use our site, you consent to our use of cookies.',
-      accept: 'Accept All',
-      decline: 'Decline',
-      customize: 'Customize Settings'
-    },
     intro: {
       title: 'Introduction',
       content: 'This Cookie Policy explains what cookies are and how we use them on the Lunex Cleaning Services website. We encourage you to read this policy to understand what cookies we use and why.',

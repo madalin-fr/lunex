@@ -12,15 +12,15 @@ export function ConditionalAnalytics() {
   useEffect(() => {
     if (canTrack) {
       // Initialize Google Analytics
-      if (typeof window !== 'undefined' && (window as any).gtag) {
-        (window as any).gtag('consent', 'update', {
+      if (typeof window !== 'undefined' && window.gtag) {
+        window.gtag('consent', 'update', {
           analytics_storage: 'granted'
         });
       }
     } else {
       // Revoke consent if previously granted
-      if (typeof window !== 'undefined' && (window as any).gtag) {
-        (window as any).gtag('consent', 'update', {
+      if (typeof window !== 'undefined' && window.gtag) {
+        window.gtag('consent', 'update', {
           analytics_storage: 'denied'
         });
       }
@@ -60,7 +60,7 @@ export function ConditionalAnalytics() {
 // Component for Google Analytics consent initialization (loads regardless of consent)
 export function GoogleAnalyticsInit() {
   return (
-    <Script id="gtag-consent-init" strategy="beforeInteractive">
+    <Script id="gtag-consent-init" strategy="afterInteractive">
       {`
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
