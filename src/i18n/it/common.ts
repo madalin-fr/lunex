@@ -328,6 +328,11 @@ export const common = {
         weeklyDesc: 'Ideale per la maggior parte delle case e piccoli uffici',
         biweeklyDesc: 'Ottimo per famiglie impegnate e uffici di medie dimensioni',
         monthlyDesc: 'Manutenzione completa per cura stagionale',
+        // Frequency translations
+        dailyFreq: 'Giornaliero',
+        weeklyFreq: 'Settimanale',
+        biweeklyFreq: 'Bisettimanale',
+        monthlyFreq: 'Mensile',
         mostPopular: 'Più Popolare',
         choosePlan: 'Scegli Piano',
         howItWorks: 'Come Funziona',

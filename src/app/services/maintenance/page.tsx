@@ -67,25 +67,25 @@ export default function MaintenanceCleaningPage() {
     {
       title: t('services.maintenance.schedules.daily'),
       description: t('services.maintenance.schedules.dailyDesc'),
-      frequency: "Daily",
+      frequency: t('services.maintenance.schedules.dailyFreq'),
       popular: false
     },
     {
       title: t('services.maintenance.schedules.weekly'),
       description: t('services.maintenance.schedules.weeklyDesc'),
-      frequency: "Weekly",
+      frequency: t('services.maintenance.schedules.weeklyFreq'),
       popular: true
     },
     {
       title: t('services.maintenance.schedules.biweekly'),
       description: t('services.maintenance.schedules.biweeklyDesc'),
-      frequency: "Bi-weekly",
+      frequency: t('services.maintenance.schedules.biweeklyFreq'),
       popular: false
     },
     {
       title: t('services.maintenance.schedules.monthly'),
       description: t('services.maintenance.schedules.monthlyDesc'),
-      frequency: "Monthly",
+      frequency: t('services.maintenance.schedules.monthlyFreq'),
       popular: false
     }
   ]

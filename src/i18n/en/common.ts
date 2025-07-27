@@ -329,6 +329,11 @@ export const common = {
         weeklyDesc: 'Ideal for most homes and small offices',
         biweeklyDesc: 'Great for busy families and medium-sized offices',
         monthlyDesc: 'Comprehensive maintenance for seasonal care',
+        // Frequency translations
+        dailyFreq: 'Daily',
+        weeklyFreq: 'Weekly',
+        biweeklyFreq: 'Bi-weekly',
+        monthlyFreq: 'Monthly',
         mostPopular: 'Most Popular',
         choosePlan: 'Choose Plan',
         howItWorks: 'How It Works',
