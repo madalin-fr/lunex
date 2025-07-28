@@ -165,79 +165,7 @@ export const common = {
       }
     },
     
-    postRenovation: {
-      title: 'Pulizie Post-Ristrutturazione',
-      name: 'Pulizie Post-Ristrutturazione',
-      subtitle: 'Pulizie specializzate dopo lavori di costruzione e ristrutturazione',
-      description: 'Servizi di pulizia specializzati per preparare il vostro spazio dopo lavori di ristrutturazione.',
-      features: {
-        specialized: 'Competenza Specializzata',
-        specializedDesc: 'Formati nelle tecniche di pulizia post-costruzione',
-        debris: 'Rimozione Detriti',
-        debrisDesc: 'Rimozione sicura di detriti edili e materiali',
-        dust: 'Eliminazione Polveri',
-        dustDesc: 'Rimozione accurata della polvere da tutte le superfici e fessure',
-        safety: 'Protocolli di Sicurezza',
-        safetyDesc: 'Misure di sicurezza appropriate e dispositivi di protezione utilizzati'
-      },
-      process: {
-        step1: 'Ispezione Cantiere',
-        step1Desc: 'Valutazione dei requisiti di pulizia post-costruzione',
-        step2: 'Rimozione Detriti',
-        step2Desc: 'Rimozione sistematica di detriti edili e materiali',
-        step3: 'Pulizia Profonda',
-        step3Desc: 'Pulizia intensiva di tutte le superfici, infissi e spazi',
-        step4: 'Preparazione Finale',
-        step4Desc: 'Finitura finale e preparazione per l\'occupazione'
-      },
-      includes: {
-        title: 'Copertura Servizio',
-        debris: 'Rimozione detriti edili',
-        dust: 'Rimozione polvere fine da tutte le superfici',
-        fixtures: 'Pulizia infissi e elettrodomestici',
-        floors: 'Pulizia e finitura pavimenti',
-        windows: 'Pulizia finestre e vetri',
-        sanitization: 'Sanificazione completa',
-        final: 'Walkthrough finale e ritocchi'
-      }
-    },
     
-    luxury: {
-      title: 'Pulizie Ville',
-      name: 'Pulizie Ville',
-      subtitle: 'Servizi di pulizia premium per ville e proprietà',
-      description: 'Servizi di pulizia di alta classe per ville e proprietà di pregio.',
-      features: {
-        premium: 'Servizio Premium',
-        premiumDesc: 'Standard di pulizia di massima qualità per proprietà di lusso',
-        attention: 'Attenzione ai Dettagli',
-        attentionDesc: 'Cura meticolosa per arredi pregiati e superfici',
-        discreet: 'Servizio Discreto',
-        discreetDesc: 'Servizio professionale e discreto rispettando la vostra privacy',
-        custom: 'Soluzioni Personalizzate',
-        customDesc: 'Soluzioni di pulizia su misura per caratteristiche uniche della proprietà'
-      },
-      process: {
-        step1: 'Valutazione Proprietà',
-        step1Desc: 'Valutazione dettagliata dei requisiti della proprietà di lusso',
-        step2: 'Piano Personalizzato',
-        step2Desc: 'Sviluppo di protocolli di pulizia specializzati',
-        step3: 'Pulizia Premium',
-        step3Desc: 'Esecuzione utilizzando prodotti e tecniche premium',
-        step4: 'Garanzia Qualità',
-        step4Desc: 'Controllo qualità finale e conferma soddisfazione cliente'
-      },
-      includes: {
-        title: 'Servizi Premium',
-        furniture: 'Cura mobili pregiati e antiquariato',
-        surfaces: 'Pulizia superfici premium',
-        chandeliers: 'Pulizia lampadari e illuminazione',
-        marble: 'Manutenzione marmo e pietre',
-        carpet: 'Cura tappeti e tappezzeria',
-        outdoor: 'Pulizia spazi esterni',
-        maintenance: 'Programmi di manutenzione continua'
-      }
-    },
     
     deep: {
       title: 'Pulizie Approfondite',

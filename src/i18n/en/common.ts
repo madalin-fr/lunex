@@ -165,79 +165,7 @@ export const common = {
       }
     },
     
-    postRenovation: {
-      title: 'Post-Renovation Cleaning',
-      name: 'Post-Renovation Cleaning',
-      subtitle: 'Specialized cleaning after construction and renovation work',
-      description: 'Expert cleaning services to remove construction debris and prepare your space for use.',
-      features: {
-        specialized: 'Specialized Expertise',
-        specializedDesc: 'Trained in post-construction cleaning techniques',
-        debris: 'Debris Removal',
-        debrisDesc: 'Safe removal of construction debris and materials',
-        dust: 'Dust Elimination',
-        dustDesc: 'Thorough dust removal from all surfaces and crevices',
-        safety: 'Safety Protocols',
-        safetyDesc: 'Proper safety measures and protective equipment used'
-      },
-      process: {
-        step1: 'Site Inspection',
-        step1Desc: 'Assessment of post-construction cleaning requirements',
-        step2: 'Debris Removal',
-        step2Desc: 'Systematic removal of construction debris and materials',
-        step3: 'Deep Cleaning',
-        step3Desc: 'Intensive cleaning of all surfaces, fixtures, and spaces',
-        step4: 'Final Preparation',
-        step4Desc: 'Final polish and preparation for occupancy'
-      },
-      includes: {
-        title: 'Service Coverage',
-        debris: 'Construction debris removal',
-        dust: 'Fine dust removal from all surfaces',
-        fixtures: 'Fixture and appliance cleaning',
-        floors: 'Floor cleaning and finishing',
-        windows: 'Window and glass cleaning',
-        sanitization: 'Complete sanitization',
-        final: 'Final walkthrough and touch-ups'
-      }
-    },
     
-    luxury: {
-      title: 'Villa Cleaning',
-      name: 'Villa Cleaning',
-      subtitle: 'Premium cleaning services for villa properties',
-      description: 'White-glove cleaning services for luxury villas and high-end properties.',
-      features: {
-        premium: 'Premium Service',
-        premiumDesc: 'Highest quality cleaning standards for luxury properties',
-        attention: 'Attention to Detail',
-        attentionDesc: 'Meticulous care for fine furnishings and surfaces',
-        discreet: 'Discreet Service',
-        discreetDesc: 'Professional, discreet service respecting your privacy',
-        custom: 'Custom Solutions',
-        customDesc: 'Tailored cleaning solutions for unique property features'
-      },
-      process: {
-        step1: 'Property Assessment',
-        step1Desc: 'Detailed evaluation of luxury property requirements',
-        step2: 'Customized Plan',
-        step2Desc: 'Development of specialized cleaning protocols',
-        step3: 'Premium Cleaning',
-        step3Desc: 'Execution using premium products and techniques',
-        step4: 'Quality Assurance',
-        step4Desc: 'Final quality check and client satisfaction confirmation'
-      },
-      includes: {
-        title: 'Premium Services',
-        furniture: 'Fine furniture and antique care',
-        surfaces: 'Premium surface cleaning',
-        chandeliers: 'Chandelier and lighting cleaning',
-        marble: 'Marble and stone maintenance',
-        carpet: 'Carpet and upholstery care',
-        outdoor: 'Outdoor space cleaning',
-        maintenance: 'Ongoing maintenance programs'
-      }
-    },
     
     deep: {
       title: 'Deep Cleaning',
@@ -876,7 +804,7 @@ export const common = {
     },
     responses: {
       quote: {
-        text: 'Perfect! Our prices depend on the type of service:\n\n• Home cleaning: €15-25/hour\n• Office cleaning: €20-30/hour\n• Post-renovation cleaning: €30-50/hour\n• Luxury villa cleaning: €25-40/hour\n\nWould you like a personalized quote?',
+        text: 'Perfect! Our prices depend on the type of service.\n\nWould you like a personalized quote?',
         suggestions: ['Yes, I want a quote', 'Available services', 'How to book']
       },
       hours: {
