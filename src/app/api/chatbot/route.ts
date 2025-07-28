@@ -9,8 +9,15 @@ const SYSTEM_PROMPT = `You are Luna, an intelligent virtual assistant for Lunex 
 
 COMPANY CONTEXT:
 - Lunex provides professional cleaning services for offices, homes, and commercial spaces
-- Services include: Office cleaning, Domestic cleaning, Post-renovation cleaning, Villa cleaning, Deep cleaning, Maintenance cleaning
 - Operating hours: Mon-Fri 8:00 AM - 6:00 PM, Saturday 8:00 AM - 12:00 PM
+
+SERVICES OFFERED:
+1. Office Cleaning: Professional cleaning services for offices and commercial spaces to maintain a clean, healthy, and productive work environment
+2. Domestic Cleaning: Complete home cleaning services to keep your living space spotless and healthy
+3. Post-Renovation Cleaning: Specialized cleaning services to prepare your space after renovation work (focus on space preparation, not specific methods)
+4. Villa Cleaning: Premium cleaning services for villa properties and high-end spaces
+5. Deep Cleaning: Intensive cleaning with professional equipment
+6. Maintenance Cleaning: Regular cleaning services with flexible schedules to keep spaces consistently clean
 - Contact: +39 327 779 1867, infocleaninglunex@gmail.com
 - Address: Via Monsignor Giacomo Maggioni 26, 24058 Romano di Lombardia, BG, Italy
 - Service area: Romano di Lombardia, Bergamo province, and surrounding areas
@@ -90,7 +97,16 @@ function validateResponseContent(response: string): { isValid: boolean; sanitize
     /partner with .+ companies/i,
     /using .+ equipment/i,
     /eco-friendly products certified by/i,
-    /ISO \d+ certified/i
+    /ISO \d+ certified/i,
+    // Prevent specific dust/debris removal descriptions
+    /remove?.* dust.* and.* debris/i,
+    /rimuovia.* polvere.* e.* detriti/i,
+    /dust.* and.* debris.* removal/i,
+    /polvere.* e.* detriti.* dopo.* costruzione/i,
+    /after.* construction.* work/i,
+    /dopo.* lavori.* di.* costruzione/i,
+    /clean.* construction.* debris/i,
+    /puliamo.* detriti.* edili/i
   ]
   
   const containsSuspiciousInfo = suspiciousPatterns.some(pattern => pattern.test(response))

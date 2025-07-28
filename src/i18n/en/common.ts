@@ -1079,7 +1079,6 @@ export const common = {
     
     story: {
       title: 'Our Story',
-      content1: 'Founded in Romano di Lombardia, Lunex has grown from a small family business to one of the most trusted cleaning services in the Bergamo province. Our commitment to quality and customer satisfaction has been the cornerstone of our success.',
       content2: 'We believe that a clean environment is essential for health, productivity, and well-being. That\'s why we use only the best eco-friendly products and employ trained professionals who care about the details.',
       content3: 'Today, we serve hundreds of homes, offices, and commercial spaces, building lasting relationships based on trust, reliability, and exceptional service.'
     },

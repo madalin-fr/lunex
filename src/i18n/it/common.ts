@@ -169,7 +169,7 @@ export const common = {
       title: 'Pulizie Post-Ristrutturazione',
       name: 'Pulizie Post-Ristrutturazione',
       subtitle: 'Pulizie specializzate dopo lavori di costruzione e ristrutturazione',
-      description: 'Servizi di pulizia esperti per rimuovere detriti edili e preparare il vostro spazio per l\'uso.',
+      description: 'Servizi di pulizia specializzati per preparare il vostro spazio dopo lavori di ristrutturazione.',
       features: {
         specialized: 'Competenza Specializzata',
         specializedDesc: 'Formati nelle tecniche di pulizia post-costruzione',
@@ -372,8 +372,8 @@ export const common = {
         description: 'Copertura assicurativa completa per la vostra tranquillità'
       },
       local: {
-        title: 'sterge',
-        description: 'sterge'
+        title: 'Azienda Locale',
+        description: 'Serviamo con orgoglio Romano di Lombardia e le zone limitrofe'
       }
     },
     
@@ -1078,7 +1078,6 @@ export const common = {
     
     story: {
       title: 'La Nostra Storia',
-      content1: 'Fondata a Romano di Lombardia, Lunex è cresciuta da una piccola impresa familiare a uno dei servizi di pulizia più affidabili della provincia di Bergamo. Il nostro impegno per la qualità e la soddisfazione del cliente è stato la pietra angolare del nostro successo.',
       content2: 'Crediamo che un ambiente pulito sia essenziale per la salute, la produttività e il benessere. Ecco perché utilizziamo solo i migliori prodotti eco-compatibili e impieghiamo professionisti qualificati che si preoccupano dei dettagli.',
       content3: 'Oggi serviamo centinaia di case, uffici e spazi commerciali, costruendo relazioni durature basate su fiducia, affidabilità e servizio eccezionale.'
     },
