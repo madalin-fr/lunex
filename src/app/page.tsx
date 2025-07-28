@@ -1,6 +1,7 @@
 'use client'
 
 import Link from "next/link"
+import Image from "next/image"
 import { useLocale } from "@/hooks/useLocale"
 import { useState, useEffect } from 'react'
 import { getLocalizedValue } from '@/lib/sanity/utils'
@@ -375,12 +376,13 @@ export default function HomePage() {
                     {/* Profile section */}
                     <div className="flex items-center">
                       <div className="relative">
-                        <div className="w-12 h-12 rounded-full overflow-hidden ring-3 ring-white shadow-lg">
+                        <div className="relative w-12 h-12 rounded-full overflow-hidden ring-3 ring-white shadow-lg">
                           {review.clientPhoto?.asset?.url ? (
-                            <img
+                            <Image
                               src={review.clientPhoto.asset.url}
                               alt={getLocalizedValue(review.clientName, locale)}
-                              className="w-full h-full object-cover"
+                              fill
+                              className="object-cover"
                             />
                           ) : (
                             <div className="w-full h-full bg-gradient-to-br from-green-500 to-emerald-500 flex items-center justify-center">

@@ -9,7 +9,7 @@ import { NavItem } from '@/types'
 import { Button } from '@/components/ui/button'
 
 export function Header() {
-  const { t, locale, setLocale } = useLocale()
+  const { t } = useLocale()
   const router = useRouter()
   const pathname = usePathname()
   const [isMenuOpen, setIsMenuOpen] = useState(false)

@@ -164,14 +164,14 @@ NEXT_PUBLIC_SANITY_DATASET=production`}
             
             if (isEnglishRoute) {
               // On English route, use English slug and English content
-              const englishSlug = (rawPost.slug as any)?.en?.current
+              const englishSlug = (rawPost.slug as { en?: { current: string }, it?: { current: string } })?.en?.current
               if (englishSlug) {
                 post = getLocalizedPost(rawPost, 'en')
                 slugValue = englishSlug
               }
             } else {
               // On Italian route, use Italian slug and Italian content
-              const italianSlug = (rawPost.slug as any)?.it?.current
+              const italianSlug = (rawPost.slug as { en?: { current: string }, it?: { current: string } })?.it?.current
               if (italianSlug) {
                 post = getLocalizedPost(rawPost, 'it')
                 slugValue = italianSlug

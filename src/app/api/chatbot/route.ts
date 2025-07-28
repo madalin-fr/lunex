@@ -48,24 +48,6 @@ interface ChatRequest {
   locale?: string
 }
 
-// Validated company information that the AI can reference
-const VALIDATED_COMPANY_INFO = {
-  services: [
-    'Office cleaning',
-    'Domestic cleaning',
-    'Post-renovation cleaning',
-    'Villa cleaning',
-    'Deep cleaning',
-    'Maintenance cleaning'
-  ],
-  contact: {
-    phone: '+39 327 779 1867',
-    email: 'infocleaninglunex@gmail.com',
-    address: 'Via Monsignor Giacomo Maggioni 26, 24058 Romano di Lombardia, BG, Italy'
-  },
-  hours: 'Mon-Fri 8:00 AM - 6:00 PM, Saturday 8:00 AM - 12:00 PM',
-  serviceArea: 'Romano di Lombardia, Bergamo province, and surrounding areas'
-}
 
 // Function to remove price tags and validate response content
 function sanitizeResponse(response: string): string {

@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import Image from 'next/image'
 import { useLocale } from '@/hooks/useLocale'
 import { Star, X, Check, Upload, User } from 'lucide-react'
 
@@ -244,9 +245,11 @@ export function ReviewForm({ isOpen, onClose }: ReviewFormProps) {
               <div className="flex items-center space-x-4">
                 {imagePreview ? (
                   <div className="relative">
-                    <img
+                    <Image
                       src={imagePreview}
                       alt="Profile preview"
+                      width={80}
+                      height={80}
                       className="w-20 h-20 rounded-full object-cover border-4 border-purple-200"
                     />
                     <button

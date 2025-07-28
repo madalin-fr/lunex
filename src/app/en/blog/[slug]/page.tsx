@@ -1,5 +1,4 @@
 import { Metadata } from 'next';
-import { notFound } from 'next/navigation';
 import { client } from '@/lib/sanity/client';
 import { groq } from 'next-sanity';
 
