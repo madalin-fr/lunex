@@ -38,13 +38,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     // Add English version if slug exists
     if (post.slugEn && post.slugEn.trim() !== '') {
       postUrls.push({
-        url: `${baseUrl}/blog/${post.slugEn}`,
+        url: `${baseUrl}/en/blog/${post.slugEn}`,
         lastModified: new Date(post.updatedAt),
       });
     }
   });
 
   const staticPages = [
+    // Italian pages (default)
     { url: `${baseUrl}/`, lastModified: new Date() },
     { url: `${baseUrl}/about`, lastModified: new Date() },
     { url: `${baseUrl}/blog`, lastModified: new Date() },
@@ -60,6 +61,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${baseUrl}/services/office`, lastModified: new Date() },
     { url: `${baseUrl}/services/post-renovation`, lastModified: new Date() },
     { url: `${baseUrl}/terms`, lastModified: new Date() },
+    
+    // English pages (/en/)
+    { url: `${baseUrl}/en/`, lastModified: new Date() },
+    { url: `${baseUrl}/en/about`, lastModified: new Date() },
+    { url: `${baseUrl}/en/blog`, lastModified: new Date() },
+    { url: `${baseUrl}/en/contact`, lastModified: new Date() },
+    { url: `${baseUrl}/en/reviews`, lastModified: new Date() },
+    { url: `${baseUrl}/en/services`, lastModified: new Date() },
   ];
 
   return [...staticPages, ...postUrls];

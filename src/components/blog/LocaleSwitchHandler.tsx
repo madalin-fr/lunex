@@ -26,7 +26,10 @@ export function LocaleSwitchHandler({ currentSlug, slugMap }: LocaleSwitchHandle
       
       if (targetSlug && targetSlug !== currentSlug) {
         hasRedirectedRef.current = true
-        router.push(`/blog/${targetSlug}`)
+        
+        // Generate the correct URL based on target locale
+        const targetUrl = locale === 'en' ? `/en/blog/${targetSlug}` : `/blog/${targetSlug}`
+        router.push(targetUrl)
       }
       
       previousLocaleRef.current = locale

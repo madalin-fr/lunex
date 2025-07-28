@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
+import { useRouter, usePathname } from 'next/navigation'
 import { useLocale } from '@/hooks/useLocale'
 import { cn } from '@/lib/utils'
 import { NavItem } from '@/types'
@@ -9,6 +10,8 @@ import { Button } from '@/components/ui/button'
 
 export function Header() {
   const { t, locale, setLocale } = useLocale()
+  const router = useRouter()
+  const pathname = usePathname()
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
 
@@ -20,17 +23,39 @@ export function Header() {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
-  const navigation: NavItem[] = [
-    { href: '/', label: t('home') },
-    { href: '/services', label: t('servicesNav') },
-    { href: '/about', label: t('about') },
-    { href: '/reviews', label: t('reviewsNav') },
-    { href: '/blog', label: t('blogNav') },
-    { href: '/contact', label: t('contact') },
-  ]
+  // Detect current locale from URL
+  const isEnglishRoute = pathname.startsWith('/en')
+  const currentLocale = isEnglishRoute ? 'en' : 'it'
+
+  // Get navigation links based on current locale
+  const getNavLinks = (locale: string): NavItem[] => {
+    const basePath = locale === 'en' ? '/en' : ''
+    return [
+      { href: `${basePath}/`, label: t('home') },
+      { href: `${basePath}/services`, label: t('servicesNav') },
+      { href: `${basePath}/about`, label: t('about') },
+      { href: `${basePath}/reviews`, label: t('reviewsNav') },
+      { href: `${basePath}/blog`, label: t('blogNav') },
+      { href: `${basePath}/contact`, label: t('contact') },
+    ]
+  }
+
+  const navigation = getNavLinks(currentLocale)
 
   const toggleLanguage = () => {
-    setLocale(locale === 'it' ? 'en' : 'it')
+    let newPath = pathname
+    
+    if (isEnglishRoute) {
+      // Switch from English to Italian (remove /en prefix)
+      newPath = pathname.replace('/en', '') || '/'
+    } else {
+      // Switch from Italian to English (add /en prefix)
+      newPath = `/en${pathname}`
+    }
+    
+    // Navigate directly without changing locale first
+    // The destination page will handle setting the correct locale
+    router.push(newPath)
   }
 
   return (
@@ -74,7 +99,7 @@ export function Header() {
               onClick={toggleLanguage}
               className="relative text-sm font-medium px-3 py-1 rounded-full backdrop-blur-sm bg-white/50 hover:bg-white/70 border border-gray-200/40 hover:border-gray-300/40 hover:shadow-md transition-all duration-300 hover:scale-105"
             >
-              <span className="relative z-10 text-gray-700">{locale === 'it' ? 'EN' : 'IT'}</span>
+              <span className="relative z-10 text-gray-700">{currentLocale === 'it' ? 'EN' : 'IT'}</span>
             </button>
             <Link href="/booking">
               <Button
@@ -149,7 +174,7 @@ export function Header() {
                 onClick={toggleLanguage}
                 className="self-start text-sm font-medium px-4 py-2 rounded-full backdrop-blur-sm bg-white/70 hover:bg-white border border-gray-200/40 hover:border-gray-300/40 hover:shadow-md transition-all duration-300 text-gray-700"
               >
-                {locale === 'it' ? 'EN' : 'IT'}
+                {currentLocale === 'it' ? 'EN' : 'IT'}
               </button>
               <Link
                 href="/booking"

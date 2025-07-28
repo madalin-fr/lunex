@@ -47,6 +47,10 @@ export default function BlogPage() {
     fetchPosts()
   }, [])
 
+  // Determine if we're on the English blog route
+  const isEnglishRoute = typeof window !== 'undefined' && window.location.pathname.startsWith('/en')
+  const blogBasePath = isEnglishRoute ? '/en/blog' : '/blog'
+
   if (!hasValidConfig) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50">
@@ -154,14 +158,32 @@ NEXT_PUBLIC_SANITY_DATASET=production`}
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {posts.map((rawPost: Post) => {
-            const post = getLocalizedPost(rawPost, locale)
-            if (!post) return null
-            const slugValue = post.slug?.current || ''
+            // Get the correct slug based on the current route
+            let slugValue = ''
+            let post = null
+            
+            if (isEnglishRoute) {
+              // On English route, use English slug and English content
+              const englishSlug = (rawPost.slug as any)?.en?.current
+              if (englishSlug) {
+                post = getLocalizedPost(rawPost, 'en')
+                slugValue = englishSlug
+              }
+            } else {
+              // On Italian route, use Italian slug and Italian content
+              const italianSlug = (rawPost.slug as any)?.it?.current
+              if (italianSlug) {
+                post = getLocalizedPost(rawPost, 'it')
+                slugValue = italianSlug
+              }
+            }
+            
+            if (!post || !slugValue) return null
             
             return (
               <article key={post._id} className="group bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
                 {post.mainImage && (
-                  <Link href={`/blog/${slugValue}`}>
+                  <Link href={`${blogBasePath}/${slugValue}`}>
                     <div className="relative h-56 w-full overflow-hidden">
                       <Image
                         src={urlFor({ ...post.mainImage, _type: 'image' }).width(400).height(300).url()}
@@ -194,7 +216,7 @@ NEXT_PUBLIC_SANITY_DATASET=production`}
                   )}
                   
                   <h2 className="text-xl font-bold text-gray-900 mb-3 leading-tight">
-                    <Link href={`/blog/${slugValue}`} className="hover:text-blue-600 transition-colors duration-200">
+                    <Link href={`${blogBasePath}/${slugValue}`} className="hover:text-blue-600 transition-colors duration-200">
                       {post.title}
                     </Link>
                   </h2>

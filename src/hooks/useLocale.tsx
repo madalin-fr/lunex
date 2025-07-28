@@ -1,6 +1,7 @@
 'use client'
 
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react'
+import { usePathname } from 'next/navigation'
 import { Locale, defaultLocale, formatMessage } from '@/i18n'
 
 interface LocaleContextType {
@@ -15,30 +16,27 @@ const LOCALE_STORAGE_KEY = 'lunex-locale'
 const LOCALE_COOKIE_KEY = 'locale'
 
 export function LocaleProvider({ children }: { children: ReactNode }) {
+  const pathname = usePathname()
   // Initialize with default locale to avoid SSR/hydration issues
   const [locale, setLocaleState] = useState<Locale>(defaultLocale)
   const [isHydrated, setIsHydrated] = useState(false)
 
+  // Detect locale from URL
+  useEffect(() => {
+    const urlLocale = pathname.startsWith('/en') ? 'en' : 'it'
+    setLocaleState(urlLocale)
+    
+    // Update localStorage and cookie to match URL
+    if (typeof window !== 'undefined') {
+      localStorage.setItem(LOCALE_STORAGE_KEY, urlLocale)
+      document.cookie = `${LOCALE_COOKIE_KEY}=${urlLocale}; path=/; max-age=31536000`
+      document.documentElement.lang = urlLocale
+    }
+  }, [pathname])
+
   // Handle client-side initialization after hydration
   useEffect(() => {
     setIsHydrated(true)
-    
-    // Check localStorage
-    const storedLocale = localStorage.getItem(LOCALE_STORAGE_KEY) as Locale
-    if (storedLocale === 'it' || storedLocale === 'en') {
-      setLocaleState(storedLocale)
-      // Also set cookie for server components
-      document.cookie = `${LOCALE_COOKIE_KEY}=${storedLocale}; path=/; max-age=31536000`
-      return
-    }
-    
-    // Check browser language preference
-    const browserLang = window.navigator.language.toLowerCase()
-    if (browserLang.startsWith('it')) {
-      setLocaleState('it')
-      localStorage.setItem(LOCALE_STORAGE_KEY, 'it')
-      document.cookie = `${LOCALE_COOKIE_KEY}=it; path=/; max-age=31536000`
-    }
   }, [])
 
   // Update localStorage and cookie when locale changes
