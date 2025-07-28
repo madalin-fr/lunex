@@ -17,13 +17,32 @@ async function getBaseUrl() {
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = await getBaseUrl();
-  const postsQuery = groq`*[_type == "post"]{ "slug": slug.current, "updatedAt": _updatedAt }`;
-  const posts = await client.fetch<{ slug: string; updatedAt: string }[]>(postsQuery);
+  const postsQuery = groq`*[_type == "post" && (defined(slug.it.current) || defined(slug.en.current))]{
+    "slugIt": slug.it.current,
+    "slugEn": slug.en.current,
+    "updatedAt": _updatedAt
+  }`;
+  const posts = await client.fetch<{ slugIt: string; slugEn: string; updatedAt: string }[]>(postsQuery);
 
-  const postUrls = posts.map((post) => ({
-    url: `${baseUrl}/blog/${post.slug}`,
-    lastModified: new Date(post.updatedAt),
-  }));
+  const postUrls: { url: string; lastModified: Date }[] = [];
+  
+  posts.forEach((post) => {
+    // Add Italian version if slug exists
+    if (post.slugIt && post.slugIt.trim() !== '') {
+      postUrls.push({
+        url: `${baseUrl}/blog/${post.slugIt}`,
+        lastModified: new Date(post.updatedAt),
+      });
+    }
+    
+    // Add English version if slug exists
+    if (post.slugEn && post.slugEn.trim() !== '') {
+      postUrls.push({
+        url: `${baseUrl}/blog/${post.slugEn}`,
+        lastModified: new Date(post.updatedAt),
+      });
+    }
+  });
 
   const staticPages = [
     { url: `${baseUrl}/`, lastModified: new Date() },
