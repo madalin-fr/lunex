@@ -1,7 +1,20 @@
 import { MetadataRoute } from 'next';
+import { headers } from 'next/headers';
 
-export default function robots(): MetadataRoute.Robots {
-  const baseUrl = process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : 'http://localhost:3000';
+async function getBaseUrl() {
+  const headersList = await headers();
+  const host = headersList.get('host');
+  const protocol = headersList.get('x-forwarded-proto') || 'http';
+  
+  if (host) {
+    return `${protocol}://${host}`;
+  }
+  
+  return 'http://localhost:3000';
+}
+
+export default async function robots(): Promise<MetadataRoute.Robots> {
+  const baseUrl = await getBaseUrl();
 
   return {
     rules: {
