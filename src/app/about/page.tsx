@@ -12,32 +12,26 @@ export default function AboutPage() {
   const values = [
     {
       icon: <Award className="h-6 w-6" />,
-      title: 'Quality Excellence',
-      description: 'We maintain the highest standards in every cleaning service we provide'
+      title: t('aboutPage.values.qualityExcellence.title'),
+      description: t('aboutPage.values.qualityExcellence.description')
     },
     {
       icon: <Users className="h-6 w-6" />,
-      title: 'Customer First',
-      description: 'Your satisfaction is our priority, with personalized service every time'
+      title: t('aboutPage.values.customerFirst.title'),
+      description: t('aboutPage.values.customerFirst.description')
     },
     {
       icon: <Leaf className="h-6 w-6" />,
-      title: 'Eco-Friendly',
-      description: 'Using environmentally safe products for a healthier clean'
+      title: t('aboutPage.values.ecoFriendly.title'),
+      description: t('aboutPage.values.ecoFriendly.description')
     },
     {
       icon: <Shield className="h-6 w-6" />,
-      title: 'Fully Insured',
-      description: 'Complete insurance coverage for your peace of mind'
+      title: t('aboutPage.values.fullyInsured.title'),
+      description: t('aboutPage.values.fullyInsured.description')
     }
   ]
 
-  const stats = [
-    { number: '10+', label: 'Years Experience' },
-    { number: '500+', label: 'Happy Customers' },
-    { number: '1000+', label: 'Projects Completed' },
-    { number: '24/7', label: 'Support Available' }
-  ]
 
   return (
     <div className="min-h-screen bg-white">
@@ -52,10 +46,10 @@ export default function AboutPage() {
             {t('about')}
           </h1>
           <p className="text-xl mb-8 max-w-3xl mx-auto text-gray-700">
-            Professional Cleaning Services in Romano di Lombardia
+            {t('aboutPage.subtitle')}
           </p>
           <p className="text-lg mb-12 max-w-2xl mx-auto text-gray-600">
-            With over 10 years of experience, Lunex is your trusted partner for all cleaning needs in the Bergamo province.
+            {t('aboutPage.description')}
           </p>
         </div>
       </section>
@@ -66,16 +60,16 @@ export default function AboutPage() {
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div className="animate-fade-in">
               <h2 className="text-3xl md:text-4xl font-bold mb-6 bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
-                Our Story
+                {t('aboutPage.story.title')}
               </h2>
               <p className="text-gray-600 mb-4">
-                Founded in Romano di Lombardia, Lunex has grown from a small family business to one of the most trusted cleaning services in the Bergamo province. Our commitment to quality and customer satisfaction has been the cornerstone of our success.
+                {t('aboutPage.story.content1')}
               </p>
               <p className="text-gray-600 mb-4">
-                We believe that a clean environment is essential for health, productivity, and well-being. That&apos;s why we use only the best eco-friendly products and employ trained professionals who care about the details.
+                {t('aboutPage.story.content2')}
               </p>
               <p className="text-gray-600">
-                Today, we serve hundreds of homes, offices, and commercial spaces, building lasting relationships based on trust, reliability, and exceptional service.
+                {t('aboutPage.story.content3')}
               </p>
             </div>
             <div className="relative animate-fade-in" style={{ animationDelay: '200ms' }}>
@@ -94,10 +88,10 @@ export default function AboutPage() {
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16 animate-fade-in">
             <h2 className="text-3xl md:text-4xl font-bold mb-4 bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
-              Our Values
+              {t('aboutPage.values.title')}
             </h2>
             <p className="text-xl max-w-3xl mx-auto text-gray-600">
-              What sets us apart in the cleaning industry
+              {t('aboutPage.values.subtitle')}
             </p>
           </div>
           
@@ -123,37 +117,16 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Stats Section */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-purple-600 to-pink-600">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
-            {stats.map((stat, index) => (
-              <div 
-                key={index} 
-                className="text-center animate-fade-in"
-                style={{ animationDelay: `${index * 100}ms` }}
-              >
-                <div className="text-4xl md:text-5xl font-bold text-white mb-2">
-                  {stat.number}
-                </div>
-                <div className="text-white/90">
-                  {stat.label}
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
 
       {/* Team Section */}
       <section className="py-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16 animate-fade-in">
             <h2 className="text-3xl md:text-4xl font-bold mb-4 bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
-              Our Team
+              {t('aboutPage.team.title')}
             </h2>
             <p className="text-xl max-w-3xl mx-auto text-gray-600">
-              Dedicated professionals committed to excellence
+              {t('aboutPage.team.subtitle')}
             </p>
           </div>
           
@@ -168,8 +141,8 @@ export default function AboutPage() {
                   <div className="aspect-square rounded-full bg-gradient-to-br from-purple-600 to-pink-600 mb-4 flex items-center justify-center">
                     <Users className="h-20 w-20 text-white/20" />
                   </div>
-                  <h3 className="text-xl font-semibold text-center mb-2">Team Member</h3>
-                  <p className="text-center text-gray-600">Professional Cleaner</p>
+                  <h3 className="text-xl font-semibold text-center mb-2">{t('aboutPage.team.teamMember')}</h3>
+                  <p className="text-center text-gray-600">{t('aboutPage.team.professionalCleaner')}</p>
                 </CardContent>
               </Card>
             ))}
@@ -181,31 +154,33 @@ export default function AboutPage() {
       <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gray-50">
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-4 bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
-            Ready to Experience the Lunex Difference?
+            {t('aboutPage.cta.title')}
           </h2>
           <p className="text-xl text-gray-600 mb-8">
-            Join hundreds of satisfied customers who trust us with their cleaning needs
+            {t('aboutPage.cta.subtitle')}
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/contact">
-              <Button 
-                size="lg" 
-                className="bg-gradient-to-r from-purple-600 to-pink-600 text-white hover:shadow-lg transition-all duration-300"
-              >
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+            <Button
+              size="lg"
+              className="w-full sm:w-auto bg-gradient-to-r from-purple-600 to-pink-600 text-white hover:shadow-lg transition-all duration-300"
+              asChild
+            >
+              <Link href="/contact" className="flex items-center justify-center">
                 <Mail className="h-5 w-5 mr-2" />
-                Get in Touch
-              </Button>
-            </Link>
-            <Link href="https://wa.me/393277791867">
-              <Button 
-                size="lg" 
-                variant="outline"
-                className="border-purple-600 text-purple-600 hover:bg-purple-50 transition-all duration-300"
-              >
+                {t('aboutPage.cta.getInTouch')}
+              </Link>
+            </Button>
+            <Button
+              size="lg"
+              variant="outline"
+              className="w-full sm:w-auto border-purple-600 text-purple-600 hover:bg-purple-50 transition-all duration-300"
+              asChild
+            >
+              <Link href="https://wa.me/393277791867" className="flex items-center justify-center">
                 <Phone className="h-5 w-5 mr-2" />
-                Call Us Now
-              </Button>
-            </Link>
+                {t('aboutPage.cta.callUsNow')}
+              </Link>
+            </Button>
           </div>
         </div>
       </section>

@@ -1069,5 +1069,60 @@ export const common = {
   pagination: {
     previous: 'Precedente',
     next: 'Successivo'
+  },
+
+  // About Page
+  aboutPage: {
+    subtitle: 'Servizi di Pulizia Professionali a Romano di Lombardia',
+    description: 'Lunex è il vostro partner di fiducia per tutte le esigenze di pulizia nella provincia di Bergamo, impegnata a fornire servizi eccezionali e di qualità.',
+    
+    story: {
+      title: 'La Nostra Storia',
+      content1: 'Fondata a Romano di Lombardia, Lunex è cresciuta da una piccola impresa familiare a uno dei servizi di pulizia più affidabili della provincia di Bergamo. Il nostro impegno per la qualità e la soddisfazione del cliente è stato la pietra angolare del nostro successo.',
+      content2: 'Crediamo che un ambiente pulito sia essenziale per la salute, la produttività e il benessere. Ecco perché utilizziamo solo i migliori prodotti eco-compatibili e impieghiamo professionisti qualificati che si preoccupano dei dettagli.',
+      content3: 'Oggi serviamo centinaia di case, uffici e spazi commerciali, costruendo relazioni durature basate su fiducia, affidabilità e servizio eccezionale.'
+    },
+    
+    values: {
+      title: 'I Nostri Valori',
+      subtitle: 'Ciò che ci distingue nel settore delle pulizie',
+      qualityExcellence: {
+        title: 'Eccellenza di Qualità',
+        description: 'Manteniamo i più alti standard in ogni servizio di pulizia che forniamo'
+      },
+      customerFirst: {
+        title: 'Cliente Prima di Tutto',
+        description: 'La vostra soddisfazione è la nostra priorità, con un servizio personalizzato ogni volta'
+      },
+      ecoFriendly: {
+        title: 'Eco-Compatibile',
+        description: 'Utilizziamo prodotti sicuri per l\'ambiente per una pulizia più salubre'
+      },
+      fullyInsured: {
+        title: 'Completamente Assicurati',
+        description: 'Copertura assicurativa completa per la vostra tranquillità'
+      }
+    },
+    
+    stats: {
+      satisfiedClients: 'Clienti Soddisfatti',
+      happyCustomers: 'Clienti Felici',
+      projectsCompleted: 'Progetti Completati',
+      supportAvailable: 'Supporto Disponibile'
+    },
+    
+    team: {
+      title: 'Il Nostro Team',
+      subtitle: 'Professionisti dedicati impegnati per l\'eccellenza',
+      teamMember: 'Membro del Team',
+      professionalCleaner: 'Addetto alle Pulizie Professionale'
+    },
+    
+    cta: {
+      title: 'Pronti a Sperimentare la Differenza Lunex?',
+      subtitle: 'Unisciti a centinaia di clienti soddisfatti che si affidano a noi per le loro esigenze di pulizia',
+      getInTouch: 'Mettiti in Contatto',
+      callUsNow: 'Chiamaci Ora'
+    }
   }
 }

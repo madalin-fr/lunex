@@ -1070,5 +1070,60 @@ export const common = {
   pagination: {
     previous: 'Previous',
     next: 'Next'
+  },
+
+  // About Page
+  aboutPage: {
+    subtitle: 'Professional Cleaning Services in Romano di Lombardia',
+    description: 'Lunex is your trusted partner for all cleaning needs in the Bergamo province, committed to delivering exceptional service and quality.',
+    
+    story: {
+      title: 'Our Story',
+      content1: 'Founded in Romano di Lombardia, Lunex has grown from a small family business to one of the most trusted cleaning services in the Bergamo province. Our commitment to quality and customer satisfaction has been the cornerstone of our success.',
+      content2: 'We believe that a clean environment is essential for health, productivity, and well-being. That\'s why we use only the best eco-friendly products and employ trained professionals who care about the details.',
+      content3: 'Today, we serve hundreds of homes, offices, and commercial spaces, building lasting relationships based on trust, reliability, and exceptional service.'
+    },
+    
+    values: {
+      title: 'Our Values',
+      subtitle: 'What sets us apart in the cleaning industry',
+      qualityExcellence: {
+        title: 'Quality Excellence',
+        description: 'We maintain the highest standards in every cleaning service we provide'
+      },
+      customerFirst: {
+        title: 'Customer First',
+        description: 'Your satisfaction is our priority, with personalized service every time'
+      },
+      ecoFriendly: {
+        title: 'Eco-Friendly',
+        description: 'Using environmentally safe products for a healthier clean'
+      },
+      fullyInsured: {
+        title: 'Fully Insured',
+        description: 'Complete insurance coverage for your peace of mind'
+      }
+    },
+    
+    stats: {
+      satisfiedClients: 'Satisfied Clients',
+      happyCustomers: 'Happy Customers',
+      projectsCompleted: 'Projects Completed',
+      supportAvailable: 'Support Available'
+    },
+    
+    team: {
+      title: 'Our Team',
+      subtitle: 'Dedicated professionals committed to excellence',
+      teamMember: 'Team Member',
+      professionalCleaner: 'Professional Cleaner'
+    },
+    
+    cta: {
+      title: 'Ready to Experience the Lunex Difference?',
+      subtitle: 'Join hundreds of satisfied customers who trust us with their cleaning needs',
+      getInTouch: 'Get in Touch',
+      callUsNow: 'Call Us Now'
+    }
   }
 }
