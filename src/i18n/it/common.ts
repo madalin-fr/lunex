@@ -164,6 +164,17 @@ export const common = {
         windows: 'Pulizia finestre interne'
       }
     },
+
+     postRenovation: {
+      title: 'Pulizie Post-Ristrutturazione',
+      subtitle: 'Pulizie specializzate dopo lavori di costruzione e ristrutturazione',
+    },
+    
+    luxury: {
+      title: 'Pulizie Ville',
+      subtitle: 'Servizi di pulizia premium per ville e proprietà',
+    },
+    
     
     
     

@@ -1,3 +1,5 @@
+import { title } from "process";
+
 export const common = {
   // Navigation
   home: 'Home',
@@ -165,7 +167,15 @@ export const common = {
       }
     },
     
-    
+    postRenovation: {
+      title: 'Post-Renovation Cleaning',
+      subtitle: 'Specialized cleaning after construction and renovation work'
+    },
+
+    luxury: {
+      title: 'Villa Cleaning',
+      subtitle: 'Premium cleaning services for villa properties',
+    },
     
     deep: {
       title: 'Deep Cleaning',
@@ -804,7 +814,7 @@ export const common = {
     },
     responses: {
       quote: {
-        text: 'Perfect! Our prices depend on the type of service.\n\nWould you like a personalized quote?',
+        text: 'Perfect! Our prices depend on the type of service:\n\n• Home cleaning\n• Office cleaning\n• Post-renovation cleaning\n• Luxury villa cleaning\n\nWould you like a personalized quote?',
         suggestions: ['Yes, I want a quote', 'Available services', 'How to book']
       },
       hours: {
