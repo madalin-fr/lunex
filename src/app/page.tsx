@@ -2,6 +2,7 @@
 
 import Link from "next/link"
 import Image from "next/image"
+import { useScrollAnimation } from '@/hooks/useScrollAnimation'
 import { useLocale } from "@/hooks/useLocale"
 import { useState, useEffect } from 'react'
 import { getLocalizedValue } from '@/lib/sanity/utils'
@@ -64,6 +65,8 @@ export default function HomePage() {
   const { t, locale } = useLocale()
   const [featuredReviews, setFeaturedReviews] = useState<Review[]>([])
   const [reviewsLoading, setReviewsLoading] = useState(true)
+
+  useScrollAnimation()
 
   useEffect(() => {
     const fetchFeaturedReviews = async () => {
@@ -132,7 +135,7 @@ export default function HomePage() {
       <section className="relative bg-gradient-to-r from-green-50 to-emerald-50 py-20 lg:py-32">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div className="space-y-8">
+            <div className="space-y-8 animate-on-scroll">
               <div className="space-y-4">
                 <h1 className="text-4xl lg:text-6xl font-bold text-gray-900 leading-tight">
                   {t('hero.title')}
@@ -170,7 +173,7 @@ export default function HomePage() {
               </div>
             </div>
 
-            <div className="relative">
+            <div className="relative animate-on-scroll animation-delay-200">
               <div className="bg-gradient-to-br from-green-100 to-emerald-100 rounded-3xl p-8 shadow-2xl">
                 <div className="bg-white rounded-2xl p-6 shadow-lg">
                   <h3 className="text-2xl font-bold text-gray-900 mb-4">{t('getQuote')}</h3>
@@ -191,7 +194,7 @@ export default function HomePage() {
       {/* Services Preview */}
       <section className="py-20 bg-white">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
+          <div className="text-center mb-16 animate-on-scroll">
             <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
               {t('services.title')}
             </h2>
@@ -202,7 +205,11 @@ export default function HomePage() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {services.map((service, index) => (
-              <div key={index} className="bg-gray-50 rounded-2xl p-8 text-center hover:shadow-lg transition-shadow group">
+              <div
+                key={index}
+                className="bg-gray-50 rounded-2xl p-8 text-center hover:shadow-lg transition-shadow group animate-on-scroll"
+                style={{ animationDelay: `${index * 100}ms` }}
+              >
                 <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6 text-green-600 group-hover:bg-gradient-to-r group-hover:from-green-600 group-hover:to-emerald-600 group-hover:text-white transition-all">
                   {service.icon}
                 </div>
@@ -223,7 +230,7 @@ export default function HomePage() {
       <section className="py-20 bg-gray-50">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div className="space-y-6">
+            <div className="space-y-6 animate-on-scroll">
               <h2 className="text-3xl lg:text-4xl font-bold text-gray-900">
                 {t('services.whyChooseUs.title')}
               </h2>
@@ -254,7 +261,7 @@ export default function HomePage() {
               </Link>
             </div>
             
-            <div className="relative">
+            <div className="relative animate-on-scroll animation-delay-200">
               <div className="bg-gradient-to-br from-green-600 to-emerald-600 rounded-3xl p-8 shadow-2xl">
                 <div className="bg-white rounded-2xl p-6 text-center">
                   <h3 className="text-2xl font-bold text-gray-900 mb-4">{t('contactPage.info.hours.title')}</h3>
@@ -287,7 +294,7 @@ export default function HomePage() {
       {/* Reviews Section */}
       <section className="py-20 bg-white">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
+          <div className="text-center mb-16 animate-on-scroll">
             <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
               {t('reviewsNav')}
             </h2>
@@ -327,7 +334,8 @@ export default function HomePage() {
               {featuredReviews.map((review) => (
                 <div
                   key={review._id}
-                  className="group relative bg-gradient-to-br from-white to-gray-50 rounded-2xl shadow-lg hover:shadow-2xl border border-gray-100 hover:border-green-200 transition-all duration-500 transform hover:-translate-y-2 overflow-hidden"
+                  className="group relative bg-gradient-to-br from-white to-gray-50 rounded-2xl shadow-lg hover:shadow-2xl border border-gray-100 hover:border-green-200 transition-all duration-500 transform hover:-translate-y-2 overflow-hidden animate-on-scroll"
+                  style={{ animationDelay: `${featuredReviews.indexOf(review) * 100}ms` }}
                 >
                   {/* Gradient overlay for premium look */}
                   <div className="absolute inset-0 bg-gradient-to-br from-green-600/5 to-emerald-600/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
@@ -445,7 +453,7 @@ export default function HomePage() {
 
       {/* CTA Section */}
       <section className="py-20 bg-gradient-to-r from-green-600 to-emerald-600">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center animate-on-scroll">
           <h2 className="text-3xl lg:text-4xl font-bold text-white mb-4">
             {t('cta.ready')}
           </h2>
