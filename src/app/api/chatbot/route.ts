@@ -1,8 +1,13 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { GoogleGenerativeAI } from '@google/generative-ai'
+import { GoogleGenerativeAI, HarmCategory, HarmBlockThreshold } from '@google/generative-ai'
 
 // Initialize Google Gemini client
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || '')
+
+// In-memory store for rate limiting
+const rateLimitStore: Record<string, { count: number; timestamp: number }> = {}
+const RATE_LIMIT_THRESHOLD = 15 // 15 requests
+const RATE_LIMIT_WINDOW = 60 * 1000 // 1 minute in milliseconds
 
 // System prompt to define the chatbot's role and behavior
 const SYSTEM_PROMPT = `You are Luna, an intelligent virtual assistant for Lunex Professional Cleaning Services, a premium cleaning company based in Romano di Lombardia, Italy.
@@ -55,6 +60,21 @@ interface ChatRequest {
   locale?: string
 }
 
+
+// Function to filter user input for harmful content
+function isContentHarmful(input: string): boolean {
+  const harmfulPatterns = [
+    // Common spam and phishing keywords
+    /free money/i, /win a prize/i, /claim your reward/i, /click here/i,
+    /unsubscribe to stop/i, /limited time offer/i, /act now/i,
+    // Malicious links and scripts
+    /http(s)?:\/\/[^\s]+/i, /<script>/i, /javascript:/i,
+    // Offensive language
+    /hate speech/i, /explicit content/i, /go kill yourself/i
+  ]
+
+  return harmfulPatterns.some(pattern => pattern.test(input))
+}
 
 // Function to remove price tags and validate response content
 function sanitizeResponse(response: string): string {
@@ -122,27 +142,57 @@ function validateResponseContent(response: string): { isValid: boolean; sanitize
   return { isValid: true, sanitizedResponse: sanctizedResponse }
 }
 
+// Helper function to handle all safety checks
+async function performSafetyChecks(request: NextRequest): Promise<NextResponse | null> {
+  // 1. IP-based Rate Limiting
+  const ip = request.headers.get('x-forwarded-for') ?? 'unknown'
+  const now = Date.now()
+
+  if (ip !== 'unknown') {
+    const userEntry = rateLimitStore[ip]
+    if (userEntry && now - userEntry.timestamp < RATE_LIMIT_WINDOW) {
+      if (userEntry.count >= RATE_LIMIT_THRESHOLD) {
+        return NextResponse.json({ error: 'Too many requests' }, { status: 429 })
+      }
+      rateLimitStore[ip].count++
+    } else {
+      rateLimitStore[ip] = { count: 1, timestamp: now }
+    }
+  }
+
+  // 2. API Key Configuration Check
+  if (!process.env.GEMINI_API_KEY || process.env.GEMINI_API_KEY === 'YOUR_GEMINI_API_KEY_HERE') {
+    return NextResponse.json(
+      {
+        error: 'Gemini API key not configured',
+        fallbackResponse: 'I apologize, but I\'m currently unable to process your request. Please contact us directly at +39 327 779 1867 or infocleaninglunex@gmail.com for assistance.'
+      },
+      { status: 500 }
+    )
+  }
+
+  // 3. Harmful Content Filtering
+  const body: ChatRequest = await request.clone().json()
+  const { message } = body
+  if (isContentHarmful(message)) {
+    return NextResponse.json({ error: 'Inappropriate content detected' }, { status: 400 })
+  }
+
+  return null // All checks passed
+}
+
 export async function POST(request: NextRequest) {
   try {
-    // Check if Gemini API key is configured
-    if (!process.env.GEMINI_API_KEY || process.env.GEMINI_API_KEY === 'YOUR_GEMINI_API_KEY_HERE') {
-      return NextResponse.json(
-        { 
-          error: 'Gemini API key not configured',
-          fallbackResponse: 'I apologize, but I\'m currently unable to process your request. Please contact us directly at +39 327 779 1867 or infocleaninglunex@gmail.com for assistance.'
-        },
-        { status: 500 }
-      )
+    const safetyCheckResponse = await performSafetyChecks(request)
+    if (safetyCheckResponse) {
+      return safetyCheckResponse
     }
 
     const body: ChatRequest = await request.json()
     const { message, conversationHistory = [], locale = 'en' } = body
 
     if (!message?.trim()) {
-      return NextResponse.json(
-        { error: 'Message is required' },
-        { status: 400 }
-      )
+      return NextResponse.json({ error: 'Message is required' }, { status: 400 })
     }
 
     // Get the generative model - using 1.5-flash for optimal balance of performance and cost
@@ -169,6 +219,24 @@ export async function POST(request: NextRequest) {
         maxOutputTokens: 300,
         temperature: 0.7,
       },
+      safetySettings: [
+        {
+          category: HarmCategory.HARM_CATEGORY_HARASSMENT,
+          threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE,
+        },
+        {
+          category: HarmCategory.HARM_CATEGORY_HATE_SPEECH,
+          threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE,
+        },
+        {
+          category: HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT,
+          threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE,
+        },
+        {
+          category: HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT,
+          threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE,
+        },
+      ],
     })
 
     // Send message and get response

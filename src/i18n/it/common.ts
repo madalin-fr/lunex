@@ -810,7 +810,9 @@ export const common = {
       quote: 'Voglio un preventivo',
       hours: 'Orari di servizio',
       services: 'Tipi di pulizia',
-      booking: 'Prenota un appuntamento'
+      booking: 'Prenota un appuntamento',
+      contact: 'Contattaci',
+      cookieSettings: 'Impostazioni Cookie'
     },
     responses: {
       quote: {

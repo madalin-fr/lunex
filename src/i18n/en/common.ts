@@ -810,7 +810,9 @@ export const common = {
       quote: 'I want a quote',
       hours: 'Service hours',
       services: 'Types of cleaning',
-      booking: 'Book an appointment'
+      booking: 'Book an appointment',
+      contact: 'Contact Us',
+      cookieSettings: 'Cookie Settings'
     },
     responses: {
       quote: {

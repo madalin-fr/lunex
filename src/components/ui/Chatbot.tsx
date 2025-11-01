@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useRef, useEffect } from 'react'
+import { useRouter } from 'next/navigation'
 import { useLocale } from '@/hooks/useLocale'
 import { useFunctionalFeatures, useExternalServices } from '@/contexts/CookieConsentContext'
 import {
@@ -8,8 +9,10 @@ import {
   X,
   Send,
   Bot,
-  User
+  User,
+  Settings
 } from 'lucide-react'
+import { CookieCustomizationModal } from '../cookies/CookieCustomizationModal'
 
 interface Message {
   id: string
@@ -37,14 +40,24 @@ interface ChatbotProps {
 
 export default function Chatbot({ isOpen, onToggle }: ChatbotProps) {
   const { t, locale } = useLocale()
+  const router = useRouter()
   const { canStoreChatHistory } = useFunctionalFeatures()
   const { canUseAI } = useExternalServices()
   const [messages, setMessages] = useState<Message[]>([])
   const [inputMessage, setInputMessage] = useState('')
   const [isTyping, setIsTyping] = useState(false)
   const [conversationHistory, setConversationHistory] = useState<Array<{role: 'user' | 'model', parts: [{text: string}]}>>([])
+  const [showCookieSettings, setShowCookieSettings] = useState(false)
   const messagesEndRef = useRef<HTMLDivElement>(null)
   const [initialized, setInitialized] = useState(false)
+  const messageCounter = useRef(0)
+
+  // Function to generate unique message IDs
+  const generateUniqueId = () => {
+    const timestamp = Date.now()
+    const counter = messageCounter.current++
+    return `${timestamp}-${counter}`
+  }
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
@@ -138,15 +151,20 @@ Area: Romano di Lombardia, BG and surroundings
 Contact us directly for a personalized quote!`
 
       return {
-        id: Date.now().toString(),
+        id: generateUniqueId(),
         text: consentMessage + '\n' + basicInfo,
         sender: 'bot',
         timestamp: new Date(),
-        suggestions: [
-          t('chatbot.suggestions.quote'),
-          t('chatbot.suggestions.services'),
-          t('chatbot.suggestions.booking')
-        ],
+        suggestions: canUseAI
+          ? [
+              t('chatbot.suggestions.quote'),
+              t('chatbot.suggestions.services'),
+              t('chatbot.suggestions.booking')
+            ]
+          : [
+              t('chatbot.suggestions.contact'),
+              t('chatbot.suggestions.cookieSettings')
+            ],
         isAI: false
       }
     }
@@ -177,7 +195,7 @@ Contact us directly for a personalized quote!`
         }
 
         return {
-          id: Date.now().toString(),
+          id: generateUniqueId(),
           text: data.response,
           sender: 'bot',
           timestamp: new Date(),
@@ -187,7 +205,7 @@ Contact us directly for a personalized quote!`
       } else {
         // Handle API error with fallback
         return {
-          id: Date.now().toString(),
+          id: generateUniqueId(),
           text: data.fallbackResponse || t('chatbot.responses.default.text'),
           sender: 'bot',
           timestamp: new Date(),
@@ -209,7 +227,7 @@ Contact us directly for a personalized quote!`
         : 'I apologize, but I\'m currently unable to process your request. Please contact us directly at +39 327 779 1867.'
 
       return {
-        id: Date.now().toString(),
+        id: generateUniqueId(),
         text: fallbackText,
         sender: 'bot',
         timestamp: new Date(),
@@ -230,7 +248,7 @@ Contact us directly for a personalized quote!`
 
     // Add user message
     const userMessage: Message = {
-      id: Date.now().toString(),
+      id: generateUniqueId(),
       text,
       sender: 'user',
       timestamp: new Date()
@@ -248,7 +266,7 @@ Contact us directly for a personalized quote!`
       console.error('Error in handleSendMessage:', error)
       // Add fallback message
       const fallbackMessage: Message = {
-        id: Date.now().toString(),
+        id: generateUniqueId(),
         text: locale === 'it'
           ? 'Mi dispiace, si è verificato un errore. Riprova o contattaci direttamente.'
           : 'Sorry, an error occurred. Please try again or contact us directly.',
@@ -322,6 +340,13 @@ Contact us directly for a personalized quote!`
 
   return (
     <>
+      {showCookieSettings && (
+        <CookieCustomizationModal
+          isOpen={showCookieSettings}
+          onClose={() => setShowCookieSettings(false)}
+        />
+      )}
+
       {/* Mobile overlay background - darken the website but preserve navbar */}
       <div
         className="fixed top-16 left-0 right-0 bottom-0 bg-black/60 sm:hidden z-40"
@@ -445,10 +470,22 @@ Contact us directly for a personalized quote!`
                     return (
                       <button
                         key={index}
-                        onClick={() => handleSuggestionClick(displayText)}
+                        onClick={() => {
+                          if (displayText === t('chatbot.suggestions.cookieSettings')) {
+                            setShowCookieSettings(true)
+                          } else if (displayText === t('chatbot.suggestions.contact')) {
+                            router.push('/contact')
+                            onToggle()
+                          } else {
+                            handleSuggestionClick(displayText)
+                          }
+                        }}
                         className={`block w-full text-left p-3 text-sm rounded-lg border-2 transition-all duration-200 transform hover:scale-[1.02] hover:shadow-md ${colors[index % colors.length]}`}
                       >
-                        {displayText}
+                        <div className="flex items-center gap-2">
+                          {displayText === t('chatbot.suggestions.cookieSettings') && <Settings className="w-4 h-4" />}
+                          <span>{displayText}</span>
+                        </div>
                       </button>
                     )
                   })}
@@ -506,26 +543,28 @@ Contact us directly for a personalized quote!`
         </div>
         
         {/* Quick actions */}
-        <div className="mt-3 flex flex-wrap gap-2">
-          <button
-            onClick={() => handleSuggestionClick(t('chatbot.suggestions.quote'))}
-            className="text-xs bg-green-50 text-green-600 px-3 py-1 rounded-full hover:bg-green-100 transition-colors"
-          >
-            {t('chatbot.quickActions.quote')}
-          </button>
-          <button
-            onClick={() => handleSuggestionClick(t('chatbot.suggestions.booking'))}
-            className="text-xs bg-emerald-50 text-emerald-600 px-3 py-1 rounded-full hover:bg-emerald-100 transition-colors"
-          >
-            {t('chatbot.quickActions.book')}
-          </button>
-          <button
-            onClick={() => handleSuggestionClick(t('chatbot.suggestions.services'))}
-            className="text-xs bg-teal-50 text-teal-600 px-3 py-1 rounded-full hover:bg-teal-100 transition-colors"
-          >
-            {t('chatbot.quickActions.services')}
-          </button>
-        </div>
+        {canUseAI && (
+          <div className="mt-3 flex flex-wrap gap-2">
+            <button
+              onClick={() => handleSuggestionClick(t('chatbot.suggestions.quote'))}
+              className="text-xs bg-green-50 text-green-600 px-3 py-1 rounded-full hover:bg-green-100 transition-colors"
+            >
+              {t('chatbot.quickActions.quote')}
+            </button>
+            <button
+              onClick={() => handleSuggestionClick(t('chatbot.suggestions.booking'))}
+              className="text-xs bg-emerald-50 text-emerald-600 px-3 py-1 rounded-full hover:bg-emerald-100 transition-colors"
+            >
+              {t('chatbot.quickActions.book')}
+            </button>
+            <button
+              onClick={() => handleSuggestionClick(t('chatbot.suggestions.services'))}
+              className="text-xs bg-teal-50 text-teal-600 px-3 py-1 rounded-full hover:bg-teal-100 transition-colors"
+            >
+              {t('chatbot.quickActions.services')}
+            </button>
+          </div>
+        )}
       </div>
     </div>
     </>

@@ -90,6 +90,7 @@ export default function RootLayout({
             
             {/* Conditional Analytics - Only loads with consent */}
             <ConditionalAnalytics />
+            
           </LocaleProvider>
         </CookieConsentProvider>
       </body>
