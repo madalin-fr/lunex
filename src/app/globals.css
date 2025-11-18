@@ -19,9 +19,9 @@
 @layer tokens {
   :root {
     /* Modern Color System using oklch() for perceptually uniform colors */
-    --color-primary: oklch(59.7% 0.202 261.45);
-    --color-secondary: oklch(70% 0.15 340);
-    --color-accent: oklch(76% 0.185 91.84);
+    --color-primary: oklch(62.31% 0.188 154.87); /* Emerald 600-ish */
+    --color-secondary: oklch(75% 0.15 170); /* Teal-ish */
+    --color-accent: oklch(85% 0.15 140); /* Light Green */
     --color-success: oklch(69% 0.19 142);
     --color-warning: oklch(79% 0.19 70);
     --color-error: oklch(64% 0.24 29);
@@ -62,7 +62,7 @@
     --shadow-sm: 0 1px 3px 0 oklch(0% 0 0 / 0.1), 0 1px 2px -1px oklch(0% 0 0 / 0.06);
     --shadow-md: 0 4px 6px -1px oklch(0% 0 0 / 0.1), 0 2px 4px -2px oklch(0% 0 0 / 0.06);
     --shadow-lg: 0 10px 15px -3px oklch(0% 0 0 / 0.1), 0 4px 6px -4px oklch(0% 0 0 / 0.05);
-    --shadow-glow: 0 0 20px oklch(59.7% 0.202 261.45 / 0.3);
+    --shadow-glow: 0 0 20px oklch(62.31% 0.188 154.87 / 0.3);
   }
   
   /* Dark mode with system preference */
@@ -78,7 +78,7 @@
   /* High contrast mode support */
   @media (prefers-contrast: high) {
     :root {
-      --color-primary: oklch(50% 0.3 261.45);
+      --color-primary: oklch(50% 0.3 154.87);
       --shadow-sm: 0 1px 3px 0 oklch(0% 0 0 / 0.3);
     }
   }
