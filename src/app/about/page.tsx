@@ -150,40 +150,6 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gray-50">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4 bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
-            {t('aboutPage.cta.title')}
-          </h2>
-          <p className="text-xl text-gray-600 mb-8">
-            {t('aboutPage.cta.subtitle')}
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <Button
-              size="lg"
-              className="w-full sm:w-auto bg-gradient-to-r from-purple-600 to-pink-600 text-white hover:shadow-lg transition-all duration-300"
-              asChild
-            >
-              <Link href="/contact" className="flex items-center justify-center">
-                <Mail className="h-5 w-5 mr-2" />
-                {t('aboutPage.cta.getInTouch')}
-              </Link>
-            </Button>
-            <Button
-              size="lg"
-              variant="outline"
-              className="w-full sm:w-auto border-purple-600 text-purple-600 hover:bg-purple-50 transition-all duration-300"
-              asChild
-            >
-              <Link href="https://wa.me/393277791867" className="flex items-center justify-center">
-                <Phone className="h-5 w-5 mr-2" />
-                {t('aboutPage.cta.callUsNow')}
-              </Link>
-            </Button>
-          </div>
-        </div>
-      </section>
     </div>
   )
 }

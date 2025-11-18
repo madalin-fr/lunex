@@ -170,7 +170,7 @@ export default function HomePage() {
                 </MagneticButton>
                 <MagneticButton strength={0.3}>
                   <Link
-                    href="/services"
+                    href="#services"
                     className="inline-block border-2 border-green-600 text-green-600 px-8 py-4 rounded-full hover:bg-green-600 hover:text-white transition-all font-semibold text-lg text-center bg-white/80 backdrop-blur-sm shadow-sm hover:shadow-md"
                   >
                     {t('servicesNav')}
@@ -211,7 +211,7 @@ export default function HomePage() {
       </AuroraBackground>
 
       {/* Services Preview */}
-      <section className="py-20 bg-white relative overflow-hidden">
+      <section id="services" className="py-20 bg-white relative overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-green-50/50 via-white to-white pointer-events-none" />
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative">
           <FadeIn className="text-center mb-16">

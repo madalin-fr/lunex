@@ -32,7 +32,7 @@ export function Header() {
     const basePath = locale === 'en' ? '/en' : ''
     return [
       { href: `${basePath}/`, label: t('home') },
-      { href: `${basePath}/services`, label: t('servicesNav') },
+      { href: `${basePath}/#services`, label: t('servicesNav') },
       { href: `${basePath}/about`, label: t('about') },
       { href: `${basePath}/reviews`, label: t('reviewsNav') },
       { href: `${basePath}/blog`, label: t('blogNav') },

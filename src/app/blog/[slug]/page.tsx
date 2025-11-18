@@ -179,21 +179,13 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
         'blog.backToBlog': '← Back to Blog',
         'blog.by': 'By',
         'blog.about': 'About',
-        'blog.writtenBy': 'Written by',
-        'blog.needProfessionalCleaning': 'Need Professional Cleaning Services?',
-        'blog.ctaDescription': 'Let Lunex handle your cleaning needs with our professional, reliable, and eco-friendly services.',
-        'blog.getFreeQuote': 'Free Estimate',
-        'blog.viewServices': 'View Services'
+        'blog.writtenBy': 'Written by'
       },
       it: {
         'blog.backToBlog': '← Torna al Blog',
         'blog.by': 'di',
         'blog.about': 'Chi è',
-        'blog.writtenBy': 'Scritto da',
-        'blog.needProfessionalCleaning': 'Hai bisogno di servizi di pulizia professionali?',
-        'blog.ctaDescription': 'Lascia che Lunex gestisca le tue esigenze di pulizia con i nostri servizi professionali, affidabili ed ecologici.',
-        'blog.getFreeQuote': 'Richiedi Preventivo Gratuito',
-        'blog.viewServices': 'Vedi Servizi'
+        'blog.writtenBy': 'Scritto da'
       }
     }
     
@@ -388,23 +380,6 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
           </div>
         )}
         
-        {/* Call to action */}
-        <div className="mt-16 text-center">
-          <div className="bg-gradient-to-r from-blue-900 to-purple-900 rounded-2xl p-8 text-white">
-            <h3 className="text-2xl font-bold mb-4">{t('blog.needProfessionalCleaning')}</h3>
-            <p className="text-blue-100 mb-6 max-w-2xl mx-auto">
-              {t('blog.ctaDescription')}
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <a href="/contact" className="bg-white text-blue-900 px-6 py-3 rounded-full font-semibold hover:bg-blue-50 transition-colors">
-                {t('blog.getFreeQuote')}
-              </a>
-              <a href="/services" className="border border-white text-white px-6 py-3 rounded-full font-semibold hover:bg-white/10 transition-colors">
-                {t('blog.viewServices')}
-              </a>
-            </div>
-          </div>
-        </div>
       </div>
     </article>
   )
