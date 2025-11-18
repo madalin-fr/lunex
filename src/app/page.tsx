@@ -171,7 +171,7 @@ export default function HomePage() {
                 <MagneticButton strength={0.3}>
                   <Link
                     href="/services"
-                    className="inline-block border-2 border-green-600 text-green-600 px-8 py-4 rounded-full hover:bg-green-600 hover:text-white transition-all font-semibold text-lg text-center bg-white/50 backdrop-blur-sm"
+                    className="inline-block border-2 border-green-600 text-green-600 dark:text-green-400 dark:border-green-400 px-8 py-4 rounded-full hover:bg-green-600 hover:text-white dark:hover:text-white transition-all font-semibold text-lg text-center bg-white/80 dark:bg-zinc-900/50 backdrop-blur-sm shadow-sm hover:shadow-md"
                   >
                     {t('servicesNav')}
                   </Link>
