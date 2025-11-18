@@ -25,7 +25,7 @@ export function SpotlightCard({
 
   return (
     <div
-      className={`group relative border border-slate-200 bg-white dark:border-slate-800 dark:bg-slate-950 overflow-hidden rounded-xl ${className}`}
+      className={`group relative border border-slate-200 bg-white overflow-hidden rounded-xl shadow-sm hover:shadow-md transition-shadow ${className}`}
       onMouseMove={handleMouseMove}
     >
       <motion.div
