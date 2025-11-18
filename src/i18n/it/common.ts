@@ -100,31 +100,33 @@ export const common = {
       description: 'Servizi completi di pulizia uffici per mantenere un ambiente di lavoro pulito, salubre e produttivo.',
       features: {
         daily: 'Pulizie Quotidiane',
-        dailyDesc: 'Servizi di pulizia quotidiana per mantenere l\'igiene dell\'ufficio',
+        dailyDesc: 'Servizi di pulizia quotidiana per mantenere l\'igiene dell\'ufficio con standard industriali 2025',
         flexible: 'Orari Flessibili',
-        flexibleDesc: 'Servizi di pulizia programmati secondo i vostri orari di lavoro',
+        flexibleDesc: 'Servizi di pulizia programmati secondo i vostri orari con sistema di prenotazione in tempo reale',
         equipment: 'Attrezzature Professionali',
-        equipmentDesc: 'Attrezzature avanzate e prodotti eco-compatibili'
+        equipmentDesc: 'Attrezzature di pulizia avanzate 2025 con efficienza alimentata da IA e prodotti eco-compatibili',
+        specialized: 'Competenze Specializzate',
+        specializedDesc: 'Conoscenza esperta dei protocolli igienici post-pandemia e pulizia focalizzata sulla salute'
       },
       process: {
-        step1: 'Valutazione',
-        step1Desc: 'Valutazione del vostro spazio ufficio e delle esigenze specifiche',
-        step2: 'Pianificazione',
-        step2Desc: 'Creazione di un piano di pulizia personalizzato e programmazione',
-        step3: 'Esecuzione',
-        step3Desc: 'Pulizia professionale utilizzando tecniche e attrezzature avanzate',
-        step4: 'Controllo Qualità',
-        step4Desc: 'Ispezione finale e garanzia di qualità di tutte le aree pulite'
+        step1: 'Valutazione Avanzata',
+        step1Desc: 'Valutazione potenziata da IA usando mappatura 3D e analisi delle esigenze specifiche di pulizia',
+        step2: 'Pianificazione Digitale',
+        step2Desc: 'Piano di pulizia personalizzato con software di programmazione avanzato e accesso al portale clienti',
+        step3: 'Esecuzione Intelligente',
+        step3Desc: 'Pulizia professionale utilizzando tecniche all\'avanguardia 2025 con attrezzature abilitate IoT',
+        step4: 'Garanzia Qualità',
+        step4Desc: 'Sistemi di controllo qualità digitale con tracciamento soddisfazione clienti in tempo reale'
       },
       includes: {
         title: 'Cosa Include',
-        dusting: 'Spolveratura di tutte le superfici',
-        vacuuming: 'Aspirazione e lavaggio pavimenti',
-        bathrooms: 'Pulizia e sanificazione bagni',
-        kitchen: 'Pulizia cucina e zone break',
-        windows: 'Pulizia finestre (interno)',
-        trash: 'Rimozione rifiuti e sostituzione',
-        customPlans: 'Piani personalizzati per aziende'
+        dusting: 'Spolveratura intelligente con tecniche elettrostatiche e integrazione purificazione aria',
+        vacuuming: 'Aspirazione con filtri HEPA e sistemi avanzati di restauro pavimenti',
+        bathrooms: 'Pulizia bagni antimicrobici e sistemi di sanificazione senza contatto',
+        kitchen: 'Pulizia cucine commerciali con protocolli di conformità per sicurezza alimentare',
+        windows: 'Pulizia finestre ad alte prestazioni con sistemi di purificazione acqua',
+        trash: 'Gestione rifiuti sostenibile e servizi di integrazione riciclaggio',
+        customPlans: 'Piani aziendali completamente personalizzati con tracciamento KPI e reportistica'
       }
     },
     

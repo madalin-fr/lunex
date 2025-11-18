@@ -102,21 +102,23 @@ export const common = {
       description: 'Comprehensive office cleaning services to maintain a clean, healthy, and productive work environment.',
       features: {
         daily: 'Daily Cleaning',
-        dailyDesc: 'Regular daily cleaning services to maintain office hygiene',
+        dailyDesc: 'Regular daily cleaning services to maintain office hygiene with 2025 industry standards',
         flexible: 'Flexible Scheduling',
-        flexibleDesc: 'Cleaning services scheduled around your business hours',
+        flexibleDesc: 'Cleaning services scheduled around your business hours with real-time booking system',
         equipment: 'Professional Equipment',
-        equipmentDesc: 'Advanced cleaning equipment and eco-friendly products'
+        equipmentDesc: 'Advanced 2025 cleaning equipment with AI-powered efficiency and eco-friendly products',
+        specialized: 'Specialized Expertise',
+        specializedDesc: 'Expert knowledge in post-pandemic hygiene protocols and health-focused cleaning'
       },
       process: {
-        step1: 'Assessment',
-        step1Desc: 'Evaluation of your office space and specific cleaning needs',
-        step2: 'Planning',
-        step2Desc: 'Creation of a customized cleaning plan and schedule',
-        step3: 'Execution',
-        step3Desc: 'Professional cleaning using advanced techniques and equipment',
-        step4: 'Quality Control',
-        step4Desc: 'Final inspection and quality assurance of all cleaned areas'
+        step1: 'Advanced Assessment',
+        step1Desc: 'AI-enhanced evaluation using 3D mapping and specific cleaning needs analysis',
+        step2: 'Digital Planning',
+        step2Desc: 'Customized cleaning plan with advanced scheduling software and client portal access',
+        step3: 'Smart Execution',
+        step3Desc: 'Professional cleaning using 2025 cutting-edge techniques with IoT-enabled equipment',
+        step4: 'Quality Assurance',
+        step4Desc: 'Digital quality control systems with real-time client satisfaction tracking'
       },
       includes: {
         title: 'What\'s Included',

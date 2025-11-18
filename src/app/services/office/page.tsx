@@ -34,6 +34,11 @@ export default function OfficeCleaning() {
       icon: <Users className="h-6 w-6" />,
       title: t('services.office.features.daily'),
       description: t('services.office.features.dailyDesc')
+    },
+    {
+      icon: <Sparkles className="h-6 w-6" />,
+      title: t('services.office.features.specialized'),
+      description: t('services.office.features.specializedDesc')
     }
   ]
 
@@ -67,7 +72,9 @@ export default function OfficeCleaning() {
     t('services.office.includes.kitchen'),
     t('services.office.includes.windows'),
     t('services.office.includes.trash'),
-    t('services.office.includes.customPlans')
+    t('services.office.includes.customPlans'),
+    t('services.office.includes.new2025'),
+    t('services.office.includes.new2025b')
   ]
 
   return (
