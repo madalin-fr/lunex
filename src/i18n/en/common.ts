@@ -19,6 +19,7 @@ export const common = {
   contactUs: 'Contact Us',
   contact_us: 'Contact Us',
   call_now: 'Call Now',
+  chat_whatsapp: 'Chat on WhatsApp',
   send_message: 'Send Message',
   submit: 'Submit',
   cancel: 'Cancel',
