@@ -14,7 +14,7 @@ export function MagneticButton({
   children,
   className = '',
   onClick,
-  strength = 0.5
+  strength = 0.2
 }: MagneticButtonProps) {
   const ref = useRef<HTMLDivElement>(null)
   const [position, setPosition] = useState({ x: 0, y: 0 })

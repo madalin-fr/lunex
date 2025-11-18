@@ -97,9 +97,12 @@ export function Header() {
           <div className="hidden lg:flex items-center space-x-4">
             <button
               onClick={toggleLanguage}
-              className="relative text-sm font-medium px-3 py-1 rounded-full backdrop-blur-sm bg-white/50 hover:bg-white/70 border border-gray-200/40 hover:border-gray-300/40 hover:shadow-md transition-all duration-300 hover:scale-105"
+              className="relative p-2 rounded-full hover:bg-white/20 transition-all duration-300 hover:scale-110"
+              aria-label={currentLocale === 'it' ? 'Switch to English' : 'Passa all\'italiano'}
             >
-              <span className="relative z-10 text-gray-700">{currentLocale === 'it' ? 'EN' : 'IT'}</span>
+              <span className="text-2xl leading-none filter drop-shadow-sm">
+                {currentLocale === 'it' ? '🇬🇧' : '🇮🇹'}
+              </span>
             </button>
             <Link href="/booking">
               <Button
@@ -172,9 +175,12 @@ export function Header() {
             <div className="flex flex-col space-y-4 pt-6 border-t border-gray-200/40 mx-4">
               <button
                 onClick={toggleLanguage}
-                className="self-start text-sm font-medium px-4 py-2 rounded-full backdrop-blur-sm bg-white/70 hover:bg-white border border-gray-200/40 hover:border-gray-300/40 hover:shadow-md transition-all duration-300 text-gray-700"
+                className="self-start p-2 rounded-full hover:bg-gray-100 transition-all duration-300"
+                aria-label={currentLocale === 'it' ? 'Switch to English' : 'Passa all\'italiano'}
               >
-                {currentLocale === 'it' ? 'EN' : 'IT'}
+                <span className="text-3xl leading-none">
+                  {currentLocale === 'it' ? '🇬🇧' : '🇮🇹'}
+                </span>
               </button>
               <Link
                 href="/booking"

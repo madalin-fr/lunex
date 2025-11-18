@@ -15,6 +15,9 @@
   initial-value: 0%;
   inherits: false;
 }
+@theme {
+  --animate-aurora: aurora 60s linear infinite;
+}
 
 @layer tokens {
   :root {
@@ -444,6 +447,15 @@
 @keyframes gradient-rotate {
   to {
     --gradient-angle: 360deg;
+  }
+}
+
+@keyframes aurora {
+  from {
+    background-position: 50% 50%, 50% 50%;
+  }
+  to {
+    background-position: 350% 50%, 350% 50%;
   }
 }
 
