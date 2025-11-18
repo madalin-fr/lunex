@@ -1,12 +1,17 @@
 'use client';
 
-import React, { useEffect } from 'react';
+import React, { useEffect, Suspense } from 'react';
 import Script from 'next/script';
 import { Analytics } from '@vercel/analytics/next';
 import { useAnalytics } from '@/contexts/CookieConsentContext';
 
 export function ConditionalAnalytics() {
   const { canTrack } = useAnalytics();
+  const [isMounted, setIsMounted] = React.useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   // Load Google Analytics only if consent is given
   useEffect(() => {
@@ -27,7 +32,7 @@ export function ConditionalAnalytics() {
     }
   }, [canTrack]);
 
-  if (!canTrack) {
+  if (!isMounted || !canTrack) {
     return null;
   }
 
@@ -52,7 +57,9 @@ export function ConditionalAnalytics() {
       </Script>
       
       {/* Vercel Analytics - Only load if consent given */}
-      <Analytics />
+      <Suspense fallback={null}>
+        <Analytics />
+      </Suspense>
     </>
   );
 }
