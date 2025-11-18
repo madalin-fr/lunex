@@ -206,7 +206,7 @@ export default function BookingPage() {
         {/* Show main booking button again if inline booking is active */}
         {showInlineBooking && (
           <div className="text-center mb-12">
-            <p className="text-sm text-gray-600 mb-4">Oppure usa il pulsante principale per prenotare</p>
+            <p className="text-sm text-gray-600 mb-4">{t('bookingPage.orUseMainButton')}</p>
             {bookingConfig.cal.username.trim() !== '' ? (
               <BookingIntegration
                 service="cal"

@@ -923,7 +923,8 @@ export const common = {
     },
     scheduleAppointment: 'Prenota Appuntamento',
     bookAppointment: 'Prenota Appuntamento',
-    loadingSystem: 'Caricamento sistema di prenotazione...'
+    loadingSystem: 'Caricamento sistema di prenotazione...',
+    orUseMainButton: 'Oppure usa il pulsante principale per prenotare'
   },
 
   // Reviews

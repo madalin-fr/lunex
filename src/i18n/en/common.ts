@@ -923,7 +923,8 @@ export const common = {
     },
     scheduleAppointment: 'Schedule Appointment',
     bookAppointment: 'Book Appointment',
-    loadingSystem: 'Loading booking system...'
+    loadingSystem: 'Loading booking system...',
+    orUseMainButton: 'Or use the main button to book'
   },
 
   // Reviews
