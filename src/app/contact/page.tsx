@@ -5,6 +5,7 @@ import { useLocale } from '@/hooks/useLocale'
 import { Button } from '@/components/ui/button'
 import { Mail, Phone, MapPin, Clock, CheckCircle, XCircle } from 'lucide-react'
 import GoogleMap from '@/components/ui/GoogleMap'
+import { AuroraBackground } from '@/components/ui/motion/AuroraBackground'
 
 export default function ContactPage() {
   const { t } = useLocale()
@@ -130,7 +131,14 @@ export default function ContactPage() {
                     </h3>
                     <div className="text-gray-600">
                       <p>{t('contactPage.info.phone.number')}</p>
-                      <p className="text-sm text-blue-600">{t('contactPage.info.phone.whatsapp')}</p>
+                      <a
+                        href="https://wa.me/393277791867"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-sm text-blue-600 hover:underline inline-flex items-center mt-1"
+                      >
+                        {t('contactPage.info.phone.whatsapp')}
+                      </a>
                     </div>
                   </div>
                 </div>
@@ -317,8 +325,12 @@ export default function ContactPage() {
       </section>
 
       {/* Map Section */}
-      <section className="py-16 bg-gray-50">
-        <div className="container mx-auto px-4">
+      <AuroraBackground className="py-16 h-auto min-h-0" style={{
+        '--color-primary': 'oklch(55% 0.2 260)', // Blue-Purple
+        '--color-secondary': 'oklch(65% 0.18 280)', // Purple
+        '--color-accent': 'oklch(75% 0.15 300)', // Light Purple
+      } as React.CSSProperties}>
+        <div className="container mx-auto px-4 relative z-10">
           <div className="text-center mb-8">
             <h2 className="text-3xl font-bold text-gray-800 mb-4">
               {t('contactPage.map.title')}
@@ -358,30 +370,8 @@ export default function ContactPage() {
             </div>
           </div>
         </div>
-      </section>
+      </AuroraBackground>
 
-      {/* CTA Section */}
-      <section className="py-16 bg-blue-600">
-        <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl font-bold text-white mb-4">
-            {t('contactPage.cta.title')}
-          </h2>
-          <p className="text-blue-100 text-lg mb-8 max-w-2xl mx-auto">
-            {t('contactPage.cta.subtitle')}
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <Button className="bg-white text-blue-600 hover:bg-blue-50 px-8 py-3">
-              {t('contactPage.cta.button')}
-            </Button>
-            <span className="text-blue-100">{t('contactPage.cta.or')}</span>
-            <a href="https://wa.me/393277791867">
-              <Button variant="outline" className="border-white text-white hover:bg-white hover:text-blue-600 px-8 py-3">
-                {t('contactPage.cta.call')}
-              </Button>
-            </a>
-          </div>
-        </div>
-      </section>
     </div>
   )
 }

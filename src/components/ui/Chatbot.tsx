@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useRef, useEffect } from 'react'
-import { useRouter } from 'next/navigation'
+import { useRouter, usePathname } from 'next/navigation'
 import { useLocale } from '@/hooks/useLocale'
 import { useFunctionalFeatures, useExternalServices } from '@/contexts/CookieConsentContext'
 import {
@@ -41,6 +41,7 @@ interface ChatbotProps {
 export default function Chatbot({ isOpen, onToggle }: ChatbotProps) {
   const { t, locale } = useLocale()
   const router = useRouter()
+  const pathname = usePathname()
   const { canStoreChatHistory } = useFunctionalFeatures()
   const { canUseAI } = useExternalServices()
   const [messages, setMessages] = useState<Message[]>([])
@@ -178,25 +179,49 @@ Contact us directly for a personalized quote!`
         body: JSON.stringify({
           message: userMessage,
           conversationHistory: conversationHistory,
-          locale: locale
+          locale: locale,
+          currentPath: pathname // Send current path for context awareness
         }),
       })
 
       const data: ChatResponse = await response.json()
 
       if (data.success && data.response) {
+        // Parse actions from response
+        let responseText = data.response
+        const actionRegex = /\[ACTION: (.*?)\]/g
+        const actions: string[] = []
+        let match
+
+        while ((match = actionRegex.exec(responseText)) !== null) {
+          actions.push(match[1])
+        }
+
+        // Remove action tags from visible text
+        responseText = responseText.replace(actionRegex, '').trim()
+
+        // Execute actions
+        actions.forEach(action => {
+          if (action.startsWith('NAVIGATE|')) {
+            const path = action.split('|')[1]
+            router.push(path)
+          } else if (action === 'OPEN_BOOKING') {
+            router.push('/booking')
+          }
+        })
+
         // Update conversation history only if functional cookies allowed
         if (canStoreChatHistory) {
           setConversationHistory(prev => [
             ...prev,
             { role: 'user', parts: [{ text: userMessage }] },
-            { role: 'model', parts: [{ text: data.response! }] }
+            { role: 'model', parts: [{ text: data.response! }] } // Store original response with actions for context
           ])
         }
 
         return {
           id: generateUniqueId(),
-          text: data.response,
+          text: responseText,
           sender: 'bot',
           timestamp: new Date(),
           suggestions: data.suggestions || [],
