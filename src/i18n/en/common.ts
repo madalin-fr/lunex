@@ -931,6 +931,7 @@ export const common = {
       title: 'Customer Reviews',
       subtitle: 'Discover what our clients say about our professional cleaning services'
     },
+    subtitle: 'See why homeowners and businesses trust us for their cleaning needs',
     setup: {
       title: 'Sanity CMS Setup Required',
       description: 'To start managing your customer reviews, you need to set up Sanity CMS:',

@@ -931,6 +931,7 @@ export const common = {
       title: 'Recensioni Clienti',
       subtitle: 'Scopri cosa dicono i nostri clienti sui nostri servizi di pulizia professionale'
     },
+    subtitle: 'Scopri perché proprietari di case e aziende si affidano a noi per le loro esigenze di pulizia',
     setup: {
       title: 'Configurazione Sanity CMS Richiesta',
       description: 'Per iniziare a gestire le recensioni dei tuoi clienti, devi configurare Sanity CMS:',

@@ -312,38 +312,46 @@ export default function HomePage() {
       </section>
 
       {/* Reviews Section */}
-      <section className="py-20 bg-white">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="py-24 bg-zinc-50 dark:bg-zinc-900 relative overflow-hidden">
+        {/* Background Pattern */}
+        <div className="absolute inset-0 opacity-[0.03] dark:opacity-[0.05] pointer-events-none"
+             style={{ backgroundImage: 'radial-gradient(#16a34a 1px, transparent 1px)', backgroundSize: '32px 32px' }}>
+        </div>
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-white/50 to-white dark:via-zinc-900/50 dark:to-zinc-900 pointer-events-none" />
+        
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative">
           <FadeIn className="text-center mb-16">
-            <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
+            <div className="inline-flex items-center justify-center p-2 bg-green-100 dark:bg-green-900/30 rounded-full mb-4">
+              <Star className="w-5 h-5 text-green-600 dark:text-green-400 fill-current" />
+            </div>
+            <h2 className="text-3xl lg:text-5xl font-bold text-gray-900 dark:text-white mb-6 tracking-tight">
               {t('reviewsNav')}
             </h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              {t('cta.description')}
+            <p className="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto leading-relaxed">
+              {t('reviews.subtitle')}
             </p>
-            <div className="w-24 h-1 bg-gradient-to-r from-green-500 to-emerald-500 rounded-full mx-auto mt-6"></div>
           </FadeIn>
 
           {reviewsLoading ? (
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               {[...Array(3)].map((_, i) => (
-                <div key={i} className="bg-gray-50 rounded-2xl p-6 animate-pulse">
-                  <div className="flex items-center mb-4">
+                <div key={i} className="bg-white dark:bg-zinc-800/50 rounded-3xl p-8 shadow-sm animate-pulse border border-gray-100 dark:border-zinc-700">
+                  <div className="flex items-center mb-6">
                     <div className="flex space-x-1">
                       {[...Array(5)].map((_, j) => (
-                        <div key={j} className="w-5 h-5 bg-gray-300 rounded" />
+                        <div key={j} className="w-5 h-5 bg-gray-200 dark:bg-zinc-700 rounded" />
                       ))}
                     </div>
                   </div>
-                  <div className="space-y-2 mb-4">
-                    <div className="h-4 bg-gray-300 rounded w-full" />
-                    <div className="h-4 bg-gray-300 rounded w-3/4" />
+                  <div className="space-y-3 mb-8">
+                    <div className="h-4 bg-gray-200 dark:bg-zinc-700 rounded w-full" />
+                    <div className="h-4 bg-gray-200 dark:bg-zinc-700 rounded w-3/4" />
                   </div>
                   <div className="flex items-center">
-                    <div className="w-10 h-10 bg-gray-300 rounded-full" />
-                    <div className="ml-3 space-y-2">
-                      <div className="h-4 bg-gray-300 rounded w-20" />
-                      <div className="h-3 bg-gray-300 rounded w-16" />
+                    <div className="w-12 h-12 bg-gray-200 dark:bg-zinc-700 rounded-full" />
+                    <div className="ml-4 space-y-2">
+                      <div className="h-4 bg-gray-200 dark:bg-zinc-700 rounded w-24" />
+                      <div className="h-3 bg-gray-200 dark:bg-zinc-700 rounded w-16" />
                     </div>
                   </div>
                 </div>
@@ -354,56 +362,52 @@ export default function HomePage() {
               {featuredReviews.map((review) => (
                 <FadeIn key={review._id}>
                   <div
-                    className="group relative bg-gradient-to-br from-white to-gray-50 rounded-2xl shadow-lg hover:shadow-2xl border border-gray-100 hover:border-green-200 transition-all duration-500 transform hover:-translate-y-2 overflow-hidden h-full"
+                    className="group relative bg-white dark:bg-zinc-800/80 backdrop-blur-sm rounded-3xl shadow-xl hover:shadow-2xl border border-gray-100 dark:border-zinc-700/50 transition-all duration-500 transform hover:-translate-y-2 overflow-hidden h-full"
                   >
-                    {/* Gradient overlay for premium look */}
-                    <div className="absolute inset-0 bg-gradient-to-br from-green-600/5 to-emerald-600/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                    {/* Decorative gradient blob */}
+                    <div className="absolute -top-20 -right-20 w-40 h-40 bg-green-500/10 rounded-full blur-3xl group-hover:bg-green-500/20 transition-colors duration-500" />
                     
                     {/* Content */}
                     <div className="relative p-8 flex flex-col h-full">
                       {/* Rating with better spacing */}
-                      <div className="flex items-center justify-between mb-6">
-                        <div className="flex items-center space-x-1">
+                      <div className="flex items-center justify-between mb-8">
+                        <div className="flex items-center space-x-1 bg-yellow-50 dark:bg-yellow-900/10 px-3 py-1.5 rounded-full border border-yellow-100 dark:border-yellow-900/20">
                           {[...Array(5)].map((_, i) => (
                             <Star
                               key={i}
-                              className={`w-5 h-5 transition-colors ${
+                              className={`w-4 h-4 transition-colors ${
                                 i < review.rating
-                                  ? 'text-yellow-400 fill-current drop-shadow-sm'
-                                  : 'text-gray-300'
+                                  ? 'text-yellow-400 fill-current'
+                                  : 'text-gray-300 dark:text-zinc-600'
                               }`}
                             />
                           ))}
-                          <span className="ml-2 text-sm font-semibold text-gray-700">
-                            {review.rating}.0
-                          </span>
                         </div>
                         {/* Verified badge */}
-                        <div className="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center ring-2 ring-white">
-                          <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
-                            <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                          </svg>
+                        <div className="flex items-center text-xs font-bold text-green-700 dark:text-green-400 bg-green-50 dark:bg-green-900/20 px-3 py-1.5 rounded-full border border-green-100 dark:border-green-900/20">
+                          <CheckCircle className="w-3.5 h-3.5 mr-1.5" />
+                          Verified
                         </div>
                       </div>
                       
                       {/* Testimonial with quote styling */}
-                      <div className="relative mb-6 flex-grow">
-                        <div className="absolute -top-2 -left-2 w-8 h-8 text-green-300 opacity-50">
-                          <svg viewBox="0 0 24 24" fill="currentColor" className="w-full h-full">
-                            <path d="M14,17h3l2-4V7h-6v6h3M6,17h3l2-4V7H5v6h3L6,17z"/>
+                      <div className="relative mb-8 flex-grow">
+                        <div className="absolute -top-4 -left-2 text-green-500/10 dark:text-green-400/10 transform -scale-x-100">
+                          <svg width="60" height="60" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M14.017 21L14.017 18C14.017 16.8954 14.9124 16 16.017 16H19.017C19.5693 16 20.017 15.5523 20.017 15V9C20.017 8.44772 19.5693 8 19.017 8H15.017C14.4647 8 14.017 8.44772 14.017 9V11C14.017 11.5523 13.5693 12 13.017 12H12.017V5H22.017V15C22.017 18.3137 19.3307 21 16.017 21H14.017ZM5.0166 21L5.0166 18C5.0166 16.8954 5.91203 16 7.0166 16H10.0166C10.5689 16 11.0166 15.5523 11.0166 15V9C11.0166 8.44772 10.5689 8 10.0166 8H6.0166C5.46432 8 5.0166 8.44772 5.0166 9V11C5.0166 11.5523 4.56889 12 4.0166 12H3.0166V5H13.0166V15C13.0166 18.3137 10.3303 21 7.0166 21H5.0166Z" />
                           </svg>
                         </div>
-                        <blockquote className="pl-8 pr-4">
-                          <p className="text-gray-700 leading-relaxed font-medium italic">
-                            {getLocalizedValue(review.testimonial, locale)}
+                        <blockquote className="relative z-10">
+                          <p className="text-gray-700 dark:text-gray-300 leading-relaxed font-medium text-lg">
+                            "{getLocalizedValue(review.testimonial, locale)}"
                           </p>
                         </blockquote>
                       </div>
                       
                       {/* Profile section */}
-                      <div className="flex items-center mt-auto">
+                      <div className="flex items-center pt-6 border-t border-gray-100 dark:border-zinc-700/50">
                         <div className="relative">
-                          <div className="relative w-12 h-12 rounded-full overflow-hidden ring-3 ring-white shadow-lg">
+                          <div className="relative w-12 h-12 rounded-full overflow-hidden ring-2 ring-white dark:ring-zinc-700 shadow-md">
                             {review.clientPhoto?.asset?.url ? (
                               <Image
                                 src={review.clientPhoto.asset.url}
@@ -421,27 +425,12 @@ export default function HomePage() {
                           </div>
                         </div>
                         <div className="ml-4 flex-1">
-                          <h4 className="font-bold text-gray-900 text-lg">{getLocalizedValue(review.clientName, locale)}</h4>
-                          <div className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-gradient-to-r from-green-100 to-emerald-100 text-green-700 border border-green-200 mt-1">
+                          <h4 className="font-bold text-gray-900 dark:text-white text-base">{getLocalizedValue(review.clientName, locale)}</h4>
+                          <div className="text-sm text-green-600 dark:text-green-400 font-medium">
                             {getLocalizedValue(review.service, locale)}
                           </div>
                         </div>
                       </div>
-                      
-                      {/* Decorative bottom border */}
-                      <div className="mt-6 h-1 w-12 bg-gradient-to-r from-green-500 to-emerald-500 rounded-full mx-auto" />
-                    </div>
-                    
-                    {/* Subtle pattern overlay */}
-                    <div className="absolute bottom-0 right-0 w-24 h-24 opacity-5">
-                      <svg viewBox="0 0 100 100" className="w-full h-full">
-                        <defs>
-                          <pattern id="circles-main" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
-                            <circle cx="10" cy="10" r="2" fill="currentColor" />
-                          </pattern>
-                        </defs>
-                        <rect width="100" height="100" fill="url(#circles-main)" />
-                      </svg>
                     </div>
                   </div>
                 </FadeIn>
@@ -465,31 +454,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-20 bg-gradient-to-r from-green-600 to-emerald-600">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center animate-on-scroll">
-          <h2 className="text-3xl lg:text-4xl font-bold text-white mb-4">
-            {t('cta.ready')}
-          </h2>
-          <p className="text-xl text-green-50 mb-8 max-w-2xl mx-auto">
-            {t('cta.description')}
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link
-              href="/contact"
-              className="bg-white text-green-600 px-8 py-4 rounded-full hover:bg-gray-50 transition-all font-semibold text-lg shadow-lg hover:shadow-xl"
-            >
-              {t('getQuote')}
-            </Link>
-            <Link
-              href="https://wa.me/393277791867"
-              className="border-2 border-white text-white px-8 py-4 rounded-full hover:bg-white hover:text-green-600 transition-all font-semibold text-lg"
-            >
-              {t('call_now')}
-            </Link>
-          </div>
-        </div>
-      </section>
     </div>
   )
 }
