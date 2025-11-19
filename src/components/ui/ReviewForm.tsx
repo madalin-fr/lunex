@@ -80,8 +80,14 @@ export function ReviewForm({ isOpen, onClose }: ReviewFormProps) {
         submitData.append('clientPhoto', formData.clientPhoto)
       }
       
+      // Get locale from localStorage or cookie
+      const locale = localStorage.getItem('lunex-locale') || 'en'
+      
       const response = await fetch('/api/reviews', {
         method: 'POST',
+        headers: {
+          'Accept-Language': locale
+        },
         body: submitData, // Send as FormData for file upload
       })
       

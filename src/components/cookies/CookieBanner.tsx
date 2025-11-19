@@ -8,7 +8,8 @@ import { CookieCustomizationModal } from './CookieCustomizationModal';
 
 export function CookieBanner() {
   const { showBanner, acceptAll, rejectAll, loading } = useCookieConsent();
-  const { t } = useLocale();
+  const { t, locale } = useLocale();
+  const basePath = locale === 'en' ? '/en' : '';
   const [showCustomization, setShowCustomization] = useState(false);
 
   // Don't render if loading or banner shouldn't show
@@ -37,8 +38,8 @@ export function CookieBanner() {
                 <p className="text-sm text-gray-600 leading-relaxed">
                   {t('cookies.banner.message')}
                   <span className="ml-1">
-                    <a 
-                      href="/cookies" 
+                    <a
+                      href={`${basePath}/cookies`}
                       className="text-green-600 hover:text-green-700 underline font-medium"
                       target="_blank"
                       rel="noopener noreferrer"

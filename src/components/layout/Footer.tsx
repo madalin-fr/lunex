@@ -6,7 +6,8 @@ import { CookieSettingsLink } from '@/components/cookies/CookieBanner'
 // Icons removed as they were not being used
 
 export function Footer() {
-  const { t } = useLocale()
+  const { t, locale } = useLocale()
+  const basePath = locale === 'en' ? '/en' : ''
 
   return (
     <footer className="bg-gray-900 text-white">
@@ -34,27 +35,27 @@ export function Footer() {
             <h3 className="text-lg font-semibold text-green-400">{t('footer.links.title')}</h3>
             <ul className="space-y-2">
               <li>
-                <Link href="/" className="text-gray-400 hover:text-green-400 transition-colors">
+                <Link href={`${basePath}/`} className="text-gray-400 hover:text-green-400 transition-colors">
                   {t('home')}
                 </Link>
               </li>
               <li>
-                <Link href="/#services" className="text-gray-400 hover:text-green-400 transition-colors">
+                <Link href={`${basePath}/#services`} className="text-gray-400 hover:text-green-400 transition-colors">
                   {t('servicesNav')}
                 </Link>
               </li>
               <li>
-                <Link href="/about" className="text-gray-400 hover:text-green-400 transition-colors">
+                <Link href={`${basePath}/about`} className="text-gray-400 hover:text-green-400 transition-colors">
                   {t('about')}
                 </Link>
               </li>
               <li>
-                <Link href="/reviews" className="text-gray-400 hover:text-green-400 transition-colors">
+                <Link href={`${basePath}/reviews`} className="text-gray-400 hover:text-green-400 transition-colors">
                   {t('reviewsNav')}
                 </Link>
               </li>
               <li>
-                <Link href="/contact" className="text-gray-400 hover:text-green-400 transition-colors">
+                <Link href={`${basePath}/contact`} className="text-gray-400 hover:text-green-400 transition-colors">
                   {t('contact')}
                 </Link>
               </li>
@@ -144,15 +145,15 @@ export function Footer() {
           <div className="text-center text-sm text-gray-400">
             <p>© 2024 Lunex Cleaning Services. {t('all_rights_reserved')}</p>
             <div className="mt-2 text-xs">
-              <Link href="/privacy" className="text-gray-500 hover:text-green-400 transition-colors">
+              <Link href={`${basePath}/privacy`} className="text-gray-500 hover:text-green-400 transition-colors">
                 {t('footer.legal.privacy')}
               </Link>
               <span className="text-gray-600 mx-2">|</span>
-              <Link href="/terms" className="text-gray-500 hover:text-green-400 transition-colors">
+              <Link href={`${basePath}/terms`} className="text-gray-500 hover:text-green-400 transition-colors">
                 {t('footer.legal.terms')}
               </Link>
               <span className="text-gray-600 mx-2">|</span>
-              <Link href="/cookies" className="text-gray-500 hover:text-green-400 transition-colors">
+              <Link href={`${basePath}/cookies`} className="text-gray-500 hover:text-green-400 transition-colors">
                 {t('footer.legal.cookies')}
               </Link>
               <span className="text-gray-600 mx-2">|</span>

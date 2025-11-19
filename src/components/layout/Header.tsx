@@ -7,6 +7,7 @@ import { useLocale } from '@/hooks/useLocale'
 import { cn } from '@/lib/utils'
 import { NavItem } from '@/types'
 import { Button } from '@/components/ui/button'
+import { UKFlag, ITFlag } from '@/components/ui/Flags'
 
 export function Header() {
   const { t } = useLocale()
@@ -100,11 +101,11 @@ export function Header() {
               className="relative p-2 rounded-full hover:bg-white/20 transition-all duration-300 hover:scale-110"
               aria-label={currentLocale === 'it' ? 'Switch to English' : 'Passa all\'italiano'}
             >
-              <span className="text-2xl leading-none filter drop-shadow-sm">
-                {currentLocale === 'it' ? '🇬🇧' : '🇮🇹'}
-              </span>
+              <div className="w-8 h-8 flex items-center justify-center filter drop-shadow-sm">
+                {currentLocale === 'it' ? <UKFlag className="w-full h-full rounded-sm" /> : <ITFlag className="w-full h-full rounded-sm" />}
+              </div>
             </button>
-            <Link href="/booking">
+            <Link href={currentLocale === 'en' ? '/en/booking' : '/booking'}>
               <Button
                 className="bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 px-6 py-2 rounded-full font-semibold backdrop-blur-sm border border-white/20"
               >
@@ -178,12 +179,12 @@ export function Header() {
                 className="self-start p-2 rounded-full hover:bg-gray-100 transition-all duration-300"
                 aria-label={currentLocale === 'it' ? 'Switch to English' : 'Passa all\'italiano'}
               >
-                <span className="text-3xl leading-none">
-                  {currentLocale === 'it' ? '🇬🇧' : '🇮🇹'}
-                </span>
+                <div className="w-8 h-8 flex items-center justify-center">
+                  {currentLocale === 'it' ? <UKFlag className="w-full h-full rounded-sm" /> : <ITFlag className="w-full h-full rounded-sm" />}
+                </div>
               </button>
               <Link
-                href="/booking"
+                href={currentLocale === 'en' ? '/en/booking' : '/booking'}
                 onClick={() => setIsMenuOpen(false)}
                 className="self-start"
               >

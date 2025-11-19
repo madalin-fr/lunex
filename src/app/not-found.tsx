@@ -4,7 +4,8 @@ import Link from 'next/link'
 import { useLocale } from '@/hooks/useLocale'
 
 export default function NotFound() {
-  const { t } = useLocale()
+  const { t, locale } = useLocale()
+  const basePath = locale === 'en' ? '/en' : ''
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-purple-50 to-pink-50">
@@ -19,7 +20,7 @@ export default function NotFound() {
           {t('pageNotFoundDesc') || 'The page you are looking for does not exist.'}
         </p>
         <Link
-          href="/"
+          href={`${basePath}/`}
           className="inline-block bg-gradient-to-r from-purple-600 to-pink-600 text-white px-8 py-3 rounded-full font-semibold hover:shadow-lg transition-all duration-300"
         >
           {t('backToHome') || 'Back to Home'}

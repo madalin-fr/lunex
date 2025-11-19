@@ -59,6 +59,7 @@ async function getReviews(): Promise<Review[]> {
 
 export default function ReviewsPage() {
   const { t, locale } = useLocale()
+  const basePath = locale === 'en' ? '/en' : ''
   const [reviews, setReviews] = useState<Review[]>([])
   const [loading, setLoading] = useState(true)
   const [currentPage, setCurrentPage] = useState(1)

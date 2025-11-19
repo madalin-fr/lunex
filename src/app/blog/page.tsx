@@ -50,6 +50,7 @@ export default function BlogPage() {
   // Determine if we're on the English blog route
   const isEnglishRoute = typeof window !== 'undefined' && window.location.pathname.startsWith('/en')
   const blogBasePath = isEnglishRoute ? '/en/blog' : '/blog'
+  const basePath = locale === 'en' ? '/en' : ''
 
   if (!hasValidConfig) {
     return (

@@ -113,7 +113,7 @@ export function CookieCustomizationModal({ isOpen, onClose }: CookieCustomizatio
           <div className="p-6 max-h-96 overflow-y-auto">
             <div className="space-y-6">
               {COOKIE_CATEGORIES.map((category) => {
-                const isEnabled = preferences[category.id];
+                const isEnabled = preferences[category.id as keyof typeof preferences];
                 const isRequired = category.required;
 
                 return (

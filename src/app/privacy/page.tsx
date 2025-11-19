@@ -5,7 +5,8 @@ import { useLocale } from '@/hooks/useLocale';
 import Link from 'next/link';
 
 export default function PrivacyPolicyPage() {
-  const { t } = useLocale();
+  const { t, locale } = useLocale();
+  const basePath = locale === 'en' ? '/en' : '';
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -163,7 +164,7 @@ export default function PrivacyPolicyPage() {
             <div className="bg-white rounded-2xl shadow-lg p-8">
               <h2 className="text-2xl font-bold text-gray-900 mb-4">{t('privacy.sections.cookies.title')}</h2>
               <p className="text-gray-600 mb-4">{t('privacy.sections.cookies.content')}</p>
-              <Link href="/cookies" className="text-green-600 hover:text-green-700 font-medium">
+              <Link href={`${basePath}/cookies`} className="text-green-600 hover:text-green-700 font-medium">
                 {t('footer.legal.cookies')} →
               </Link>
             </div>
@@ -213,7 +214,7 @@ export default function PrivacyPolicyPage() {
               <p className="text-gray-600 mb-6">{t('privacy.sections.contact.content')}</p>
               <div className="flex flex-col sm:flex-row gap-4">
                 <Link 
-                  href="/contact"
+                  href={`${basePath}/contact`}
                   className="bg-gradient-to-r from-green-600 to-emerald-600 text-white px-6 py-3 rounded-full text-center hover:shadow-lg transition-all duration-300 inline-block"
                 >
                   {t('contactUs')}

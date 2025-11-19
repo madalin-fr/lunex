@@ -15,6 +15,7 @@ import Link from 'next/link'
 
 export default function MaintenanceCleaningPage() {
   const { t, locale } = useLocale()
+  const basePath = locale === 'en' ? '/en' : ''
   useScrollAnimation()
 
   const features = [
@@ -151,7 +152,7 @@ export default function MaintenanceCleaningPage() {
               
               <div className="flex flex-col sm:flex-row gap-4">
                 <Link
-                  href="/contact"
+                  href={`${basePath}/contact`}
                   className="group btn-modern bg-gradient-to-r from-teal-600 to-emerald-600 text-white px-8 py-4 rounded-full font-semibold text-center transition-all duration-300 hover:shadow-2xl hover:scale-105"
                 >
                   <span className="flex items-center justify-center gap-2">
@@ -309,7 +310,7 @@ export default function MaintenanceCleaningPage() {
                 {t('services.maintenance.schedules.customDesc')}
               </p>
               <Link
-                href="/contact"
+                href={`${basePath}/contact`}
                 className="btn-modern bg-gradient-to-r from-teal-600 to-emerald-600 text-white px-8 py-4 rounded-full font-semibold inline-block hover:shadow-xl transition-all duration-300"
               >
                 {t('services.maintenance.schedules.discussCustom')}
@@ -362,7 +363,7 @@ export default function MaintenanceCleaningPage() {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link
-                href="/contact"
+                href={`${basePath}/contact`}
                 className="btn-glass bg-white/10 backdrop-blur-md text-white px-8 py-4 rounded-full hover:bg-white hover:text-teal-600 transition-all duration-300 font-semibold text-lg hover:scale-105"
               >
                 {t('getQuote')}

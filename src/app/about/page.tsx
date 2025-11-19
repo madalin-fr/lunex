@@ -7,7 +7,8 @@ import { Building2, Users, Award, Leaf, Shield, Phone, Mail } from 'lucide-react
 import Link from 'next/link'
 
 export default function AboutPage() {
-  const { t } = useLocale()
+  const { t, locale } = useLocale()
+  const basePath = locale === 'en' ? '/en' : ''
 
   const values = [
     {

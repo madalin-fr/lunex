@@ -19,7 +19,8 @@ import {
 import Link from 'next/link'
 
 export default function DeepCleaning() {
-  const { t } = useLocale()
+  const { t, locale } = useLocale()
+  const basePath = locale === 'en' ? '/en' : ''
 
   const features = [
     {
@@ -102,7 +103,7 @@ export default function DeepCleaning() {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
               <Button size="lg" className="bg-cyan-600 hover:bg-cyan-700 w-full sm:w-auto" asChild>
-                <Link href="/contact" className="flex items-center justify-center">
+                <Link href={`${basePath}/contact`} className="flex items-center justify-center">
                   <Calendar className="h-5 w-5 mr-2" />
                   {t('bookNow')}
                 </Link>
@@ -240,7 +241,7 @@ export default function DeepCleaning() {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
             <Button size="lg" className="bg-white text-cyan-600 hover:bg-gray-100 w-full sm:w-auto" asChild>
-              <Link href="/contact" className="flex items-center justify-center">
+              <Link href={`${basePath}/contact`} className="flex items-center justify-center">
                 <Sparkles className="h-5 w-5 mr-2" />
                 {t('cta.quote')}
               </Link>

@@ -82,42 +82,44 @@ export default function HomePage() {
     fetchFeaturedReviews()
   }, [])
 
+  const basePath = locale === 'en' ? '/en' : ''
+
   const services = [
     {
       icon: <Building2 className="h-8 w-8" />,
       title: t('services.office.title'),
       description: t('services.office.subtitle'),
-      href: '/services/office'
+      href: `${basePath}/services/office`
     },
     {
       icon: <Home className="h-8 w-8" />,
       title: t('services.domestic.title'),
       description: t('services.domestic.subtitle'),
-      href: '/services/domestic'
+      href: `${basePath}/services/domestic`
     },
     {
       icon: <Hammer className="h-8 w-8" />,
       title: t('services.postRenovation.title'),
       description: t('services.postRenovation.subtitle'),
-      href: '/services/post-renovation'
+      href: `${basePath}/services/post-renovation`
     },
     {
       icon: <Crown className="h-8 w-8" />,
       title: t('services.luxury.title'),
       description: t('services.luxury.subtitle'),
-      href: '/services/luxury'
+      href: `${basePath}/services/luxury`
     },
     {
       icon: <Sparkles className="h-8 w-8" />,
       title: t('services.deep.title'),
       description: t('services.deep.subtitle'),
-      href: '/services/deep'
+      href: `${basePath}/services/deep`
     },
     {
       icon: <Calendar className="h-8 w-8" />,
       title: t('services.maintenance.title'),
       description: t('services.maintenance.subtitle'),
-      href: '/services/maintenance'
+      href: `${basePath}/services/maintenance`
     }
   ]
 
@@ -162,7 +164,7 @@ export default function HomePage() {
               <div className="flex flex-col sm:flex-row gap-4">
                 <MagneticButton>
                   <Link
-                    href="/contact"
+                    href={`${basePath}/contact`}
                     className="inline-block bg-gradient-to-r from-green-600 to-emerald-600 text-white px-8 py-4 rounded-full hover:from-green-700 hover:to-emerald-700 transition-all font-semibold text-lg text-center shadow-lg hover:shadow-xl"
                   >
                     {t('hero.cta')}
@@ -170,7 +172,7 @@ export default function HomePage() {
                 </MagneticButton>
                 <MagneticButton strength={0.3}>
                   <Link
-                    href="#services"
+                    href={`${basePath}/#services`}
                     className="inline-block border-2 border-green-600 text-green-600 px-8 py-4 rounded-full hover:bg-green-600 hover:text-white transition-all font-semibold text-lg text-center bg-white/80 backdrop-blur-sm shadow-sm hover:shadow-md"
                   >
                     {t('servicesNav')}
@@ -197,7 +199,7 @@ export default function HomePage() {
                   <p className="text-gray-600 mb-6">{t('contactPage.info.hours.weekdays')}</p>
                   <MagneticButton className="w-full">
                     <Link
-                      href="/contact"
+                      href={`${basePath}/contact`}
                       className="w-full bg-gradient-to-r from-green-600 to-emerald-600 text-white py-3 rounded-full hover:from-green-700 hover:to-emerald-700 transition-all font-semibold block text-center shadow-md hover:shadow-lg"
                     >
                       {t('contactUs')}
@@ -233,7 +235,7 @@ export default function HomePage() {
                     </div>
                     <h3 className="text-xl font-semibold text-gray-900 mb-3">{service.title}</h3>
                     <p className="text-gray-600 mb-4 flex-grow">{service.description}</p>
-                    {service.href !== '/services/post-renovation' && service.href !== '/services/luxury' && (
+                    {service.href !== `${basePath}/services/post-renovation` && service.href !== `${basePath}/services/luxury` && (
                       <Link href={service.href} className="text-green-600 hover:text-green-700 font-medium inline-flex items-center group-hover:translate-x-1 transition-transform">
                         {t('read_more')} <span className="ml-1">→</span>
                       </Link>
@@ -273,7 +275,7 @@ export default function HomePage() {
               </div>
               
               <Link
-                href="/contact"
+                href={`${basePath}/contact`}
                 className="inline-flex items-center text-green-600 hover:text-green-700 font-medium"
               >
                 {t('contactUs')}
@@ -439,7 +441,7 @@ export default function HomePage() {
           <div className="text-center mt-12">
             <MagneticButton className="inline-block">
               <Link
-                href="/reviews"
+                href={`${basePath}/reviews`}
                 className="inline-flex items-center bg-gradient-to-r from-green-600 to-emerald-600 text-white px-8 py-4 rounded-full hover:from-green-700 hover:to-emerald-700 transition-all font-semibold text-lg shadow-lg hover:shadow-xl"
               >
                 {t('view_all')} {t('reviewsNav')}

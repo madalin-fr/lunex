@@ -5,7 +5,8 @@ import { useLocale } from '@/hooks/useLocale';
 import Link from 'next/link';
 
 export default function TermsOfServicePage() {
-  const { t } = useLocale();
+  const { t, locale } = useLocale();
+  const basePath = locale === 'en' ? '/en' : '';
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -192,7 +193,7 @@ export default function TermsOfServicePage() {
               <p className="text-gray-600 mb-6">{t('terms.contact.content')}</p>
               <div className="flex flex-col sm:flex-row gap-4">
                 <Link 
-                  href="/contact"
+                  href={`${basePath}/contact`}
                   className="bg-gradient-to-r from-green-600 to-emerald-600 text-white px-6 py-3 rounded-full text-center hover:shadow-lg transition-all duration-300 inline-block"
                 >
                   {t('contactUs')}

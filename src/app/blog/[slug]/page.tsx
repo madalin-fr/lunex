@@ -192,6 +192,8 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
     return translations[locale]?.[key] || translations['en'][key] || key
   }
 
+  const basePath = locale === 'en' ? '/en' : ''
+
   return (
     <article className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50">
       {/* Handle locale switching */}
@@ -214,7 +216,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
           <div className="absolute top-8 left-8 right-8">
             <div className="max-w-4xl mx-auto">
               <nav className="text-white/80 text-sm">
-                <Link href="/blog" className="hover:text-white transition-colors">{t('blog.backToBlog')}</Link>
+                <Link href={`${basePath}/blog`} className="hover:text-white transition-colors">{t('blog.backToBlog')}</Link>
               </nav>
             </div>
           </div>
@@ -280,7 +282,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
         {!post.mainImage && (
           <div className="text-center mb-16">
             <nav className="text-blue-600 text-sm mb-8">
-              <Link href="/blog" className="hover:text-blue-800 transition-colors">{t('blog.backToBlog')}</Link>
+              <Link href={`${basePath}/blog`} className="hover:text-blue-800 transition-colors">{t('blog.backToBlog')}</Link>
             </nav>
             {post.categories && post.categories.length > 0 && (
               <div className="flex gap-2 justify-center mb-6">

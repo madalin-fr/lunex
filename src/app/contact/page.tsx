@@ -8,7 +8,8 @@ import GoogleMap from '@/components/ui/GoogleMap'
 import { AuroraBackground } from '@/components/ui/motion/AuroraBackground'
 
 export default function ContactPage() {
-  const { t } = useLocale()
+  const { t, locale } = useLocale()
+  const basePath = locale === 'en' ? '/en' : ''
   const [formData, setFormData] = useState({
     name: '',
     email: '',
