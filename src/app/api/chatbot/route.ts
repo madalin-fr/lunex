@@ -54,7 +54,7 @@ YOUR CAPABILITIES (ACTIONS):
 You can perform actions on the website to help the user. Use these EXACT tags at the end of your response if relevant:
 - [ACTION: NAVIGATE|/contact] -> Go to contact page
 - [ACTION: NAVIGATE|/booking] -> Go to booking page
-- [ACTION: NAVIGATE|/services] -> Go to services overview
+- [ACTION: NAVIGATE|/#services] -> Go to services overview (on homepage)
 - [ACTION: NAVIGATE|/services/office] -> Go to office cleaning
 - [ACTION: NAVIGATE|/services/domestic] -> Go to domestic cleaning
 - [ACTION: NAVIGATE|/services/deep] -> Go to deep cleaning
