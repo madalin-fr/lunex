@@ -239,7 +239,12 @@ export async function POST(request: NextRequest) {
     INSTRUCTIONS:
     - If the user asks a general question like "What's included?", assume they are asking about the service on the current page (${currentPath}).
     - If the current page is generic (like / or /contact), ask for clarification or give a general overview.
-    - If the user wants to book or contact, use the appropriate [ACTION] tag.
+    
+    ACTION GUIDELINES:
+    - You can proactively help users by navigating them to the right page when their intent is clear.
+    - When a user asks about booking, contact, or a specific service, you can take them to the relevant page.
+    - Frame your response as a helpful action. For example: "You can book an appointment on our booking page. I'll take you there now." and then add the action tag.
+    - For very general questions, provide information first before offering to navigate.
     `
 
     const fullSystemPrompt = `${SYSTEM_PROMPT}\n${contextMessage}\n${locale === 'it' ? 'Rispondi sempre in italiano.' : 'Always respond in English.'}`

@@ -105,7 +105,9 @@ export const common = {
         flexible: 'Orari Flessibili',
         flexibleDesc: 'Servizi di pulizia programmati secondo i vostri orari di lavoro',
         equipment: 'Attrezzature Professionali',
-        equipmentDesc: 'Attrezzature avanzate e prodotti eco-compatibili'
+        equipmentDesc: 'Attrezzature avanzate e prodotti eco-compatibili',
+        specialized: 'Competenza Specializzata',
+        specializedDesc: 'Conoscenza esperta dei protocolli di igiene e della pulizia focalizzata sulla salute'
       },
       process: {
         step1: 'Valutazione',
@@ -117,6 +119,7 @@ export const common = {
         step4: 'Controllo Qualità',
         step4Desc: 'Ispezione finale e garanzia di qualità di tutte le aree pulite'
       },
+      processTitle: 'Il Nostro Processo di Pulizia',
       includes: {
         title: 'Cosa Include',
         dusting: 'Spolveratura di tutte le superfici',
@@ -154,6 +157,7 @@ export const common = {
         step4: 'Ispezione Finale',
         step4Desc: 'Controllo qualità per garantire la soddisfazione dei clienti'
       },
+      processTitle: 'Il Nostro Processo di Pulizia',
       includes: {
         title: 'Il Servizio Include',
         bedrooms: 'Pulizia e riordino camere da letto',
@@ -257,6 +261,7 @@ export const common = {
         step4: 'Monitoraggio Qualità',
         step4Desc: 'Controlli qualità regolari e aggiustamenti del servizio'
       },
+      processTitle: 'Il Nostro Processo di Mantenimento',
       schedules: {
         title: 'Programmi Disponibili',
         daily: 'Servizio di pulizia quotidiana',
@@ -802,7 +807,7 @@ export const common = {
 
   // Chatbot
   chatbot: {
-    title: 'Luna - Assistente',
+    title: 'Luna - Assistente AI',
     status: 'Online ora',
     placeholder: 'Scrivi un messaggio...',
     welcome: 'Ciao! Sono Luna, la tua assistente intelligente di Lunex. Posso aiutarti con domande sui nostri servizi di pulizia professionale, prezzi e prenotazioni. Come posso assisterti oggi?',

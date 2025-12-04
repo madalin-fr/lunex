@@ -119,6 +119,7 @@ export const common = {
         step4: 'Quality Control',
         step4Desc: 'Final inspection and quality assurance of all cleaned areas'
       },
+      processTitle: 'Our Cleaning Process',
       includes: {
         title: 'What\'s Included',
         dusting: 'Dusting of all surfaces',
@@ -156,6 +157,7 @@ export const common = {
         step4: 'Final Inspection',
         step4Desc: 'Quality check to ensure satisfaction of clients'
       },
+      processTitle: 'Our Cleaning Process',
       includes: {
         title: 'Service Includes',
         bedrooms: 'Bedroom cleaning and organizing',
@@ -257,6 +259,7 @@ export const common = {
         step4: 'Quality Monitoring',
         step4Desc: 'Regular quality checks and service adjustments'
       },
+      processTitle: 'Our Maintenance Process',
       schedules: {
         title: 'Available Schedules',
         daily: 'Daily cleaning service',
