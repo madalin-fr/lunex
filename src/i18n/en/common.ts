@@ -1,5 +1,3 @@
-import { title } from "process";
-
 export const common = {
   // Navigation
   home: 'Home',
@@ -103,23 +101,23 @@ export const common = {
       description: 'Comprehensive office cleaning services to maintain a clean, healthy, and productive work environment.',
       features: {
         daily: 'Daily Cleaning',
-        dailyDesc: 'Regular daily cleaning services to maintain office hygiene with 2025 industry standards',
+        dailyDesc: 'Regular daily cleaning services to maintain office hygiene',
         flexible: 'Flexible Scheduling',
-        flexibleDesc: 'Cleaning services scheduled around your business hours with real-time booking system',
+        flexibleDesc: 'Cleaning services scheduled around your business hours',
         equipment: 'Professional Equipment',
-        equipmentDesc: 'Advanced 2025 cleaning equipment with AI-powered efficiency and eco-friendly products',
+        equipmentDesc: 'Advanced cleaning equipment and eco-friendly products',
         specialized: 'Specialized Expertise',
-        specializedDesc: 'Expert knowledge in post-pandemic hygiene protocols and health-focused cleaning'
+        specializedDesc: 'Expert knowledge in hygiene protocols and health-focused cleaning'
       },
       process: {
-        step1: 'Advanced Assessment',
-        step1Desc: 'AI-enhanced evaluation using 3D mapping and specific cleaning needs analysis',
-        step2: 'Digital Planning',
-        step2Desc: 'Customized cleaning plan with advanced scheduling software and client portal access',
-        step3: 'Smart Execution',
-        step3Desc: 'Professional cleaning using 2025 cutting-edge techniques with IoT-enabled equipment',
-        step4: 'Quality Assurance',
-        step4Desc: 'Digital quality control systems with real-time client satisfaction tracking'
+        step1: 'Assessment',
+        step1Desc: 'Evaluation of your office space and specific cleaning needs',
+        step2: 'Planning',
+        step2Desc: 'Creation of a customized cleaning plan and schedule',
+        step3: 'Execution',
+        step3Desc: 'Professional cleaning using advanced techniques and equipment',
+        step4: 'Quality Control',
+        step4Desc: 'Final inspection and quality assurance of all cleaned areas'
       },
       includes: {
         title: 'What\'s Included',
@@ -797,14 +795,14 @@ export const common = {
       },
       external: {
         title: 'External Services',
-        description: 'These cookies enable external services like Google Maps for location services and AI-powered chatbot features for enhanced customer support.'
+        description: 'These cookies enable external services like Google Maps for location services and chatbot features for enhanced customer support.'
       }
     }
   },
 
   // Chatbot
   chatbot: {
-    title: 'Luna - AI Assistant',
+    title: 'Luna - Assistant',
     status: 'Online now',
     placeholder: 'Type a message...',
     welcome: 'Hi! I\'m Luna, your intelligent Lunex assistant. I can help you with questions about our professional cleaning services, pricing, and booking. How can I assist you today?',

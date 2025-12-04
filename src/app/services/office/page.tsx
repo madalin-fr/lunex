@@ -73,9 +73,7 @@ export default function OfficeCleaning() {
     t('services.office.includes.kitchen'),
     t('services.office.includes.windows'),
     t('services.office.includes.trash'),
-    t('services.office.includes.customPlans'),
-    t('services.office.includes.new2025'),
-    t('services.office.includes.new2025b')
+    t('services.office.includes.customPlans')
   ]
 
   return (
